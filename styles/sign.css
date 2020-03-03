@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.nav-link {
+    color: #F85859;
+}
+
+nav .navbar-brand {
+    color: #F85859;
+    font-size: 3rem;
+    padding-left: 1rem;
+}
+
+nav .navbar-collapse {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+nav ul {
+    font-size: 1.3rem;
+}
+
+nav ul li {
+    padding-right: 1rem;
+}
+
+.nav-item .signin {
+    font-weight: 600;
+}
+
+.main {
+    display: flex;
+}
+
+.group {
+    flex: 2;
+}
+
+.form {
+    flex: 1;
+    justify-self: flex-start;
+    align-self: center;
+}
+
+.login-form .form-group {
+    max-width: 50%;
+    border-bottom: solid #F9A826 1px;
+    padding-top: 2rem;
+}
+
+.login-form .btn {
+    background-color: #F9A826;
+    width: 8rem;
+    border: 0;
+    margin-top: 2rem;
+}
+
+.login-form .custom-control {
+    margin-top: 2rem;
+    color: #8F8C8C;
+}
+
+.form-group input {
+    box-shadow: 0;
+    border: 0;
+}
+
+.form h1 {
+    font-weight: 600;
+    color: #F9A826;
+    padding-left: 7rem;
+    padding-bottom: 1rem;
+}
+
+.form h3 {
+    color: #F9A826;
+    font-weight: 400;
+    padding-top: 1rem;
+}
