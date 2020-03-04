@@ -14,33 +14,12 @@ nav .navbar-brand {
     padding-left: 1rem;
 }
 
-nav .navbar-collapse {
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-}
-
 nav ul {
     font-size: 1.3rem;
 }
 
 nav ul li {
     padding-right: 1rem;
-}
-
-.one {
-    width: 30%;
-    height: 100%;
-    flex: 2;
-}
-
-.two {
-    width: 50%;
-    height: 100%;
-    float: right;
-    padding-bottom: 10%;
-    flex: 1.5;
-    align-self: flex-end;
 }
 
 h1,
@@ -50,11 +29,6 @@ h2 {
 
 h2 {
     font-family: 'Roboto';
-}
-
-.main {
-    display: flex;
-    align-items: flex-start;
 }
 
 .content {
@@ -89,4 +63,10 @@ h2 {
 .close_win {
     color: white;
     text-decoration: none;
+}
+
+.foot {
+    background-color: #525361;
+    color: white;
+    text-align: center;
 }
