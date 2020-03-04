@@ -21,7 +21,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     var_dump($password);
 
     // prepare and bind
-    $stmt = $conn->prepare("SELECT * FROM login_form WHERE `User` = ? AND `Password` = ?");
+    $stmt = $conn->prepare("SELECT * FROM users WHERE `username` = ? AND `password` = ?");
     $stmt->bind_param($username, $password);
 
     $result = $stmt->execute();
@@ -43,7 +43,7 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Camagru</title>
-    <link rel="icon" href="../assets/Camagru-favicon.png">
+    <link rel="icon" href="/assets/Camagru-favicon.png">
     <link rel="stylesheet" href="../styles/sign.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
@@ -66,7 +66,7 @@ $conn->close();
                         <a class="nav-link" href="#">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link signin" href="forms/signin.html">Sign in</a>
+                        <a class="nav-link signin" href="forms/signin.php">Sign in</a>
                     </li>
                 </ul>
             </div>

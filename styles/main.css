@@ -74,7 +74,19 @@ h2 {
     font-size: 1.2rem;
 }
 
+.conditions {
+    margin: auto;
+    width: 50%;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+}
+
 .content .btn:hover {
     color: #F85859;
     background-color: #DBDBDB;
+}
+
+.agree,
+.close_win {
+    color: white;
+    text-decoration: none;
 }
