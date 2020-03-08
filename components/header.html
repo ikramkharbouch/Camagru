@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Camagru</title>
+    <link rel="icon" href="assets/Camagru-favicon.png" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand camagru" href="#">Camagru</a>
+      <button
+        id="btn-menu"
+        class="navbar-toggler navbar-toggler-right"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon">
+          <i class="fas fa-bars" style="color: black; font-size:28px;"></i>
+        </span>
+      </button>
+        <div class="collapse navbar-collapse float-right" id="navbarNavAltMarkup">
+          <div class="navbar-nav ml-auto">
+            <a class="nav-item nav-link" href="../index.php">Home</a>
+            <a class="nav-item nav-link" href="#">About</a>
+            <a class="nav-item nav-link" href="../forms/signin.php">Sign in</a>
+            <a class="nav-item nav-link" href="../forms/signup.php">Sign up</a>
+          </div>
+        </div>
+    </nav>
+
+    <script>
+      const btnMenu = document.querySelector("#btn-menu");
+      btnMenu.addEventListener("click", function() {
+        const menu = document.querySelector("#navbarNavAltMarkup");
+        menu.classList.toggle("show");
+      });
+    </script>
+  </body>
+</html>

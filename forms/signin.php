@@ -1,8 +1,8 @@
 <?php
 
 $host = "localhost";
-$user = "root";
-$password = "rootroot";
+$user = "admin";
+$password = "D9t9lnkEbzti";
 $db = "camagru";
 
 // Create connection
@@ -51,27 +51,8 @@ $conn->close();
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg">
-            <a class="navbar-brand h6" href="#">Camagru</a>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../index.php">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About US</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link signin" href="forms/signin.php">Sign in</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+    <?php include '../components/header.html'; ?>
+
     <section class="main">
         <img class="img-fluid group" src="../assets/group.svg" alt="Responsive image">
         <div class="form">
@@ -93,8 +74,8 @@ $conn->close();
             </form>
         </div>
     </section>
-    <footer>
-    </footer>
+
+    <?php include '../components/footer.html'; ?>
 </body>
 
 </html>

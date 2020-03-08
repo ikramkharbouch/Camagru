@@ -4,31 +4,13 @@
     box-sizing: border-box;
 }
 
-.nav-link {
-    color: #F85859;
+.camagru {
+    font-size: 2.2rem !important;
+    color: #F85859 !important;
 }
 
-nav .navbar-brand {
-    color: #F85859;
-    font-size: 3rem;
-    padding-left: 1rem;
-}
-
-nav ul {
-    font-size: 1.3rem;
-}
-
-nav ul li {
-    padding-right: 1rem;
-}
-
-h1,
-h2 {
-    color: #F9A826;
-}
-
-h2 {
-    font-family: 'Roboto';
+.navbar-nav a {
+    color: #F85859 !important;
 }
 
 .content {
@@ -38,6 +20,10 @@ h2 {
     margin: 0 auto;
     margin-top: 20rem;
     padding: 2rem;
+}
+
+.content .text {
+    color: #FFBE56;
 }
 
 .content .btn {
