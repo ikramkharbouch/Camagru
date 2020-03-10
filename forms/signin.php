@@ -1,38 +1,42 @@
 <?php
 
-$host = "localhost";
-$user = "admin";
-$password = "D9t9lnkEbzti";
-$db = "camagru";
+    function test_input($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
 
-// Create connection
-$conn = new mysqli($host, $user, $password, $db);
+    $host = 'localhost';
+    $user = 'root';
+    $password = 'root1234@';
+    $dbname = 'camagru';
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+    // Set DSN
+    $dsn = 'mysql:host='.$host.';dbname='.$dbname;
 
-if (isset($_POST['username']) && isset($_POST['password'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    // Create a PDO instance
+    $pdo = new PDO($dsn, $user, $password);
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 
-    var_dump($username);
-    var_dump($password);
+    // User Input
 
-    // prepare and bind
-    $stmt = $conn->prepare("SELECT * FROM users WHERE `username` = ? AND `password` = ?");
-    $stmt->bind_param($username, $password);
+    $data = array(
+        "email" => test_input($_POST['email']),
+        "pass" => test_input($_POST['password']),
+    );
 
-    $result = $stmt->execute();
+    print_r($data);
 
-    var_dump($result);
+    // COMPARE DATA
 
-    $stmt->close();
-}
+    $stmt = $pdo->prepare('SELECT * FROM users WHERE email = :email AND pass = :pass');
+    $stmt->execute($data);
+    $userCount = $stmt->rowCount();
 
-$conn->close();
-
+    if ($userCount == 1) {
+        header('Location:../index.php');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -61,13 +65,13 @@ $conn->close();
                 people all sharing and growing the feed.</h3>
             <form method="POST" class="login-form">
                 <div class="form-group">
-                    <input type="text" name="username" class="form-control" id="formGroupExampleInput" placeholder="Enter your username...">
+                    <input type="text" name="email" class="form-control" id="formGroupExampleInput" placeholder="Enter your email">
                 </div>
                 <div class="form-group">
                     <input type="password" name="password" class="form-control" id="formGroupExampleInput" placeholder="Enter your password">
                 </div>
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                    <input type="checkbox" class="custom-control-input" id="customCheck1" required>
                     <label class="custom-control-label" for="customCheck1">Remember your password</label>
                 </div>
                 <button type="submit" class="btn btn-primary btn-lg">Sign in</button>
