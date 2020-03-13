@@ -1,72 +1,3 @@
-<?php
-    function test_input($data) {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
-
-    include '../config/database.php';
-    
-    // User Input
-
-    $data = array(
-        "email" => test_input($_POST['email']),
-        "username" => test_input($_POST['username']),
-        "pass" => test_input($_POST['password']),
-    );
-
-    // VALIDATE INPUT
-
-    $filters = array(
-        "email" => FILTER_VALIDATE_EMAIL,
-        "username" => array(
-            "filter" => FILTER_CALLBACK,
-            "options" => "ucwords"
-        ),
-        "pass" => array(
-            "filter" => FILTER_VALIDATE_REGEXP,
-            "options" => array(
-                "regexp" => "/^[a-z-0-9]+/i"
-            ),
-        )
-    );
-
-    $results = filter_var_array($data, $filters);
-
-    foreach ($results as $key => $value) {
-        if (empty($value)) {
-            $error = 1;
-            echo "Error in ". $key . " input.";
-            break;
-        }
-    }
-
-    //  CHECK BEFORE INSERTING
-
-    $stmt = $pdo->prepare('SELECT * FROM users WHERE username = ?');
-    $stmt->execute([$data['username']]);
-    $userCount = $stmt->rowCount();
-
-    $stmt = $pdo->prepare('SELECT * FROM users WHERE email = ?');
-    $stmt->execute([$data['email']]);
-    $emailCount = $stmt->rowCount();
-
-    if ($userCount != 0 || $emailCount != 0) {
-        echo "This username or email are already used";
-    }
-    else if ($userCount == 0 && $error == 0) {
-         // INSERT DATA
-        mail('camagru@support.com', 'Verification email', 'Activate your account please in this url', 'From: info@societe.com');
-        $sql = 'INSERT INTO users(email, username, pass) VALUES(:email, :username, :pass)';
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute($data);
-        echo 'Post Added';
-    }
-    
-    $pdo = null;
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -92,7 +23,7 @@
         <div class="two">
             <div class="form d-flex flex-column align-items-center mt-5">
                 <div class="caption pt-5">
-                    <h1 class="text-center">Welcome Back!</h1>
+                    <h1 class="text-center">Get Started!</h1>
                     <h5 class="text-center">Join a community of over 1 million people<br />
                         all sharing and growing the feed.</h5>
                 </div>

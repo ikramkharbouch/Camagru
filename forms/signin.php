@@ -1,32 +1,3 @@
-<?php
-
-    function test_input($data) {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
-
-    include '../config/database.php';
-    
-    // User Input
-
-    $data = array(
-        "email" => test_input($_POST['email']),
-        "pass" => test_input($_POST['password']),
-    );
-
-    // COMPARE DATA
-
-    $stmt = $pdo->prepare('SELECT * FROM users WHERE email = :email AND pass = :pass');
-    $stmt->execute($data);
-    $userCount = $stmt->rowCount();
-
-    if ($userCount == 1) {
-        header('Location:../index.php');
-    }
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
