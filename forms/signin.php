@@ -7,26 +7,14 @@
         return $data;
     }
 
-    $host = 'localhost';
-    $user = 'root';
-    $password = 'root1234@';
-    $dbname = 'camagru';
-
-    // Set DSN
-    $dsn = 'mysql:host='.$host.';dbname='.$dbname;
-
-    // Create a PDO instance
-    $pdo = new PDO($dsn, $user, $password);
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-
+    include '../config/database.php';
+    
     // User Input
 
     $data = array(
         "email" => test_input($_POST['email']),
         "pass" => test_input($_POST['password']),
     );
-
-    print_r($data);
 
     // COMPARE DATA
 
@@ -57,27 +45,33 @@
 <body>
     <?php include '../components/header.html'; ?>
 
-    <section class="main">
-        <img class="img-fluid group" src="../assets/group.svg" alt="Responsive image">
-        <div class="form">
-            <h1>Welcome Back</h1>
-            <h3>Camagru is a community of over 1 million </br>
-                people all sharing and growing the feed.</h3>
-            <form method="POST" class="login-form">
-                <div class="form-group">
-                    <input type="text" name="email" class="form-control" id="formGroupExampleInput" placeholder="Enter your email">
-                </div>
-                <div class="form-group">
-                    <input type="password" name="password" class="form-control" id="formGroupExampleInput" placeholder="Enter your password">
-                </div>
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="customCheck1" required>
-                    <label class="custom-control-label" for="customCheck1">Remember your password</label>
-                </div>
-                <button type="submit" class="btn btn-primary btn-lg">Sign in</button>
-            </form>
+    <div class="container-1">
+        <div class="illustration">
+            <img class="img-fluid" src="../assets/group.svg" alt="Responsive image">
         </div>
-    </section>
+        <div class="two">
+            <div class="form d-flex flex-column align-items-center mt-5">
+                <div class="caption pt-5">
+                    <h1 class="text-center">Welcome Back!</h1>
+                    <h5 class="text-center">Join a community of over 1 million people<br />
+                        all sharing and growing the feed.</h5>
+                </div>
+                <form method="POST" class="login-form">
+                    <div class="form-group pt-5">
+                        <input type="text" name="email" class="form-control" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" class="form-control" placeholder="Enter your password">
+                    </div>
+                    <div class="custom-control custom-checkbox pt-2">
+                        <input type="checkbox" class="custom-control-input" id="customCheck1" required>
+                        <label class="remember custom-control-label" for="customCheck1">Remember your password</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg">Sign in</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <?php include '../components/footer.html'; ?>
 </body>

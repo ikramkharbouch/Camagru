@@ -4,31 +4,21 @@
     box-sizing: border-box;
 }
 
-.main {
-    display: flex;
-}
-
 .group {
     flex: 2;
 }
 
-.form {
-    flex: 1;
-    justify-self: flex-start;
-    align-self: center;
-}
-
 .login-form .form-group {
-    max-width: 50%;
     border-bottom: solid #F9A826 1px;
     padding-top: 2rem;
+    width: 30vw;
 }
 
 .login-form .btn {
     background-color: #F9A826;
-    width: 8rem;
     border: 0;
-    margin-top: 2rem;
+    margin-top: 1vh;
+    text-align: center;
 }
 
 .login-form .custom-control {
@@ -38,23 +28,38 @@
 
 .form-group input {
     box-shadow: 0;
-    border: 0;
+    border: 0
 }
 
-.form h1 {
-    font-weight: 600;
-    color: #F9A826;
-    padding-left: 7rem;
-    padding-bottom: 1rem;
-}
-
-.form h3 {
-    color: #F9A826;
-    font-weight: 400;
-    padding-top: 1rem;
+.form {
+    color: #F9A826 !important;
 }
 
 .terms {
     color: #8F8C8C;
     font-weight: 700;
+}
+
+.container-1 {
+    display: flex;
+}
+
+.one {
+    flex: 2;
+
+}
+
+.two {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (max-width: 800px) { 
+    .container-1 {
+        flex-direction: column;
+    }
+    .login-form .form-group {
+        width: 80vw;
+    }
 }

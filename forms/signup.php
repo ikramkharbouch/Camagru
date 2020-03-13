@@ -6,18 +6,8 @@
         return $data;
     }
 
-    $host = 'localhost';
-    $user = 'root';
-    $password = 'root1234@';
-    $dbname = 'camagru';             
-
-    // Set DSN
-    $dsn = 'mysql:host='.$host.';dbname='.$dbname;
-
-    // Create a PDO instance
-    $pdo = new PDO($dsn, $user, $password);
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-
+    include '../config/database.php';
+    
     // User Input
 
     $data = array(
@@ -58,12 +48,16 @@
     $stmt->execute([$data['username']]);
     $userCount = $stmt->rowCount();
 
-    if ($userCount != 0) {
-        echo "This username is already used";
+    $stmt = $pdo->prepare('SELECT * FROM users WHERE email = ?');
+    $stmt->execute([$data['email']]);
+    $emailCount = $stmt->rowCount();
+
+    if ($userCount != 0 || $emailCount != 0) {
+        echo "This username or email are already used";
     }
     else if ($userCount == 0 && $error == 0) {
          // INSERT DATA
-
+        mail('camagru@support.com', 'Verification email', 'Activate your account please in this url', 'From: info@societe.com');
         $sql = 'INSERT INTO users(email, username, pass) VALUES(:email, :username, :pass)';
         $stmt = $pdo->prepare($sql);
         $stmt->execute($data);
@@ -81,8 +75,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Camagru</title>
-    <link rel="icon" href="../assets/Camagru-favicon.png">
     <link rel="stylesheet" href="../styles/sign.css">
+    <link rel="icon" href="../assets/Camagru-favicon.png" />
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -91,30 +85,36 @@
 <body>
 <?php include '../components/header.html'; ?>
 
-    <section class="main">
-        <img class="img-fluid group" src="../assets/group.svg" alt="Responsive image">
-        <div class="form">
-            <h1>GET STARTED</h1>
-            <h3>Join a community of over 1 million people </br>
-                all sharing and growing the feed.</h3>
-            <form method="POST" class="login-form">
-                <div class="form-group">
-                    <input type="text" name="email" class="form-control" placeholder="Your email">
-                </div>
-                <div class="form-group">
-                    <input type="text" name="username" class="form-control" placeholder="Your username">
-                </div>
-                <div class="form-group">
-                    <input type="password" name="password" class="form-control" placeholder="Password">
-                </div>
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="customCheck1">
-                    <label class="custom-control-label" for="customCheck1">Agree to the <a class="terms" href="./terms.php">terms and conditions.</a></label>
-                </div>
-                <button type="submit" class="btn btn-primary btn-lg">Sign up</button>
-            </form>
+    <div class="container-1">
+        <div class="illustration">
+            <img class="img-fluid" src="../assets/group.svg" alt="Responsive image">
         </div>
-    </section>
+        <div class="two">
+            <div class="form d-flex flex-column align-items-center mt-5">
+                <div class="caption pt-5">
+                    <h1 class="text-center">Welcome Back!</h1>
+                    <h5 class="text-center">Join a community of over 1 million people<br />
+                        all sharing and growing the feed.</h5>
+                </div>
+                <form method="POST" class="login-form">
+                    <div class="form-group pt-5">
+                        <input type="text" name="email" class="form-control" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="username" class="form-control" placeholder="Enter your username">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" class="form-control" placeholder="Enter your password">
+                    </div>
+                    <div class="custom-control custom-checkbox pt-2">
+                        <input type="checkbox" class="custom-control-input" id="customCheck1" required>
+                        <label class="remember custom-control-label" for="customCheck1">Remember your password</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg">Sign in</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <?php include '../components/footer.html'; ?>
 </body>
