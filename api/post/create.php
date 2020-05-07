@@ -3,34 +3,34 @@
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
     header('Access-Control-Allow-Methods: POST');
-    header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type,
-    Access-Control-Allow-Methods, Authorization, X-Requested-With');
-
+    header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
+    
     include_once '../../config/Database.php';
-    include_once '../../models/Users.php';
+    include_once '../../models/User.php';
+
 
     // Instantiate DB & connect
     $database = new Database();
     $db = $database->connect();
 
-    // Instantiate blog post object
-    $users = new Users($db);
+    // Instantiate user object
+    $user = new User($db);
 
     // Get raw posted data
     $data = json_decode(file_get_contents("php://input"));
 
-    $users->email = $data->email;
-    $users->username = $data->username;
-    $users->pass = $data->pass;
+    $user->email = $data->email;
+    $user->username = $data->username;
+    $user->pass = $data->pass;
 
-    // Create User
-    if ($users->create()) {
+    if ($user->create()) {
         echo json_encode(
-            array('message' => 'Post Created')
+            array('Message' => 'Post Created')
         );
     } else {
         echo json_encode(
-            array('message' => 'Post Not Created')
+            array('Message' => 'Post Not Created')
         );
     }
+
 ?>

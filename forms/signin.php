@@ -14,37 +14,49 @@
 </head>
 
 <body>
-    <?php include '../components/header.html'; ?>
-
-    <div class="container-1">
-        <div class="illustration">
-            <img class="img-fluid" src="../assets/group.svg" alt="Responsive image">
-        </div>
-        <div class="two">
-            <div class="form d-flex flex-column align-items-center mt-5">
-                <div class="caption pt-5">
-                    <h1 class="text-center">Welcome Back!</h1>
-                    <h5 class="text-center">Join a community of over 1 million people<br />
-                        all sharing and growing the feed.</h5>
-                </div>
-                <form method="POST" class="login-form">
-                    <div class="form-group pt-5">
-                        <input type="text" name="email" class="form-control" placeholder="Enter your email">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" name="password" class="form-control" placeholder="Enter your password">
-                    </div>
-                    <div class="custom-control custom-checkbox pt-2">
-                        <input type="checkbox" class="custom-control-input" id="customCheck1" required>
-                        <label class="remember custom-control-label" for="customCheck1">Remember your password</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-lg">Sign in</button>
-                </form>
+    <div class="container">
+        <button class="btn btn-warning mt-4" id="getUsers">Get API Data</button>
+        <form id="addPost">
+            <div class="form-group mt-4">
+                <input type="text" id="email" placeholder="Email" class="form-control border"/>
             </div>
-        </div>
+            <div class="form-group">
+                <input type="password" id="pass" placeholder="Pass" class="form-control border"/>
+            </div>
+            <input type="submit" value="Login" class="btn btn-primary"/>
+        </form>
     </div>
+    
+    <script>
+        document.getElementById("addPost").addEventListener("submit", addPost);
+        document.getElementById("getUsers").addEventListener("click", getUsers);
 
-    <?php include '../components/footer.html'; ?>
+        function addPost(e) {
+        e.preventDefault();
+
+        let username = document.getElementById("username").value;
+        let email = document.getElementById("email").value;
+        let pass = document.getElementById("pass").value;
+
+        fetch("http://localhost/api/post/create.php", {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({username: username, email: email, pass: pass}),
+        })
+          .then((res) => res.text())
+          .then((data) => console.log(data));
+      }
+
+      function getUsers() {
+        fetch("http://localhost/api/post/read_single.php?id=2")
+          .then((res) => res.json())
+          .then((data) => console.log(data))
+          .catch((err) => console.log(err));
+      }
+    </script>
 </body>
 
 </html>

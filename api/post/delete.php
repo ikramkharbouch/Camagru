@@ -2,7 +2,7 @@
     // Headers
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
-    header('Access-Control-Allow-Methods: PUT');
+    header('Access-Control-Allow-Methods: DELETE');
     header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
     
     include_once '../../config/Database.php';
@@ -22,20 +22,14 @@
     // Update ID
     $user->id = $data->id;
 
-    // Set data
-    $user->email = $data->email;
-    $user->username = $data->username;
-    $user->pass = $data->pass;
-    $user->verified = $data->verified;
-
-    // Update User
-    if ($user->update()) {
+    // Delete User
+    if ($user->delete()) {
         echo json_encode(
-            array('Message' => 'Post Updated')
+            array('Message' => 'Post Deleted')
         );
     } else {
         echo json_encode(
-            array('Message' => 'Post Not Updated')
+            array('Message' => 'Post Not Deleted')
         );
     }
 
