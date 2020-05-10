@@ -192,12 +192,7 @@
         $stmt->bindParam(':verified', $this->verified);
         $stmt->bindParam(':id', $this->id);
         
-        // Execute query
-        var_dump($this->email);
-        var_dump($this->username);
-        var_dump($this->pass);
-        var_dump($this->verified);
-        
+        // Execute query       
         if ($stmt->execute()) {
             return true;
         }
@@ -239,12 +234,16 @@
 
         $stmt->bindParam(':email', $this->email);
 
-        if ($stmt->execute()) {
-            printf("This user was found");
+        $stmt->execute();
+
+        // Fetch data
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Set properties
+        if ($row['email'] == $this->email) {
             return true;
         }
 
-        printf("This user was not found");
         return false;
     }
 

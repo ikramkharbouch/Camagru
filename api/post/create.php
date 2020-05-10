@@ -37,16 +37,5 @@
                 array('Message' => 'Post Not Created')
             );
         }
-    
     }
-    // if ($user->create()) {
-    //     echo json_encode(
-    //         array('Message' => 'Post Created')
-    //     );
-    // } else {
-    //     echo json_encode(
-    //         array('Message' => 'Post Not Created')
-    //     );
-    // }
-
 ?>
