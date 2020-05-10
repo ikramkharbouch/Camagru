@@ -28,27 +28,7 @@
     </div>
     
     <script>
-        document.getElementById("addPost").addEventListener("submit", addPost);
         document.getElementById("getUsers").addEventListener("click", getUsers);
-
-        function addPost(e) {
-        e.preventDefault();
-
-        let username = document.getElementById("username").value;
-        let email = document.getElementById("email").value;
-        let pass = document.getElementById("pass").value;
-
-        fetch("http://localhost/api/post/create.php", {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify({username: username, email: email, pass: pass}),
-        })
-          .then((res) => res.text())
-          .then((data) => console.log(data));
-      }
 
       function getUsers() {
         fetch("http://localhost/api/post/read_single.php?id=2")

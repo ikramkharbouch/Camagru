@@ -1,62 +1,62 @@
 <?php
-// ----------------------------------------------------------------------------------------------------
-// - Display Errors
-// ----------------------------------------------------------------------------------------------------
-ini_set('display_errors', 'On');
-ini_set('html_errors', 0);
+// // ----------------------------------------------------------------------------------------------------
+// // - Display Errors
+// // ----------------------------------------------------------------------------------------------------
+// ini_set('display_errors', 'On');
+// ini_set('html_errors', 0);
 
-// ----------------------------------------------------------------------------------------------------
-// - Error Reporting
-// ----------------------------------------------------------------------------------------------------
-error_reporting(-1);
+// // ----------------------------------------------------------------------------------------------------
+// // - Error Reporting
+// // ----------------------------------------------------------------------------------------------------
+// error_reporting(-1);
 
-// ----------------------------------------------------------------------------------------------------
-// - Shutdown Handler
-// ----------------------------------------------------------------------------------------------------
-function ShutdownHandler()
-{
-    if(@is_array($error = @error_get_last()))
-    {
-        return(@call_user_func_array('ErrorHandler', $error));
-    };
+// // ----------------------------------------------------------------------------------------------------
+// // - Shutdown Handler
+// // ----------------------------------------------------------------------------------------------------
+// function ShutdownHandler()
+// {
+//     if(@is_array($error = @error_get_last()))
+//     {
+//         return(@call_user_func_array('ErrorHandler', $error));
+//     };
 
-    return(TRUE);
-};
+//     return(TRUE);
+// };
 
-register_shutdown_function('ShutdownHandler');
+// register_shutdown_function('ShutdownHandler');
 
-// ----------------------------------------------------------------------------------------------------
-// - Error Handler
-// ----------------------------------------------------------------------------------------------------
-function ErrorHandler($type, $message, $file, $line)
-{
-    $_ERRORS = Array(
-        0x0001 => 'E_ERROR',
-        0x0002 => 'E_WARNING',
-        0x0004 => 'E_PARSE',
-        0x0008 => 'E_NOTICE',
-        0x0010 => 'E_CORE_ERROR',
-        0x0020 => 'E_CORE_WARNING',
-        0x0040 => 'E_COMPILE_ERROR',
-        0x0080 => 'E_COMPILE_WARNING',
-        0x0100 => 'E_USER_ERROR',
-        0x0200 => 'E_USER_WARNING',
-        0x0400 => 'E_USER_NOTICE',
-        0x0800 => 'E_STRICT',
-        0x1000 => 'E_RECOVERABLE_ERROR',
-        0x2000 => 'E_DEPRECATED',
-        0x4000 => 'E_USER_DEPRECATED'
-    );
+// // ----------------------------------------------------------------------------------------------------
+// // - Error Handler
+// // ----------------------------------------------------------------------------------------------------
+// function ErrorHandler($type, $message, $file, $line)
+// {
+//     $_ERRORS = Array(
+//         0x0001 => 'E_ERROR',
+//         0x0002 => 'E_WARNING',
+//         0x0004 => 'E_PARSE',
+//         0x0008 => 'E_NOTICE',
+//         0x0010 => 'E_CORE_ERROR',
+//         0x0020 => 'E_CORE_WARNING',
+//         0x0040 => 'E_COMPILE_ERROR',
+//         0x0080 => 'E_COMPILE_WARNING',
+//         0x0100 => 'E_USER_ERROR',
+//         0x0200 => 'E_USER_WARNING',
+//         0x0400 => 'E_USER_NOTICE',
+//         0x0800 => 'E_STRICT',
+//         0x1000 => 'E_RECOVERABLE_ERROR',
+//         0x2000 => 'E_DEPRECATED',
+//         0x4000 => 'E_USER_DEPRECATED'
+//     );
 
-    if(!@is_string($name = @array_search($type, @array_flip($_ERRORS))))
-    {
-        $name = 'E_UNKNOWN';
-    };
+//     if(!@is_string($name = @array_search($type, @array_flip($_ERRORS))))
+//     {
+//         $name = 'E_UNKNOWN';
+//     };
 
-    return(print(@sprintf("%s Error in file \xBB%s\xAB at line %d: %s\n", $name, @basename($file), $line, $message)));
-};
+//     return(print(@sprintf("%s Error in file \xBB%s\xAB at line %d: %s\n", $name, @basename($file), $line, $message)));
+// };
 
-$old_error_handler = set_error_handler("ErrorHandler");
+// $old_error_handler = set_error_handler("ErrorHandler");
 
     class User {
         // DB stuff
@@ -132,6 +132,17 @@ $old_error_handler = set_error_handler("ErrorHandler");
         $this->pass = htmlspecialchars(strip_tags($this->pass));
         $this->verified = 0;
 
+        // Check if data is empty
+        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            return false;
+        }
+        if (!filter_var($this->username, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-z-A-Z]+/")))) {
+            return false;
+        }
+        if (!filter_var($this->pass, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-z-A-Z]+[0-9]+/")))) {
+            return false;
+        }
+
         $stmt->bindParam(':email', $this->email);
         $stmt->bindParam(':username', $this->username);
         $stmt->bindParam(':pass', $this->pass); 
@@ -149,7 +160,7 @@ $old_error_handler = set_error_handler("ErrorHandler");
 
         // Print error message if something goes wrong
         printf("Error : %s. \n", $stmt->error);
-        return true;
+        return false;
     }
 
     // Update user
@@ -216,6 +227,24 @@ $old_error_handler = set_error_handler("ErrorHandler");
         
         // Print error message if something goes wrong
         printf("Error : %s. \n", $stmt->error);
+        return false;
+    }
+
+    public function check() {
+        // Create query
+        $query = 'SELECT id, email, username, pass, verified FROM users WHERE email= :email';
+        
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':email', $this->email);
+
+        if ($stmt->execute()) {
+            printf("This user was found");
+            return true;
+        }
+
+        printf("This user was not found");
         return false;
     }
 
