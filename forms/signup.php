@@ -16,6 +16,7 @@
 <body>
     <div class="container">
         <button class="btn btn-warning mt-4" id="getUsers">Get API Data</button>
+        <p id="message" class="text-danger mt-2"></p>
         <form id="addPost">
             <div class="form-group mt-4">
                 <input type="text" id="email" placeholder="Email" class="form-control border" required/>
@@ -50,7 +51,17 @@
           body: JSON.stringify({username: username, email: email, pass: pass}),
         })
           .then((res) => res.text())
-          .then((data) => console.log(data));
+          .then((data) => {
+              if (data == '{"Message":"User Exists"}') {
+                document.getElementById("message").innerHTML = "This email already exists";
+              } else if (data == '{"Message":"Post Not Created"}') {
+                document.getElementById("message").innerHTML = "Email or password doesn't have the minimum requirements";
+              } else {
+                console.log('User Created');
+                window.location.href = "./signin.php";
+              }
+            
+          });
       }
 
       function getUsers() {

@@ -16,7 +16,8 @@
 <body>
     <div class="container">
         <button class="btn btn-warning mt-4" id="getUsers">Get API Data</button>
-        <form id="addPost">
+        <p id="message" class="text-danger mt-2"></p>
+        <form id="checkUser">
             <div class="form-group mt-4">
                 <input type="text" id="email" placeholder="Email" class="form-control border"/>
             </div>
@@ -29,13 +30,42 @@
     
     <script>
         document.getElementById("getUsers").addEventListener("click", getUsers);
+        document.getElementById("checkUser").addEventListener("submit", checkUser);
 
       function getUsers() {
-        fetch("http://localhost/api/post/read_single.php?id=2")
+        fetch("http://localhost/api/post/read.php")
           .then((res) => res.json())
           .then((data) => console.log(data))
           .catch((err) => console.log(err));
       }
+
+      function checkUser(e) {
+        e.preventDefault();
+
+        let email = document.getElementById("email").value;
+        let pass = document.getElementById("pass").value;
+
+        fetch("http://localhost/api/post/check.php", {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({email: email, pass: pass}),
+        })
+          .then((res) => res.text())
+          .then((data) => {
+            if (data == '{"Message":"User Exists"}') {
+              console.log("I will redirect");
+              window.location.href = "./welcome.php";
+            } else {
+              document.getElementById("message").innerHTML = "This email or password does not exist";
+              console.log("I will not redirect");
+            }
+
+          });
+      }
+
     </script>
 </body>
 
