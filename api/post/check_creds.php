@@ -1,5 +1,5 @@
 <?php
-    // Headers
+// Headers
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
     header('Access-Control-Allow-Methods: POST');
@@ -21,21 +21,15 @@
 
     $user->email = $data->email;
     $user->username = $data->username;
-    $user->pass = md5($data->pass);
+    $user->pass = $data->pass;
 
-    if ($user->check()) {
+    if ($user->check_creds()) {
         echo json_encode(
             array('Message' => 'User Exists')
         );
     } else {
-        if ($user->create()) {
-            echo json_encode(
-                array('Message' => 'Post Created')
-            );
-        } else {
-            echo json_encode(
-                array('Message' => 'Post Not Created')
-            );
-        }
+        echo json_encode(
+            array('Message' => 'User Does Not Exist')
+        );
     }
 ?>

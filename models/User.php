@@ -247,5 +247,28 @@
         return false;
     }
 
+    public function check_creds() {
+        // Create query
+        $query = 'SELECT id, email, username, pass, verified FROM users WHERE email= :email, pass= :pass';
+
+        $stmt = $this->conn->prepare($query);
+
+        // Hash password
+        $this->pass = md5($this->pass);
+
+        $stmt->bindParam(':email', $this->email);
+        $stmt->bindParam(':pass', $this->pass);
+
+        // Fetch data
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Set properties
+        if ($row['email'] == $this->email) {
+            return true;
+        }
+
+        return false;
+    }
+
 }
 ?>
