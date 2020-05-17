@@ -27,7 +27,7 @@
             <input type="submit" value="Login" class="btn btn-primary"/>
         </form>
     </div>
-    
+
     <script>
         document.getElementById("getUsers").addEventListener("click", getUsers);
         document.getElementById("checkUser").addEventListener("submit", checkUser);
@@ -56,13 +56,15 @@
           .then((res) => res.text())
           .then((data) => {
             if (data == '{"Message":"User Exists"}') {
+
+              // Redirect
               console.log("I will redirect");
-              console.log(data);
               window.location.href = "./welcome.php";
             } else {
-              document.getElementById("message").innerHTML = "This email or password does not exist";
+
+              // Reject
+              document.getElementById("message").innerHTML = "This email or password is incorrect";
               console.log("I will not redirect");
-              console.log(data);
             }
           });
       }

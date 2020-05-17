@@ -6,7 +6,6 @@
     include_once '../../config/Database.php';
     include_once '../../models/User.php';
 
-
     // Instantiate DB & connect
     $database = new Database();
     $db = $database->connect();
@@ -31,4 +30,5 @@
 
     // Make JSON
     print_r(json_encode($user_arr));
+
 ?>

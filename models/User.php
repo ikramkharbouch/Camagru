@@ -1,5 +1,5 @@
 <?php
-// // ----------------------------------------------------------------------------------------------------
+// // // ----------------------------------------------------------------------------------------------------
 // // - Display Errors
 // // ----------------------------------------------------------------------------------------------------
 // ini_set('display_errors', 'On');
@@ -119,9 +119,8 @@
 
     // Create new user
     public function create() {
-
         // Create Query
-       $query = 'INSERT INTO users SET email = :email, username = :username, pass = :pass, verified = :verified';
+       $query = 'INSERT INTO users SET email = :email, username = :username, pass = :pass, verified = :verified, token = :token';
 
         // Prepare statement
         $stmt = $this->conn->prepare($query);
@@ -131,6 +130,7 @@
         $this->username = htmlspecialchars(strip_tags($this->username));
         $this->pass = htmlspecialchars(strip_tags($this->pass));
         $this->verified = 0;
+        $this->token = htmlspecialchars($this->token);
 
         // Check if data is empty
         if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
@@ -147,12 +147,7 @@
         $stmt->bindParam(':username', $this->username);
         $stmt->bindParam(':pass', $this->pass); 
         $stmt->bindParam(':verified', $this->verified);
-        
-        // Execute query
-        var_dump($this->email);
-        var_dump($this->username);
-        var_dump($this->pass);
-        var_dump($this->verified);
+        $stmt->bindParam(':token', $this->token);
         
         if ($stmt->execute()) {
             return true;
@@ -227,12 +222,13 @@
 
     public function check() {
         // Create query
-        $query = 'SELECT id, email, username, pass, verified FROM users WHERE email= :email';
+        $query = 'SELECT id, email, username, pass, verified FROM users WHERE email= :email OR username = :username';
         
         // Prepare statement
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindParam(':email', $this->email);
+        $stmt->bindParam(':username', $this->username);
 
         $stmt->execute();
 
@@ -240,7 +236,7 @@
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // Set properties
-        if ($row['email'] == $this->email) {
+        if (($row['email'] == $this->email) || ($row['username'] == $this->username)) {
             return true;
         }
 
@@ -249,7 +245,8 @@
 
     public function check_creds() {
         // Create query
-        $query = 'SELECT id, email, username, pass, verified FROM users WHERE email= :email, pass= :pass';
+        $query = 'SELECT id, email, username, pass, verified 
+                FROM users WHERE email = :email';
 
         $stmt = $this->conn->prepare($query);
 
@@ -257,16 +254,60 @@
         $this->pass = md5($this->pass);
 
         $stmt->bindParam(':email', $this->email);
-        $stmt->bindParam(':pass', $this->pass);
+
+        // Execute query
+        $stmt->execute();
 
         // Fetch data
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // Set properties
-        if ($row['email'] == $this->email) {
+        if ($row['email'] == $this->email && $row['pass'] == $this->pass) {
             return true;
         }
 
+        return false;
+    }
+
+    public function find_id() {
+        // Create Query
+        $query = 'SELECT id FROM users WHERE token = :token';
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':token', $this->token);
+
+        // Execute query 
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $this->id = $row['id'];
+    }
+
+    public function verify() {
+        // Create update query
+        $query = 'Update users 
+        SET
+         verified = :verified
+        WHERE
+         id = :id';
+
+        $stmt = $this->conn->prepare($query);
+
+        // Create new data
+        $this->verified = 1;
+
+        $stmt->bindParam(':verified', $this->verified);
+        $stmt->bindParam(':id', $this->id);
+
+        // Execute query 
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        // Print error message if something goes wrong
+        printf("Error : %s. \n", $stmt->error);
         return false;
     }
 
