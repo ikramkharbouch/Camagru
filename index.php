@@ -5,16 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Camagru</title>
+    <link rel="stylesheet" href="./styles/main.css" />
     <link rel="icon" href="./assets/Camagru-favicon.png" />
-    <link rel="stylesheet" href="styles/main.css" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
     <link
       href="https://fonts.googleapis.com/css?family=Raleway&display=swap"
       rel="stylesheet"
     />
+    <link href="https://fonts.googleapis.com/css2?family=Jacques+Francois&display=swap" rel="stylesheet">
+
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -24,37 +23,24 @@
   </head>
 
   <body>
-    <?php include './components/header.html'; ?>
+    <?php include './components/header.html';?>
 
-    <div class="container-fluid vh-100">
-      <div class="d-flex flex-wrap justify-content-around align-items-center">
-        <div class="">
-          <img
-            src="assets/selfie.svg"
-            class="img-fluid one"
-            alt="Responsive image"
-          />
-        </div>
-
-        <div class="mt-5 mb-5 content">
-          <div class="text">
-            <h2>SHARE YOUR MOMENTS</h2>
-            <h1>EDIT AND POST YOUR PICTURES</h1>
-          </div>
-          <a class="btn btn-primary" href="forms/signup.php" role="button"
-            >Get started</a
-          >
-        </div>
-
-        <div class="">
-          <img
-            src="assets/organize-photos.svg"
-            class="img-fluid two"
-            alt="Responsive image"
-          />
-        </div>
+    <div class="content">
+      <div class="title">
+        <h3>Hello.</h3>
       </div>
+      <div class="text">
+        <h1>Lorem ipsum dolor sit amet consectetur
+       <br>adipisicing elit</h1>
+      </div>
+      
+       <div class="start">
+         <a href="./forms/signup.php"><p>Get Started</p></a>
+         <img src="./assets/arrow.svg" width="20">
+       </div>
+       
     </div>
-    <?php include './components/footer.html'; ?>
+
+    <?php include './components/footer.html';?>
   </body>
 </html>

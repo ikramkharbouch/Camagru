@@ -4,56 +4,70 @@
     box-sizing: border-box;
 }
 
+body {
+    background-image: url('../assets/photoshoot.jpg');
+    background-size: cover;
+    font-family: 'Roboto', 'sans-serif';
+    color: #fff;
+}
+
 .camagru {
-    font-size: 2.2rem !important;
-    color: #F85859 !important;
+    font-size: 1.5 !important;
+    color: #fff !important;
+    font-weight: 500;
+    margin-left: 20px;
 }
 
 .navbar-nav a {
-    color: #F85859 !important;
-}
-
-.content {
-    text-align: center;
-    flex: 2;
-    padding-top: 4rem;
-    margin: 0 auto;
-    margin-top: 20rem;
-    padding: 2rem;
-}
-
-.content .text {
-    color: #FFBE56;
-}
-
-.content .btn {
-    background-color: #F85859;
-    border: 0;
-    margin-top: 2rem;
-    margin-right: 2.5rem;
-    font-size: 1.2rem;
-}
-
-.conditions {
-    margin: auto;
-    width: 50%;
-    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
-}
-
-.content .btn:hover {
-    color: #F85859;
-    background-color: #DBDBDB;
-}
-
-.agree,
-.close_win {
-    color: white;
-    text-decoration: none;
+    color: #fff !important;
+    font-weight: 300;
+    margin: 10px;
 }
 
 .foot {
-    background-color: #525361;
     color: white;
     text-align: center;
     width: 100%;
+    font-family: 'Jacques Francois', serif;
+}
+
+h3 {
+    font-family: 'Jacques Francois', serif;
+    color: #fff;
+}
+
+h1 {
+    font-weight: 700;
+    color: #fff;
+    font-size: 100px;
+}
+
+.content {
+    margin: 100px;
+}
+
+a {
+    text-decoration: none;
+}
+
+p {
+    color: #fff;
+    font-family: 'Roboto', 'sans-serif';
+    font-weight: 300;
+    margin-top: 30px;
+}
+
+.start {
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
+}
+
+img {
+    margin-bottom: 15px;
+    margin-left: 5px;
+}
+
+.text {
+    margin-top: 20px;
 }
