@@ -20,7 +20,7 @@
     <div id="mySidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <h1>Camagru</h1>
-      <a href="#">Home</a>
+      <a href="../index.php">Home</a>
       <a href="#">Gallery</a>
       <a href="#">Profile</a>
       <a href="#">Settings</a>

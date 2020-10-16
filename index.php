@@ -26,7 +26,7 @@
   <body>
     <?php include './components/header.html';?>
 
-    <div class="content">
+    <!-- <div class="content">
       <div class="title">
         <h3>Hello.</h3>
       </div>
@@ -40,7 +40,7 @@
          <img src="./assets/arrow.svg" width="20">
        </div>
        
-    </div>
+    </div> -->
 
     <?php include './components/footer.html';?>
   </body>
