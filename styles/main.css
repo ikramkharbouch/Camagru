@@ -57,17 +57,3 @@ p {
     margin-top: 30px;
 }
 
-.start {
-    display: flex;
-    flex-direction: row;
-    margin-top: 40px;
-}
-
-img {
-    margin-bottom: 15px;
-    margin-left: 5px;
-}
-
-.text {
-    margin-top: 20px;
-}
