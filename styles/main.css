@@ -15,25 +15,6 @@ img {
     width: 100%;
 }
 
-.camagru {
-    font-size: 1.5 !important;
-    color: #fff !important;
-    font-weight: 500;
-    margin-left: 20px;
-}
-
-.navbar-nav a {
-    color: #fff !important;
-    font-weight: 300;
-    margin: 10px;
-}
-
-.foot {
-    color: white;
-    text-align: center;
-    width: 100%;
-}
-
 h3 {
     color: #fff;
 }
@@ -52,6 +33,7 @@ h1 {
 
 a {
     text-decoration: none;
+    color: #fff;
 }
 
 p {
@@ -65,3 +47,7 @@ p {
     height: 50px;
     padding-top: 5px;
 } */
+
+.camagru {
+    color: #fff;
+}
