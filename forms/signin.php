@@ -14,6 +14,28 @@
 </head>
 
 <body>
+  <div class="sign-in">
+    <img src="../assets/Sign-in.png" alt="">
+
+    <div class="container">
+      <h1>Sign In to <span>Camagru</span></h1>
+      <form>
+      <div class="col">
+      <div class="row">
+        <input type="text" class="form-control form-control-lg" placeholder="First name">
+      </div>
+      <div class="row">
+        <input type="text" class="form-control form-control-lg" placeholder="Last name">
+      </div>
+      <div class="row check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Remember your password ?</label>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg custom-btn">Sign In</button>
+    </div>
+    </form>
+    </div>
+  <!-- </div>
     <div class="container">
         <button class="btn btn-warning mt-4" id="getUsers">Get API Data</button>
         <p id="message" class="text-danger mt-2"></p>
@@ -26,7 +48,7 @@
             </div>
             <input type="submit" value="Login" class="btn btn-primary"/>
         </form>
-    </div>
+    </div> -->
 
     <script>
         document.getElementById("getUsers").addEventListener("click", getUsers);

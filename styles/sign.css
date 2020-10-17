@@ -26,13 +26,14 @@
     color: #8F8C8C;
 }
 
-.form-group input {
-    box-shadow: 0;
-    border: 0
+.form {
+    width: 30%;
+    padding: 20px;
+    margin-top: 40px;
 }
 
-.form {
-    color: #F9A826 !important;
+.container {
+    padding: 20px;
 }
 
 .terms {
@@ -46,7 +47,6 @@
 
 .one {
     flex: 2;
-
 }
 
 .two {
@@ -62,4 +62,53 @@
     .login-form .form-group {
         width: 80vw;
     }
+}
+
+.check {
+    padding-left: 30px;
+}
+
+img {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+}
+
+span {
+    color: #9364A8;
+    font-weight: bold;
+}
+
+.container {
+    margin: 100px;
+}
+
+h1 {
+    font-weight: 300;
+    font-family: 'Roboto', 'sans-serif';
+}
+
+input.form-control {
+    width: 70%;
+    margin: 10px;
+    padding: 30px;
+    border: 1px solid #9364A8;
+}
+
+.sign-in {
+    width: 60%;
+    margin-left: 2%;
+}
+
+.btn-primary.custom-btn{
+    background-color: #9364A8;
+    border: 0;
+}
+
+.col {
+    padding: 10px;
+}
+.row {
+    margin: 10px;
 }
