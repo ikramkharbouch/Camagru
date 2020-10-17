@@ -5,21 +5,25 @@
 }
 
 body {
-    background-image: url("../assets/pablo-camera-access.png");
-    background-size: cover;
+    background-image: url('../assets/Landing-page-cover.png');
     font-family: 'Roboto', 'sans-serif';
-    color: #9364A8;
+    color: #fff;
+    background-size: cover;
+}
+
+img {
+    width: 100%;
 }
 
 .camagru {
     font-size: 1.5 !important;
-    color: #9364A8 !important;
+    color: #fff !important;
     font-weight: 500;
     margin-left: 20px;
 }
 
 .navbar-nav a {
-    color: #9364A8 !important;
+    color: #fff !important;
     font-weight: 300;
     margin: 10px;
 }
@@ -28,11 +32,9 @@ body {
     color: white;
     text-align: center;
     width: 100%;
-    font-family: 'Jacques Francois', serif;
 }
 
 h3 {
-    font-family: 'Jacques Francois', serif;
     color: #fff;
 }
 
@@ -44,6 +46,8 @@ h1 {
 
 .content {
     margin: 100px;
+    width: 50%;
+    padding: 20px;
 }
 
 a {
@@ -57,3 +61,7 @@ p {
     margin-top: 30px;
 }
 
+/* button {
+    height: 50px;
+    padding-top: 5px;
+} */

@@ -25,21 +25,29 @@
 
   <body>
     <?php include './components/header.html';?>
+    <!-- <img src="./assets/landing-page-cover.png" alt=""> -->
+ 
+    <div class="content">
+     <h1>Welcome to Camagru</h1>
+     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi sint iste qui nulla illum molestias, at ratione pariatur nostrum, corrupti, laudantium et cum dolorum. Nesciunt magni perferendis iusto sed libero!</p>
+     <a href="./forms/signup.php" class="btn btn-primary btn-lg" role="button">Sign Up</a>
 
-    <!-- <div class="content">
-      <div class="title">
-        <h3>Hello.</h3>
-      </div>
+    </div>
+    
+      <!-- <div class="content">
+        <div class="title">
+          <h3>Hello.</h3>
+        </div>
       <div class="text">
         <h1>Lorem ipsum dolor sit amet consectetur
        <br>adipisicing elit</h1>
       </div>
-      
+
        <div class="start">
          <a href="./forms/signup.php"><p>Get Started</p></a>
          <img src="./assets/arrow.svg" width="20">
        </div>
-       
+
     </div> -->
 
     <?php include './components/footer.html';?>
