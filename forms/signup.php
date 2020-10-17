@@ -14,7 +14,39 @@
 </head>
 
 <body>
+
+<div class="sign-in">
+    <img src="../assets/Sign-in.png" alt="">
+
     <div class="container">
+      <h1>Sign Up to <span>Camagru</span></h1>
+      <form>
+      <div class="col">
+      <div class="row">
+        <input type="text" class="form-control form-control-lg" placeholder="First name">
+      </div>
+      <div class="row">
+        <input type="text" class="form-control form-control-lg" placeholder="Last name">
+      </div>
+      <div class="row">
+        <input type="text" class="form-control form-control-lg" placeholder="Username">
+      </div>
+      <div class="row">
+        <input type="text" class="form-control form-control-lg" placeholder="Email">
+      </div>
+      <div class="row">
+        <input type="password" class="form-control form-control-lg" placeholder="Password">
+      </div>
+      <div class="row">
+        <input type="password" class="form-control form-control-lg" placeholder="Repeat Password">
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg custom-btn">Register</button>
+    </div>
+    </form>
+    </div>
+
+
+    <!-- <div class="container">
         <button class="btn btn-warning mt-4" id="getUsers">Get API Data</button>
         <p id="message" class="text-danger mt-2"></p>
         <form id="addPost">
@@ -29,7 +61,7 @@
             </div>
             <input type="submit" value="Register" class="btn btn-primary"/>
         </form>
-    </div>
+    </div> -->
     
     <script>
         document.getElementById("addPost").addEventListener("submit", addPost);

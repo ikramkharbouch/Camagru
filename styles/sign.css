@@ -29,12 +29,12 @@
 .form {
     width: 30%;
     padding: 20px;
-    margin-top: 40px;
+    margin-top: 30px;
 }
 
-.container {
+/* .container {
     padding: 20px;
-}
+} */
 
 .terms {
     color: #8F8C8C;
@@ -104,6 +104,8 @@ input.form-control {
 .btn-primary.custom-btn{
     background-color: #9364A8;
     border: 0;
+    padding: 16px 40px 16px 40px;
+    margin-left: 0;
 }
 
 .col {
