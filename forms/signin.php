@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <div class="sign-in">
+  <div class="sign-in d-flex flex-column">
     <img src="../assets/Sign-in.png" alt="">
 
     <div class="container">
@@ -22,7 +22,7 @@
       <form>
       <div class="col">
       <div class="row">
-        <input type="text" class="form-control form-control-lg" placeholder="Email">
+        <input type="text" class="form-control form-control-lg form-control-sm" placeholder="Email">
       </div>
       <div class="row">
         <input type="password" class="form-control form-control-lg" placeholder="Password">
@@ -31,7 +31,10 @@
         <input type="checkbox" class="form-check-input" id="exampleCheck1">
         <label class="form-check-label" for="exampleCheck1">Remember your password ?</label>
       </div>
-      <button type="submit" class="btn btn-primary btn-lg custom-btn">Sign In</button>
+      <div class="row">
+        <button type="submit" class="btn btn-primary btn-lg custom-btn">Sign In</button>
+      </div>
+      
     </div>
     </form>
     </div>

@@ -105,7 +105,7 @@ input.form-control {
     background-color: #9364A8;
     border: 0;
     padding: 16px 40px 16px 40px;
-    margin-left: 0;
+    margin-left: 10px;
 }
 
 .col {
@@ -113,4 +113,31 @@ input.form-control {
 }
 .row {
     margin: 10px;
+}
+
+@media only screen and (max-width: 1024px) {
+    img {
+        display: none;
+    }
+    input.form-control {
+        width: 100%;
+        margin-left: 0;
+    }
+    .check {
+        margin-left: 0;
+    }
+    .sign-in {
+        flex-direction: row;
+    }
+    div.container {
+        width: 100vw;
+    }
+
+    .form {
+        padding-left: 0;
+    }
+
+    button.btn {
+        padding-left: 0;
+    }
 }

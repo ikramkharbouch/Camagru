@@ -40,7 +40,9 @@
       <div class="row">
         <input type="password" class="form-control form-control-lg" placeholder="Repeat Password">
       </div>
-      <button type="submit" class="btn btn-primary btn-lg custom-btn">Register</button>
+      <div class="row">
+        <button type="submit" class="btn btn-primary btn-lg custom-btn">Register</button>
+      </div>
     </div>
     </form>
     </div>
