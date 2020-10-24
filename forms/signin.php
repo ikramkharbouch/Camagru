@@ -22,17 +22,17 @@
       <form>
       <div class="col">
       <div class="row">
-        <input type="text" class="form-control form-control-lg form-control-sm" placeholder="Email">
+        <input type="text" id="email" class="form-control form-control-lg form-control-sm" placeholder="Email">
       </div>
       <div class="row">
-        <input type="password" class="form-control form-control-lg" placeholder="Password">
+        <input type="password" id="pass" class="form-control form-control-lg" placeholder="Password">
       </div>
       <div class="row check">
         <input type="checkbox" class="form-check-input" id="exampleCheck1">
         <label class="form-check-label" for="exampleCheck1">Remember your password ?</label>
       </div>
       <div class="row">
-        <button type="submit" class="btn btn-primary btn-lg custom-btn">Sign In</button>
+        <button type="submit" value="Login" class="btn btn-primary btn-lg custom-btn">Sign In</button>
       </div>
       
     </div>

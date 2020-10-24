@@ -23,25 +23,13 @@
       <form>
       <div class="col">
       <div class="row">
-        <input type="text" class="form-control form-control-lg" placeholder="First name">
+        <input type="text" id="email" class="form-control form-control-lg" placeholder="Email">
       </div>
       <div class="row">
-        <input type="text" class="form-control form-control-lg" placeholder="Last name">
+        <input type="text" id="username" class="form-control form-control-lg" placeholder="Username">
       </div>
       <div class="row">
-        <input type="text" class="form-control form-control-lg" placeholder="Username">
-      </div>
-      <div class="row">
-        <input type="text" class="form-control form-control-lg" placeholder="Email">
-      </div>
-      <div class="row">
-        <input type="password" class="form-control form-control-lg" placeholder="Password">
-      </div>
-      <div class="row">
-        <input type="password" class="form-control form-control-lg" placeholder="Repeat Password">
-      </div>
-      <div class="row">
-        <button type="submit" class="btn btn-primary btn-lg custom-btn">Register</button>
+        <input type="text" id="pass" value="Register" class="form-control form-control-lg" placeholder="Password">
       </div>
     </div>
     </form>

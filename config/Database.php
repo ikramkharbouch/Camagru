@@ -1,10 +1,10 @@
 <?php
     class Database {
         // DB Params
-        private $host = 'localhost';
+        private $host = '54.163.108.123';
         private $db_name = 'camagru';
         private $username = 'root';
-        private $password = 'root1234';
+        private $password = 'Root1234@';
         private $conn;
 
         // DB Connect
