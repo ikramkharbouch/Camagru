@@ -65,7 +65,7 @@
         let email = document.getElementById("email").value;
         let pass = document.getElementById("pass").value;
 
-        fetch("http://localhost/api/post/create.php", {
+        fetch("http://54.163.108.123/Camagru/api/post/create.php", {
           method: "POST",
           headers: {
             'Content-Type': 'application/json',

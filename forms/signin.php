@@ -58,7 +58,7 @@
         document.getElementById("checkUser").addEventListener("submit", checkUser);
 
       function getUsers() {
-        fetch("http://localhost/api/post/read.php")
+        fetch("http://54.163.108.123/Camagru/api/post/read.php")
           .then((res) => res.json())
           .then((data) => console.log(data))
           .catch((err) => console.log(err));
