@@ -101,11 +101,10 @@ input.form-control {
     margin-left: 2%;
 }
 
-.btn-primary.custom-btn{
+.btn-primary.custom-btn {
     background-color: #9364A8;
     border: 0;
     padding: 16px 40px 16px 40px;
-    margin-left: 10px;
 }
 
 .col {

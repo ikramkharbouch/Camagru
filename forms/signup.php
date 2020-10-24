@@ -31,6 +31,7 @@
       <div class="row">
         <input type="text" id="pass" value="Register" class="form-control form-control-lg" placeholder="Password">
       </div>
+      <button type="submit" class="btn btn-primary btn-lg custom-btn">Register</button>
     </div>
     </form>
     </div>
