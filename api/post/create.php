@@ -23,6 +23,11 @@ $user->username = $data->username;
 $user->pass = md5($data->pass);
 $user->token = md5(time());
 
+echo $user->email;
+echo $user->password;
+echo $user->pass;
+echo $user->token;
+
 // if ($user->check()) {
 //     echo json_encode(
 //         array('Message' => 'User Exists')
