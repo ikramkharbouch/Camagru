@@ -23,11 +23,11 @@ $user->username = $data->username;
 $user->pass = md5($data->pass);
 $user->token = md5(time());
 
-if ($user->check()) {
-    echo json_encode(
-        array('Message' => 'User Exists')
-    );
-} else {
+// if ($user->check()) {
+//     echo json_encode(
+//         array('Message' => 'User Exists')
+//     );
+// } else {
     if ($user->create()) {
         $to = $user->email;
         $subject = "Email Verification";
@@ -55,4 +55,4 @@ if ($user->check()) {
             array('Message' => 'Post Not Created')
         );
     }
-}
+// }
