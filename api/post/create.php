@@ -26,6 +26,7 @@ $user->token = md5(time());
 echo $user->email;
 echo $user->password;
 echo $user->pass;
+echo "1";
 echo $user->token;
 
 // if ($user->check()) {

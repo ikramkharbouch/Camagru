@@ -122,11 +122,9 @@
         // Create Query
        $query = 'INSERT INTO users SET email = :email, username = :username, pass = :pass, verified = :verified, token = :token';
 
-        echo "1";
         // Prepare statement
         $stmt = $this->conn->prepare($query);
         
-        echo "1";
         // Clean data
         $this->email = htmlspecialchars(strip_tags($this->email));
         $this->username = htmlspecialchars(strip_tags($this->username));
