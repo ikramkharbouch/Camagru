@@ -17,6 +17,10 @@
                 $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch(PDOException $e) {
                 echo 'Connection Error: ' . $e->getMessage();
+                echo $this->host;
+                echo $this->db_name;
+                echo $this->username;
+                echo $this->password;
             }
 
 
