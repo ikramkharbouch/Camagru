@@ -29,7 +29,7 @@
         <input type="text" id="username" class="form-control form-control-lg" placeholder="Username">
       </div>
       <div class="row">
-        <input type="text" id="pass" value="Register" class="form-control form-control-lg" placeholder="Password">
+        <input type="text" id="pass" class="form-control form-control-lg" placeholder="Password">
       </div>
       <button type="submit" class="btn btn-primary btn-lg custom-btn">Register</button>
     </div>
