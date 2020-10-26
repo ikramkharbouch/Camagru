@@ -19,8 +19,8 @@ $user = new User($db);
 $data = json_decode(file_get_contents("php://input"));
 
 var_dump(file_get_contents("php://input"));
-var_dump(file_get_contents($data));
-var_dump(file_get_contents($user));
+var_dump($data);
+var_dump($user);
 
 $user->email = $data->email;
 $user->username = $data->username;
