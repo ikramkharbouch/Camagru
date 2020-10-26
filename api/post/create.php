@@ -18,6 +18,8 @@ $user = new User($db);
 // Get raw posted data
 $data = json_decode(file_get_contents("php://input"));
 
+var_dump(json_last_error());
+
 var_dump(file_get_contents("php://input"));
 var_dump($data);
 var_dump($user);
