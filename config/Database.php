@@ -11,7 +11,8 @@
         public function connect() {
             $this->conn = null; 
             try {
-                $this->conn = new PDO('mysql:host=' . $this->host . ';dbname=' . $this->db_name,
+                $this->conn = new PDO('mysql:host=54.163.108.123/Camagru' . ';dbname=' . $this->db_name,
+                // $this->conn = new PDO('mysql:host=' . $this->host . ';dbname=' . $this->db_name,
                 $this->username, $this->password);
                 $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch(PDOException $e) {
