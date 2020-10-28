@@ -122,6 +122,8 @@
         // Create Query
        $query = 'INSERT INTO users SET email = :email, username = :username, pass = :pass, verified = :verified, token = :token';
 
+    //    $query = "INSERT INTO users (email, username, pass, verified, token) VALUES ('test@test.fr', 'tester21', 'test@hh1423', '0', 'hdhufgeiuf')";
+
         // Prepare statement
         $stmt = $this->conn->prepare($query);
         
@@ -236,7 +238,11 @@
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // Set properties
-        if (($row['email'] == $this->email) || ($row['username'] == $this->username)) {
+        // if (($row['email'] == $this->email) || ($row['username'] == $this->username)) {
+        //     return true;
+        // }
+
+        if (is_array($row) && (($row['email'] == $this->email) || ($row['username'] == $this->username))) {
             return true;
         }
 
