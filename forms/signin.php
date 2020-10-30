@@ -19,7 +19,7 @@
 
     <div class="container">
       <h1>Sign In to <span>Camagru</span></h1>
-      <form>
+      <form id="checkUser">
       <div class="col">
       <div class="row">
         <input type="text" id="email" class="form-control form-control-lg form-control-sm" placeholder="Email">
@@ -57,6 +57,7 @@
     </div> -->
 
     <script>
+
       document.getElementById("getUsers").addEventListener("click", getUsers);
       document.getElementById("checkUser").addEventListener("submit", checkUser);
 
@@ -96,8 +97,6 @@
             }
           });
       }
-
-
     </script>
 </body>
 

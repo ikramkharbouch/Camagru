@@ -20,7 +20,7 @@
 
     <div class="container">
       <h1>Sign Up to <span>Camagru</span></h1>
-      <form>
+      <form id="addPost">
       <div class="col">
       <div class="row">
         <input type="text" id="email" class="form-control form-control-lg" placeholder="Email">
