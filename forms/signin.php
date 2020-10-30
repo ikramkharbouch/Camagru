@@ -88,7 +88,7 @@
 
               // Redirect
               console.log("I will redirect");
-              window.location.href = "./Camagru/welcome.php";
+              window.location.href = "./welcome.php";
             } else {
 
               // Reject
