@@ -82,10 +82,12 @@
                 document.getElementById("message").innerHTML = "This email or username already exists";
               } else if (data == '{"Message":"Post Not Created"}') {
                 document.getElementById("message").innerHTML = "Email or password doesn't have the minimum requirements";
-              } else {
+              } else if (data == '{"Message":"Post Created"}') {
                 console.log('User Created');
                 window.location.href = "./signin.php";
-              }
+              } else {
+                console.log('a problem occured');
+              } 
             
           });
       }
