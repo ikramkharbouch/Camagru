@@ -57,9 +57,8 @@
     </div> -->
 
     <script>
-      document.addEventListener("DOMContentLoaded", function(event) {
       document.getElementById("getUsers").addEventListener("click", getUsers);
-        document.getElementById("checkUser").addEventListener("submit", checkUser);
+      document.getElementById("checkUser").addEventListener("submit", checkUser);
 
       function getUsers() {
         fetch("http://54.163.108.123/Camagru/api/post/read.php")
@@ -97,7 +96,6 @@
             }
           });
       }
-  });
 
 
     </script>
