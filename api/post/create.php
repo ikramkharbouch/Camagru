@@ -18,24 +18,18 @@ $user = new User($db);
 // Get raw posted data
 $data = json_decode(file_get_contents("php://input"));
 
-var_dump(json_last_error());
-
-var_dump(file_get_contents("php://input"));
-var_dump($data);
-var_dump($user);
+// var_dump(json_last_error());
 
 $user->email = $data->email;
 $user->username = $data->username;
 $user->pass = md5($data->pass);
 $user->token = md5(time());
 
-var_dump("1");
 if ($user->check()) {
     echo json_encode(
         array('Message' => 'User Exists')
     );
 } else {
-    var_dump(1);
     if ($user->create()) {
         // $to = $user->email;
         // $subject = "Email Verification";
