@@ -34,17 +34,17 @@
       <div class="row">
         <button type="submit" value="Login" class="btn btn-primary btn-lg custom-btn">Sign In</button>
       </div>
-      
+
     </div>
     </form>
-    </div>        
-    
+    </div>
+
     <button class="btn btn-warning mt-4" id="getUsers">Get API Data</button>
     <p id="message" class="text-danger mt-2"></p>
   <!-- </div>
     <div class="container">
 
-        
+
         <form id="checkUser">
             <div class="form-group mt-4">
                 <input type="text" id="email" placeholder="Email" class="form-control border"/>
@@ -57,7 +57,8 @@
     </div> -->
 
     <script>
-        document.getElementById("getUsers").addEventListener("click", getUsers);
+      document.addEventListener("DOMContentLoaded", function(event) {
+      document.getElementById("getUsers").addEventListener("click", getUsers);
         document.getElementById("checkUser").addEventListener("submit", checkUser);
 
       function getUsers() {
@@ -96,6 +97,8 @@
             }
           });
       }
+  });
+
 
     </script>
 </body>
