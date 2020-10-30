@@ -36,6 +36,9 @@
     </form>
     </div>
 
+    <button class="btn btn-warning mt-4" id="getUsers">Get API Data</button>
+    <p id="message" class="text-danger mt-2"></p>
+
 
     <!-- <div class="container">
         <button class="btn btn-warning mt-4" id="getUsers">Get API Data</button>
