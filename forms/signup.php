@@ -71,7 +71,7 @@
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
-          body: JSON.stringify({username: username, email: email, pass: pass}),
+          body: JSON.stringify({email: email, username: username, pass: pass}),
         })
           .then((res) => res.text())
           .then((data) => {
@@ -88,7 +88,7 @@
       }
 
       function getUsers() {
-        fetch("http://localhost/api/post/read_single.php?id=2")
+        fetch("http://54.163.108.123/Camagru/api/post/read_single.php?id=2")
           .then((res) => res.json())
           .then((data) => console.log(data))
           .catch((err) => console.log(err));

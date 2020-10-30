@@ -70,7 +70,7 @@
         let email = document.getElementById("email").value;
         let pass = document.getElementById("pass").value;
 
-        fetch("http://localhost/api/post/check_creds.php", {
+        fetch("http://54.163.108.123/Camagru/api/post/check_creds.php", {
           method: "POST",
           headers: {
             'Content-Type': 'application/json',
@@ -84,7 +84,7 @@
 
               // Redirect
               console.log("I will redirect");
-              window.location.href = "./welcome.php";
+              window.location.href = "./Camagru/welcome.php";
             } else {
 
               // Reject
