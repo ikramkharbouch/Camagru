@@ -37,11 +37,14 @@
       
     </div>
     </form>
-    </div>
+    </div>        
+    
+    <button class="btn btn-warning mt-4" id="getUsers">Get API Data</button>
+    <p id="message" class="text-danger mt-2"></p>
   <!-- </div>
     <div class="container">
-        <button class="btn btn-warning mt-4" id="getUsers">Get API Data</button>
-        <p id="message" class="text-danger mt-2"></p>
+
+        
         <form id="checkUser">
             <div class="form-group mt-4">
                 <input type="text" id="email" placeholder="Email" class="form-control border"/>
