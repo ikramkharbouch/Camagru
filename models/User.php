@@ -156,8 +156,9 @@
             $query = 'INSERT INTO posts SET user_id = $lastid';
             var_dump($lastid);
             $stmt = $this->conn->prepare($query);
-            $stmt->execute();
-            return true;
+            if ($stmt->execute()) {
+                return true;
+            }
         }
 
         // Print error message if something goes wrong
