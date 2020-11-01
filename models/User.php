@@ -328,6 +328,8 @@
     public function open_session() {
         session_start();
 
+        // You should compare the hashes
+        $this->pass = md5($this->pass);
         $query = 'SELECT id FROM users WHERE email = :email AND pass = :pass';
         $stmt = $this->conn->prepare($query);
 
