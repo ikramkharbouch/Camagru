@@ -341,8 +341,8 @@
 
         $this->id = $row['id'];
 
-        $_SESSION['id'] = $this->id;
-        $_SESSION['email'] = $this->email;
+        $_SESSION["id"] = $this->id;
+        $_SESSION["email"] = $this->email;
 
         return true;
     }
