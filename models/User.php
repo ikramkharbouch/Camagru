@@ -122,7 +122,7 @@
         // Create Query
        $query = 'BEGIN;
        INSERT INTO users SET email = :email, username = :username, pass = :pass, verified = :verified, token = :token;
-       INSERT INTO posts SET user_id = 1;
+       INSERT INTO posts SET user_id = "1";
        COMMIT;';
 
     //    $query = "INSERT INTO users (email, username, pass, verified, token) VALUES ('test@test.fr', 'tester21', 'test@hh1423', '0', 'hdhufgeiuf')";
