@@ -330,6 +330,7 @@
 
         // You should compare the hashes
         $this->pass = md5($this->pass);
+        
         $query = 'SELECT id FROM users WHERE email = :email AND pass = :pass';
         $stmt = $this->conn->prepare($query);
 
@@ -340,8 +341,6 @@
         $stmt->execute();
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        var_dump($row['id']);
 
         $this->id = $row['id'];
 

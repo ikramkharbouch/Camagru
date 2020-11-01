@@ -24,8 +24,6 @@
         echo json_encode(
             array('Message' => 'Session Created')
         );
-        var_dump($_SESSION["id"]);
-        var_dump($_SESSION["email"]);
     } else {
         echo json_encode(
             array('Message' => 'Session Was Not Created')
