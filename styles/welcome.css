@@ -11,7 +11,7 @@
     padding-top: 60px; /* Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
   }
-  
+
   /* The navigation menu links */
   .sidenav a {
     padding: 8px 8px 8px 32px;
@@ -102,9 +102,9 @@ video, canvas {
   width: 50%;
   height: 80%;
   position: absolute;
-  right: 0;
+  left: 0;
   bottom: 0;
-  margin-right: 20px;
+  margin-left: 20px;
 }
 
 /* button {
@@ -118,20 +118,29 @@ video, canvas {
   text-align: center;
 }
 
-button {
+/* button {
   background-color: orange;
-}
+} */
 
 .emojis {
   width: 40%;
   height: 70%;
   position: absolute;
-  left: 0;
+  right: 0;
   bottom: 0;
-  margin-left: 20px;
+  margin-right: 50px;
   background-color: #EBEBEB;
   border: 10px solid orchid;
   margin-bottom: 40px;
   border-radius: 5px;
   padding: 30px;
+}
+
+img {
+  width: 160px;
+  height: 160px;
+}
+
+#canvas {
+  display: none;
 }
