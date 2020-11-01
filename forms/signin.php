@@ -87,7 +87,7 @@
             if (data == '{"Message":"User Exists"}') {
 
               fetch("http://54.163.108.123/Camagru/api/post/session.php", {
-              method: "GET",
+              method: "POST",
               headers: {
               'Content-Type': 'application/json',
               'Accept': 'application/json'
