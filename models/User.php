@@ -331,7 +331,8 @@
         $query = 'SELECT id FROM users WHERE email = :email AND pass = :pass';
         $stmt = $this->conn->prepare($query);
 
-        $stmt->bindParam(':token', $this->token);
+        $stmt->bindParam(':email', $this->email);
+        $stmt->bindParam(':pass', $this->pass);
 
         // Execute query 
         $stmt->execute();

@@ -22,7 +22,7 @@
 
     if ($user->open_session()) {
         echo json_encode(
-            array('Message' => 'Session Was Created')
+            array('Message' => 'Session Created')
         );
     } else {
         echo json_encode(

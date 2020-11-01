@@ -96,7 +96,7 @@
         })
           .then((res) => res.text())
           .then((data) => {
-            if (data == '{"Message":"Session created"}') {
+            if (data == '{"Message":"Session Created"}') {
                   console.log("Session Created");
                   console.log("I will redirect");
                   window.location.href = "./welcome.php";
