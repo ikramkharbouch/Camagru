@@ -153,6 +153,7 @@
         
         if ($stmt->execute()) {
             $lastid = mysqli_insert_id();
+            var_dump(mysqli_insert_id());
             $query = 'INSERT INTO posts SET user_id = $lastid';
             var_dump($lastid);
             $stmt = $this->conn->prepare($query);
