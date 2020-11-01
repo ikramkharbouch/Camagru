@@ -152,14 +152,12 @@
         $stmt->bindParam(':token', $this->token);
         
         if ($stmt->execute()) {
-            $lastid = mysqli_insert_id();
-            var_dump(mysqli_insert_id());
-            $query = 'INSERT INTO posts SET user_id = $lastid';
-            var_dump($lastid);
-            $stmt = $this->conn->prepare($query);
-            if ($stmt->execute()) {
-                return true;
-            }
+            // $lastid = mysqli_insert_id();
+            // var_dump(mysqli_insert_id());
+            // $query = 'INSERT INTO posts SET user_id = $lastid';
+            // var_dump($lastid);
+            // $stmt = $this->conn->prepare($query);
+            return true;
         }
 
         // Print error message if something goes wrong
