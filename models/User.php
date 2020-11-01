@@ -339,6 +339,8 @@
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
+        var_dump($row['id']);
+
         $this->id = $row['id'];
 
         $_SESSION["id"] = $this->id;
