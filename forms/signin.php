@@ -93,9 +93,9 @@
               'Accept': 'application/json'
             },
             body: JSON.stringify({email: email, pass: pass}),
-        })
-          .then((res) => res.text())
-          .then((data) => {
+            })
+            .then((res) => res.text())
+            .then((data) => {
             if (data == '{"Message":"Session Created"}') {
                   console.log("Session Created");
                   console.log("I will redirect");
