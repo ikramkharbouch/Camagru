@@ -120,10 +120,6 @@
     // Create new user
     public function create() {
         // Create Query
-
-       $lastid = LAST_INSERT_ID();
-
-       var_dump($lastid);
        $query = 'BEGIN;
        INSERT INTO users SET email = :email, username = :username, pass = :pass, verified = :verified, token = :token;
        INSERT INTO posts SET user_id = 27;
