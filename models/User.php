@@ -121,8 +121,8 @@
     public function create() {
         // Create Query
        $query = 'BEGIN;
-       INSERT INTO users SET email = :email, username = :username, pass = :pass, verified = :verified, token = :token;
-       INSERT INTO posts SET user_id = LAST_INSERT_ID();
+        INSERT INTO users SET email = :email, username = :username, pass = :pass, verified = :verified, token = :token;
+        INSERT INTO posts SET user_id = mysql_insert_id();
        COMMIT;';
 
     //    $query = "INSERT INTO users (email, username, pass, verified, token) VALUES ('test@test.fr', 'tester21', 'test@hh1423', '0', 'hdhufgeiuf')";
@@ -323,6 +323,27 @@
         // Print error message if something goes wrong
         printf("Error : %s. \n", $stmt->error);
         return false;
+    }
+
+    public function open_session() {
+        session_start();
+
+        $query = 'SELECT id FROM users WHERE email = :email AND pass = :pass';
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':token', $this->token);
+
+        // Execute query 
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $this->id = $row['id'];
+
+        $_SESSION['id'] = $this->id;
+        $_SESSION['email'] = $this->email;
+
+        return true;
     }
 
 }

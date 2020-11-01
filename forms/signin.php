@@ -86,17 +86,52 @@
           .then((data) => {
             if (data == '{"Message":"User Exists"}') {
 
-              // Redirect
-              console.log("I will redirect");
-              window.location.href = "./welcome.php";
+              fetch("http://54.163.108.123/Camagru/api/post/session.php", {
+              method: "GET",
+              headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({email: email, pass: pass}),
+        })
+          .then((res) => res.text())
+          .then((data) => {
+            if (data == '{"Message":"Session created"}') {
+                  console.log("Session Created");
+                  console.log("I will redirect");
+                  window.location.href = "./welcome.php";
             } else {
-
-              // Reject
-              document.getElementById("message").innerHTML = "This email or password is incorrect";
+                  console.log("Session Not Created");
+            }
+          });
+            } else {
               console.log("I will not redirect");
             }
           });
       }
+
+      function open_session(e) {
+              e.preventDefault();
+
+              let email = document.getElementById("email").value;
+              let pass = document.getElementById("pass").value;
+              fetch("http://54.163.108.123/Camagru/api/post/session.php", {
+              method: "GET",
+              headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({email: email, pass: pass}),
+        })
+          .then((res) => res.text())
+          .then((data) => {
+            if (data == '{"Message":"Session created"}') {
+                  console.log("Session Created");
+            } else {
+                  console.log("Session Not Created");
+            }
+          });
+          }
     </script>
 </body>
 
