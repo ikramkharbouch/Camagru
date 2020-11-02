@@ -22,10 +22,10 @@
       <form id="checkUser">
       <div class="col">
       <div class="row">
-        <input type="text" id="email" class="form-control form-control-lg form-control-sm" placeholder="Email">
+        <input type="text" id="email" class="form-control form-control-lg form-control-sm" placeholder="Email" required>
       </div>
       <div class="row">
-        <input type="password" id="pass" class="form-control form-control-lg" placeholder="Password">
+        <input type="password" id="pass" class="form-control form-control-lg" placeholder="Password" required>
       </div>
       <div class="row check">
         <input type="checkbox" class="form-check-input" id="exampleCheck1">

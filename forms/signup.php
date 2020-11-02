@@ -23,13 +23,13 @@
       <form id="addPost">
       <div class="col">
       <div class="row">
-        <input type="text" id="email" class="form-control form-control-lg" placeholder="Email">
+        <input type="text" id="email" class="form-control form-control-lg" placeholder="Email" required>
       </div>
       <div class="row">
-        <input type="text" id="username" class="form-control form-control-lg" placeholder="Username">
+        <input type="text" id="username" class="form-control form-control-lg" placeholder="Username" required>
       </div>
       <div class="row">
-        <input type="text" id="pass" class="form-control form-control-lg" placeholder="Password">
+        <input type="text" id="pass" class="form-control form-control-lg" placeholder="Password" required>
       </div>
       <button type="submit" value="Register" class="btn btn-primary btn-lg custom-btn">Register</button>
     </div>
