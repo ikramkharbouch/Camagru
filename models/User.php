@@ -120,10 +120,12 @@
     // Create new user
     public function create() {
         // Create Query
-       $query = 'BEGIN;
-        INSERT INTO users SET email = :email, username = :username, pass = :pass, verified = :verified, token = :token;
-        INSERT INTO posts SET user_id = mysql_insert_id();
-       COMMIT;';
+       $query = 'INSERT INTO users SET email = :email, username = :username, pass = :pass, verified = :verified, token = :token;';
+
+    //    $query = 'BEGIN;
+    //     INSERT INTO users SET email = :email, username = :username, pass = :pass, verified = :verified, token = :token;
+    //     INSERT INTO posts SET user_id = mysql_insert_id();
+    //    COMMIT;';
 
     //    $query = "INSERT INTO users (email, username, pass, verified, token) VALUES ('test@test.fr', 'tester21', 'test@hh1423', '0', 'hdhufgeiuf')";
 
@@ -155,11 +157,6 @@
         $stmt->bindParam(':token', $this->token);
         
         if ($stmt->execute()) {
-            // $lastid = mysqli_insert_id();
-            // var_dump(mysqli_insert_id());
-            // $query = 'INSERT INTO posts SET user_id = $lastid';
-            // var_dump($lastid);
-            // $stmt = $this->conn->prepare($query);
             return true;
         }
 
