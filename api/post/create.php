@@ -5,6 +5,10 @@ header('Content-Type: application/json');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
+// Import the Postmark Client Class:
+require_once('../../vendor/autoload.php');
+use Postmark\PostmarkClient;
+
 include_once '../../config/Database.php';
 include_once '../../models/User.php';
 
@@ -31,6 +35,16 @@ if ($user->check()) {
     );
 } else {
     if ($user->create()) {
+
+        $client = new PostmarkClient("POSTMARK-SERVER-API-TOKEN-HERE");
+
+        // Send an email:
+        $sendResult = $client->sendEmail(
+            "Camagru",
+            "4573r14@gmail.com",
+            "Hello from Postmark!",
+            "This is just a friendly 'hello' from your friends at Postmark."
+        );
         // $to = $user->email;
         // $subject = "Email Verification";
 
