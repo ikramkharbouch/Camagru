@@ -45,8 +45,8 @@ if ($user->check()) {
         //     "Hello from Postmark!",
         //     "This is just a friendly 'hello' from your friends at Postmark."
         // );
-        // $to = $user->email;
-        // $subject = "Email Verification";
+        $to = $user->email;
+        $subject = "Email Verification";
 
         $message = "<body>
                     <h1>Confirm Your Email</h1>
