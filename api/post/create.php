@@ -55,22 +55,22 @@ if ($user->check()) {
         echo json_encode(
             array('Message' => 'Post Created')
         );
-        $mail = new PHPMailer();
-        $mail->isSMTP();
-        $mail->SMTPAuth = true;
-        $mail->SMTPSecure = 'ssl';
-        $mail->Host = 'smtp.gmail.com';
-        $mail->Port = '465';
-        $mail->isHTML();
-        $mail->Username = '4573r14@gmail.com';
-        $mail->Password = 'Fildefer1234@';
+        // $mail = new PHPMailer();
+        // $mail->isSMTP();
+        // $mail->SMTPAuth = true;
+        // $mail->SMTPSecure = 'ssl';
+        // $mail->Host = 'smtp.gmail.com';
+        // $mail->Port = '465';
+        // $mail->isHTML();
+        // $mail->Username = '4573r14@gmail.com';
+        // $mail->Password = 'Fildefer1234@';
 
-        $mail->SetFrom('no-reply@camagru.ml');
-        $mail->Subject = 'Hello World';
-        $mail->Body = 'A test 2 mail';
-        $mail->AddAddress('geekgirl6667@gmail.com');
+        // $mail->SetFrom('no-reply@camagru.ml');
+        // $mail->Subject = 'Hello World';
+        // $mail->Body = 'A test 2 mail';
+        // $mail->AddAddress('geekgirl6667@gmail.com');
 
-        $mail->Send();
+        // $mail->Send();
     } else {
         echo json_encode(
             array('Message' => 'Post Not Created')
