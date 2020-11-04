@@ -36,32 +36,32 @@ if ($user->check()) {
 } else {
     if ($user->create()) {
 
-        $client = new PostmarkClient("POSTMARK-SERVER-API-TOKEN-HERE");
+        // $client = new PostmarkClient("POSTMARK-SERVER-API-TOKEN-HERE");
 
-        // Send an email:
-        $sendResult = $client->sendEmail(
-            "Camagru",
-            "4573r14@gmail.com",
-            "Hello from Postmark!",
-            "This is just a friendly 'hello' from your friends at Postmark."
-        );
+        // // Send an email:
+        // $sendResult = $client->sendEmail(
+        //     "Camagru",
+        //     "4573r14@gmail.com",
+        //     "Hello from Postmark!",
+        //     "This is just a friendly 'hello' from your friends at Postmark."
+        // );
         // $to = $user->email;
         // $subject = "Email Verification";
 
-        // $message = "<body>
-        //             <h1>Confirm Your Email</h1>
-        //             Please confirm your email address " . "<a href='http://http://54.163.108.123/Camagru/api/post/verify.php?token=$user->token'>Verify Account</a>
-        //             </body>";
+        $message = "<body>
+                    <h1>Confirm Your Email</h1>
+                    Please confirm your email address " . "<a href='http://http://54.163.108.123/Camagru/api/post/verify.php?token=$user->token'>Verify Account</a>
+                    </body>";
 
-        // // Always set content-type when sending HTML email
-        // $headers = "MIME-Version: 1.0" . "\r\n";
-        // $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        // Always set content-type when sending HTML email
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
-        // // More headers
-        // $headers .= 'From: <webmaster@example.com>' . "\r\n";
-        // $headers .= 'Cc: myboss@example.com' . "\r\n";
+        // More headers
+        $headers .= 'From: <webmaster@example.com>' . "\r\n";
+        $headers .= 'Cc: myboss@example.com' . "\r\n";
 
-        // mail($to, $subject, $message, $headers);
+        mail($to, $subject, $message, $headers);
 
         echo json_encode(
             array('Message' => 'Post Created')
