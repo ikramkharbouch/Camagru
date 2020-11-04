@@ -27,6 +27,8 @@ $user->username = $data->username;
 $user->pass = md5($data->pass);
 $user->token = md5(time());
 
+var_dump($user->email);
+
 if ($user->check()) {
     echo json_encode(
         array('Message' => 'User Exists')
@@ -55,7 +57,6 @@ if ($user->check()) {
         echo json_encode(
             array('Message' => 'Post Created')
         );
-        require_once('../../PHPMailer/PHPMailerAutoload.php');
         $mail = new PHPMailer();
         $mail->isSMTP();
         $mail->SMTPAuth = true;
