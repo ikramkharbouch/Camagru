@@ -5,6 +5,7 @@ header('Content-Type: application/json');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
+var_dump("2");
 require_once($_SERVER['DOCUMENT_ROOT']."./PHPMailer/PHPMailerAutoload.php");
 
 include_once '../../config/Database.php';
