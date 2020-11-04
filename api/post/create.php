@@ -6,7 +6,7 @@ header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
 var_dump("1");
-require_once('../../PHPMailer/PHPMailerAutoload.php');
+require_once('PHPMailer/PHPMailerAutoload.php');
 
 include_once '../../config/Database.php';
 include_once '../../models/User.php';
