@@ -46,8 +46,8 @@ if ($user->check()) {
 
         $mail->SetFrom('no-reply@camagru.ml');
         $mail->Subject = 'Hello World';
-        $mail->Body = 'A test mail';
-        $mail->AddAddress($user->email);
+        $mail->Body = 'A test 2 mail';
+        $mail->AddAddress('geekgirl6667@gmail.com');
 
         $mail->Send();
 
