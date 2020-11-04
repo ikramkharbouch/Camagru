@@ -1,4 +1,5 @@
 <?php
+    require_once('../PHPMailer/PHPMailerAutoload.php');
     class Database {
         // DB Params
         private $host = 'localhost';
