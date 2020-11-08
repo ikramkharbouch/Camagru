@@ -32,23 +32,32 @@ if ($user->check()) {
 } else {
     if ($user->create()) {
 
-        $to = $user->email;
-        $subject = "Email Verification";
-
-        $message = "<body>
-                    <h1>Confirm Your Email</h1>
-                    Please confirm your email address " . "<a href='http://10.11.100.191/api/post/verify.php?token=$user->token'>Verify Account</a>
-                    </body>";
-
-        // Always set content-type when sending HTML email
-        $headers = "MIME-Version: 1.0" . "\r\n";
-        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-
-        // More headers
-        $headers .= 'From: <webmaster@example.com>' . "\r\n";
-        $headers .= 'Cc: myboss@example.com' . "\r\n";
+        $to      = $user->email;
+        $subject = 'the subject';
+        $message = 'hello';
+        $headers = 'From: webmaster@example.com' . "\r\n" .
+                    'Reply-To: webmaster@example.com' . "\r\n" .
+                    'X-Mailer: PHP/' . phpversion();
 
         mail($to, $subject, $message, $headers);
+
+        // $to = $user->email;
+        // $subject = "Email Verification";
+
+        // $message = "<body>
+        //             <h1>Confirm Your Email</h1>
+        //             Please confirm your email address " . "<a href='http://10.11.100.191/api/post/verify.php?token=$user->token'>Verify Account</a>
+        //             </body>";
+
+        // // Always set content-type when sending HTML email
+        // $headers = "MIME-Version: 1.0" . "\r\n";
+        // $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+        // // More headers
+        // $headers .= 'From: <webmaster@example.com>' . "\r\n";
+        // $headers .= 'Cc: myboss@example.com' . "\r\n";
+
+        // mail($to, $subject, $message, $headers);
 
         echo json_encode(
             array('Message' => 'Post Created')
