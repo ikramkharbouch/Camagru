@@ -62,7 +62,7 @@
       document.getElementById("checkUser").addEventListener("submit", checkUser);
 
       function getUsers() {
-        fetch("http://54.163.108.123/Camagru/api/post/read.php")
+        fetch("http://10.11.100.191/Camagru/api/post/read.php")
           .then((res) => res.json())
           .then((data) => console.log(data))
           .catch((err) => console.log(err));
@@ -74,7 +74,7 @@
         let email = document.getElementById("email").value;
         let pass = document.getElementById("pass").value;
 
-        fetch("http://54.163.108.123/Camagru/api/post/check_creds.php", {
+        fetch("http://10.11.100.191/Camagru/api/post/check_creds.php", {
           method: "POST",
           headers: {
             'Content-Type': 'application/json',
@@ -86,7 +86,7 @@
           .then((data) => {
             if (data == '{"Message":"User Exists"}') {
 
-              fetch("http://54.163.108.123/Camagru/api/post/session.php", {
+              fetch("http://10.11.100.191/Camagru/api/post/session.php", {
               method: "POST",
               headers: {
               'Content-Type': 'application/json',
@@ -115,7 +115,7 @@
 
               let email = document.getElementById("email").value;
               let pass = document.getElementById("pass").value;
-              fetch("http://54.163.108.123/Camagru/api/post/session.php", {
+              fetch("http://10.11.100.191/Camagru/api/post/session.php", {
               method: "GET",
               headers: {
               'Content-Type': 'application/json',

@@ -68,7 +68,7 @@
         let email = document.getElementById("email").value;
         let pass = document.getElementById("pass").value;
 
-        fetch("http://54.163.108.123/Camagru/api/post/create.php", {
+        fetch("http://10.11.100.191/Camagru/api/post/create.php", {
           method: "POST",
           headers: {
             'Content-Type': 'application/json',
@@ -93,7 +93,7 @@
       }
 
       function getUsers() {
-        fetch("http://54.163.108.123/Camagru/api/post/read_single.php?id=2")
+        fetch("http://10.11.100.191/Camagru/api/post/read_single.php?id=2")
           .then((res) => res.json())
           .then((data) => console.log(data))
           .catch((err) => console.log(err));
