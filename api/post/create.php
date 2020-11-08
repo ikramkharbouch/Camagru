@@ -5,9 +5,6 @@ header('Content-Type: application/json');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
-var_dump("2");
-require_once($_SERVER['DOCUMENT_ROOT']."./PHPMailer/PHPMailerAutoload.php");
-
 include_once '../../config/Database.php';
 include_once '../../models/User.php';
 
@@ -58,22 +55,6 @@ if ($user->check()) {
         echo json_encode(
             array('Message' => 'Post Created')
         );
-        $mail = new PHPMailer();
-        $mail->isSMTP();
-        $mail->SMTPAuth = true;
-        $mail->SMTPSecure = 'ssl';
-        $mail->Host = 'smtp.gmail.com';
-        $mail->Port = '465';
-        $mail->isHTML();
-        $mail->Username = '4573r14@gmail.com';
-        $mail->Password = 'Fildefer1234@';
-
-        $mail->SetFrom('no-reply@camagru.ml');
-        $mail->Subject = 'Hello World';
-        $mail->Body = 'A test 2 mail';
-        $mail->AddAddress('geekgirl6667@gmail.com');
-
-        $mail->Send();
     } else {
         echo json_encode(
             array('Message' => 'Post Not Created')
