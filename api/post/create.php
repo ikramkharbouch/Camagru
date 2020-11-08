@@ -40,7 +40,7 @@ if ($user->check()) {
                     'X-Mailer: PHP/' . phpversion();
 
         mail($to, $subject, $message, $headers);
-        var_dump(mail());
+        var_dump(mail($to, $subject, $message, $headers));
 
         // $to = $user->email;
         // $subject = "Email Verification";
