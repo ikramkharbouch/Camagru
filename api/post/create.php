@@ -31,15 +31,9 @@ if ($user->check()) {
     );
 } else {
     if ($user->create()) {
+        
 
-        $to      = $user->email;
-        $subject = 'Confirming Camagru Account';
-        $message = "<body>
-                    <h1>Confirm Your Email</h1>
-                    Please confirm your email address " . "<a href='http://34.90.29.10/api/post/verify.php?token=$user->token'>Verify Account</a>
-                    </body>";
-
-        mail($to, $subject, $message);
+        var_dump(mail("geekgirl6667@gmail.com", "Confirming Camagru account", "php on"));
 
         // $to      = $user->email;
         // $subject = 'the subject';
