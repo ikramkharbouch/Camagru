@@ -36,6 +36,10 @@ function closeNav() {
     photo = document.getElementById('photo');
     startbutton = document.getElementById('startbutton');
 
+    video.onloadedmetadata = function(e) {
+      video.play();
+    };
+
     navigator.mediaDevices.getUserMedia({video: true, audio: false})
     .then(function(stream) {
       video.srcObject = stream;
