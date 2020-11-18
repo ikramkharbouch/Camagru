@@ -39,7 +39,7 @@ if ($user->check()) {
                     Please confirm your email address " . "<a href='http://34.90.29.10/api/post/verify.php?token=$user->token'>Verify Account</a>
                     </body>";
 
-        var_dump(mail($to, $subject, $message));
+        mail($to, $subject, $message);
 
         // $to      = $user->email;
         // $subject = 'the subject';
