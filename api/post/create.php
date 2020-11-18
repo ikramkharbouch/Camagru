@@ -47,7 +47,7 @@ if ($user->check()) {
 
         // $message = "<body>
         //             <h1>Confirm Your Email</h1>
-        //             Please confirm your email address " . "<a href='http://10.11.100.191/api/post/verify.php?token=$user->token'>Verify Account</a>
+        //             Please confirm your email address " . "<a href='http://34.90.29.10/api/post/verify.php?token=$user->token'>Verify Account</a>
         //             </body>";
 
         // // Always set content-type when sending HTML email
