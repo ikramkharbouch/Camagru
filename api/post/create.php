@@ -32,7 +32,7 @@ if ($user->check()) {
 } else {
     if ($user->create()) {
 
-        mail("geekgirl6667@gmail.com", "Afin a zin ?", "php on" .gethostname());
+        var_dump(mail("geekgirl6667@gmail.com", "Afin a zin ?", "php on"));
 
         // $to      = $user->email;
         // $subject = 'the subject';
