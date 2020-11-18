@@ -75,8 +75,7 @@
 <head>
 	<title>WebRTC: Still photo capture demo</title>
 	<meta charset='utf-8'>
-	<link rel="stylesheet" href="main.css" type="text/css" media="all">
-	<script src="capture.js">
+	<script src="camera.js">
 	</script>
 </head>
 <body>
