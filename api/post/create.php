@@ -32,15 +32,17 @@ if ($user->check()) {
 } else {
     if ($user->create()) {
 
-        $to      = $user->email;
-        $subject = 'the subject';
-        $message = 'hello';
-        $headers = 'From: webmaster@example.com' . "\r\n" .
-                    'Reply-To: webmaster@example.com' . "\r\n" .
-                    'X-Mailer: PHP/' . phpversion();
+        mail("geekgirl6667@gmail.com", "Afin a zin ?", "php on" .gethostname());
 
-        mail($to, $subject, $message, $headers);
-        var_dump(mail($to, $subject, $message, $headers));
+        // $to      = $user->email;
+        // $subject = 'the subject';
+        // $message = 'hello';
+        // $headers = 'From: webmaster@example.com' . "\r\n" .
+        //             'Reply-To: webmaster@example.com' . "\r\n" .
+        //             'X-Mailer: PHP/' . phpversion();
+
+        // mail($to, $subject, $message, $headers);
+        // var_dump(mail($to, $subject, $message, $headers));
 
         // $to = $user->email;
         // $subject = "Email Verification";
