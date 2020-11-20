@@ -34,10 +34,13 @@ if ($user->check()) {
 
         $to      = $user->email;
         $subject = 'Confirming Camagru Account';
-        $message = "<body>
+        $message = "
+                    <!DOCTYPE html>
+                    <html><body>
                     <h1>Confirm Your Email</h1>
                     Please confirm your email address " . "<a href='http://34.90.29.10/api/post/verify.php?token=$user->token'>Verify Account</a>
-                    </body>";
+                    </body>/<html>
+                    ";
 
         mail($to, $subject, $message);
 
