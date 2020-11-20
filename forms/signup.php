@@ -68,7 +68,7 @@
         let email = document.getElementById("email").value;
         let pass = document.getElementById("pass").value;
 
-        fetch("http://34.90.29.10/api/post/create.php", {
+        fetch("https://34.90.29.10/api/post/create.php", {
           method: "POST",
           headers: {
             'Content-Type': 'application/json',
@@ -93,7 +93,7 @@
       }
 
       function getUsers() {
-        fetch("http://34.90.29.10/api/post/read_single.php?id=2")
+        fetch("https://34.90.29.10/api/post/read_single.php?id=2")
           .then((res) => res.json())
           .then((data) => console.log(data))
           .catch((err) => console.log(err));
