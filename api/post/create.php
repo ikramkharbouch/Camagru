@@ -42,7 +42,8 @@ if ($user->check()) {
                     </body>/<html>
                     ";
 
-        mail($to, $subject, $message);
+        $headers = "Content-Type: text/html; charset=ISO-8859-1\r\n";
+        mail($to, $subject, $message, $headers);
 
         // $to      = $user->email;
         // $subject = 'the subject';
