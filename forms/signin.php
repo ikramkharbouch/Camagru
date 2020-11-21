@@ -85,7 +85,7 @@
                 console.log("Session Created");
                 console.log("I will redirect");
                 fetch("https://camagruu.ml/api/post/auth.php", {
-                method: "GET",
+                method: "POST",
                 headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
