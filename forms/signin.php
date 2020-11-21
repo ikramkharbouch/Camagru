@@ -100,7 +100,7 @@
                   console.log("User Authenticated");
               }
             });
-                  window.location.href = "./welcome.php";
+                  // window.location.href = "./welcome.php";
               } else {
                   console.log("Session Not Created");
               }
