@@ -1,7 +1,9 @@
 <?php
 session_start();
 
-$_SESSION['test'] = 'test';
+if(isset($_SESSION['blah']) && !empty($_SESSION['blah'])) {
+   echo 'Set and not empty, and no undefined index error!';
+}
 ?>
 
 
