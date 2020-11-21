@@ -21,9 +21,10 @@
     $user->pass = $data->pass;
 
     if ($user->open_session()) {
-        echo json_encode(
-            array('Message' => 'Session Created')
-        );
+        // echo json_encode(
+        //     array('Message' => 'Session Created')
+        // );
+        echo($_SESSION["id"]);
     } else {
         echo json_encode(
             array('Message' => 'Session Was Not Created')
