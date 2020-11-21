@@ -103,7 +103,6 @@
                   window.location.href = "./welcome.php";
               } else {
                   console.log("Session Not Created");
-                  console.log(data);
               }
             });
             } else {
