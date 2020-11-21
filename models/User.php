@@ -348,14 +348,14 @@
     }
 
     public function authenticate() {
-        
-        $query = 'INSERT INTO account_sessions SET `session_id` = :`session_id`, account_id = :account_id, login_time = :login_time';
 
+        // $query = 'INSERT INTO account_sessions SET `session_id` = :`session_id`, account_id = :account_id, login_time = :login_time';
+        $query = 'INSERT INTO account_sessions SET `session_id` = 1, account_id = 14, login_time = NOW()';
         $stmt = $this->conn->prepare($query);
 
-        $stmt->bindParam(':session_id', session_id());
-        $stmt->bindParam(':account_id', $_SESSION['id']);
-        $stmt->bindParam(':login_time', NOW());
+        // $stmt->bindParam(':session_id', session_id());
+        // $stmt->bindParam(':account_id', $_SESSION['id']);
+        // $stmt->bindParam(':login_time', NOW());
 
         // Execute query 
         $stmt->execute();
