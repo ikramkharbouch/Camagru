@@ -20,6 +20,9 @@
     $user->email = $data->email;
     $user->pass = $data->pass;
 
+    echo($_SESSION['id']);
+    echo($_SESSION['email']);
+
     if ($user->authenticate()) {
         echo json_encode(
             array('Message' => 'User Authenticated')
