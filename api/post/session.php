@@ -25,6 +25,7 @@
         //     array('Message' => 'Session Created')
         // );
         echo($_SESSION["id"]);
+        echo($_SESSION["email"]);
     } else {
         echo json_encode(
             array('Message' => 'Session Was Not Created')
