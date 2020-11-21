@@ -62,7 +62,7 @@
       document.getElementById("checkUser").addEventListener("submit", checkUser);
 
       function getUsers() {
-        fetch("http://10.11.100.191/api/post/read.php")
+        fetch("https://camagruu.ml/api/post/read.php")
           .then((res) => res.json())
           .then((data) => console.log(data))
           .catch((err) => console.log(err));
@@ -74,7 +74,7 @@
         let email = document.getElementById("email").value;
         let pass = document.getElementById("pass").value;
 
-        fetch("http://34.90.29.10/api/post/check_creds.php", {
+        fetch("https://camagruu.ml/api/post/check_creds.php", {
           method: "POST",
           headers: {
             'Content-Type': 'application/json',
@@ -86,7 +86,7 @@
           .then((data) => {
             if (data == '{"Message":"User Exists"}') {
 
-              fetch("http://34.90.29.10/api/post/session.php", {
+              fetch("https://camagruu.ml/api/post/session.php", {
               method: "POST",
               headers: {
               'Content-Type': 'application/json',
@@ -115,7 +115,7 @@
 
               let email = document.getElementById("email").value;
               let pass = document.getElementById("pass").value;
-              fetch("http://34.90.29.10/api/post/session.php", {
+              fetch("https://camagruu.ml/api/post/session.php", {
               method: "GET",
               headers: {
               'Content-Type': 'application/json',
