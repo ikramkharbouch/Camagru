@@ -41,20 +41,6 @@
 
     <button class="btn btn-warning mt-4" id="getUsers">Get API Data</button>
     <p id="message" class="text-danger mt-2"></p>
-  <!-- </div>
-    <div class="container">
-
-
-        <form id="checkUser">
-            <div class="form-group mt-4">
-                <input type="text" id="email" placeholder="Email" class="form-control border"/>
-            </div>
-            <div class="form-group">
-                <input type="password" id="pass" placeholder="Pass" class="form-control border"/>
-            </div>
-            <input type="submit" value="Login" class="btn btn-primary"/>
-        </form>
-    </div> -->
 
     <script>
 
@@ -85,7 +71,6 @@
           .then((res) => res.text())
           .then((data) => {
             if (data == '{"Message":"User Exists"}') {
-
               fetch("https://camagruu.ml/api/post/session.php", {
               method: "POST",
               headers: {
@@ -97,13 +82,29 @@
             .then((res) => res.text())
             .then((data) => {
             if (data == '{"Message":"Session Created"}') {
-                  console.log("Session Created");
-                  console.log("I will redirect");
+                console.log("Session Created");
+                console.log("I will redirect");
+                fetch("https://camagruu.ml/api/post/auth.php", {
+                method: "GET",
+                headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+             body: JSON.stringify({email: email, pass: pass}),
+          })
+            .then((res) => res.text())
+            .then((data) => {
+              if (data == '{"Message":"User Authenticated"}') {
+                  console.log("User Authenticated");
+              } else {
+                  console.log("User Authenticated");
+              }
+            });
                   window.location.href = "./welcome.php";
-            } else {
+              } else {
                   console.log("Session Not Created");
-            }
-          });
+              }
+            });
             } else {
               console.log("I will not redirect");
             }
