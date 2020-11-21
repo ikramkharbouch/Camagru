@@ -344,8 +344,8 @@
         $_SESSION["id"] = $this->id;
         $_SESSION["email"] = $this->email;
 
-        echo($_SESSION["id"]);
-        echo($_SESSION["email"]);
+        // echo($_SESSION["id"]);
+        // echo($_SESSION["email"]);
         return true;
     }
 
