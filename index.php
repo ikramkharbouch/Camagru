@@ -1,11 +1,11 @@
-<?php
+<!-- <?php
 session_start();
 
 $_SESSION['blah'] = 'blah';
 if(isset($_SESSION['blah']) && !empty($_SESSION['blah'])) {
    echo 'Set and not empty, and no undefined index error!';
 }
-?>
+?> -->
 
 
 <!DOCTYPE html>
@@ -41,7 +41,6 @@ if(isset($_SESSION['blah']) && !empty($_SESSION['blah'])) {
      <h1>Welcome to Camagru</h1>
      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi sint iste qui nulla illum molestias, at ratione pariatur nostrum, corrupti, laudantium et cum dolorum. Nesciunt magni perferendis iusto sed libero!</p>
      <a href="./forms/signup.php" class="btn btn-primary btn-lg" role="button">Sign Up</a>
-
     </div>
     
       <!-- <div class="content">
