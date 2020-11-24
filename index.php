@@ -1,11 +1,11 @@
-<!-- <?php
-// session_start();
+<?php
+session_start();
 
 // $_SESSION['blah'] = 'blah';
 // if(isset($_SESSION['blah']) && !empty($_SESSION['blah'])) {
 //    echo 'Set and not empty, and no undefined index error!';
 // }
-?> -->
+?>
 
 
 <!DOCTYPE html>

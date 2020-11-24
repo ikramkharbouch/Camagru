@@ -323,7 +323,6 @@
     }
 
     public function open_session() {
-        session_start();
 
         // You should compare the hashes
         $this->pass = md5($this->pass);
@@ -353,7 +352,7 @@
         // $query = 'INSERT INTO account_sessions SET `session_id` = 3, account_id = 16, login_time = NOW()';
         $stmt = $this->conn->prepare($query);
 
-        var_dump(session_start());
+        // var_dump(session_start());
         var_dump(session_id());
         var_dump($_SESSION['id']);
 
