@@ -338,37 +338,52 @@
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        var_dump($row);
-
         $this->id = $row['id'];
 
         $_SESSION["id"] = $this->id;
         $_SESSION["email"] = $this->email;
-        var_dump($this->id);
-
-        var_dump($_SESSION);
 
         return true;
     }
 
     public function authenticate() {
 
-        $query = 'INSERT INTO account_sessions SET session_id = :session_id, account_id = :account_id, login_time = :login_time';
-        // $query = 'INSERT INTO account_sessions SET `session_id` = 3, account_id = 16, login_time = NOW()';
+        $this->id = $_SESSION['id'];
+        $session = session_id();
+        $id = $_SESSION['id'];
+
+
+        $query = 'INSERT INTO account_sessions SET sess_id = :sess_id, account_id = :account_id, login_time = NOW()';
+        // $query = 'INSERT INTO account_sessions SET sess_id = session_id(), account_id = $this->id, login_time = NOW()';
+        // $query = 'INSERT INTO account_sessions SET sess_id = session_id(), account_id = 9, login_time = NOW()';
+        // $query = "INSERT INTO account_sessions VALUES($session, $id, NOW())";
+
+        // $query = "INSERT INTO account_sessions SET sess_id = '$session', account_id = $id, login_time = NOW()";
         $stmt = $this->conn->prepare($query);
-
-        // var_dump(session_start());
+        
         var_dump(session_id());
-        var_dump($_SESSION['id']);
-
-        $stmt->bindParam(':session_id', session_id());
-        $stmt->bindParam(':account_id', $_SESSION['id']);
-        $stmt->bindParam(':login_time', NOW());
-
-        // Execute query 
-        $stmt->execute();
-
-        return true;
+        
+        
+        $timestamp = "NOW()";
+        var_dump($timestamp);
+        
+        try {
+            $stmt->bindParam(':sess_id', session_id());
+            $stmt->bindParam(':account_id', $_SESSION['id']);
+            // $stmt->bindParam(':login_time', "NOW()", PDO::PARAM_STR, 12);
+            var_dump($query);
+            
+            
+            // Execute query 
+            if ($stmt->execute()) {
+                var_dump($query);
+                return true;
+            }
+        }
+        catch (Exception $e){
+            var_dump($e);
+        }
+        return false;
     }
 
 }
