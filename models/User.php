@@ -345,6 +345,7 @@
         $_SESSION["id"] = $this->id;
         $_SESSION["email"] = $this->email;
         var_dump($this->id);
+
         var_dump($_SESSION);
 
         return true;
