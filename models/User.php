@@ -353,8 +353,8 @@
         // $query = 'INSERT INTO account_sessions SET `session_id` = 3, account_id = 16, login_time = NOW()';
         $stmt = $this->conn->prepare($query);
 
-        echo(session_id());
-        echo($_SESSION['id']);
+        var_dump(session_id());
+        var_dump($_SESSION['id']);
 
         $stmt->bindParam(':session_id', session_id());
         $stmt->bindParam(':account_id', $_SESSION['id']);
