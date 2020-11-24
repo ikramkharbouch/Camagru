@@ -338,12 +338,14 @@
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
+        var_dump($row);
+
         $this->id = $row['id'];
 
         $_SESSION["id"] = $this->id;
         $_SESSION["email"] = $this->email;
-        var_dump($_SESSION["id"]);
-        var_dump($_SESSION["email"]);
+        var_dump($this->id);
+        var_dump($_SESSION);
 
         return true;
     }
