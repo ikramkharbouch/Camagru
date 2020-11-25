@@ -1,3 +1,18 @@
+<?php
+
+@require('../init.php');
+
+var_dump($_SESSION['auth']);
+
+if (isset($_SESSION['auth']) && $_SESSION['auth'] == true) 
+{
+  header("Location: ../forms/welcome.php");
+  exit();
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 

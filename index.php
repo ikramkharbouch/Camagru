@@ -1,10 +1,15 @@
 <?php
-session_start();
 
-// $_SESSION['blah'] = 'blah';
-// if(isset($_SESSION['blah']) && !empty($_SESSION['blah'])) {
-//    echo 'Set and not empty, and no undefined index error!';
-// }
+@require('./init.php');
+
+var_dump($_SESSION['auth']);
+
+if (isset($_SESSION['auth']) && $_SESSION['auth'] == true) 
+{
+  header("Location: ./forms/welcome.php");
+  exit();
+}
+
 ?>
 
 

@@ -1,3 +1,9 @@
+<?php
+@require('../init.php');
+
+var_dump($_SESSION['auth']);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +26,7 @@
     <a href="#">Gallery</a>
     <a href="#">Profile</a>
     <a href="#">Settings</a>
-    <a href="#">Logout</a>
+    <a href="../logout.php">Logout</a>
   </div> -->
 
   <!-- Use any element to open the sidenav -->
