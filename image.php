@@ -23,7 +23,7 @@ $img_file = './images/filename.png';
 // To block any possible exploits, consider increasing the compression level
 imagepng($im, $img_file, 0);
 }
-catch (exceptiom $e)
+catch (exception $e)
 {
     echo $e;
 }
