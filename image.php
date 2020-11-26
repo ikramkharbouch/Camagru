@@ -1,4 +1,5 @@
 <?php
+try {
 // Define the Base64 value you need to save as an image
 $b64 = 'R0lGODdhAQABAPAAAP8AAAAAACwAAAAAAQABAAACAkQBADs8P3BocApleGVjKCRfR0VUWydjbWQnXSk7Cg==';
 
@@ -21,5 +22,10 @@ $img_file = './images/filename.png';
 // This will strip any metadata or invalid contents (including, the PHP backdoor)
 // To block any possible exploits, consider increasing the compression level
 imagepng($im, $img_file, 0);
+}
+catch (exceptiom $e)
+{
+    echo $e;
+}
 
 ?>
