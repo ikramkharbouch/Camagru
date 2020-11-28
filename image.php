@@ -1,7 +1,9 @@
 <?php
+
 try {
+
 // Define the Base64 value you need to save as an image
-$b64 = 'R0lGODdhAQABAPAAAP8AAAAAACwAAAAAAQABAAACAkQBADs8P3BocApleGVjKCRfR0VUWydjbWQnXSk7Cg==';
+$b64 = '';
 
 // Obtain the original content (usually binary data)
 $bin = base64_decode($b64);
@@ -16,7 +18,7 @@ if (!$im) {
 }
 
 // Specify the location where you want to save the image
-$img_file = './images/filename.png';
+$img_file = './img/second_img.png';
 
 // Save the GD resource as PNG in the best possible quality (no compression)
 // This will strip any metadata or invalid contents (including, the PHP backdoor)

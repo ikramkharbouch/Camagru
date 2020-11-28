@@ -69,6 +69,8 @@
         public $username;
         public $pass;
         public $verified;
+        public $base64;
+        public $path_to_img;
 
         // Constructor with DB
         public function __construct($db) {
@@ -387,6 +389,19 @@
 
     public function logout() {
         $query = 'INSERT INTO account_sessions SET sess_id = :sess_id, account_id = :account_id, login_time = NOW()';
+    }
+
+    public function save_img() {
+        $query = 'INSERT INTO posts SET `user_id` = :`user_id`, post = :post';
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':sess_id', $_SESSION['id']);
+        $stmt->bindParam(':account_id', $path_to_img);
+
+        if ($stmt->execute()) {
+            return true;
+        }
     }
 
 }

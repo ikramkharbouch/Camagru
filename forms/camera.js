@@ -29,6 +29,7 @@ function closeNav() {
   var canvas = null;
   var photo = null;
   var startbutton = null;
+  var base64 = null;
 
   function startup() {
     video = document.getElementById('video');
@@ -102,10 +103,34 @@ function closeNav() {
       context.drawImage(video, 0, 0, width, height);
     
       var data = canvas.toDataURL('image/png');
+      console.log(data);
+
+      base64 = data;
       photo.setAttribute('src', data);
     } else {
       clearphoto();
     }
+  }
+
+  function save_img() {
+
+    fetch("https://camagruu.ml/api/post/img.php", {
+              method: "POST",
+              headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({base64: base64}),
+        })
+          .then((res) => res.text())
+          .then((data) => {
+            if (data == '{"Message":"Image Saved"}') {
+                  console.log("Session Created");
+            } else {
+                  console.log("Image Not Saved");
+            }
+          });
+
   }
 
   // Set up our event listener to run the startup process
