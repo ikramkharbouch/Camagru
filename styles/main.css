@@ -1,0 +1,53 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url('../assets/Landing-page-cover.png');
+    font-family: 'Roboto', 'sans-serif';
+    color: #fff;
+    background-size: cover;
+}
+
+img {
+    width: 100%;
+}
+
+h3 {
+    color: #fff;
+}
+
+h1 {
+    font-weight: 700;
+    color: #fff;
+    font-size: 100px;
+}
+
+.content {
+    margin: 100px;
+    width: 50%;
+    padding: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+p {
+    color: #fff;
+    font-family: 'Roboto', 'sans-serif';
+    font-weight: 300;
+    margin-top: 30px;
+}
+
+/* button {
+    height: 50px;
+    padding-top: 5px;
+} */
+
+.camagru {
+    color: #fff;
+}
