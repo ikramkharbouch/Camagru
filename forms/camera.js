@@ -29,7 +29,7 @@ function closeNav() {
   var canvas = null;
   var photo = null;
   var startbutton = null;
-  var savebutton = null;
+  var savebutton = null
   var base64 = null;
 
   function startup() {

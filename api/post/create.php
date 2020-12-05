@@ -31,7 +31,7 @@ if ($user->check()) {
     );
 } else {
     if ($user->create()) {
-
+        
         // $to      = $user->email;
         // $subject = 'Confirming Camagru Account';
         // $message = "
@@ -51,7 +51,6 @@ if ($user->check()) {
 
         // $headers = "Content-Type: text/html; charset=ISO-8859-1\r\n";
         // mail($to, $subject, $message, $headers);
-
         // $to      = $user->email;
         // $subject = 'the subject';
         // $message = 'hello';

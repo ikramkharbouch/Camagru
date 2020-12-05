@@ -45,6 +45,7 @@ var_dump($_SESSION['auth']);
       <video id="video">Video stream not available.</video>
       <button id="startbutton" type="button" class="btn btn-success">Take photo</button>
       <button id="savebutton" type="button" class="btn btn-primary">Save</button>
+      <button id="startbutton" type="button" class="btn btn-primary">Save</button>
     </div>
     <canvas id="canvas">
     </canvas>
