@@ -25,7 +25,6 @@
                 echo $this->password;
             }
 
-
             return $this->conn;
         }
 

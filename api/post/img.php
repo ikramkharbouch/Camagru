@@ -39,18 +39,16 @@
     $img_file = tempnam('../../img', '');
     rename($img_file, $img_file .= '.png');
     chmod($img_file, 0644);
-    $img_file = '../../img/second_img.png';
 
     // Save the GD resource as PNG in the best possible quality (no compression)
     // This will strip any metadata or invalid contents (including, the PHP backdoor)
     // To block any possible exploits, consider increasing the compression level
     imagepng($im, $img_file, 0);
 
-    $im = imagecreatefrompng($img_file);
-    imagefilter($im, IMG_FILTER_GRAYSCALE);
+    // $im = imagecreatefrompng($img_file);
+    // imagefilter($im, IMG_FILTER_GRAYSCALE);
 
-    imagepng($im, $img_file);
-
+    // imagepng($im, $img_file);
 
     $user->path_to_img = $img_file;
 

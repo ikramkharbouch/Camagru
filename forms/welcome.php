@@ -1,7 +1,5 @@
 <?php
 @require('../init.php');
-
-var_dump($_SESSION['auth']);
 ?>
 
 <!DOCTYPE html>
@@ -27,52 +25,49 @@ var_dump($_SESSION['auth']);
     <a href="#">Profile</a>
     <a href="#">Settings</a>
     <a href="../logout.php">Logout</a>
-  </div> -->
+  </div>
 
   <!-- Use any element to open the sidenav -->
   <span onclick="openNav()"><i class="fas fa-bars"></i>
   </span>
 
   <div class="user-details d-flex flex-row">
-    <p>Ikram Kharbouch</p>
     <img src="../assets/avatar.png" alt="Avatar" class="avatar">
+    <p class="font-weight-bold ml-1">Ikram Kharbouch</p>
   </div>
 
 
   <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
-  <div id="main">
-    <div class="camera">
+  <div class="main d-flex flex-row">
+    <div class="camera d-flex flex-column">
       <video id="video">Video stream not available.</video>
-      <button id="startbutton" type="button" class="btn btn-success">Take photo</button>
-      <button id="savebutton" type="button" class="btn btn-primary">Save</button>
-      <button id="startbutton" type="button" class="btn btn-primary">Save</button>
+      <div class="dropdown text-left ml-3 mt-3">
+        <p>Choose a filter</p>
+        <button class="btn btn-secondary">Filters</button>
+        <div class="dropdown-content">
+          <p>Love</p>
+          <p>Happy</p>
+          <p>Sad</p>
+        </div>
+      </div>
+    <div class="d-flex flex-row">
+        <button id="startbutton" type="button" class="btn btn-take ml-3 mt-4">Take photo</button>
+        <button id="savebutton" type="button" class="btn btn-save ml-3 mt-4">Save</button>
     </div>
     <canvas id="canvas">
     </canvas>
+    </div>
+
+    <div class="pictures">
+      <h3 class="mt-4 text-center">Your shots</h3>
     <div class="output">
       <img id="photo" alt="The screen capture will appear in this box.">
     </div>
     <div id="my-image"></div>
-
-    <div class="emojis">
-      <h3>Add Emojis</h3>
-      <div class="container">
-        <div class="row row-cols-2">
-          <div class="col"><img src="../assets/emoji-inlove.png" alt=""></div>
-          <div class="col"><img src="../assets/emoji-inlove.png" alt=""></div>
-          <div class="col"><img src="../assets/emoji-inlove.png" alt=""></div>
-          <div class="col"><img src="../assets/emoji-inlove.png" alt=""></div>
-          <div class="col"><img src="../assets/emoji-inlove.png" alt=""></div>
-          <div class="col"><img src="../assets/emoji-inlove.png" alt=""></div>
-          <div class="col"><img src="../assets/emoji-inlove.png" alt=""></div>
-          <div class="col"><img src="../assets/emoji-inlove.png" alt=""></div>
-          <div class="col"><img src="../assets/emoji-inlove.png" alt=""></div>
-          <div class="col"><img src="../assets/emoji-inlove.png" alt=""></div>
-        </div>
-      </div>
     </div>
   </div>
   </div>
+
 </body>
 
 </html>
