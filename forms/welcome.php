@@ -43,28 +43,33 @@
       <video id="video">Video stream not available.</video>
       <div class="dropdown text-left ml-3 mt-3">
         <p>Choose a filter</p>
-        <button class="btn btn-secondary">Filters</button>
-        <div class="dropdown-content">
-          <p>Love</p>
-          <p>Happy</p>
-          <p>Sad</p>
-        </div>
+        <!-- <button class="btn btn-secondary">Filters</button> -->
+        <!-- <div class="dropdown-content"> -->
+          <label>Love</label><br /><input type="radio" name="filter" value="Love" id="filter1"><br />
+          <label>Happy</label><br /><input type="radio" name="filter" value="Happy" id="filter2"> <br />
+          <label>Sad</label><br /><input type="radio" name="filter" value="Sad" id="filter3"> <br />
+          <!-- <p id="filter1" value="love">Love</p>
+          <p id="filter2" value="happy">Happy</p>
+          <p id="filter3" value="sad">Sad</p> -->
+        <!-- </div> -->
       </div>
     <div class="d-flex flex-row">
-        <button id="startbutton" type="button" class="btn btn-take ml-3 mt-4">Take photo</button>
-        <button id="savebutton" type="button" class="btn btn-save ml-3 mt-4">Save</button>
+        <!-- <button id="startbutton" type="button" class="btn btn-take ml-3 mt-4">Take photo</button> -->
+        <button id="savebutton" type="button" class="btn btn-save ml-3 mt-4" disabled>Save</button>
     </div>
     <canvas id="canvas">
     </canvas>
     </div>
 
-    <div class="pictures">
+    <div class="pictures" id="pictures">
       <h3 class="mt-4 text-center">Your shots</h3>
-    <div class="output">
+    <div class="output" id="output">
       <img id="photo" alt="The screen capture will appear in this box.">
     </div>
+    <div id="x"></div>
     <div id="my-image"></div>
     </div>
+    
   </div>
   </div>
 

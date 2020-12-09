@@ -39,13 +39,56 @@
 // echo $str;
 
 
-$dest = imagecreatefrompng('img/sig15b.png');
-$src = imagecreatefrompng('assets/emoji-inlove.png');
+// $dest = imagecreatefrompng('img/sig15b.png');
+// $src = imagecreatefrompng('assets/emoji-inlove.png');
 
-imagecopymerge($dest, $src, 10, 10, 0, 0, 100, 47, 75);
+// imagecopymerge($dest, $src, 10, 10, 0, 0, 100, 47, 75);
 
-header('Content-Type: image/png');
+// header('Content-Type: image/png');
 
-imagepng($dest);
+// imagepng($dest);
+
 
 ?>
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+
+    </head>
+
+    <body>
+        <label>Love</label><input type="radio" name="filter" value="Love" id="filter1"><br />
+        <label>Happy</label><input type="radio" name="filter" value="Happy" id="filter2"> <br />
+        <label>Sad</label><input type="radio" name="filter" value="Sad" id="filter3"> <br />
+
+        <button disabled>Save</button>
+
+        <script>
+
+
+            var filter1 = document.getElementById('filter1');
+            var filter2 = document.getElementById('filter2');
+            var filter3 = document.getElementById('filter3');
+            const button = document.querySelector('button');
+
+
+            filter1.onclick = function() {
+                console.log(filter1.value);
+                button.disabled = false;
+            };
+
+            filter2.onclick = function() {
+                console.log(filter2.value);
+                button.disabled = false;
+            };
+
+            filter3.onclick = function() {
+                console.log(filter3.value);
+                button.disabled = false;
+            };
+
+        </script>
+    </body>
+</html>

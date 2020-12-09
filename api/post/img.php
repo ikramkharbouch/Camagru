@@ -21,6 +21,8 @@
 
     $user->base64 = $data->base64;
 
+    $user->filter = $data->filter;
+
     $user->base64 = substr($user->base64, 22);
 
     // Obtain the original content (usually binary data)
@@ -50,11 +52,50 @@
 
     // imagepng($im, $img_file);
 
+    function imagecopymerge_alpha($dst_im, $src_im, $dst_x, $dst_y, $src_x, $src_y, $src_w, $src_h, $pct){
+        // creating a cut resource
+        $cut = imagecreatetruecolor($src_w, $src_h);
+
+        // copying relevant section from background to the cut resource
+        imagecopy($cut, $dst_im, 0, 0, $dst_x, $dst_y, $src_w, $src_h);
+       
+        // copying relevant section from watermark to the cut resource
+        imagecopy($cut, $src_im, 0, 0, $src_x, $src_y, $src_w, $src_h);
+       
+        // insert cut resource to destination image
+        imagecopymerge($dst_im, $cut, $dst_x, $dst_y, 0, 0, $src_w, $src_h, $pct);
+    }
+
+    if ($user->filter) {
+
+        $dest = imagecreatefrompng($img_file);
+
+        if ($user->filter == 'Love')
+            $src = imagecreatefrompng('../../assets/in-love-128.png');
+        else if ($user->filter == 'Happy')
+            $src = imagecreatefrompng('../../assets/happy-128.png');
+        else if ($user->filter == 'Sad')
+            $src = imagecreatefrompng('../../assets/sad-128.png');
+
+        // imagecopymerge($dest, $src, 10, 10, 0, 0, 100, 47, 75);
+
+        imagecopymerge_alpha($dest, $src, 10, 10, 0, 0, 128, 128, 100);
+
+        header('Content-Type: image/png');
+
+        imagepng($dest, $img_file);
+    } else {
+        echo json_encode(
+            array('Message' => 'Image Not Saved')
+        );
+        exit();
+    }
+
     $user->path_to_img = $img_file;
 
     if ($user->save_img()) {
         echo json_encode(
-            array('Message' => 'Image Saved')
+            array('Message' => $user->path_to_img)
         );
     } else {
         echo json_encode(

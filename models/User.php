@@ -71,6 +71,7 @@
         public $verified;
         public $base64;
         public $path_to_img;
+        public $filter;
 
         // Constructor with DB
         public function __construct($db) {

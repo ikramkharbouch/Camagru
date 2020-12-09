@@ -182,4 +182,8 @@ button {
   color: #fff !important;
 }
 
+.output {
+  display: none;
+}
+
 
