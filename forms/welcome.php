@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="../styles/welcome.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-  <script src="./camera.js"></script>
+  <script src="../JS/camera.js"></script>
 </head>
 
 <body>
@@ -21,9 +21,9 @@
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <h1>Camagru</h1>
     <a href="../index.php">Home</a>
-    <a href="#">Gallery</a>
-    <a href="#">Profile</a>
-    <a href="#">Settings</a>
+    <a href="./gallery.php">Gallery</a>
+    <a href="./profile.php">Profile</a>
+    <a href="./settings.php">Settings</a>
     <a href="../logout.php">Logout</a>
   </div>
 

@@ -164,7 +164,7 @@ function closeNav() {
             if (data == '{"Message":"Image Not Saved"}') {
               console.log("Image Not Saved");
             } else {
-              console.log(data);
+              console.log(data);   
               var str = '../img/';
               data = data.substring(44, 56);
               data = data.substring(0, data.length - 2);
