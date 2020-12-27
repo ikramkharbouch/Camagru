@@ -38,7 +38,6 @@
 
 // echo $str;
 
-
 // $dest = imagecreatefrompng('img/sig15b.png');
 // $src = imagecreatefrompng('assets/emoji-inlove.png');
 
@@ -47,7 +46,6 @@
 // header('Content-Type: image/png');
 
 // imagepng($dest);
-
 
 ?>
 
@@ -67,12 +65,10 @@
 
         <script>
 
-
             var filter1 = document.getElementById('filter1');
             var filter2 = document.getElementById('filter2');
             var filter3 = document.getElementById('filter3');
             const button = document.querySelector('button');
-
 
             filter1.onclick = function() {
                 console.log(filter1.value);

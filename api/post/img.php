@@ -2,7 +2,7 @@
     // Headers
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
-    header('Access-Control-Allow-Methods: DELETE');
+    header('Access-Control-Allow-Methods: POST');
     header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
     include_once '../../config/Database.php';
@@ -20,6 +20,7 @@
     $data = json_decode(file_get_contents("php://input"));
 
     $user->base64 = $data->base64;
+
 
     $user->filter = $data->filter;
 
@@ -39,6 +40,7 @@
 
     // Specify the location where you want to save the image
     $img_file = tempnam('../../img', '');
+
     rename($img_file, $img_file .= '.png');
     chmod($img_file, 0644);
 
@@ -65,6 +67,10 @@
         // insert cut resource to destination image
         imagecopymerge($dst_im, $cut, $dst_x, $dst_y, 0, 0, $src_w, $src_h, $pct);
     }
+
+    // $img_file = substr($img_file, 5);
+    // $img_file = "../../img/".$img_file;
+
 
     if ($user->filter) {
 

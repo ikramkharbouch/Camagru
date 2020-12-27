@@ -397,19 +397,21 @@
     }
 
     public function save_img() {
+           
+        $query = 'INSERT INTO posts SET account_id = :account_id, post = :post';
 
-            $query = 'INSERT INTO posts SET account_id = :account_id, post = :post';
+        $stmt = $this->conn->prepare($query);
 
-            $stmt = $this->conn->prepare($query);
+        $_SESSION['id'] = 12;
 
-            $_SESSION['id'] = 12;
+        var_dump($this->path_to_img);
 
-            $stmt->bindParam(':account_id', $_SESSION['id']);
-            $stmt->bindParam(':post', $this->path_to_img);
+        $stmt->bindParam(':account_id', $_SESSION['id']);
+        $stmt->bindParam(':post', $this->path_to_img);
 
-            if ($stmt->execute()) {
-                return true;
-            }
+        if ($stmt->execute()) {
+            return true;
+        }
     }
 
 }

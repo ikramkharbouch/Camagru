@@ -83,7 +83,7 @@ if (isset($_SESSION['auth']) && $_SESSION['auth'] == true)
         let email = document.getElementById("email").value;
         let pass = document.getElementById("pass").value;
 
-        fetch("https://camagruu.ml/api/post/create.php", {
+        fetch("https://camagru-ik.cf/api/post/create.php", {
           method: "POST",
           headers: {
             'Content-Type': 'application/json',
@@ -108,7 +108,7 @@ if (isset($_SESSION['auth']) && $_SESSION['auth'] == true)
       }
 
       function getUsers() {
-        fetch("https://camagruu.ml/api/post/read_single.php?id=2")
+        fetch("https://camagru-ik.cf/api/post/read_single.php?id=2")
           .then((res) => res.json())
           .then((data) => console.log(data))
           .catch((err) => console.log(err));
