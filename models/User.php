@@ -72,6 +72,7 @@
         public $base64;
         public $path_to_img;
         public $filter;
+        public $offset;
 
         // Constructor with DB
         public function __construct($db) {
@@ -345,7 +346,6 @@
         $stmt->execute();
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
         $this->id = $row['id'];
 
         $_SESSION["id"] = $this->id;
@@ -402,8 +402,6 @@
 
         $stmt = $this->conn->prepare($query);
 
-        $_SESSION['id'] = 12;
-
         var_dump($this->path_to_img);
 
         $stmt->bindParam(':account_id', $_SESSION['id']);
@@ -412,6 +410,24 @@
         if ($stmt->execute()) {
             return true;
         }
+    }
+
+    public function gallery() {
+
+        $query = 'SELECT post FROM posts WHERE account_id = :account_id LIMIT :offset, 5';
+
+        $stmt = $this->conn->prepare($query);
+
+        $_SESSION['id'] = 12;
+
+        // var_dump($_GET['offset']);
+        $stmt->bindParam(':account_id', $_SESSION['id']);
+        $stmt->bindParam(':offset', $_GET['offset'], PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        return $stmt;
+
     }
 
 }

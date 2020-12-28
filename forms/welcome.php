@@ -1,5 +1,9 @@
 <?php
 @require('../init.php');
+
+var_dump($_SESSION['auth']);
+var_dump($_SESSION['id']);
+
 ?>
 
 <!DOCTYPE html>
