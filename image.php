@@ -16,7 +16,7 @@ if (!$im) {
 }
 
 // Specify the location where you want to save the image
-$img_file = './images/filename.png';
+$img_file = './images/first_image.png';
 
 // Save the GD resource as PNG in the best possible quality (no compression)
 // This will strip any metadata or invalid contents (including, the PHP backdoor)
