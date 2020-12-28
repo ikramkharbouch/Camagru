@@ -49,7 +49,7 @@
 } else {
     // No Posts
     echo json_encode(
-        array('message' => 'No Posts Found')
+        array('Message' => 'No Posts Found')
     );
 }
 ?>

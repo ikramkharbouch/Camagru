@@ -360,7 +360,7 @@
 
         $stmt = $this->conn->prepare($query);
 
-        $_SESSION['id'] = 12;
+        // $_SESSION['id'] = 12;
 
         // var_dump($_GET['offset']);
         $stmt->bindParam(':account_id', $_SESSION['id']);

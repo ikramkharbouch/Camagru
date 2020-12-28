@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome Page</title>
+  <title>Camagru</title>
   <link rel="stylesheet" href="../styles/gallery.css">
   <link rel="stylesheet" href="../styles/welcome.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -41,9 +41,9 @@
 
   <a href="#" class="btn btn-primary text-center" id="getimages">Get Images</a>
 
-  <div class="container">
+  <div class="container" id="container">
   
-  <div class="card" style="width: 17rem;">
+  <div class="card" id="card" style="width: 17rem;">
   <img src="../img/8HvrVh.png" class="card-img-top" alt="myImg">
   <!-- <div class="card-body"> -->
     <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
