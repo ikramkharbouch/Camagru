@@ -17,9 +17,6 @@
     // Instantiate user object
     $user = new User($db);
 
-    // // Debug the last offset
-    // var_dump($_GET['offset']);
-
     // Get The last offset
     $_GET['offset'] = (int)$_GET['offset'];
 
@@ -55,15 +52,4 @@
         array('message' => 'No Posts Found')
     );
 }
-
-    // if ($user->gallery()) {
-    //     echo json_encode(
-    //         array('Message' => $_GET['offset'])
-    //     );
-    // } else {
-    //     echo json_encode(
-    //         array('Message' => 'Images Not Imported')
-    //     );
-    // }
-
 ?>

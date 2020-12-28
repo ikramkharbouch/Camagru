@@ -42,6 +42,11 @@ function closeNav() {
               console.log("Error");
             } else {
               console.log(data);
+              data = data.substring(9);
+              data = data.slice(0, -2);
+              console.log(data);
+              var array = data.split(',');
+              console.log(array);
             }
           });
       } catch (error) {
