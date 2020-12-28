@@ -39,22 +39,22 @@
     <p class="font-weight-bold ml-1">Ikram Kharbouch</p>
   </div>
 
-  <a href="#" class="btn btn-primary text-center" id="getimages">Get Images</a>
+  <!-- <a href="#" class="btn btn-primary text-center" id="getimages">Get Images</a> -->
 
-  <div class="container" id="container">
+  <div class="container d-flex flex-wrap" id="container">
   
-  <div class="card" id="card" style="width: 17rem;">
-  <img src="../img/8HvrVh.png" class="card-img-top" alt="myImg">
-  <!-- <div class="card-body"> -->
-    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+  <!-- <div class="card" id="card" style="width: 17rem;">
+  <img src="../img/8HvrVh.png" class="card-img-top" alt="myImg"> -->
+  <!-- <div class="card-body" id="card-body">
+    <a href="#" class="btn btn-primary">Go somewhere</a> -->
     <!-- <h4>Hello</h4> -->
-  <!-- </div> -->
-  <div class="card-footer">
+  <!-- </div>
+    <div class="card-footer">
       <small class="text-muted">Last updated 3 mins ago</small>
     </div>
   </div>
 
-  </div>
+  </div> -->
 
 <!-- </div> -->
 
