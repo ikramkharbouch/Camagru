@@ -69,6 +69,9 @@
         public $username;
         public $pass;
         public $verified;
+        public $base64;
+        public $path_to_img;
+        public $filter;
 
         // Constructor with DB
         public function __construct($db) {
@@ -139,7 +142,7 @@
         $this->verified = 0;
         $this->token = htmlspecialchars($this->token);
 
-        // Check if data is empty
+        //Check if data is empty
         if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
             return false;
         }
@@ -150,12 +153,17 @@
             return false;
         }
 
+        // if(!($stmt->bind_param(':email', $this->email))){
+        //     die( "Error in bind_param: (" .$this->conn->errno . ") " . $this->conn->error);
+        // }
+
         $stmt->bindParam(':email', $this->email);
         $stmt->bindParam(':username', $this->username);
         $stmt->bindParam(':pass', $this->pass); 
         $stmt->bindParam(':verified', $this->verified);
         $stmt->bindParam(':token', $this->token);
-        
+
+
         if ($stmt->execute()) {
             return true;
         }
@@ -362,7 +370,6 @@
         // var_dump(session_id());
         var_dump($_SESSION);
         
-        
         $timestamp = "NOW()";
         // var_dump($timestamp);
         
@@ -387,6 +394,24 @@
 
     public function logout() {
         $query = 'INSERT INTO account_sessions SET sess_id = :sess_id, account_id = :account_id, login_time = NOW()';
+    }
+
+    public function save_img() {
+           
+        $query = 'INSERT INTO posts SET account_id = :account_id, post = :post';
+
+        $stmt = $this->conn->prepare($query);
+
+        $_SESSION['id'] = 12;
+
+        var_dump($this->path_to_img);
+
+        $stmt->bindParam(':account_id', $_SESSION['id']);
+        $stmt->bindParam(':post', $this->path_to_img);
+
+        if ($stmt->execute()) {
+            return true;
+        }
     }
 
 }

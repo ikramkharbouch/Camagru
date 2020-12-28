@@ -63,7 +63,7 @@ if (isset($_SESSION['auth']) && $_SESSION['auth'] == true)
       document.getElementById("checkUser").addEventListener("submit", checkUser);
 
       function getUsers() {
-        fetch("https://camagruu.ml/api/post/read.php")
+        fetch("https://camagru-ik.cf/api/post/read.php")
           .then((res) => res.json())
           .then((data) => console.log(data))
           .catch((err) => console.log(err));
@@ -75,7 +75,7 @@ if (isset($_SESSION['auth']) && $_SESSION['auth'] == true)
         let email = document.getElementById("email").value;
         let pass = document.getElementById("pass").value;
 
-        fetch("https://camagruu.ml/api/post/check_creds.php", {
+        fetch("https://camagru-ik.cf/api/post/check_creds.php", {
           method: "POST",
           headers: {
             'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ if (isset($_SESSION['auth']) && $_SESSION['auth'] == true)
           .then((res) => res.text())
           .then((data) => {
             if (data == '{"Message":"User Exists"}') {
-              fetch("https://camagruu.ml/api/post/session.php", {
+              fetch("https://camagru-ik.cf/api/post/session.php", {
               method: "POST",
               headers: {
               'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ if (isset($_SESSION['auth']) && $_SESSION['auth'] == true)
             if (data == '{"Message":"Session Created"}') {
                 console.log("Session Created");
                 console.log("I will redirect");
-                fetch("https://camagruu.ml/api/post/auth.php", {
+                fetch("https://camagru-ik.cf/api/post/auth.php", {
                 method: "POST",
                 headers: {
                 'Content-Type': 'application/json',
@@ -131,7 +131,7 @@ if (isset($_SESSION['auth']) && $_SESSION['auth'] == true)
 
               let email = document.getElementById("email").value;
               let pass = document.getElementById("pass").value;
-              fetch("https://camagruu.ml/api/post/session.php", {
+              fetch("https://camagru-ik.cf/api/post/session.php", {
               method: "GET",
               headers: {
               'Content-Type': 'application/json',
