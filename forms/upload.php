@@ -25,6 +25,8 @@ var_dump($_SESSION['id']);
 <!-- <input type="submit" name="submit" value="Upload" id="uploaded"> -->
 <button id="upload" type="button" class="btn btn-save ml-3 mt-4">Upload</button>
 
+<img id="output" width="200" />	
+
 </body>
 
 </html>
