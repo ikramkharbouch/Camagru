@@ -15,6 +15,8 @@ function closeNav() {
     var i;
     var src = null;
     var cardbody = null;
+    var likeIcon = null;
+    var commentIcon = null;
   
     function startup() {
 
@@ -25,10 +27,20 @@ function closeNav() {
 
       getpictures();
 
-      getimages.addEventListener('click', function (ev) {
-        getpictures();
-        ev.preventDefault();
-      }, false);
+      // getimages.addEventListener('click', function (ev) {
+      //   getpictures();
+      //   ev.preventDefault();
+      // }, false);
+
+      // likeIcon.addEventListener('click', function (ev) {
+      //   console.log('liked');
+      //   ev.preventDefault();
+      // }, false);
+
+      // commentIcon.addEventListener('click', function (ev) {
+      //   console.log('liked');
+      //   ev.preventDefault();
+      // }, false);
     }
 
     function getpictures() {
@@ -58,6 +70,10 @@ function closeNav() {
           console.log(error);
         }
       }
+
+      function like() {
+        console.log("liked");
+      }
       
       function manipulate_data(data)
       {
@@ -76,10 +92,10 @@ function closeNav() {
           img = document.createElement('img');
           div = document.createElement('div');
           cardBody = document.createElement('div');
-          var likeIcon = document.createElement('IMG');
+          likeIcon = document.createElement('IMG');
           likeIcon.setAttribute('src', '../assets/like.png');
 
-          var commentIcon = document.createElement('IMG');
+          commentIcon = document.createElement('IMG');
           commentIcon.setAttribute('src', '../assets/comment.png');
 
           likeIcon.style.width = '20px';
@@ -89,6 +105,9 @@ function closeNav() {
           commentIcon.style.height = '20px';
 
           commentIcon.style.marginLeft = '25px';
+
+          div.style.marginTop = '30px';
+          div.style.marginLeft = '20px';
 
           img.style.height = '100%';
           img.style.width = '100%';
@@ -105,6 +124,7 @@ function closeNav() {
           div.appendChild(cardBody);
           src.appendChild(div);
           div.className = 'card';
+  
         }
     }
 

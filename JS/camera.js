@@ -86,7 +86,6 @@ function closeNav() {
     //   takepicture();
     //   ev.preventDefault();
     // }, false);
-
     savebutton.addEventListener('click', function (ev) {
       savepicture();
       ev.preventDefault();
@@ -166,7 +165,7 @@ function closeNav() {
             } else {
               console.log(data);   
               var str = '../img/';
-              data = data.substring(44, 56);
+              data = data.substring(50);
               data = data.substring(0, data.length - 2);
               // console.log(data);
               data = str.concat(data);

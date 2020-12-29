@@ -60,6 +60,8 @@ var_dump($_SESSION['id']);
     <div class="d-flex flex-row">
         <!-- <button id="startbutton" type="button" class="btn btn-take ml-3 mt-4">Take photo</button> -->
         <button id="savebutton" type="button" class="btn btn-save ml-3 mt-4" disabled>Save</button>
+        <!-- <button id="uploadbutton" type="button" class="btn btn-save ml-3 mt-4">Upload</button> -->
+        <a href="./upload.php" class="btn btn-save ml-3 mt-4" role="button">Upload</a>
     </div>
     <canvas id="canvas">
     </canvas>
