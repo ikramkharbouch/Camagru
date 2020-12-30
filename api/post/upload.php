@@ -19,17 +19,22 @@
 
     $data = json_decode(file_get_contents("php://input"));
 
+    $type = substr(implode("", $_FILES[files]["type"]), 6);
+
+    $type = '.' . $type;
+
+
     $user->uploaded_file = implode("", $_FILES[files]["tmp_name"]);
 
     $random_string = md5(uniqid(rand(), true));
 
     $filename = substr($random_string, 0, 5);
 
-    if (move_uploaded_file($user->uploaded_file, '../../upload/'. $filename . '.jpg')) {
-        copy('../../upload/'. $filename . '.jpg', '../../upload/2.jpg');
+    if (move_uploaded_file($user->uploaded_file, '../../upload/'. $filename . $type)) {
+        copy('../../upload/'. $filename . $type, '../../upload/2.jpg');
     }
 
-    $user->uploaded_file = '/var/www/camagru-ik.cf/html/upload/' . $filename . '.jpg';
+    $user->uploaded_file = '/var/www/camagru-ik.cf/html/upload/' . $filename . $type;
 
     if ($user->upload()) {
         echo json_encode(
