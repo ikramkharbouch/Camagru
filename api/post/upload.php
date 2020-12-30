@@ -23,9 +23,17 @@
 
     var_dump($_FILES[files]["tmp_name"]);
 
-    $user->uploaded_file = $_FILES[files]["tmp_name"];
+    $user->uploaded_file = implode("", $_FILES[files]["tmp_name"]);
 
-    
+    var_dump($user->uploaded_file);
+
+
+    if (move_uploaded_file($user->uploaded_file, '../../upload/1.png')) {
+        copy('../../upload/1.png', '../../upload/2.png');
+        copy('../../upload/1.png', '../../upload/3.png');
+    }
+
+
 
     // $user->formData = $data->formData;
 
