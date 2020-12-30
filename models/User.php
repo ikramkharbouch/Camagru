@@ -375,8 +375,23 @@
 
     }
 
-    public function upload() {
+    // To optimize later if possible
 
+    public function upload() {
+        
+        $query = 'INSERT INTO posts SET account_id = :account_id, post_id = :post_id, post = :post';
+
+        $stmt = $this->conn->prepare($query);
+
+        // var_dump($this->path_to_img);
+
+        $stmt->bindParam(':account_id', $_SESSION['id']);
+        $stmt->bindParam(':post_id', uniqid());
+        $stmt->bindParam(':post', $this->uploaded_file);
+
+        if ($stmt->execute()) {
+            return true;
+        }
     }
 
 }
