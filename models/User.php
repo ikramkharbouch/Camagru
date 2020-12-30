@@ -15,6 +15,8 @@
         public $path_to_img;
         public $filter;
         public $offset;
+        public $formData;
+        public $uploaded_file;
 
         // Constructor with DB
         public function __construct($db) {
@@ -370,6 +372,10 @@
         $stmt->execute();
 
         return $stmt;
+
+    }
+
+    public function upload() {
 
     }
 

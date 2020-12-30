@@ -1,8 +1,8 @@
 <?php
 @require('../init.php');
 
-var_dump($_SESSION['auth']);
-var_dump($_SESSION['id']);
+// var_dump($_SESSION['auth']);
+// var_dump($_SESSION['id']);
 
 ?>
 
@@ -21,9 +21,20 @@ var_dump($_SESSION['id']);
 
 <body>
 
-<input type="file" name="file" accept="image/jpeg, image/png" id="uploaded">
-<!-- <input type="submit" name="submit" value="Upload" id="uploaded"> -->
-<button id="upload" type="button" class="btn btn-save ml-3 mt-4">Upload</button>
+<!-- <form method="POST" action="../api/post/upload.php" id="profileData" enctype="multipart/form-data"> -->
+
+<form method="post" enctype="multipart/form-data">
+  <input type="file" name="files[]" accept="image/jpeg, image/png, image/jpg" id="uploaded" multiple>
+  <!-- <input type="submit" name="submit" value="Upload" id="uploaded"> -->
+  <button id="upload" type="submit" value="Upload File" class="btn btn-save ml-3 mt-4">Upload</button>
+  </form>
+
+<!-- </form> -->
+
+
+  <!-- <input type="file" name="files[]" multiple />
+  <input type="submit" value="Upload File" name="submit" /> -->
+
 
 <img id="output" width="200" />	
 
