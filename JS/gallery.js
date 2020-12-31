@@ -48,7 +48,7 @@ function closeNav() {
       inc += 1;
       offset = 5 * inc;
 
-      console.log(offset);
+      // console.log(offset);
 
       try {
         fetch("https://camagru-ik.cf/api/post/gallery.php" + "?offset=" + offset, {
@@ -64,6 +64,7 @@ function closeNav() {
               console.log("Error");
             } else {
               manipulate_data(data);
+              console.log(data);
             }
           });
         } catch (error) {
@@ -79,13 +80,16 @@ function closeNav() {
       {
         var img;
         var div;
-        var str = '../img/';
+        var str = '../';
 
         data = data.substring(9);
         data = data.slice(0, -2);
         var array = data.split(',');
         for (i = 0; i < array.length; i++) {
-          array[i] = array[i].substring(47);
+
+          // This could be split into a function
+          array[i] = array[i].replace(/\\\//g, "/");
+          array[i] = array[i].substring(37);
           array[i] = array[i].slice(0, -2);
           array[i] = str.concat(array[i]);
 
