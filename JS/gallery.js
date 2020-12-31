@@ -17,6 +17,7 @@ function closeNav() {
   var cardbody = null;
   var likeIcon = null;
   var commentIcon = null;
+  var cmtImg = null;
 
   function startup() {
 
@@ -24,31 +25,15 @@ function closeNav() {
     getimages = document.getElementById('getimages');
     src = document.getElementById('container');
     cardbody = document.getElementById('card-body');
+    cmtImg = document.getElementById('cmt-img');
 
     getpictures();
-
-    // getimages.addEventListener('click', function (ev) {
-    //   getpictures();
-    //   ev.preventDefault();
-    // }, false);
-
-    // likeIcon.addEventListener('click', function (ev) {
-    //   console.log('liked');
-    //   ev.preventDefault();
-    // }, false);
-
-    // commentIcon.addEventListener('click', function (ev) {
-    //   console.log('liked');
-    //   ev.preventDefault();
-    // }, false);
   }
 
   function getpictures() {
 
     inc += 1;
     offset = 5 * inc;
-
-    // console.log(offset);
 
     try {
       fetch("https://camagru-ik.cf/api/post/gallery.php" + "?offset=" + offset, {
@@ -71,12 +56,24 @@ function closeNav() {
     }
   }
 
-  function like() {
-    console.log("liked");
+  function like(path) {
+    console.log(path);
   }
 
-  function create_path(data) {
+  function comment(path) {
 
+    // var image;
+    console.log(path);
+    window.location.href = "../forms/comment.php" + '?path=' + path;
+    // image = document.createElement('img');
+
+    // image.src = path;
+
+    // cmtImg.appendChild(image);
+  }
+
+  function create_path(data) 
+  {
     var str = '../';
 
     data = (data.substring(9)).slice(0, -2);
@@ -89,8 +86,8 @@ function closeNav() {
     return array;
   }
 
-  function create_card(path) {
-
+  function create_card(path) 
+  {
     var img;
     var div;
 
@@ -104,7 +101,12 @@ function closeNav() {
     commentIcon.setAttribute('src', '../assets/comment.png');
 
     likeIcon.addEventListener('click', function (ev) {
-      console.log('liked');
+      like(path);
+      ev.preventDefault();
+    }, false);
+
+    commentIcon.addEventListener('click', function (ev) {
+      comment(path);
       ev.preventDefault();
     }, false);
 
@@ -114,6 +116,7 @@ function closeNav() {
 
     commentIcon.style.width = '20px';
     commentIcon.style.height = '20px';
+    commentIcon.style.cursor = 'pointer';
 
     commentIcon.style.marginLeft = '25px';
 
@@ -123,7 +126,7 @@ function closeNav() {
     img.style.height = '100%';
     img.style.width = '100%';
     img.style.margin = '0';
-    
+
     div.style.width = '500px';
     div.style.height = '500px';
 
@@ -140,9 +143,10 @@ function closeNav() {
 
   }
 
-  function manipulate_data(data) {
-    var path;
-
+  function manipulate_data(data) 
+  {
+    var paths;
+  
     paths = create_path(data);
 
     for (i = 0; i < paths.length; i++) {
