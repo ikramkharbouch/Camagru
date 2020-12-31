@@ -8,129 +8,148 @@ function closeNav() {
 }
 
 (function () {
-  
-    var getimages = null;
-    var offset = 0;
-    var inc = -1;
-    var i;
-    var src = null;
-    var cardbody = null;
-    var likeIcon = null;
-    var commentIcon = null;
-  
-    function startup() {
 
-      window.onscroll = function() {getpictures()};
-      getimages = document.getElementById('getimages');
-      src = document.getElementById('container');
-      cardbody = document.getElementById('card-body');
+  var getimages = null;
+  var offset = 0;
+  var inc = -1;
+  var i;
+  var src = null;
+  var cardbody = null;
+  var likeIcon = null;
+  var commentIcon = null;
 
-      getpictures();
+  function startup() {
 
-      // getimages.addEventListener('click', function (ev) {
-      //   getpictures();
-      //   ev.preventDefault();
-      // }, false);
+    window.onscroll = function () { getpictures() };
+    getimages = document.getElementById('getimages');
+    src = document.getElementById('container');
+    cardbody = document.getElementById('card-body');
 
-      // likeIcon.addEventListener('click', function (ev) {
-      //   console.log('liked');
-      //   ev.preventDefault();
-      // }, false);
+    getpictures();
 
-      // commentIcon.addEventListener('click', function (ev) {
-      //   console.log('liked');
-      //   ev.preventDefault();
-      // }, false);
+    // getimages.addEventListener('click', function (ev) {
+    //   getpictures();
+    //   ev.preventDefault();
+    // }, false);
+
+    // likeIcon.addEventListener('click', function (ev) {
+    //   console.log('liked');
+    //   ev.preventDefault();
+    // }, false);
+
+    // commentIcon.addEventListener('click', function (ev) {
+    //   console.log('liked');
+    //   ev.preventDefault();
+    // }, false);
+  }
+
+  function getpictures() {
+
+    inc += 1;
+    offset = 5 * inc;
+
+    // console.log(offset);
+
+    try {
+      fetch("https://camagru-ik.cf/api/post/gallery.php" + "?offset=" + offset, {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+      })
+        .then((res) => res.text())
+        .then((data) => {
+          if (data == '{"Message":"No Posts Found"}') {
+            console.log("Error");
+          } else {
+            manipulate_data(data);
+          }
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  function like() {
+    console.log("liked");
+  }
+
+  function create_path(data) {
+
+    var str = '../';
+
+    data = (data.substring(9)).slice(0, -2);
+    var array = data.split(',');
+    for (i = 0; i < array.length; i++) {
+      array[i] = str.concat(((array[i].replace(/\\\//g, "/")).substring(37)).slice(0, -2));
     }
 
-    function getpictures() {
+    console.log(array);
+    return array;
+  }
 
-      inc += 1;
-      offset = 5 * inc;
+  function create_card(path) {
 
-      // console.log(offset);
+    var img;
+    var div;
 
-      try {
-        fetch("https://camagru-ik.cf/api/post/gallery.php" + "?offset=" + offset, {
-          method: "GET",
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-        })
-          .then((res) => res.text())
-          .then((data) => {
-            if (data == '{"Message":"No Posts Found"}') {
-              console.log("Error");
-            } else {
-              manipulate_data(data);
-              console.log(data);
-            }
-          });
-        } catch (error) {
-          console.log(error);
-        }
-      }
+    img = document.createElement('img');
+    div = document.createElement('div');
+    cardBody = document.createElement('div');
+    likeIcon = document.createElement('IMG');
+    likeIcon.setAttribute('src', '../assets/like.png');
 
-      function like() {
-        console.log("liked");
-      }
-      
-      function manipulate_data(data)
-      {
-        var img;
-        var div;
-        var str = '../';
+    commentIcon = document.createElement('IMG');
+    commentIcon.setAttribute('src', '../assets/comment.png');
 
-        data = data.substring(9);
-        data = data.slice(0, -2);
-        var array = data.split(',');
-        for (i = 0; i < array.length; i++) {
+    likeIcon.addEventListener('click', function (ev) {
+      console.log('liked');
+      ev.preventDefault();
+    }, false);
 
-          // This could be split into a function
-          array[i] = array[i].replace(/\\\//g, "/");
-          array[i] = array[i].substring(37);
-          array[i] = array[i].slice(0, -2);
-          array[i] = str.concat(array[i]);
+    likeIcon.style.width = '20px';
+    likeIcon.style.height = '20px';
+    likeIcon.style.cursor = 'pointer';
 
-          img = document.createElement('img');
-          div = document.createElement('div');
-          cardBody = document.createElement('div');
-          likeIcon = document.createElement('IMG');
-          likeIcon.setAttribute('src', '../assets/like.png');
+    commentIcon.style.width = '20px';
+    commentIcon.style.height = '20px';
 
-          commentIcon = document.createElement('IMG');
-          commentIcon.setAttribute('src', '../assets/comment.png');
+    commentIcon.style.marginLeft = '25px';
 
-          likeIcon.style.width = '20px';
-          likeIcon.style.height = '20px';
+    div.style.marginTop = '30px';
+    div.style.marginLeft = '20px';
 
-          commentIcon.style.width = '20px';
-          commentIcon.style.height = '20px';
+    img.style.height = '100%';
+    img.style.width = '100%';
+    img.style.margin = '0';
+    
+    div.style.width = '500px';
+    div.style.height = '500px';
 
-          commentIcon.style.marginLeft = '25px';
+    img.src = path;
+    cardBody.className = 'card-footer';
+    cardBody.style.backgroundColor = '#9364A8';
+    cardBody.style.height = '100px';
+    div.appendChild(img);
+    cardBody.appendChild(likeIcon);
+    cardBody.appendChild(commentIcon);
+    div.appendChild(cardBody);
+    src.appendChild(div);
+    div.className = 'card';
 
-          div.style.marginTop = '30px';
-          div.style.marginLeft = '20px';
+  }
 
-          img.style.height = '100%';
-          img.style.width = '100%';
-          img.style.margin = '0';
-          div.style.width = '500px';
-          div.style.height = '500px';
-          img.src = array[i];
-          cardBody.className = 'card-footer';
-          cardBody.style.backgroundColor = '#9364A8';
-          cardBody.style.height = '100px';
-          div.appendChild(img);
-          cardBody.appendChild(likeIcon);
-          cardBody.appendChild(commentIcon);
-          div.appendChild(cardBody);
-          src.appendChild(div);
-          div.className = 'card';
-  
-        }
+  function manipulate_data(data) {
+    var path;
+
+    paths = create_path(data);
+
+    for (i = 0; i < paths.length; i++) {
+      create_card(paths[i]);
     }
+    
+  }
 
-    window.addEventListener('load', startup, false);
-  })();
+  window.addEventListener('load', startup, false);
+})();
