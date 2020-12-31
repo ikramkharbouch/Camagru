@@ -29,8 +29,9 @@ var_dump($_GET['path']);
 
 <h3>Write a comment...</h3>
 <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="input" value="">
+<button type="submit" value="Comment" class="btn btn-primary btn-lg custom-btn" id="comment">Comment</button>
 
-<div class="comments"></div>
+<div class="comments" id="comments"></div>
 
 </body>
 

@@ -21,7 +21,7 @@
 
     $user->email = $data->email;
 
-    if ($user->like()) {
+    if ($user->comment()) {
         echo json_encode(
             array('Message' => 'Commented Successfully')
         );
