@@ -9,6 +9,7 @@
   var likeIcon = null;
   var commentIcon = null;
   var cmtImg = null;
+  var liked = 0;
 
   function startup() {
 
@@ -47,14 +48,17 @@
     }
   }
 
-  function like(path) {
+  function send_query(parameter, path) {
 
     var str = '/var/www/camagru-ik.cf/html';
 
     path = str.concat(path.substring(2));
 
+    console.log(path);
+    console.log(parameter);
+
     try {
-      fetch("https://camagru-ik.cf/api/post/like.php", {
+      fetch("https://camagru-ik.cf/api/post/" + parameter + ".php", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -64,8 +68,8 @@
       })
         .then((res) => res.text())
         .then((data) => {
-          if (data == '{"Message":"Liked Successfully"}') {
-            console.log('Success');
+          if (data == '{"Message":"' + parameter + 'd Successfully"}') {
+            console.log(parameter +'d');
           } else {
             console.log(data);
           }
@@ -73,6 +77,22 @@
     } catch (error) {
       console.log(error);
     }
+  }
+
+  function like(path) {
+
+    if (liked == 0)
+    {
+      liked = 1;
+      send_query('like', path);
+
+    } else {
+
+      liked = 0;
+      send_query('dislike', path);
+      
+    }
+
     
   }
 

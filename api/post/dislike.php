@@ -19,11 +19,13 @@
     // Get raw posted data
     $data = json_decode(file_get_contents("php://input"));
 
-    $user->email = $data->email;
+    $user->filename = $data->filename;
 
-    if ($user->like()) {
+    $user->get_post_id();
+
+    if ($user->dislike()) {
         echo json_encode(
-            array('Message' => 'Disliked Successfully')
+            array('Message' => 'disliked Successfully')
         );
     } else {
         echo json_encode(

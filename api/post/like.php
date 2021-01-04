@@ -25,7 +25,7 @@
 
     if ($user->like()) {
         echo json_encode(
-            array('Message' => 'Liked Successfully')
+            array('Message' => 'liked Successfully')
         );
     } else {
         echo json_encode(
