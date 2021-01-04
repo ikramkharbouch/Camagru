@@ -10,6 +10,7 @@
   var commentIcon = null;
   var cmtImg = null;
   var liked = 0;
+  var index = 0;
 
   function startup() {
 
@@ -79,20 +80,20 @@
     }
   }
 
-  function like(path) {
+  function like(path, div) {
 
     if (liked == 0)
     {
       liked = 1;
+      div.getElementsByTagName('img')[1].src = '../assets/like-black-32.png';
       send_query('like', path);
 
     } else {
 
       liked = 0;
+      div.getElementsByTagName('img')[1].src = '../assets/like.png';
       send_query('dislike', path);
-      
     }
-
     
   }
 
@@ -118,7 +119,6 @@
       array[i] = str.concat(((array[i].replace(/\\\//g, "/")).substring(37)).slice(0, -2));
     }
 
-    console.log(array);
     return array;
   }
 
@@ -137,7 +137,7 @@
     commentIcon.setAttribute('src', '../assets/comment.png');
 
     likeIcon.addEventListener('click', function (ev) {
-      like(path);
+      like(path, div);
       ev.preventDefault();
     }, false);
 
@@ -165,6 +165,8 @@
 
     div.style.width = '500px';
     div.style.height = '500px';
+
+    div.id = index++;
 
     img.src = path;
     cardBody.className = 'card-footer';
