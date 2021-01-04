@@ -17,6 +17,10 @@
         public $offset;
         public $formData;
         public $uploaded_file;
+        public $filename;
+        public $post_id;
+        public $owner;
+        public $likes;
 
         // Constructor with DB
         public function __construct($db) {
@@ -70,12 +74,6 @@
         // Create Query
        $query = 'INSERT INTO users SET email = :email, username = :username, pass = :pass, verified = :verified, token = :token;';
 
-    //    $query = 'BEGIN;
-    //     INSERT INTO users SET email = :email, username = :username, pass = :pass, verified = :verified, token = :token;
-    //     INSERT INTO posts SET user_id = mysql_insert_id();
-    //    COMMIT;';
-
-    //    $query = "INSERT INTO users (email, username, pass, verified, token) VALUES ('test@test.fr', 'tester21', 'test@hh1423', '0', 'hdhufgeiuf')";
 
         // Prepare statement
         $stmt = $this->conn->prepare($query);
@@ -342,15 +340,19 @@
 
     public function save_img() {
            
-        $query = 'INSERT INTO posts SET account_id = :account_id, post_id = :post_id, post = :post';
+        $query = 'INSERT INTO posts SET account_id = :account_id, post_id = :post_id, post = :post, likes = :likes, comments = :comments';
 
         $stmt = $this->conn->prepare($query);
 
         // var_dump($this->path_to_img);
 
+        $bool = 0;
+
         $stmt->bindParam(':account_id', $_SESSION['id']);
         $stmt->bindParam(':post_id', uniqid());
         $stmt->bindParam(':post', $this->path_to_img);
+        $stmt->bindParam(':likes', $bool);
+        $stmt->bindParam(':comments', $bool);
 
         if ($stmt->execute()) {
             return true;
@@ -379,20 +381,76 @@
 
     public function upload() {
         
-        $query = 'INSERT INTO posts SET account_id = :account_id, post_id = :post_id, post = :post';
+        $query = 'INSERT INTO posts SET account_id = :account_id, post_id = :post_id, post = :post, likes = :likes, comments = :comments';
 
         $stmt = $this->conn->prepare($query);
 
         // var_dump($this->path_to_img);
 
+        $bool = 0;
+
         $stmt->bindParam(':account_id', $_SESSION['id']);
         $stmt->bindParam(':post_id', uniqid());
         $stmt->bindParam(':post', $this->uploaded_file);
+        $stmt->bindParam(':likes', $bool);
+        $stmt->bindParam(':comments', $bool);
 
         if ($stmt->execute()) {
             return true;
         }
     }
 
+    public function get_post_id() {
+
+        $query = 'SELECT post_id,account_id,likes FROM posts WHERE post = :post AND account_id = :account_id';
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':post', $this->filename);
+        $stmt->bindParam(':account_id', $_SESSION['id']);
+
+        $stmt->execute();
+
+        // Fetch data
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Set properties
+        $this->post_id = $row['post_id'];
+        $this->owner = $row['account_id'];
+        $this->likes = $row['likes'];
+    }
+
+    public function like() {
+
+        // $query = 'INSERT INTO user_likes SET account_id = :account_id, post_id = :post_id, liked = :liked';
+
+        $query = 'BEGIN;
+                    UPDATE posts SET likes = :likes WHERE post_id = :post_id AND account_id = :account_id;
+                    INSERT INTO user_likes SET account_id = :account_id, post_id = :post_id, liked = :liked;
+                COMMIT;';
+
+        $stmt = $this->conn->prepare($query);
+
+        $bool = 1;
+
+        $likes = $this->likes + 1;
+
+        $stmt->bindParam(':likes', $likes, PDO::PARAM_INT);
+        $stmt->bindParam(':account_id', $_SESSION['id']);
+        $stmt->bindParam(':post_id', $this->post_id);
+        $stmt->bindParam(':liked', $bool);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+
+    }
+
+    public function comment() {
+
+    }
+
+
+    
 }
 ?>

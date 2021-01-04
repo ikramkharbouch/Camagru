@@ -1,0 +1,13 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+#cmt-img {
+    margin-top: 30px;
+}
+
+.cmt-section {
+    border: 1px solid black;
+}

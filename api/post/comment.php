@@ -19,7 +19,12 @@
     // Get raw posted data
     $data = json_decode(file_get_contents("php://input"));
 
-    $user->email = $data->email;
+    $user->filename = $data->filename;
+
+    $user->get_post_id();
+
+    // Get post owner later to insert its 
+    $user->get_post_owner();
 
     if ($user->comment()) {
         echo json_encode(

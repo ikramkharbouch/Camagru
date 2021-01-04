@@ -19,7 +19,9 @@
     // Get raw posted data
     $data = json_decode(file_get_contents("php://input"));
 
-    $user->email = $data->email;
+    $user->filename = $data->filename;
+
+    $user->get_post_id();
 
     if ($user->like()) {
         echo json_encode(

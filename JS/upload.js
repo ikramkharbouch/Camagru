@@ -1,4 +1,3 @@
-
 // This is an anonymous function
 (function () {
 
@@ -69,11 +68,6 @@
     }
 
     function send_img() {
-
-        // getMetadataForFileList(fileList);
-
-        // var formData = new FormData();
-        // formData.append('file', this.files);
 
         form.append('image', fileList);
         form.append('name', fileList.name); // [edited]

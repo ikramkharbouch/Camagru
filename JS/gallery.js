@@ -1,12 +1,3 @@
-function openNav() {
-  document.getElementById("mySidenav").style.width = "250px";
-}
-
-/* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
-function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
-}
-
 (function () {
 
   var getimages = null;
@@ -57,7 +48,32 @@ function closeNav() {
   }
 
   function like(path) {
-    console.log(path);
+
+    var str = '/var/www/camagru-ik.cf/html';
+
+    path = str.concat(path.substring(2));
+
+    try {
+      fetch("https://camagru-ik.cf/api/post/like.php", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({ filename: path }),
+      })
+        .then((res) => res.text())
+        .then((data) => {
+          if (data == '{"Message":"Liked Successfully"}') {
+            console.log('Success');
+          } else {
+            console.log(data);
+          }
+        });
+    } catch (error) {
+      console.log(error);
+    }
+    
   }
 
   function comment(path) {
