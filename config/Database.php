@@ -4,7 +4,7 @@
         private $host = 'localhost';
         private $db_name = 'camagru';
         private $username = 'root';
-        private $password = 'qhQ3x5C6jPBXLs';
+        private $password = 'JJ2AhRBcqFjtxJ';
         private $conn;
 
         // DB Connect

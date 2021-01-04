@@ -1,62 +1,4 @@
 <?php
-// // // ----------------------------------------------------------------------------------------------------
-// // - Display Errors
-// // ----------------------------------------------------------------------------------------------------
-// ini_set('display_errors', 'On');
-// ini_set('html_errors', 0);
-
-// // ----------------------------------------------------------------------------------------------------
-// // - Error Reporting
-// // ----------------------------------------------------------------------------------------------------
-// error_reporting(-1);
-
-// // ----------------------------------------------------------------------------------------------------
-// // - Shutdown Handler
-// // ----------------------------------------------------------------------------------------------------
-// function ShutdownHandler()
-// {
-//     if(@is_array($error = @error_get_last()))
-//     {
-//         return(@call_user_func_array('ErrorHandler', $error));
-//     };
-
-//     return(TRUE);
-// };
-
-// register_shutdown_function('ShutdownHandler');
-
-// // ----------------------------------------------------------------------------------------------------
-// // - Error Handler
-// // ----------------------------------------------------------------------------------------------------
-// function ErrorHandler($type, $message, $file, $line)
-// {
-//     $_ERRORS = Array(
-//         0x0001 => 'E_ERROR',
-//         0x0002 => 'E_WARNING',
-//         0x0004 => 'E_PARSE',
-//         0x0008 => 'E_NOTICE',
-//         0x0010 => 'E_CORE_ERROR',
-//         0x0020 => 'E_CORE_WARNING',
-//         0x0040 => 'E_COMPILE_ERROR',
-//         0x0080 => 'E_COMPILE_WARNING',
-//         0x0100 => 'E_USER_ERROR',
-//         0x0200 => 'E_USER_WARNING',
-//         0x0400 => 'E_USER_NOTICE',
-//         0x0800 => 'E_STRICT',
-//         0x1000 => 'E_RECOVERABLE_ERROR',
-//         0x2000 => 'E_DEPRECATED',
-//         0x4000 => 'E_USER_DEPRECATED'
-//     );
-
-//     if(!@is_string($name = @array_search($type, @array_flip($_ERRORS))))
-//     {
-//         $name = 'E_UNKNOWN';
-//     };
-
-//     return(print(@sprintf("%s Error in file \xBB%s\xAB at line %d: %s\n", $name, @basename($file), $line, $message)));
-// };
-
-// $old_error_handler = set_error_handler("ErrorHandler");
 
     class User {
         // DB stuff
@@ -71,6 +13,16 @@
         public $verified;
         public $base64;
         public $path_to_img;
+        public $filter;
+        public $offset;
+        public $formData;
+        public $uploaded_file;
+        public $filename;
+        public $post_id;
+        public $owner;
+        public $likes;
+        public $comments;
+        public $comment;
 
         // Constructor with DB
         public function __construct($db) {
@@ -124,12 +76,6 @@
         // Create Query
        $query = 'INSERT INTO users SET email = :email, username = :username, pass = :pass, verified = :verified, token = :token;';
 
-    //    $query = 'BEGIN;
-    //     INSERT INTO users SET email = :email, username = :username, pass = :pass, verified = :verified, token = :token;
-    //     INSERT INTO posts SET user_id = mysql_insert_id();
-    //    COMMIT;';
-
-    //    $query = "INSERT INTO users (email, username, pass, verified, token) VALUES ('test@test.fr', 'tester21', 'test@hh1423', '0', 'hdhufgeiuf')";
 
         // Prepare statement
         $stmt = $this->conn->prepare($query);
@@ -344,7 +290,6 @@
         $stmt->execute();
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
         $this->id = $row['id'];
 
         $_SESSION["id"] = $this->id;
@@ -396,20 +341,158 @@
     }
 
     public function save_img() {
+           
+        $query = 'INSERT INTO posts SET account_id = :account_id, post_id = :post_id, post = :post, likes = :likes, comments = :comments';
 
-            $query = 'INSERT INTO posts SET account_id = :account_id, post = :post';
+        $stmt = $this->conn->prepare($query);
 
-            $stmt = $this->conn->prepare($query);
+        // var_dump($this->path_to_img);
 
-            $_SESSION['id'] = 12;
+        $bool = 0;
 
-            $stmt->bindParam(':account_id', $_SESSION['id']);
-            $stmt->bindParam(':post', $this->path_to_img);
+        $stmt->bindParam(':account_id', $_SESSION['id']);
+        $stmt->bindParam(':post_id', uniqid());
+        $stmt->bindParam(':post', $this->path_to_img);
+        $stmt->bindParam(':likes', $bool);
+        $stmt->bindParam(':comments', $bool);
 
-            if ($stmt->execute()) {
-                return true;
-            }
+        if ($stmt->execute()) {
+            return true;
+        }
     }
 
+    public function gallery() {
+
+        $query = 'SELECT post FROM posts WHERE account_id = :account_id LIMIT :offset, 5';
+
+        $stmt = $this->conn->prepare($query);
+
+        // $_SESSION['id'] = 12;
+
+        // var_dump($_GET['offset']);
+        $stmt->bindParam(':account_id', $_SESSION['id']);
+        $stmt->bindParam(':offset', $_GET['offset'], PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        return $stmt;
+
+    }
+
+    // To optimize later if possible
+
+    public function upload() {
+        
+        $query = 'INSERT INTO posts SET account_id = :account_id, post_id = :post_id, post = :post, likes = :likes, comments = :comments';
+
+        $stmt = $this->conn->prepare($query);
+
+        // var_dump($this->path_to_img);
+
+        $bool = 0;
+
+        $stmt->bindParam(':account_id', $_SESSION['id']);
+        $stmt->bindParam(':post_id', uniqid());
+        $stmt->bindParam(':post', $this->uploaded_file);
+        $stmt->bindParam(':likes', $bool);
+        $stmt->bindParam(':comments', $bool);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+    }
+
+    public function get_post_id() {
+
+        $query = 'SELECT post_id,account_id,likes,comments FROM posts WHERE post = :post AND account_id = :account_id';
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':post', $this->filename);
+        $stmt->bindParam(':account_id', $_SESSION['id']);
+
+        $stmt->execute();
+
+        // Fetch data
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Set properties
+        $this->post_id = $row['post_id'];
+        $this->owner = $row['account_id'];
+        $this->likes = $row['likes'];
+        $this->comments = $row['comments'];
+    }
+
+    public function like() {
+
+        // $query = 'INSERT INTO user_likes SET account_id = :account_id, post_id = :post_id, liked = :liked';
+
+        $query = 'BEGIN;
+                    UPDATE posts SET likes = :likes WHERE post_id = :post_id AND account_id = :account_id;
+                    INSERT INTO user_likes SET account_id = :account_id, post_id = :post_id, liked = :liked;
+                COMMIT;';
+
+        $stmt = $this->conn->prepare($query);
+
+        $bool = 1;
+
+        $likes = $this->likes + 1;
+
+        $stmt->bindParam(':likes', $likes, PDO::PARAM_INT);
+        $stmt->bindParam(':account_id', $_SESSION['id']);
+        $stmt->bindParam(':post_id', $this->post_id);
+        $stmt->bindParam(':liked', $bool);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+
+    }
+
+    public function comment() {
+
+        $query = 'BEGIN;
+                    UPDATE posts SET comments = :comments WHERE post_id = :post_id AND account_id = :account_id;
+                    INSERT INTO user_comments SET account_id = :account_id, post_id = :post_id, commented = :commented, comment = :comment;
+        COMMIT;';
+
+        $stmt = $this->conn->prepare($query);
+
+        $bool = 1;
+
+        $comments = $this->comments + 1;
+
+        $stmt->bindParam(':comments', $comments, PDO::PARAM_INT);
+        $stmt->bindParam(':account_id', $_SESSION['id']);
+        $stmt->bindParam(':post_id', $this->post_id);
+        $stmt->bindParam(':commented', $bool);
+        $stmt->bindParam(':comment', $this->comment);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+
+    }
+
+    public function dislike() {
+
+        $query = 'DELETE FROM user_likes WHERE account_id = :account_id AND post_id = :post_id';
+
+        $stmt = $this->conn->prepare($query);
+
+
+        $stmt->bindParam(':account_id', $_SESSION['id']);
+        $stmt->bindParam(':post_id', $this->post_id);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+
+    }
+
+
+
+
+    
 }
 ?>
