@@ -21,6 +21,8 @@
         public $post_id;
         public $owner;
         public $likes;
+        public $comments;
+        public $comment;
 
         // Constructor with DB
         public function __construct($db) {
@@ -402,7 +404,7 @@
 
     public function get_post_id() {
 
-        $query = 'SELECT post_id,account_id,likes FROM posts WHERE post = :post AND account_id = :account_id';
+        $query = 'SELECT post_id,account_id,likes,comments FROM posts WHERE post = :post AND account_id = :account_id';
 
         $stmt = $this->conn->prepare($query);
 
@@ -418,6 +420,7 @@
         $this->post_id = $row['post_id'];
         $this->owner = $row['account_id'];
         $this->likes = $row['likes'];
+        $this->comments = $row['comments'];
     }
 
     public function like() {
@@ -447,6 +450,28 @@
     }
 
     public function comment() {
+
+        $query = 'BEGIN;
+                    UPDATE posts SET comments = :comments WHERE post_id = :post_id AND account_id = :account_id;
+                    INSERT INTO user_comments SET account_id = :account_id, post_id = :post_id, commented = :commented, comment = :comment;
+        COMMIT;';
+
+
+        $stmt = $this->conn->prepare($query);
+
+        $bool = 1;
+
+        $comments = $this->comments + 1;
+
+        $stmt->bindParam(':comments', $comments, PDO::PARAM_INT);
+        $stmt->bindParam(':account_id', $_SESSION['id']);
+        $stmt->bindParam(':post_id', $this->post_id);
+        $stmt->bindParam(':commented', $bool);
+        $stmt->bindParam(':comment', $this->comment);
+
+        if ($stmt->execute()) {
+            return true;
+        }
 
     }
 

@@ -20,6 +20,8 @@
 
         path = (window.location.search.substr(1)).substr(5);
 
+        console.log(path);
+
         img = document.createElement('img');
         img.src = path;
 
@@ -36,6 +38,8 @@
 
     function addComment(comment) {
 
+        var str = '/var/www/camagru-ik.cf/html';
+
         newElem = document.createElement('div');
 
         // and give it some content
@@ -45,6 +49,29 @@
         newElem.appendChild(newContent);
 
         comments.appendChild(newElem);
+
+        var newpath = str.concat(path.substring(2));
+
+        try {
+            fetch("https://camagru-ik.cf/api/post/comment.php", {
+              method: "POST",
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+              body: JSON.stringify({ filename: newpath, comment: comment }),
+            })
+              .then((res) => res.text())
+              .then((data) => {
+                if (data == '{"Message":"Commented Successfully"}') {
+                  console.log('Success');
+                } else {
+                  console.log(data);
+                }
+              });
+          } catch (error) {
+            console.log(error);
+          }
 
     }
 

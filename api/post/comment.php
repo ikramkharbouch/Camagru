@@ -20,11 +20,9 @@
     $data = json_decode(file_get_contents("php://input"));
 
     $user->filename = $data->filename;
+    $user->comment = $data->comment;
 
     $user->get_post_id();
-
-    // Get post owner later to insert its 
-    $user->get_post_owner();
 
     if ($user->comment()) {
         echo json_encode(
