@@ -42,6 +42,7 @@
             console.log("Error");
           } else {
             manipulate_data(data);
+            console.log(data);
           }
         });
     } catch (error) {
@@ -109,14 +110,18 @@
     // cmtImg.appendChild(image);
   }
 
-  function create_path(data) 
+  function create_path(data)
   {
     var str = '../';
+    var regex = /((\/img\/)|(\/upload\/)).*?((.png)|(.jpeg)|(.jpg)).*?/g;
+    var found;
 
     data = (data.substring(9)).slice(0, -2);
-    var array = data.split(',');
+    var array = data.split('},');
     for (i = 0; i < array.length; i++) {
-      array[i] = str.concat(((array[i].replace(/\\\//g, "/")).substring(37)).slice(0, -2));
+      array[i] = array[i].replace(/\\\//g, "/");
+      found = array[i].match(regex);
+      array[i] = str.concat(found);
     }
 
     return array;

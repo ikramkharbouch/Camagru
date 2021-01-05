@@ -363,7 +363,7 @@
 
     public function gallery() {
 
-        $query = 'SELECT post FROM posts WHERE account_id = :account_id LIMIT :offset, 5';
+        $query = 'SELECT post, likes, comments FROM posts WHERE account_id = :account_id LIMIT :offset, 5';
 
         $stmt = $this->conn->prepare($query);
 
@@ -376,7 +376,6 @@
         $stmt->execute();
 
         return $stmt;
-
     }
 
     // To optimize later if possible

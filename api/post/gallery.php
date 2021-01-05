@@ -37,7 +37,9 @@
         extract($row);
 
         $post_item = array(
-            'post' => $post
+            'post' => $post,
+            'likes' => $likes,
+            'comments' => $comments,
         );
 
         // Push to "data"
