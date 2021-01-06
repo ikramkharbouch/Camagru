@@ -78,5 +78,11 @@
 
     }
 
+    // Add previous comments to the commented image
+
+    function addPreviousComments() {
+
+    }
+
     window.addEventListener('load', startup, false);
 })();

@@ -142,6 +142,24 @@
     return array;
   }
 
+  function liked_or_disliked(likes) {
+
+    if (parseInt(likes))
+      return ('../assets/like-black-32.png');
+
+    return ('../assets/like.png');
+
+  }
+
+  function commented_or_uncommented(comments) {
+
+    if (parseInt(comments))
+      return ('../assets/comment-black-32.png');
+
+    return ('../assets/comment.png');
+
+  }
+
   function create_card(path, likes, comments) 
   {
     var img;
@@ -157,7 +175,7 @@
     likeIcon = document.createElement('IMG');
     likeText = document.createTextNode(likes);
     commentText = document.createTextNode(comments);
-    likeIcon.setAttribute('src', '../assets/like.png');
+    likeIcon.setAttribute('src', liked_or_disliked(likes));
 
     commentIcon = document.createElement('IMG');
     commentIcon.setAttribute('src', '../assets/comment.png');
@@ -209,7 +227,7 @@
 
   }
 
-  function manipulate_data(data) 
+  function manipulate_data(data)
   {
     var paths;
   
