@@ -12,6 +12,12 @@
   var liked = 0;
   var index = 0;
 
+  var likes = null;
+  var comments = null;
+
+  var likeText = null;
+  var commentText = null;
+
   function startup() {
 
     window.onscroll = function () { getpictures() };
@@ -112,7 +118,7 @@
 
   function create_path(data)
   {
-    var str = '../';
+    var str = '..';
     var regex = /((\/img\/)|(\/upload\/)).*?((.png)|(.jpeg)|(.jpg)).*?/g;
     var regex_likes = /(?<=,"likes":")(.*)(?=",)/g;
     var regex_comments = /(?<=,"comments":")(.*)(?=")/g;
@@ -121,8 +127,8 @@
     data = (data.substring(9)).slice(0, -2);
     var array = data.split('},');
 
-    var likes = new Array(array.length);
-    var comments = new Array(array.length);
+    likes = new Array(array.length);
+    comments = new Array(array.length);
 
     for (i = 0; i < array.length; i++) {
       array[i] = array[i].replace(/\\\//g, "/");
@@ -136,15 +142,21 @@
     return array;
   }
 
-  function create_card(path) 
+  function create_card(path, likes, comments) 
   {
     var img;
     var div;
+
+
+    console.log(likes);
+    console.log(comments);
 
     img = document.createElement('img');
     div = document.createElement('div');
     cardBody = document.createElement('div');
     likeIcon = document.createElement('IMG');
+    likeText = document.createTextNode(likes);
+    commentText = document.createTextNode(comments);
     likeIcon.setAttribute('src', '../assets/like.png');
 
     commentIcon = document.createElement('IMG');
@@ -188,7 +200,9 @@
     cardBody.style.height = '100px';
     div.appendChild(img);
     cardBody.appendChild(likeIcon);
+    cardBody.appendChild(likeText);
     cardBody.appendChild(commentIcon);
+    cardBody.appendChild(commentText);
     div.appendChild(cardBody);
     src.appendChild(div);
     div.className = 'card';
@@ -202,7 +216,8 @@
     paths = create_path(data);
 
     for (i = 0; i < paths.length; i++) {
-      create_card(paths[i]);
+      console.log(paths[i]);
+      create_card(paths[i], likes[i], comments[i]);
     }
     
   }

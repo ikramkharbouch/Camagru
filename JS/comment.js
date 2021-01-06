@@ -52,7 +52,7 @@
 
         comments.appendChild(newElem);
 
-        var newpath = str.concat(path.substring(3));
+        var newpath = str.concat(path.substring(2));
 
         try {
             fetch("https://camagru-ik.cf/api/post/comment.php", {
