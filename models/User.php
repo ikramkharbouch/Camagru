@@ -407,8 +407,6 @@
 
         $stmt = $this->conn->prepare($query);
 
-        var_dump($this->filename);
-
         $stmt->bindParam(':post', $this->filename);
         $stmt->bindParam(':account_id', $_SESSION['id']);
 
@@ -491,8 +489,19 @@
 
     }
 
+    public function get_comments() {
 
+        $query = 'SELECT `comment` FROM `user_comments` WHERE post_id = :post_id';
 
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':post_id', $this->post_id);
+
+        $stmt->execute();
+
+        return $stmt;
+
+    }
 
     
 }
