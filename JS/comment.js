@@ -18,9 +18,11 @@
         comment = document.getElementById('comment');
         comments = document.getElementById('comments');
 
+        // console.log(window.location.search.substr(1));
+
         path = (window.location.search.substr(1)).substr(5);
 
-        console.log(path);
+        // console.log(path);
 
         img = document.createElement('img');
         img.src = path;
@@ -50,7 +52,7 @@
 
         comments.appendChild(newElem);
 
-        var newpath = str.concat(path.substring(2));
+        var newpath = str.concat(path.substring(3));
 
         try {
             fetch("https://camagru-ik.cf/api/post/comment.php", {
@@ -65,6 +67,7 @@
               .then((data) => {
                 if (data == '{"Message":"Commented Successfully"}') {
                   console.log('Success');
+                  console.log(data);
                 } else {
                   console.log(data);
                 }

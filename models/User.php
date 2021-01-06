@@ -394,7 +394,7 @@
         $stmt->bindParam(':post_id', uniqid());
         $stmt->bindParam(':post', $this->uploaded_file);
         $stmt->bindParam(':likes', $bool);
-        $stmt->bindParam(':comments', $bool);
+         $stmt->bindParam(':comments', $bool);
 
         if ($stmt->execute()) {
             return true;
@@ -406,6 +406,8 @@
         $query = 'SELECT post_id,account_id,likes,comments FROM posts WHERE post = :post AND account_id = :account_id';
 
         $stmt = $this->conn->prepare($query);
+
+        var_dump($this->filename);
 
         $stmt->bindParam(':post', $this->filename);
         $stmt->bindParam(':account_id', $_SESSION['id']);
