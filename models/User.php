@@ -503,6 +503,24 @@
 
     }
 
+    public function get_user() {
+
+        $query = 'SELECT `username` FROM `users` WHERE id = :id';
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':id', $_SESSION['id']);
+
+        $stmt->execute();
+
+        // Fetch data
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Set properties
+        $this->username = $row['username'];
+
+    }
+
     
 }
 ?>

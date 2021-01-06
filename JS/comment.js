@@ -139,7 +139,6 @@
         console.log(error);
       }
 
-
     }
 
     window.addEventListener('load', startup, false);

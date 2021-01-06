@@ -22,6 +22,8 @@
 
 <body>
 
+<?php include '../components/menu.html';?>
+
 <!-- <form method="POST" action="../api/post/upload.php" id="profileData" enctype="multipart/form-data"> -->
 
 <form method="post" enctype="multipart/form-data">
