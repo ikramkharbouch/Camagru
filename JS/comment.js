@@ -38,6 +38,7 @@
 
         comment.addEventListener('click', function (ev) {
             addComment(input.value);
+            input.value = '';
             ev.preventDefault();
         }, false);
     }
