@@ -11,7 +11,6 @@ function openNav() {
 
     var x = null;
     
-    
     function startup() {
       
       get_username();
