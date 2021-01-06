@@ -153,6 +153,7 @@
 
   function commented_or_uncommented(comments) {
 
+    console.log(parseInt("The number of comments is" + comments));
     if (parseInt(comments))
       return ('../assets/comment-black-32.png');
 
@@ -164,7 +165,6 @@
   {
     var img;
     var div;
-
 
     console.log(likes);
     console.log(comments);
@@ -178,7 +178,7 @@
     likeIcon.setAttribute('src', liked_or_disliked(likes));
 
     commentIcon = document.createElement('IMG');
-    commentIcon.setAttribute('src', '../assets/comment.png');
+    commentIcon.setAttribute('src', commented_or_uncommented(comments));
 
     likeIcon.addEventListener('click', function (ev) {
       like(path, div);
