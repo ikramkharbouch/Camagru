@@ -14,6 +14,7 @@
 
   var likes = null;
   var comments = null;
+  var menuIcon = null;
 
   var likeText = null;
   var commentText = null;
@@ -116,6 +117,12 @@
     // cmtImg.appendChild(image);
   }
 
+  function menu(path) {
+
+    console.log(path);
+
+  }
+
   function create_path(data)
   {
     var str = '..';
@@ -175,10 +182,13 @@
     likeIcon = document.createElement('IMG');
     likeText = document.createTextNode(likes);
     commentText = document.createTextNode(comments);
+    menuIcon = document.createElement('IMG');
     likeIcon.setAttribute('src', liked_or_disliked(likes));
 
     commentIcon = document.createElement('IMG');
     commentIcon.setAttribute('src', commented_or_uncommented(comments));
+
+    menuIcon.setAttribute('src', '../assets/menu-black-32.png');
 
     likeIcon.addEventListener('click', function (ev) {
       like(path, div);
@@ -187,6 +197,11 @@
 
     commentIcon.addEventListener('click', function (ev) {
       comment(path);
+      ev.preventDefault();
+    }, false);
+
+    menuIcon.addEventListener('click', function (ev) {
+      menu(path);
       ev.preventDefault();
     }, false);
 
@@ -199,6 +214,12 @@
     commentIcon.style.cursor = 'pointer';
 
     commentIcon.style.marginLeft = '25px';
+
+    menuIcon.style.width = '20px';
+    menuIcon.style.height = '20px';
+    menuIcon.style.cursor = 'pointer';
+
+    menuIcon.style.marginLeft = '325px';
 
     div.style.marginTop = '30px';
     div.style.marginLeft = '20px';
@@ -221,6 +242,7 @@
     cardBody.appendChild(likeText);
     cardBody.appendChild(commentIcon);
     cardBody.appendChild(commentText);
+    cardBody.appendChild(menuIcon);
     div.appendChild(cardBody);
     src.appendChild(div);
     div.className = 'card';
