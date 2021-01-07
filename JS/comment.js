@@ -11,6 +11,8 @@
     var newElem = null;
     var comments = null;
     var newpath = null;
+    var Username = null;
+    var x = null;
 
     function startup() {
 
@@ -18,6 +20,9 @@
         input = document.getElementById('input');
         comment = document.getElementById('comment');
         comments = document.getElementById('comments');
+        x = localStorage.getItem("username");
+
+        Username = x.trim();
 
         // console.log(window.location.search.substr(1));
 
@@ -44,9 +49,11 @@
 
     function addComment(comment) {
 
+      console.log(Username);
+
         var str = '/var/www/camagru-ik.cf/html';
 
-        createCmtElem("Username", comment);
+        createCmtElem(comment);
 
         newpath = str.concat(path.substring(2));
 
@@ -74,15 +81,17 @@
 
     }
 
-    function createCmtElem(Username, comment) {
+    function createCmtElem(comment) {
 
-      newElem = document.createElement('div');
+      console.log(Username);
+
+        newElem = document.createElement('div');
 
         newElem.style.cssText = 'border: 1px solid #ABABAB; margin-top: 10px; border-radius: 3px; padding: 20px; width: 100%;';
 
         // and give it some content
         var newContent = document.createTextNode(comment);
-        var Username = document.createTextNode("Username ");
+        var username = document.createTextNode(Username);
 
         // is this jquery ?
         // because if it is then it's already fucked up
@@ -92,7 +101,7 @@
         var second_span = document.createElement('span');
         second_span.setAttribute('style', 'color: black; margin-left: 20px;'); /*just an example, your styles set here*/
 
-        first_span.appendChild(Username);
+        first_span.appendChild(username);
         second_span.appendChild(newContent);
 
         // add the text node to the newly created div
@@ -109,6 +118,8 @@
 
     function addCommentBlocks(data) {
 
+      console.log(Username);
+
       var regex = /(?<={"comment":")(.*)(?="})/g;
 
       data = data.substring(9).slice(0, -2);
@@ -121,7 +132,7 @@
 
         array[i] = array[i].match(regex);
 
-        createCmtElem("Username", array[i]); 
+        createCmtElem(array[i]); 
 
       }
 

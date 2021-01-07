@@ -21,6 +21,7 @@ echo $_GET['link'];
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   <script src="../JS/comment.js"></script>
+  <script src="../JS/menu.js"></script>
   <link rel="stylesheet" href="../styles/comment.css">
 </head>
 
