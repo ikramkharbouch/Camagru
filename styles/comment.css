@@ -6,13 +6,19 @@ body {
 
 #cmt-img {
     margin-top: 30px;
+    width: 100%;
+    /* margin-left: 10%; */
+}
+
+img {
+    margin: 0;
 }
 
 .cmt-section {
-    border: 1px solid black;
-    margin-left: 40px;
+    border: 1px solid #ABABAB;
+    /* margin-left: 10%; */
     margin-top: 30px;
-    width: 30%;
+    width: 100%;
 }
 
 .smaller {
@@ -33,4 +39,15 @@ button {
 h3 {
     font-family: 'Roboto', 'sans-serif';
     font-weight: 300;
+}
+
+.heart-icon {
+    width: 25px;
+    height: 25px;
+    margin-top: 10px;
+    margin-left: 60%;
+}
+
+.upper-div {
+    margin: 20px;
 }

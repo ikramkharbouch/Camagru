@@ -28,23 +28,33 @@ echo $_GET['link'];
 
 <?php include '../components/menu.html';?>
 
-<div class="container d-flex flex-row align-content-center flex-wrap">
+<div class="container d-flex flex-column flex-wrap">
 
-<div id="cmt-img" class="mt-10">
+<!-- Div of the image -->
+<div id="cmt-img" class="mt-10"></div>
 
-</div>
+<!-- Div of the comment section -->
 
 <div class="cmt-section mt-15">
 
+<!-- Div of the upper assets -->
+
+<div class="upper-div d-flex flex-row">
+<button class="btn btn-primary btn custom-btn" id="sharebutton">Share</button>
+<img src="../assets/heart-32.png" alt="" class="heart-icon">
+</div>
+
+<!-- Div of the lower component -->
+
 <div class="smaller">
+
 <h3 class="fs-3">Comments</h3>
 <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="input" value="">
 <button type="submit" value="" class="btn btn-primary btn custom-btn" id="comment">Comment</button>
-
-<div class="comments" id="comments"></div>
-
+<div class="comments" id="comments">
 </div>
 
+</div>
 
 </div>
 
