@@ -97,7 +97,6 @@
 
         array[i] = array[i].match(regex);
         
-        
         newElem = document.createElement('div');
 
         // and give it some content
@@ -129,7 +128,7 @@
         })
           .then((res) => res.text())
           .then((data) => {
-            if (data == '{"Message":"No Comments Found"}') {
+            if (data == '{"message":"No Comments Found"}') {
               console.log('Comments Not Found');
 
             } else {

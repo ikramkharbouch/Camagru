@@ -10,4 +10,27 @@ body {
 
 .cmt-section {
     border: 1px solid black;
+    margin-left: 40px;
+    margin-top: 30px;
+    width: 30%;
+}
+
+.smaller {
+    margin: 60px 20px 20px 20px;
+}
+
+button {
+    width: 40%;
+    margin-top: 10px;
+}
+
+.btn-primary.custom-btn {
+    background-color: #9364A8;
+    border: 0;
+    /* padding: 16px 40px 16px 40px; */
+}
+
+h3 {
+    font-family: 'Roboto', 'sans-serif';
+    font-weight: 300;
 }
