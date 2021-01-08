@@ -1,10 +1,14 @@
 <?php
 @require('../init.php');
 
-
 echo $_GET['link'];
 
-// var_dump($_GET['path']);
+if (!isset($_SESSION['auth']) && $_SESSION['auth'] == false) 
+{
+  header("Location: ../404.php");
+  exit();
+}
+
 ?>
 
 <!DOCTYPE html>

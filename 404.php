@@ -1,14 +1,7 @@
 <?php
-@require('../init.php');
 
-if (!isset($_SESSION['auth']) && $_SESSION['auth'] == false) 
-{
-  header("Location: ../404.php");
-  exit();
-}
 
 ?>
-
 
 
 <!DOCTYPE html>
@@ -16,9 +9,11 @@ if (!isset($_SESSION['auth']) && $_SESSION['auth'] == false)
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settings</title>
+    <title>404 Error Page</title>
 </head>
 <body>
+
+<h1>You are not logged in or this page doesn't exist</h1>
     
 </body>
 </html>

@@ -4,6 +4,12 @@
 var_dump($_SESSION['auth']);
 var_dump($_SESSION['id']);
 
+if (!isset($_SESSION['auth']) && $_SESSION['auth'] == false) 
+{
+  header("Location: ../404.php");
+  exit();
+}
+
 ?>
 
 <!DOCTYPE html>
