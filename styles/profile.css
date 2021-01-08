@@ -1,0 +1,115 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', 'sans-serif';
+}
+
+.container {
+    border: 1px solid #ABABAB;
+    width: 80%;
+    height: 50rem;
+    border-radius: 5px;
+    margin-top: 10%;
+}
+
+.container h1 {
+    text-align: left;
+    font-size: 35px;
+    color: #000;
+    font-weight: 300;
+    margin-top: 40px;
+    margin-left: 20px;
+}
+
+.right h3, .left h3 {
+    text-align: left;
+    font-size: 20px;
+    color: #000;
+    font-weight: 500;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+
+.second-container {
+    width: 100%;
+    height: 90%;
+    margin-top: 5%;
+}
+
+.left {
+    border: 1px solid #9364A8;
+    width: 40%;
+    height: 80%;
+    border-radius: 5px;
+    margin-left: 2%;
+}
+
+.right {
+
+    border: 1px solid #9364A8;
+    width: 50%;
+    height: 80%;
+    border-radius: 5px;
+    margin-left: 2%;
+}
+
+.btn-primary.custom-btn.btn-lg {
+    margin-top: 20px;
+    margin-left: 20px;
+    padding: 16px 40px 16px 40px;
+    width: 60%;
+}
+
+.btn-primary.custom-btn {
+
+    background-color: #9364A8;
+    border: 0;
+    width: 40%;
+}
+
+.user-info {
+    display: none;
+}
+
+.user-info .inputs {
+    margin-top: 20px;
+}
+
+.fullname, .fullname .last{
+    margin-left: 20px;
+}
+
+.credentials {
+    width: 74%;
+    margin-left: 20px;
+}
+
+
+.profile-picture {
+    /* display: none; */
+}
+
+.picture-upload {
+
+    width : 80%;
+    margin-left: 20px;
+    margin-top: 20px;
+
+}
+
+.pdp { 
+    margin-left: 0;
+    width: 200px;
+    height: 200px;
+}
+
+.notifications {
+    display: none;
+}
+
+

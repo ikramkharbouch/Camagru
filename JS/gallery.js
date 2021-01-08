@@ -247,6 +247,8 @@
     src.appendChild(div);
     div.className = 'card';
 
+    // To edit later with TextCss property
+
   }
 
   function manipulate_data(data)
