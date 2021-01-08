@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    text-align: center;
+    font-family: 'Roboto', 'sans-serif';
+    /* background-color: #f9f9f9; */
+    background-color: #9364A8;
+    color: #f9f9f9;
+}
+
+h1 { 
+    font-size: 10rem;
+}
+p {
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+.error-page { 
+    margin-top: 20%;
+}

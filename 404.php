@@ -10,10 +10,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 Error Page</title>
+    <link rel="stylesheet" href="./styles/404.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<h1>You are not logged in or this page doesn't exist</h1>
+<div class="error-page">
+
+<h1>404</h1>
+
+<h1>ERROR PAGE</h1>
+
+<p>You are not logged in or some error occured!</p>
+
+</div>
+
+
     
 </body>
 </html>

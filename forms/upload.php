@@ -33,7 +33,7 @@ if (!isset($_SESSION['auth']) && $_SESSION['auth'] == false)
   <input type="file" name="files[]" accept="image/jpeg, image/png, image/jpg" id="uploaded" multiple>
   <!-- <input type="submit" name="submit" value="Upload" id="uploaded"> -->
   <button id="upload" type="submit" value="Upload File" class="btn btn-save ml-3 mt-4">Upload</button>
-  </form>
+</form>
 
 <!-- </form> -->
 
