@@ -28,13 +28,13 @@
       
       <div class="left d-flex flex-column flex-wrap">
         <h3>Informations</h3>
-        <button type="submit" value="Login" class="btn btn-primary btn-lg custom-btn">User Infos</button>
-        <button type="submit" value="Login" class="btn btn-primary btn-lg custom-btn">Set Profile Picture</button>
+        <button type="submit" value="Login" class="btn btn-primary btn-lg custom-btn" id="userinfos">User Infos</button>
+        <button type="submit" value="Login" class="btn btn-primary btn-lg custom-btn" id="setpdp">Set Profile Picture</button>
         <h3>Notifications</h3>
-        <button type="submit" value="Login" class="btn btn-primary btn-lg custom-btn">Preferences</button>
+        <button type="submit" value="Login" class="btn btn-primary btn-lg custom-btn" id="notifications">Preferences</button>
       </div>
       <div class="right">
-        <div class="user-info">
+        <div class="user-info" id="user-info">
           <h3>Update user info</h3>
 
           <div class="inputs">
@@ -72,7 +72,7 @@
 
         <!-- End of user info div -->
 
-        <div class="profile-picture">
+        <div class="profile-picture" id="profile-picture">
 
           <h3>Set profile picture</h3>
 
@@ -88,7 +88,18 @@
 
         <!-- End of profile picture upload div -->
 
-        <div class="notifications"></div>
+          <div class="notifications" id="notifications"> 
+              <h3>Activate/Deactivate Notifications</h3>
+
+              <div class="check">
+              <p>Activate/Deactivate Email Notifications</p>
+              <p>Current status:  <span>Active</span></p>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                  <button type="button" class="btn btn-outline-primary" id="activate">Activate</button>
+                  <button type="button" class="btn btn-outline-primary" id="deactivate">Deactivate</button>
+                </div>
+              </div>
+          </div>
         </div>
         
         <!-- End of notifications upload div -->

@@ -91,7 +91,7 @@ body {
 
 
 .profile-picture {
-    /* display: none; */
+    display: none;
 }
 
 .picture-upload {
@@ -112,4 +112,20 @@ body {
     display: none;
 }
 
+.check {
+    width: 80%;
+    margin-left: 20px;
+    margin-top: 20px;
+}
 
+.check button {
+    width: 100%;
+}
+
+span {
+    color: #9364A8;
+}
+
+.display { 
+    display: unset;
+}
