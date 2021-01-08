@@ -26,7 +26,7 @@
 
     userinfos = document.getElementById("userinfos");
     setpdp = document.getElementById("setpdp");
-    notifications = document.getElementById("notifications");
+    notifications = document.getElementById("notifs");
 
     // Getting the hidden classes to change their style
 
@@ -54,10 +54,7 @@
       
       // Make the class visible to the user
 
-      second.className = 'profile-picture';
-      third.className = 'notifications';
-
-      first.className = 'display';
+      display_hide(first, second, third);
 
       ev.preventDefault();
     }, false);
@@ -67,10 +64,7 @@
     setpdp.addEventListener('click', function (ev) {
       console.log("setpdp");
 
-      second.className = 'display';
-
-      first.className = 'user-info';
-      third.className = 'notifications';
+      display_hide(second, first, third);
       
       ev.preventDefault();
     }, false);
@@ -80,11 +74,7 @@
     notifications.addEventListener('click', function (ev) {
       console.log("notifications");
 
-
-      first.className = 'user-info';
-      second.className = 'profile-picture';
-
-      third.className = 'display';
+      display_hide(third, first, second);
       
       ev.preventDefault();
     }, false);
@@ -102,6 +92,13 @@
         ev.preventDefault();
       }, false);
       
+    }
+
+    function display_hide(display, f_hide, s_hide) {
+
+      display.className = 'display';
+      f_hide.className = 'none-display';
+      s_hide.className = 'none-display';
     }
 
     function  update_infos() {

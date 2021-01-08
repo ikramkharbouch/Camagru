@@ -31,7 +31,7 @@
         <button type="submit" value="Login" class="btn btn-primary btn-lg custom-btn" id="userinfos">User Infos</button>
         <button type="submit" value="Login" class="btn btn-primary btn-lg custom-btn" id="setpdp">Set Profile Picture</button>
         <h3>Notifications</h3>
-        <button type="submit" value="Login" class="btn btn-primary btn-lg custom-btn" id="notifications">Preferences</button>
+        <button type="submit" value="Login" class="btn btn-primary btn-lg custom-btn" id="notifs">Preferences</button>
       </div>
       <div class="right">
         <div class="user-info" id="user-info">

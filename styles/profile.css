@@ -129,3 +129,7 @@ span {
 .display { 
     display: unset;
 }
+
+.none-display {
+    display: none;
+}
