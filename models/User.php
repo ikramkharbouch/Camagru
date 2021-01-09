@@ -129,14 +129,7 @@
     public function update() {
 
         // Update Query
-       $query = 'Update users 
-       SET
-        email = :email,
-        username = :username,
-        pass = :pass,
-        verified = :verified
-       WHERE
-        id = :id';
+       $query = 'UPDATE users SET email = :email, username = :username, pass = :pass WHERE id = :id';
 
         // Prepare statement
         $stmt = $this->conn->prepare($query);
@@ -145,14 +138,12 @@
         $this->email = htmlspecialchars(strip_tags($this->email));
         $this->username = htmlspecialchars(strip_tags($this->username));
         $this->pass = htmlspecialchars(strip_tags($this->pass));
-        $this->verified = 0;
         $this->id = htmlspecialchars(strip_tags($this->id));
 
         $stmt->bindParam(':email', $this->email);
         $stmt->bindParam(':username', $this->username);
         $stmt->bindParam(':pass', $this->pass); 
-        $stmt->bindParam(':verified', $this->verified);
-        $stmt->bindParam(':id', $this->id);
+        $stmt->bindParam(':id', $_SESSION['id']);
         
         // Execute query       
         if ($stmt->execute()) {

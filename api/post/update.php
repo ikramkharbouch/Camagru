@@ -18,14 +18,13 @@ $user = new User($db);
 // Get raw posted data
 $data = json_decode(file_get_contents("php://input"));
 
-// Update ID
-$user->id = $data->id;
+// // Update ID
+// $user->id = $data->id;
 
 // Set data
 $user->email = $data->email;
 $user->username = $data->username;
 $user->pass = $data->pass;
-$user->verified = $data->verified;
 
 // Update User
 if ($user->update()) {

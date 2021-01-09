@@ -50,16 +50,16 @@ if (!isset($_SESSION['auth']) && $_SESSION['auth'] == false)
             <div class="credentials">
   
               <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Fullname</label>
-                <input type="fullname" class="form-control" id="exampleFormControlInput1" placeholder="Ikram Kharbouch">
+                <label for="exampleFormControlInput1" class="form-label">Username</label>
+                <input type="text" class="form-control" id="user-name" placeholder="Username">
               </div>
               <div class="mb-3 email">
                   <label for="exampleFormControlInput1" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                  <input type="email" class="form-control" id="email" placeholder="name@example.com">
               </div>
               <div class="mb-3 password">
-                  <label for="exampleFormControlInput1" class="form-label">Last name</label>
-                  <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="hdjueuweE5dk@s/">
+                  <label for="exampleFormControlInput1" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="password" placeholder="hdjueuweE5dk@s/">
               </div>
   
               <button type="submit" value="Login" class="btn btn-primary custom-btn" id="updateinfos">Update</button>

@@ -9,6 +9,10 @@
     var input = null;
     var fileList = null;
 
+    var username = null;
+    var email = null;
+    var password = null;
+
     // The hidden classes elements
 
     var first = null;
@@ -22,11 +26,15 @@
     img = document.getElementById("pdp");
     input = document.getElementById("uploaded");
     updateinfos = document.getElementById("updateinfos");
-    setpicture = document.getElementById("updateinfos");
+    setpicture = document.getElementById("setpicture");
 
     userinfos = document.getElementById("userinfos");
     setpdp = document.getElementById("setpdp");
     notifications = document.getElementById("notifs");
+
+    username = document.getElementById("user-name");
+    email = document.getElementById("email");
+    password = document.getElementById("password");
 
     // Getting the hidden classes to change their style
 
@@ -80,14 +88,18 @@
 
 
       updateinfos.addEventListener('click', function (ev) {
-        console.log('Call updateinfos function');
-        window.location.href = "../forms/profile.php";
+
+        console.log('Call update infos function');
+
+        update_infos();
+
+        // window.location.href = "../forms/profile.php";
         ev.preventDefault();
       }, false);
 
       setpicture.addEventListener('click', function (ev) {
         console.log('Call updateinfos function');
-        window.location.href = "../forms/profile.php";
+        // window.location.href = "../forms/profile.php";
         ev.preventDefault();
       }, false);
       
@@ -101,6 +113,33 @@
     }
 
     function  update_infos() {
+
+      username = username.value;
+      email = email.value;
+      password = password.value;
+
+      try {
+        fetch("https://camagru-ik.cf/api/post/update.php", {
+          method: "PUT",
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({email: email, username: username, pass: password}),
+        })
+          .then((res) => res.text())
+          .then((data) => {
+            if (data == '{"Message":"Post Updated"}') {
+              console.log("Credentials of the user were updated");
+            } else {
+
+              console.log(data);
+              // console.log("Credentials of the user were not updated");
+            }
+          });
+      } catch (error) {
+        console.log(error);
+      }
 
     }
 
