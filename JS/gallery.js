@@ -212,6 +212,9 @@
     commentIcon.style.width = '20px';
     commentIcon.style.height = '20px';
     commentIcon.style.cursor = 'pointer';
+    
+
+    commentIcon.cssText = 'cursor: pointer;';
 
     commentIcon.style.marginLeft = '25px';
 

@@ -52,19 +52,28 @@
 
         console.log(formData.get('files[]'));
 
-        fetch("https://camagru-ik.cf/api/post/upload.php", {
-            method: "POST",
-            body: formData,
-        })
-            .then((res) => res.text())
-            .then((data) => {
-                if (data == '{"Message":"Image Uploaded"}') {
-                    console.log('Image uploaded successfully');
-                } else {
-                    console.log(data);
-                }
+        if (formData.get('files[]'))
+        {
 
-            });
+            fetch("https://camagru-ik.cf/api/post/upload.php", {
+                method: "POST",
+                body: formData,
+            })
+                .then((res) => res.text())
+                .then((data) => {
+                    if (data == '{"Message":"Image Uploaded"}') {
+                        console.log('Image uploaded successfully');
+                    } else {
+                        console.log(data);
+                    }
+    
+                });
+        }
+
+        else {
+            console.log("No image was uploaded");
+        }
+
     }
 
     function send_img() {

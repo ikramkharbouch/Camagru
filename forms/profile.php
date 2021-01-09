@@ -45,21 +45,14 @@ if (!isset($_SESSION['auth']) && $_SESSION['auth'] == false)
           <h3>Update user info</h3>
 
           <div class="inputs">
-
-            <div class="fullname d-flex flex-row">
   
-              <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">First name</label>
-                <input type="firstname" class="form-control" id="exampleFormControlInput1" placeholder="Ikram">
-              </div>
-              <div class="mb-3 last">
-                <label for="exampleFormControlInput1" class="form-label">Last name</label>
-                <input type="lastname" class="form-control" id="exampleFormControlInput1" placeholder="Kharbouch">
-              </div>
   
-            </div>
             <div class="credentials">
   
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Fullname</label>
+                <input type="fullname" class="form-control" id="exampleFormControlInput1" placeholder="Ikram Kharbouch">
+              </div>
               <div class="mb-3 email">
                   <label for="exampleFormControlInput1" class="form-label">Email</label>
                   <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">

@@ -36,7 +36,6 @@
 
     console.log(img);
 
-
     input.addEventListener('change', function (ev) {
       fileList = this.files;
       // this.form.image = event.target.files[0];

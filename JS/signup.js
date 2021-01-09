@@ -25,6 +25,7 @@
     function addPost(e) {
         e.preventDefault();
 
+        let fullname = document.getElementById("fullname").value;
         let username = document.getElementById("username").value;
         let email = document.getElementById("email").value;
         let pass = document.getElementById("pass").value;
@@ -35,7 +36,7 @@
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            body: JSON.stringify({ username: username, email: email, pass: pass }),
+            body: JSON.stringify({ fullname: fullname, username: username, email: email, pass: pass }),
         })
             .then((res) => res.text())
             .then((data) => {
@@ -48,6 +49,7 @@
                     window.location.href = "./signin.php";
                 } else {
                     console.log('a problem occured');
+                    console.log(data);
                 }
 
             });

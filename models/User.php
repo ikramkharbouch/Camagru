@@ -7,6 +7,7 @@
 
         // User Properties
         public $id;
+        public $fullname;
         public $email;
         public $username;
         public $pass;
@@ -74,24 +75,28 @@
     // Create new user
     public function create() {
         // Create Query
-       $query = 'INSERT INTO users SET email = :email, username = :username, pass = :pass, verified = :verified, token = :token;';
-
+       $query = 'INSERT INTO users SET fullname = :fullname, email = :email, username = :username, pass = :pass, token = :token, verified = :verified, profile_pic = :profile_pic;';
 
         // Prepare statement
         $stmt = $this->conn->prepare($query);
-        
+
         // Clean data
+        $this->fullname = htmlspecialchars(strip_tags($this->fullname));
         $this->email = htmlspecialchars(strip_tags($this->email));
         $this->username = htmlspecialchars(strip_tags($this->username));
         $this->pass = htmlspecialchars(strip_tags($this->pass));
         $this->verified = 0;
         $this->token = htmlspecialchars($this->token);
+        $profile_pic = "test";
 
         //Check if data is empty
         if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
             return false;
         }
-        if (!filter_var($this->username, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-z-A-Z]+/")))) {
+        if (!filter_var($this->fullname, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-z-A-Z]+/")))) {
+            return false;
+        }
+        if (!filter_var($this->username, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/[\w\s]+/")))) {
             return false;
         }
         if (!filter_var($this->pass, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-z-A-Z]+[0-9]+/")))) {
@@ -102,12 +107,14 @@
         //     die( "Error in bind_param: (" .$this->conn->errno . ") " . $this->conn->error);
         // }
 
+
+        $stmt->bindParam(':fullname', $this->fullname, PDO::PARAM_STR);
         $stmt->bindParam(':email', $this->email);
         $stmt->bindParam(':username', $this->username);
         $stmt->bindParam(':pass', $this->pass); 
-        $stmt->bindParam(':verified', $this->verified);
+        $stmt->bindParam(':verified', $this->verified, PDO::PARAM_INT);
         $stmt->bindParam(':token', $this->token);
-
+        $stmt->bindParam(':profile_pic', $profile_pic, PDO::PARAM_STR);
 
         if ($stmt->execute()) {
             return true;
@@ -350,8 +357,10 @@
 
         $bool = 0;
 
+        $unique_id = uniqid();
+
         $stmt->bindParam(':account_id', $_SESSION['id']);
-        $stmt->bindParam(':post_id', uniqid());
+        $stmt->bindParam(':post_id', $unique_id);
         $stmt->bindParam(':post', $this->path_to_img);
         $stmt->bindParam(':likes', $bool);
         $stmt->bindParam(':comments', $bool);
@@ -367,11 +376,11 @@
 
         $stmt = $this->conn->prepare($query);
 
-        // $_SESSION['id'] = 12;
+        $_SESSION['id'] = 4;
 
         // var_dump($_GET['offset']);
         $stmt->bindParam(':account_id', $_SESSION['id']);
-        $stmt->bindParam(':offset', $_GET['offset'], PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $this->offset, PDO::PARAM_INT);
 
         $stmt->execute();
 
@@ -390,8 +399,10 @@
 
         $bool = 0;
 
+        $unique_id = uniqid();
+
         $stmt->bindParam(':account_id', $_SESSION['id']);
-        $stmt->bindParam(':post_id', uniqid());
+        $stmt->bindParam(':post_id', $unique_id);
         $stmt->bindParam(':post', $this->uploaded_file);
         $stmt->bindParam(':likes', $bool);
          $stmt->bindParam(':comments', $bool);

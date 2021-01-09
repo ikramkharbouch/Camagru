@@ -20,7 +20,9 @@
     // Get The last offset
     $_GET['offset'] = (int)$_GET['offset'];
 
-    $user->offset = isset($_GET['offset']) ? $_GET['offset'] : die();
+    // $user->offset = isset($_GET['offset']) ? $_GET['offset'] : die();
+
+    $user->offset = 5;
 
     $result = $user->gallery();
 

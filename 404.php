@@ -20,9 +20,9 @@
 
 <h1>404</h1>
 
-<h1>ERROR PAGE</h1>
+<h1>NOT FOUND</h1>
 
-<p>You are not logged in or some error occured!</p>
+<p>We could not find the page you are logging in.</p>
 
 </div>
 
