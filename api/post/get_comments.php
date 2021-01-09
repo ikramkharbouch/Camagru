@@ -22,7 +22,6 @@ $user->filename = $data->filename;
 
 $user->get_post_id();
 
-
 // User query
 $result = $user->get_comments();
 

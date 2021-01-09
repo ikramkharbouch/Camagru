@@ -530,6 +530,23 @@
 
     }
 
+    public function delete_img() {
+
+        $query = 'DELETE FROM `posts` WHERE account_id = :account_id AND post_id = :post_id';
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':account_id', $_SESSION['id']);
+        $stmt->bindParam(':post_id', $this->post_id);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+        
+        return false;
+
+    }
+
     
 }
 ?>
