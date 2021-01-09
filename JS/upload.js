@@ -63,6 +63,7 @@
                 .then((data) => {
                     if (data == '{"Message":"Image Uploaded"}') {
                         console.log('Image uploaded successfully');
+                        window.location.href = '../redirect_pages/upload.php';
                     } else {
                         console.log(data);
                     }

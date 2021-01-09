@@ -376,8 +376,6 @@
 
         $stmt = $this->conn->prepare($query);
 
-        $_SESSION['id'] = 4;
-
         // var_dump($_GET['offset']);
         $stmt->bindParam(':account_id', $_SESSION['id']);
         $stmt->bindParam(':offset', $this->offset, PDO::PARAM_INT);
