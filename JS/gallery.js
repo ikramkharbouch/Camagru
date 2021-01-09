@@ -49,7 +49,6 @@
             console.log("Error");
           } else {
             manipulate_data(data);
-            console.log(data);
           }
         });
     } catch (error) {
@@ -62,9 +61,6 @@
     var str = '/var/www/camagru-ik.cf/html';
 
     path = str.concat(path.substring(2));
-
-    console.log(path);
-    console.log(parameter);
 
     try {
       fetch("https://camagru-ik.cf/api/post/" + parameter + ".php", {
@@ -147,7 +143,6 @@
 
     for (i = 0; i < array.length; i++) {
       array[i] = array[i].replace(/\\\//g, "/");
-      console.log(array[i]);
       likes[i] = array[i].match(regex_likes);
       comments[i] = array[i].match(regex_comments);
       found = array[i].match(regex);
@@ -168,7 +163,6 @@
 
   function commented_or_uncommented(comments) {
 
-    console.log(parseInt("The number of comments is" + comments));
     if (parseInt(comments))
       return ('../assets/comment-black-32.png');
 
@@ -180,9 +174,6 @@
   {
     var img;
     var div;
-
-    console.log(likes);
-    console.log(comments);
 
     img = document.createElement('img');
     div = document.createElement('div');
@@ -264,15 +255,20 @@
 
   }
 
+
   function manipulate_data(data)
   {
     var paths;
+
+    var regex = /^(..\/img\/|..\/upload\/)\/*.+/g;
   
     paths = create_path(data);
 
     for (i = 0; i < paths.length; i++) {
-      console.log(paths[i]);
-      create_card(paths[i], likes[i], comments[i]);
+      if (paths[i].match(regex))
+        create_card(paths[i], likes[i], comments[i]);
+      else
+        continue;
     }
     
   }
