@@ -24,7 +24,7 @@ $data = json_decode(file_get_contents("php://input"));
 // Set data
 $user->email = $data->email;
 $user->username = $data->username;
-$user->pass = $data->pass;
+$user->pass = md5($data->pass);
 
 // Update User
 if ($user->update()) {

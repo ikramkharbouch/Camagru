@@ -51,15 +51,15 @@ if (!isset($_SESSION['auth']) && $_SESSION['auth'] == false)
   
               <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Username</label>
-                <input type="text" class="form-control" id="user-name" placeholder="Username">
+                <input type="text" class="form-control" id="user-name" placeholder="Username" value="">
               </div>
               <div class="mb-3 email">
                   <label for="exampleFormControlInput1" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="email" placeholder="name@example.com">
+                  <input type="email" class="form-control" id="email" placeholder="name@example.com" value="">
               </div>
               <div class="mb-3 password">
                   <label for="exampleFormControlInput1" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="password" placeholder="hdjueuweE5dk@s/">
+                  <input type="password" class="form-control" id="password" placeholder="hdjueuweE5dk@s/" value="">
               </div>
   
               <button type="submit" value="Login" class="btn btn-primary custom-btn" id="updateinfos">Update</button>
@@ -79,7 +79,7 @@ if (!isset($_SESSION['auth']) && $_SESSION['auth'] == false)
           <div class="picture-upload d-flex flex-column flex-wrap">
             <div class="mb-3">
               <label for="formFile" class="form-label">Choose your preferred image</label>
-              <input class="form-control" type="file" id="uploaded">
+              <input class="form-control" type="file" name="files[]" accept="image/jpeg, image/png, image/jpg" id="uploaded">
             </div>
             <img src="../assets/avatar.png" class="img-thumbnail pdp" alt="profile_picture" id="pdp">
             <button type="submit" value="Login" class="btn btn-primary custom-btn" id="setpicture">Set Picture</button>

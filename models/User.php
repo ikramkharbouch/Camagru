@@ -538,6 +538,23 @@
 
     }
 
+    public function update_img() {
+
+        $query = 'UPDATE users SET profile_pic = :profile_pic WHERE id = :id';
+
+        $stmt = $this->conn->prepare($query);
+        
+        $stmt->bindParam('profile_pic', $this->uploaded_file);
+        $stmt->bindParam('id', $_SESSION['id']);
+        
+        if ($stmt->execute()) {
+            return true;
+        } 
+        
+        return false;
+
+    }
+
     
 }
 ?>

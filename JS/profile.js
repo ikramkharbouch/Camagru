@@ -49,7 +49,7 @@
       // this.form.image = event.target.files[0];
       // this.form.name = event.target.files[0].name;
       console.log(fileList);
-      img.src = URL.createObjectURL(event.target.files[0]);
+      img.src = URL.createObjectURL(ev.target.files[0]);
       ev.preventDefault();
      }, false);
 
@@ -70,6 +70,8 @@
 
     setpdp.addEventListener('click', function (ev) {
       console.log("setpdp");
+
+      update_img();
 
       display_hide(second, first, third);
       
@@ -93,12 +95,18 @@
 
         update_infos();
 
+        // Clear the values of inputs 
+
+        // clear_values();
+
         // window.location.href = "../forms/profile.php";
         ev.preventDefault();
       }, false);
 
       setpicture.addEventListener('click', function (ev) {
         console.log('Call updateinfos function');
+
+        update_img();
         // window.location.href = "../forms/profile.php";
         ev.preventDefault();
       }, false);
@@ -144,6 +152,53 @@
     }
 
     function  set_picture() {
+
+      
+      
+    }
+
+    function clear_values() {
+
+      username.value = '';
+      email.value = '';
+      password.value = '';
+    }
+
+    function update_img() {
+
+      console.log('update image');
+
+      const files = document.querySelector('[type=file]').files;
+      const formData = new FormData();
+
+        for (let i = 0; i < files.length; i++) {
+            let file = files[i];
+
+            formData.append('files[]', file);
+        };
+
+        console.log(formData.get('files[]'));
+
+        if (formData.get('files[]'))
+        {
+
+            fetch("https://camagru-ik.cf/api/post/update_img.php", {
+                method: "POST",
+                body: formData,
+            })
+                .then((res) => res.text())
+                .then((data) => {
+                    if (data == '{"Message":"Image Uploaded"}') {
+                        console.log('Image uploaded successfully');
+                    } else {
+                        console.log(data);
+                    }
+    
+                });
+        }
+        else {
+            console.log("No image was uploaded");
+        }
       
     }
     

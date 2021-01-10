@@ -23,7 +23,7 @@
             // this.form.image = event.target.files[0];
             // this.form.name = event.target.files[0].name;
             console.log(fileList);
-            img.src = URL.createObjectURL(event.target.files[0]);
+            img.src = URL.createObjectURL(ev.target.files[0]);
             ev.preventDefault();
         }, false);
 
