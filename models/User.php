@@ -24,6 +24,7 @@
         public $likes;
         public $comments;
         public $comment;
+        public $notifs;
 
         // Constructor with DB
         public function __construct($db) {
@@ -75,7 +76,7 @@
     // Create new user
     public function create() {
         // Create Query
-       $query = 'INSERT INTO users SET fullname = :fullname, email = :email, username = :username, pass = :pass, token = :token, verified = :verified, profile_pic = :profile_pic;';
+       $query = 'INSERT INTO users SET fullname = :fullname, email = :email, username = :username, pass = :pass, token = :token, verified = :verified, notifs = :notifs, profile_pic = :profile_pic;';
 
         // Prepare statement
         $stmt = $this->conn->prepare($query);
@@ -87,6 +88,7 @@
         $this->pass = htmlspecialchars(strip_tags($this->pass));
         $this->verified = 0;
         $this->token = htmlspecialchars($this->token);
+        $this->notifs = 1;
         $profile_pic = "test";
 
         //Check if data is empty
@@ -113,6 +115,7 @@
         $stmt->bindParam(':username', $this->username);
         $stmt->bindParam(':pass', $this->pass); 
         $stmt->bindParam(':verified', $this->verified, PDO::PARAM_INT);
+        $stmt->bindParam(':notifs', $this->notifs, PDO::PARAM_INT);
         $stmt->bindParam(':token', $this->token);
         $stmt->bindParam(':profile_pic', $profile_pic, PDO::PARAM_STR);
 
@@ -555,6 +558,22 @@
 
     }
 
+    public function notifs_update() {
+
+        $query = 'UPDATE users SET notifs = :notifs WHERE id = :id';
+
+        $stmt = $this->conn->prepare($query);
+        
+        $stmt->bindParam('notifs', $this->notifs);
+        $stmt->bindParam('id', $_SESSION['id']);
+        
+        if ($stmt->execute()) {
+            return true;
+        } 
+        
+        return false;
+
+    }
     
 }
 ?>

@@ -13,6 +13,9 @@
     var email = null;
     var password = null;
 
+    var activate = null;
+    var deactivate = null;
+
     // The hidden classes elements
 
     var first = null;
@@ -41,6 +44,11 @@
     first = document.getElementById("user-info");
     second = document.getElementById("profile-picture");
     third = document.getElementById("notifications");
+
+
+    // Activate/Deactivate buttons
+    activate = document.getElementById('activate');
+    deactivate = document.getElementById('deactivate');
 
     console.log(img);
 
@@ -108,6 +116,18 @@
 
         update_img();
         // window.location.href = "../forms/profile.php";
+        ev.preventDefault();
+      }, false);
+
+      activate.addEventListener('click', function (ev) {
+
+        notifs_preferences('activate');
+        ev.preventDefault();
+      }, false);
+
+      deactivate.addEventListener('click', function (ev) {
+
+        notifs_preferences('deactivate');
         ev.preventDefault();
       }, false);
       
@@ -200,6 +220,40 @@
             console.log("No image was uploaded");
         }
       
+    }
+
+    function notifs_preferences(parameter) {
+
+      console.log(parameter);
+
+      var status = document.querySelector('.check p span');
+
+      status.innerText = parameter.slice(0, -3) + 'e';
+
+      console.log(status);
+
+      try {
+        fetch("https://camagru-ik.cf/api/post/notifications.php", {
+          method: "PUT",
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({ status: parameter }),
+        })
+          .then((res) => res.text())
+          .then((data) => {
+            if (data == '{"Message":"Status Updated"}') {
+              console.log(data);
+            } else {
+              console.log(data);
+            }
+          });
+      } catch (error) {
+        console.log(error);
+      }
+
+
     }
     
     window.addEventListener('load', startup, false);
