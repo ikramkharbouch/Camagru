@@ -25,6 +25,7 @@
         public $comments;
         public $comment;
         public $notifs;
+        public $profile_pic;
 
         // Constructor with DB
         public function __construct($db) {
@@ -572,6 +573,24 @@
         } 
         
         return false;
+
+    }
+
+    public function get_pdp() {
+
+        $query = 'SELECT `profile_pic` FROM `users` WHERE id = :id';
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':id', $_SESSION['id']);
+
+        $stmt->execute();
+
+        // Fetch data
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Set properties
+        $this->profile_pic = $row['profile_pic'];
 
     }
     
