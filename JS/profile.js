@@ -21,6 +21,8 @@
     var first = null;
     var second = null;
     var third = null;
+
+    var profile_pic = null;
     
     function startup() {
       
@@ -50,6 +52,8 @@
     activate = document.getElementById('activate');
     deactivate = document.getElementById('deactivate');
 
+    profile_pic = document.getElementById('avatar');
+
     console.log(img);
 
     input.addEventListener('change', function (ev) {
@@ -78,8 +82,6 @@
 
     setpdp.addEventListener('click', function (ev) {
       console.log("setpdp");
-
-      update_img();
 
       display_hide(second, first, third);
       
@@ -191,6 +193,8 @@
       const files = document.querySelector('[type=file]').files;
       const formData = new FormData();
 
+      console.log(files[0].name);
+
         for (let i = 0; i < files.length; i++) {
             let file = files[i];
 
@@ -208,10 +212,12 @@
             })
                 .then((res) => res.text())
                 .then((data) => {
-                    if (data == '{"Message":"Image Uploaded"}') {
-                        console.log('Image uploaded successfully');
+                    if (data == '{"Message":"Image Not Uploaded"}') {
+                        console.log("Error");
                     } else {
+                        console.log("Success");
                         console.log(data);
+                        profile_pic.src = "../".concat(data.substring(28));
                     }
     
                 });
