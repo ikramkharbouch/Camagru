@@ -26,6 +26,7 @@
         public $comment;
         public $notifs;
         public $profile_pic;
+        public $liked;
 
         // Constructor with DB
         public function __construct($db) {
@@ -407,12 +408,12 @@
 
     public function get_post_id() {
 
-        $query = 'SELECT post_id,account_id,likes,comments FROM posts WHERE post = :post AND account_id = :account_id';
+        $query = 'SELECT post_id,account_id,likes,comments FROM posts WHERE post = :post';
 
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindParam(':post', $this->filename);
-        $stmt->bindParam(':account_id', $_SESSION['id']);
+        // $stmt->bindParam(':account_id', $_SESSION['id']);
 
         $stmt->execute();
 
@@ -592,6 +593,29 @@
         // Set properties
         $this->profile_pic = $row['profile_pic'];
 
+    }
+
+    public function check_like() {
+
+        // SELECT `account_id`, `post_id`, `liked` FROM `user_likes` WHERE 1
+
+        $query = 'SELECT `liked` FROM `user_likes` WHERE post_id = :post_id AND account_id = :account_id';
+
+        $stmt = $this->conn->prepare($query);
+
+        $_SESSION['id'] = 1;
+
+        $stmt->bindParam(':post_id', $this->post_id);
+        $stmt->bindParam(':account_id', $_SESSION['id']);
+
+        $stmt->execute();
+
+        // Fetch data
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Set properties
+        $this->liked = $row['liked'];
+        
     }
     
 }

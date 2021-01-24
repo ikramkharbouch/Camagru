@@ -19,6 +19,8 @@
   var likeText = null;
   var commentText = null;
 
+  var previousLike = null;
+
   function startup() {
 
     window.onscroll = function () { getpictures() };
@@ -26,6 +28,7 @@
     src = document.getElementById('container');
     cardbody = document.getElementById('card-body');
     cmtImg = document.getElementById('cmt-img');
+
 
     getpictures();
   }
@@ -61,6 +64,7 @@
     var str = '/var/www/camagru-ik.cf/html';
 
     path = str.concat(path.substring(2));
+    console.log(path);
 
     try {
       fetch("https://camagru-ik.cf/api/post/" + parameter + ".php", {
@@ -86,6 +90,11 @@
   }
 
   function like(path, div) {
+
+    check_user_likes(path, liked);
+
+    console.log(liked);
+    console.log(path);
 
     if (liked == 0)
     {
@@ -170,7 +179,7 @@
 
   }
 
-  function create_card(path, likes, comments) 
+  function create_card(path, likes, comments)
   {
     var img;
     var div;
@@ -271,6 +280,37 @@
         continue;
     }
     
+  }
+
+  function check_user_likes(path, liked) {
+
+    var str = '/var/www/camagru-ik.cf/html';
+
+    path = str.concat(path.substring(2));
+
+    try {
+      fetch("https://camagru-ik.cf/api/post/check_like.php", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({ filename: path }),
+      })
+        .then((res) => res.text())
+        .then((data) => {
+          if (data == '{"Message":"No Like Found"}') {
+            console.log(error);
+          } else {
+            liked = 1;
+            console.log(liked);
+            console.log(data);
+          }
+        });
+    } catch (error) {
+      console.log(error);
+    }
+
   }
 
   window.addEventListener('load', startup, false);
