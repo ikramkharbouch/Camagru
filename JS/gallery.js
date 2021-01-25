@@ -20,6 +20,7 @@
   var commentText = null;
 
   var previousLike = null;
+  var check_like = 0;
 
   function startup() {
 
@@ -91,7 +92,13 @@
 
   function like(path, div) {
 
-    check_user_likes(path, liked);
+    console.log(check_user_likes(path));
+
+    // if (check_user_likes(path) == true) {
+
+    //   liked = 1;
+    //   console.log("Mission done");
+    // }
 
     console.log(liked);
     console.log(path);
@@ -282,14 +289,14 @@
     
   }
 
-  function check_user_likes(path, liked) {
+  async function check_user_likes(path) {
 
     var str = '/var/www/camagru-ik.cf/html';
 
     path = str.concat(path.substring(2));
 
     try {
-      fetch("https://camagru-ik.cf/api/post/check_like.php", {
+      const {data} = await fetch("https://camagru-ik.cf/api/post/check_like.php", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -297,16 +304,15 @@
         },
         body: JSON.stringify({ filename: path }),
       })
-        .then((res) => res.text())
-        .then((data) => {
-          if (data == '{"Message":"No Like Found"}') {
-            console.log(error);
-          } else {
-            liked = 1;
-            console.log(liked);
-            console.log(data);
-          }
-        });
+        .then((res) => res.text());
+
+      if (data == '{"Message":"No Like Found"}') {
+          console.log(error);
+          return false;
+        } else {
+          return true;
+        }
+
     } catch (error) {
       console.log(error);
     }

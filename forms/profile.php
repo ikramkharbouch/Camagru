@@ -1,11 +1,11 @@
 <?php
-@require('../init.php');
+  @require('../init.php');
 
-if (!isset($_SESSION['auth']) && $_SESSION['auth'] == false) 
-{
-  header("Location: ../404.php");
-  exit();
-}
+  if (!isset($_SESSION['auth']) && $_SESSION['auth'] == false) 
+  {
+    header("Location: ../404.php");
+    exit();
+  }
 
 ?>
 
