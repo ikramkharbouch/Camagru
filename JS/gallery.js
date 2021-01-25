@@ -166,10 +166,12 @@
 
     if (checkUser == true)
       liked = 1;
+    else
+      liked = 0;
 
     if (liked == 1)
       return ('../assets/like-black-32.png');
-
+    
     return ('../assets/like.png');
 
   }
@@ -190,6 +192,8 @@
     var checkLike;
 
     checkLike = await liked_or_disliked(path);
+
+    console.log("The return value is " + checkLike + "for this path" + path);
 
     img = document.createElement('img');
     div = document.createElement('div');
