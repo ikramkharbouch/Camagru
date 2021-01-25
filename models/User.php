@@ -480,7 +480,12 @@
 
     public function dislike() {
 
-        $query = 'DELETE FROM user_likes WHERE account_id = :account_id AND post_id = :post_id';
+        // $query = 'DELETE FROM user_likes WHERE account_id = :account_id AND post_id = :post_id';
+
+        $query = 'BEGIN;
+                    DELETE FROM user_likes WHERE account_id = :account_id AND post_id = :post_id;
+                    UPDATE `posts` SET `likes` = `likes` - 1 WHERE post_id = :post_id;
+        COMMIT;';
 
         $stmt = $this->conn->prepare($query);
 

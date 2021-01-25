@@ -25,9 +25,9 @@
 
     $user->check_like();
 
-    echo $user->liked;
-
-    if (!isset($user->liked)) {
+    if ($user->liked)
+        echo $user->liked;
+    else {
         echo json_encode(
             array('message' => 'No Like Found')
         );

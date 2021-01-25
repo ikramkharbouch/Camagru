@@ -19,9 +19,6 @@
   var likeText = null;
   var commentText = null;
 
-  var previousLike = null;
-  var check_like = 0;
-
   function startup() {
 
     window.onscroll = function () { getpictures() };
@@ -29,7 +26,6 @@
     src = document.getElementById('container');
     cardbody = document.getElementById('card-body');
     cmtImg = document.getElementById('cmt-img');
-
 
     getpictures();
   }
@@ -90,18 +86,15 @@
     }
   }
 
-  function like(path, div) {
+  async function like(path, div) {
 
-    console.log(check_user_likes(path));
+    let checkUser = await check_user_likes(path);
+    console.log("return value: ",checkUser);
 
-    // if (check_user_likes(path) == true) {
-
-    //   liked = 1;
-    //   console.log("Mission done");
-    // }
-
-    console.log(liked);
-    console.log(path);
+    if (checkUser == true)
+      liked = 1;
+    else
+      liked = 0;
 
     if (liked == 0)
     {
@@ -110,7 +103,6 @@
       send_query('like', path);
 
     } else {
-
       liked = 0;
       div.getElementsByTagName('img')[1].src = '../assets/like.png';
       send_query('dislike', path);
@@ -168,9 +160,14 @@
     return array;
   }
 
-  function liked_or_disliked(likes) {
+  async function liked_or_disliked(path) {
 
-    if (parseInt(likes))
+    let checkUser = await check_user_likes(path);
+
+    if (checkUser == true)
+      liked = 1;
+
+    if (liked == 1)
       return ('../assets/like-black-32.png');
 
     return ('../assets/like.png');
@@ -186,10 +183,13 @@
 
   }
 
-  function create_card(path, likes, comments)
+  async function create_card(path, likes, comments)
   {
     var img;
     var div;
+    var checkLike;
+
+    checkLike = await liked_or_disliked(path);
 
     img = document.createElement('img');
     div = document.createElement('div');
@@ -198,7 +198,7 @@
     likeText = document.createTextNode(likes);
     commentText = document.createTextNode(comments);
     DeleteIcon = document.createElement('IMG');
-    likeIcon.setAttribute('src', liked_or_disliked(likes));
+    likeIcon.setAttribute('src', checkLike);
 
     commentIcon = document.createElement('IMG');
     commentIcon.setAttribute('src', commented_or_uncommented(comments));
@@ -296,7 +296,7 @@
     path = str.concat(path.substring(2));
 
     try {
-      const {data} = await fetch("https://camagru-ik.cf/api/post/check_like.php", {
+      const response = await fetch("https://camagru-ik.cf/api/post/check_like.php", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -306,8 +306,8 @@
       })
         .then((res) => res.text());
 
-      if (data == '{"Message":"No Like Found"}') {
-          console.log(error);
+        console.log("received data: ",response)
+      if (response == '{"message":"No Like Found"}') {
           return false;
         } else {
           return true;
