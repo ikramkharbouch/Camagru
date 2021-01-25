@@ -21,12 +21,8 @@
     var first = null;
     var second = null;
     var third = null;
-
-    var profile_pic = null;
     
     function startup() {
-
-    setup_profile_pic();
       
     //   profile = document.querySelector(".user-details p");
 
@@ -54,7 +50,6 @@
     activate = document.getElementById('activate');
     deactivate = document.getElementById('deactivate');
 
-    profile_pic = document.getElementById('avatar');
 
     console.log(img);
 
@@ -260,33 +255,6 @@
       } catch (error) {
         console.log(error);
       }
-
-
-    }
-
-    function setup_profile_pic() {
-
-      try {
-        fetch("https://camagru-ik.cf/api/post/get_pdp.php", {
-          method: "GET",
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-        })
-          .then((res) => res.text())
-          .then((data) => {
-            if (data == '{"Message":"No Profile Picture Found"}') {
-              console.log(data);
-            } else {
-              console.log(data);
-              profile_pic.src =  "../".concat(data.substring(28));
-            }
-          });
-      } catch (error) {
-        console.log(error);
-      }
-
 
 
     }
