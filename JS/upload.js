@@ -6,6 +6,9 @@
 
     var image = null;
     var fileList = null;
+    var filter1 = null;
+    var filter2 = null;
+    var filter3 = null;
 
     const url = '../api/post/upload.php';
     var form = null;
@@ -15,6 +18,12 @@
         input = document.getElementById('uploaded');
         uploadbutton = document.getElementById('upload');
         img = document.getElementById('output');
+
+        // Get filter to merge it with the uploaded image
+
+        filter1 = document.getElementById('filter1');
+        filter2 = document.getElementById('filter2');
+        filter3 = document.getElementById('filter3');
 
         form = document.querySelector('form');
 
@@ -28,10 +37,26 @@
         }, false);
 
 
-        // uploadbutton.addEventListener('click', function(ev) {
-        //     send_img();
-        //     ev.preventDefault();
-        // }, false);
+        filter1.addEventListener('click', function (ev) {
+            console.log(filter1);
+            console.log(filter1.value);
+            lastFilter = filter1.value;
+            uploadbutton.disabled = false;
+          }, false);
+      
+          filter2.addEventListener('click', function (ev) {
+            console.log(filter2);
+            console.log(filter2.value);
+            lastFilter = filter2.value;
+            uploadbutton.disabled = false;
+          }, false);
+      
+          filter3.addEventListener('click', function (ev) {
+            console.log(filter3);
+            console.log(filter3.value);
+            lastFilter = filter3.value;
+            uploadbutton.disabled = false;
+          }, false);
 
         form.addEventListener('submit', function (ev) {
             send_file();
@@ -44,11 +69,15 @@
         const files = document.querySelector('[type=file]').files;
         const formData = new FormData();
 
+        console.log("The last filter was ", lastFilter);
+
         for (let i = 0; i < files.length; i++) {
             let file = files[i];
 
             formData.append('files[]', file);
         };
+
+        formData.append("filter", lastFilter);
 
         console.log(formData.get('files[]'));
 
@@ -75,51 +104,6 @@
             console.log("No image was uploaded");
         }
 
-    }
-
-    function send_img() {
-
-        form.append('image', fileList);
-        form.append('name', fileList.name); // [edited]
-
-        console.log(fileList.name);
-        console.log(fileList);
-
-        fetch("https://camagru-ik.cf/api/post/upload.php", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({ form }),
-        })
-            .then((res) => res.text())
-            .then((data) => {
-                if (data == '{"Message":"Image Uploaded"}') {
-                    console.log('Image uploaded successfully');
-                } else {
-                    console.log(data);
-                }
-
-            });
-
-        console.log(fileList);
-        console.log(1);
-
-    }
-
-    // A function to check the type of the file
-
-    function getMetadataForFileList(fileList) {
-        for (const file of fileList) {
-            // Not supported in Safari for iOS.
-            const name = file.name ? file.name : 'NOT SUPPORTED';
-            // Not supported in Firefox for Android or Opera for Android.
-            const type = file.type ? file.type : 'NOT SUPPORTED';
-            // Unknown cross-browser support.
-            const size = file.size ? file.size : 'NOT SUPPORTED';
-            console.log({ file, name, type, size });
-        }
     }
 
     window.addEventListener('load', startup, false);

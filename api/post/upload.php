@@ -19,10 +19,15 @@
 
     $data = json_decode(file_get_contents("php://input"));
 
+    $user->filter = $_POST["filter"];
+
+    // Get the type of the uploaded file
+
     $type = substr(implode("", $_FILES[files]["type"]), 6);
 
     $type = '.' . $type;
 
+     // Get the path of the uploaded file
 
     $user->uploaded_file = implode("", $_FILES[files]["tmp_name"]);
 
@@ -30,11 +35,63 @@
 
     $filename = substr($random_string, 0, 5);
 
-    if (move_uploaded_file($user->uploaded_file, '../../upload/'. $filename . $type)) {
-        copy('../../upload/'. $filename . $type, '../../upload/2.jpg');
+    $img_file = "../../upload/" .$filename .".png";
+
+    if ($type == ".jpeg")
+        $png = imagepng(imagecreatefromjpeg($user->uploaded_file), $img_file);
+    else
+        $png = imagepng(imagecreatefrompng($user->uploaded_file), $img_file);
+
+    // The function to place the filter on the image using alpha method
+
+    function imagecopymerge_alpha($dst_im, $src_im, $dst_x, $dst_y, $src_x, $src_y, $src_w, $src_h, $pct) {
+        // creating a cut resource
+        $cut = imagecreatetruecolor($src_w, $src_h);
+
+        // copying relevant section from background to the cut resource
+        imagecopy($cut, $dst_im, 0, 0, $dst_x, $dst_y, $src_w, $src_h);
+       
+        // copying relevant section from watermark to the cut resource
+        imagecopy($cut, $src_im, 0, 0, $src_x, $src_y, $src_w, $src_h);
+       
+        // insert cut resource to destination image
+        imagecopymerge($dst_im, $cut, $dst_x, $dst_y, 0, 0, $src_w, $src_h, $pct);
     }
 
-    $user->uploaded_file = '/var/www/camagru-ik.cf/html/upload/' . $filename . $type;
+    // Apply the user filter on the image
+
+    if ($user->filter) {
+
+        $dest = imagecreatefrompng($img_file);
+
+        if ($user->filter == 'Love')
+            $src = imagecreatefrompng('../../assets/in-love-128.png');
+        else if ($user->filter == 'Happy')
+            $src = imagecreatefrompng('../../assets/happy-128.png');
+        else if ($user->filter == 'Sad')
+            $src = imagecreatefrompng('../../assets/sad-128.png');
+
+        // imagecopymerge($dest, $src, 10, 10, 0, 0, 100, 47, 75);
+
+        imagecopymerge_alpha($dest, $src, 10, 10, 0, 0, 128, 128, 100);
+
+        header('Content-Type: image/png');
+
+        imagepng($dest, $img_file);
+    } else {
+        echo json_encode(
+            array('Message' => 'Image Not Saved')
+        );
+        exit();
+    }
+
+    // if (move_uploaded_file($img_file, $img_file)) {
+    //     copy($img_file, '../../upload/2.jpg');
+    // }
+
+    // A variable to save in the database
+    
+    $user->uploaded_file = '/var/www/camagru-ik.cf/html/upload/' . $filename . ".png";
 
     if ($user->upload()) {
         echo json_encode(

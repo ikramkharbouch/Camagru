@@ -32,7 +32,19 @@ if (!isset($_SESSION['auth']) && $_SESSION['auth'] == false)
 <form method="post" enctype="multipart/form-data">
   <input type="file" name="files[]" accept="image/jpeg, image/png, image/jpg" id="uploaded" multiple>
   <!-- <input type="submit" name="submit" value="Upload" id="uploaded"> -->
-  <button id="upload" type="submit" value="Upload File" class="btn btn-save ml-3 mt-4">Upload</button>
+  <div class="dropdown text-left ml-3 mt-3">
+        <p>Choose a filter</p>
+        <!-- <button class="btn btn-secondary">Filters</button> -->
+        <!-- <div class="dropdown-content"> -->
+          <label>Love</label><br /><input type="radio" name="filter" value="Love" id="filter1"><br />
+          <label>Happy</label><br /><input type="radio" name="filter" value="Happy" id="filter2"> <br />
+          <label>Sad</label><br /><input type="radio" name="filter" value="Sad" id="filter3"> <br />
+          <!-- <p id="filter1" value="love">Love</p>
+          <p id="filter2" value="happy">Happy</p>
+          <p id="filter3" value="sad">Sad</p> -->
+        <!-- </div> -->
+      </div>
+  <button id="upload" type="submit" value="Upload File" class="btn btn-save ml-3 mt-4" disabled>Upload</button>
 </form>
 
 <!-- </form> -->

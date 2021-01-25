@@ -64,6 +64,7 @@ if (!isset($_SESSION['auth']) && $_SESSION['auth'] == false)
           <p id="filter3" value="sad">Sad</p> -->
         <!-- </div> -->
       </div>
+    
     <div class="d-flex flex-row">
         <!-- <button id="startbutton" type="button" class="btn btn-take ml-3 mt-4">Take photo</button> -->
         <button id="savebutton" type="button" class="btn btn-save ml-3 mt-4" disabled>Save</button>

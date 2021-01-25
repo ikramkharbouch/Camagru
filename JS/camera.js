@@ -152,18 +152,17 @@
             if (data == '{"Message":"Image Not Saved"}') {
               console.log("Image Not Saved");
             } else {
-              console.log(data);   
-              var str = '../img/';
-              data = data.substring(50);
-              data = data.substring(0, data.length - 2);
-              // console.log(data);
-              data = str.concat(data);
-              console.log(data);
-              var img = document.createElement('img');
-              img.style.height = '200px';
-              img.style.width = '200px';
-              img.src = data;
-              src.appendChild(img);
+              console.log(data);  
+              // var str = '../img/';
+              // data = data.substring(50);
+              // data = data.substring(0, data.length - 2);
+              // // console.log(data);
+              // data = str.concat(data);
+              // var img = document.createElement('img');
+              // img.style.height = '200px';
+              // img.style.width = '200px';
+              // img.src = data;
+              // src.appendChild(img);
             }
           });
       } catch (error) {
