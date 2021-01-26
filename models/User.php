@@ -611,8 +611,6 @@
 
         $stmt = $this->conn->prepare($query);
 
-        $_SESSION['id'] = 1;
-
         $stmt->bindParam(':post_id', $this->post_id);
         $stmt->bindParam(':account_id', $_SESSION['id']);
 

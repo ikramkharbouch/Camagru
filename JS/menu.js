@@ -70,8 +70,9 @@ function openNav() {
         })
           .then((res) => res.text())
           .then((data) => {
-            if (data == '{"Message":"No Profile Picture Found"}') {
+            if (data == '{"message":"No Profile Picture Found"}') {
               console.log(data);
+              profile_pic.src = "../assets/avatar.png";
             } else {
               console.log(data);
               profile_pic.src =  "../".concat(data.substring(28));

@@ -23,12 +23,14 @@
     // Get user
     $user->get_pdp();
 
-    echo $user->profile_pic;
+    // echo $user->profile_pic;
 
-    if (!isset($user->profile_pic)) {
+    if (!isset($user->profile_pic) || $user->profile_pic == '') {
         echo json_encode(
             array('message' => 'No Profile Picture Found')
         );
+    } else {
+        echo $user->profile_pic;
     }
 
 ?>
