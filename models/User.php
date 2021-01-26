@@ -345,14 +345,14 @@
 
     public function save_img() {
            
-        $query = 'INSERT INTO posts SET account_id = :account_id, post_id = :post_id, post = :post, likes = :likes, comments = :comments';
+        $query = 'INSERT INTO posts SET account_id = :account_id, post_id = :post_id, post = :post, likes = :likes, comments = :comments, creation_date = :creation_date';
 
         $stmt = $this->conn->prepare($query);
 
         // var_dump($this->path_to_img);
 
         $bool = 0;
-
+        $timestamp = date('Y-m-d H:i:s','1299762201428');
         $unique_id = uniqid();
 
         $stmt->bindParam(':account_id', $_SESSION['id']);
@@ -360,6 +360,7 @@
         $stmt->bindParam(':post', $this->path_to_img);
         $stmt->bindParam(':likes', $bool);
         $stmt->bindParam(':comments', $bool);
+        $stmt->bindParam(':creation_date', $timestamp);
 
         if ($stmt->execute()) {
             return true;
@@ -385,13 +386,14 @@
 
     public function upload() {
         
-        $query = 'INSERT INTO posts SET account_id = :account_id, post_id = :post_id, post = :post, likes = :likes, comments = :comments';
+        $query = 'INSERT INTO posts SET account_id = :account_id, post_id = :post_id, post = :post, likes = :likes, comments = :comments, creation_date = :creation_date';
 
         $stmt = $this->conn->prepare($query);
 
         // var_dump($this->path_to_img);
 
         $bool = 0;
+        $date = date("Y-m-d");
 
         $unique_id = uniqid();
 
@@ -399,7 +401,8 @@
         $stmt->bindParam(':post_id', $unique_id);
         $stmt->bindParam(':post', $this->uploaded_file);
         $stmt->bindParam(':likes', $bool);
-         $stmt->bindParam(':comments', $bool);
+        $stmt->bindParam(':comments', $bool);
+        $stmt->bindParam(':creation_date', $date);
 
         if ($stmt->execute()) {
             return true;
