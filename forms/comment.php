@@ -45,17 +45,18 @@ if (!isset($_SESSION['auth']) && $_SESSION['auth'] == false)
 <!-- Div of the upper assets -->
 
 <div class="upper-div d-flex flex-row">
-<button class="btn btn-primary btn custom-btn" id="sharebutton">Share</button>
-<img src="../assets/heart-32.png" alt="" class="heart-icon">
+  <button class="btn btn-primary btn custom-btn" id="sharebutton">Share</button>
+  <img src="../assets/heart-32.png" alt="" class="heart-icon">
+  <span></span>
 </div>
 
 <!-- Div of the lower component -->
 
-<div class="smaller">
+<div class="smaller" id="smaller">
 
 <h3 class="fs-3">Comments</h3>
-<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="input" value="">
-<button type="submit" value="" class="btn btn-primary btn custom-btn" id="comment">Comment</button>
+  <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="input" value="">
+  <button type="submit" value="" class="btn btn-primary btn custom-btn" id="comment">Comment</button>
 <div class="comments" id="comments">
 </div>
 

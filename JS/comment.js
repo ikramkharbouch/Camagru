@@ -12,6 +12,9 @@
     var comments = null;
     var newpath = null;
     var Username = null;
+    var userCreds = null;
+    var likeIcon = null;
+    var lowerDiv = null;
     var x = null;
 
     function startup() {
@@ -20,6 +23,8 @@
         input = document.getElementById('input');
         comment = document.getElementById('comment');
         comments = document.getElementById('comments');
+        likeIcon = document.querySelector('.upper-div span');
+        lowerDiv = document.getElementById('smaller')
         x = localStorage.getItem("username");
 
         Username = x.trim();
@@ -31,6 +36,9 @@
         newpath = "/var/www/camagru-ik.cf/html".concat(path.substring(2));
 
         addPreviousComments(newpath);
+        getNumberOfLikes(newpath);
+
+        console.log(userCreds);
 
         img = document.createElement('img');
         img.src = path;
@@ -132,7 +140,7 @@
 
         array[i] = array[i].match(regex);
 
-        createCmtElem(array[i]); 
+        createCmtElem(array[i]);
 
       }
 
@@ -163,6 +171,42 @@
               addCommentBlocks(data);
             }
           });
+      } catch (error) {
+        console.log(error);
+      }
+
+    }
+
+    function addLikesNumber(response) {
+
+      var obj = JSON.parse(response);
+      var likes = document.createTextNode(obj.likes);
+
+      console.log(likeIcon);
+
+      likeIcon.appendChild(likes);
+      // lowerDiv.appendChild(likeIcon);
+
+
+      console.log(obj.likes);
+
+    }
+
+    async function getNumberOfLikes(newpath) {
+
+      try {
+        const response = await fetch("https://camagru-ik.cf/api/post/get_post_credentials.php", {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({ filename: newpath }),
+        })
+          .then((res) => res.text())
+
+          addLikesNumber(response);
+          
       } catch (error) {
         console.log(error);
       }

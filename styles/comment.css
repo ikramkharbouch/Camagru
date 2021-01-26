@@ -45,9 +45,15 @@ h3 {
     width: 25px;
     height: 25px;
     margin-top: 10px;
-    margin-left: 60%;
+    margin-left: 50%;
 }
 
 .upper-div {
     margin: 20px;
+}
+
+span {
+    margin-top: 10px;
+    margin-left: 30px;
+    color: pink;
 }
