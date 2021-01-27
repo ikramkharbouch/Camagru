@@ -352,7 +352,8 @@
         // var_dump($this->path_to_img);
 
         $bool = 0;
-        $timestamp = date('Y-m-d H:i:s','1299762201428');
+        // $timestamp = date('Y-m-d H:i:s','1299762201428');
+        $date = date("Y-m-d");
         $unique_id = uniqid();
 
         $stmt->bindParam(':account_id', $_SESSION['id']);
@@ -360,7 +361,7 @@
         $stmt->bindParam(':post', $this->path_to_img);
         $stmt->bindParam(':likes', $bool);
         $stmt->bindParam(':comments', $bool);
-        $stmt->bindParam(':creation_date', $timestamp);
+        $stmt->bindParam(':creation_date', $date);
 
         if ($stmt->execute()) {
             return true;
@@ -369,7 +370,7 @@
 
     public function gallery() {
 
-        $query = 'SELECT post, likes, comments FROM posts WHERE account_id = :account_id LIMIT :offset, 5';
+        $query = 'SELECT post, likes, comments FROM posts WHERE account_id = :account_id ORDER BY `creation_date` DESC LIMIT :offset, 5';
 
         $stmt = $this->conn->prepare($query);
 

@@ -153,16 +153,16 @@
               console.log("Image Not Saved");
             } else {
               console.log(data);  
-              // var str = '../img/';
-              // data = data.substring(50);
-              // data = data.substring(0, data.length - 2);
-              // // console.log(data);
-              // data = str.concat(data);
-              // var img = document.createElement('img');
-              // img.style.height = '200px';
-              // img.style.width = '200px';
-              // img.src = data;
-              // src.appendChild(img);
+              var str = '../img/';
+              data = data.substring(50);
+              data = data.substring(0, data.length - 2);
+              // console.log(data);
+              data = str.concat(data);
+              var img = document.createElement('img');
+              img.style.height = '200px';
+              img.style.width = '200px';
+              img.src = data;
+              src.appendChild(img);
             }
           });
       } catch (error) {
@@ -172,25 +172,6 @@
       clearphoto();
     }
   }
-
-  // function takepicture() {
-  //   var context = canvas.getContext('2d');
-  //   if (width && height) {
-  //     canvas.width = width;
-  //     canvas.height = height;
-  //     context.drawImage(video, 0, 0, width, height);
-
-  //     var data = canvas.toDataURL('image/png');
-  //     console.log(data);
-
-  //     base64 = data;
-  //     photo.setAttribute('src', data);
-  //   } else {
-  //     clearphoto();
-  //   }
-  // }
-
-  // Set up our event listener to run the startup process
-  // once loading is complete.
+  
   window.addEventListener('load', startup, false);
 })();
