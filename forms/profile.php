@@ -14,10 +14,10 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
   <title>Camagru</title>
   <link rel="stylesheet" href="../styles/welcome.css">
-  <link rel="stylesheet" href="../styles/profile.css">
+  <link rel="stylesheet" href="../styles/profile.css" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
@@ -31,22 +31,25 @@
   <?php include '../components/menu.html';?>
     <div class="container">
       <h1>User settings</h1>
-      <div class="second-container d-flex flex-row flex-wrap">
+      <div class="second-container d-flex flex-column">
       
-      <div class="left d-flex flex-column flex-wrap">
+      <!-- The left div-->
+
+      <div class="left d-flex flex-column">
         <h3>Informations</h3>
         <button type="submit" value="Login" class="btn btn-primary btn-lg custom-btn" id="userinfos">User Infos</button>
         <button type="submit" value="Login" class="btn btn-primary btn-lg custom-btn" id="setpdp">Set Profile Picture</button>
         <h3>Notifications</h3>
         <button type="submit" value="Login" class="btn btn-primary btn-lg custom-btn" id="notifs">Preferences</button>
       </div>
+
+      <!-- The right div-->
+
       <div class="right">
         <div class="user-info" id="user-info">
           <h3>Update user info</h3>
 
           <div class="inputs">
-  
-  
             <div class="credentials">
   
               <div class="mb-3">
