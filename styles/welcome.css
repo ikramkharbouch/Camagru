@@ -43,9 +43,11 @@
   .main {
     /* transition: margin-left .5s;
     padding: 20px; */
-    margin-left: 11%;
     margin-top: 100px;
     padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
   }
   
   /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
@@ -105,6 +107,7 @@ video, canvas {
   width: 100%;
   height: 80%;
   border-radius: 5px;
+  border: 1px solid #9364A8;
   /* position: absolute;
   left: 0;
   bottom: 0;
@@ -118,9 +121,9 @@ video, canvas {
   padding-right: 20px;
 } */
 
-.camera {
+/* .camera {
   text-align: center;
-}
+} */
 
 /* button {
   background-color: orange;
@@ -185,5 +188,28 @@ button {
 .output {
   display: none;
 }
+
+@media screen and (max-width: 768px) {
+
+  .main {
+    flex-direction: column !important;
+    margin: 0 auto;
+    padding: 10px;
+    margin-top: 30px;
+  }
+
+  .pictures {
+    width: 100%;
+    margin: 0;
+    margin-top: 20px;
+  }
+
+  video {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+}
+
 
 

@@ -1,14 +1,14 @@
 <?php
-@require('../init.php');
+  @require('../init.php');
 
-var_dump($_SESSION['auth']);
-var_dump($_SESSION['id']);
+  var_dump($_SESSION['auth']);
+  var_dump($_SESSION['id']);
 
-if (!isset($_SESSION['auth']) && $_SESSION['auth'] == false) 
-{
-  header("Location: ../404.php");
-  exit();
-}
+  if (!isset($_SESSION['auth']) && $_SESSION['auth'] == false) 
+  {
+    header("Location: ../404.php");
+    exit();
+  }
 
 ?>
 
@@ -49,7 +49,7 @@ if (!isset($_SESSION['auth']) && $_SESSION['auth'] == false)
 
 
   <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
-  <div class="main d-flex flex-row">
+  <div class="main">
     <div class="camera d-flex flex-column">
       <video id="video">Video stream not available.</video>
       <div class="dropdown text-left ml-3 mt-3">
