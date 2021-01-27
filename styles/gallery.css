@@ -7,3 +7,30 @@
     width: 100%;
     margin-left: 0;
 }
+
+.comment-icon {
+    margin-left: 25px;
+}
+
+.delete-icon {
+    margin-left: 325px;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.img {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.try {
+    margin-top: 150px;
+    margin-left: 20px;
+    width: 500px;
+    height: 500px;
+}

@@ -85,29 +85,6 @@
             }
           });
       }
-      
-      function open_session(e) {
-              e.preventDefault();
-      
-              let email = document.getElementById("email").value;
-              let pass = document.getElementById("pass").value;
-              fetch("https://camagru-ik.cf/api/post/session.php", {
-              method: "GET",
-              headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
-            body: JSON.stringify({email: email, pass: pass}),
-        })
-          .then((res) => res.text())
-          .then((data) => {
-            if (data == '{"Message":"Session created"}') {
-                  console.log("Session Created");
-            } else {
-                  console.log("Session Not Created");
-            }
-          });
-    }
 
     window.addEventListener('load', startup, false);
 })();

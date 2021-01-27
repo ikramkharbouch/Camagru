@@ -81,22 +81,16 @@
     }, false);
 
     filter1.addEventListener('click', function (ev) {
-      console.log(filter1);
-      console.log(filter1.value);
       lastFilter = filter1.value;
       savebutton.disabled = false;
     }, false);
 
     filter2.addEventListener('click', function (ev) {
-      console.log(filter2);
-      console.log(filter2.value);
       lastFilter = filter2.value;
       savebutton.disabled = false;
     }, false);
 
     filter3.addEventListener('click', function (ev) {
-      console.log(filter3);
-      console.log(filter3.value);
       lastFilter = filter3.value;
       savebutton.disabled = false;
     }, false);
@@ -131,13 +125,10 @@
       context.drawImage(video, 0, 0, width, height);
 
       var data = canvas.toDataURL('image/png');
-      console.log(data);
 
       base64 = data;
       photo.setAttribute('src', data);
 
-      console.log(lastFilter);
-      console.log("Called the function");
       try {
         fetch("https://camagru-ik.cf/api/post/img.php", {
           method: "POST",
@@ -152,15 +143,12 @@
             if (data == '{"Message":"Image Not Saved"}') {
               console.log("Image Not Saved");
             } else {
-              console.log(data);  
               var str = '../img/';
               data = data.substring(50);
               data = data.substring(0, data.length - 2);
-              // console.log(data);
               data = str.concat(data);
               var img = document.createElement('img');
-              img.style.height = '200px';
-              img.style.width = '200px';
+              img.setAttribute('style', 'height: 200px; width: 200px');
               img.src = data;
               src.appendChild(img);
             }
@@ -172,6 +160,6 @@
       clearphoto();
     }
   }
-  
+
   window.addEventListener('load', startup, false);
 })();

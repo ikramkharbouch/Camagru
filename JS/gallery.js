@@ -227,34 +227,17 @@
       ev.preventDefault();
     }, false);
 
-    likeIcon.style.width = '20px';
-    likeIcon.style.height = '20px';
-    likeIcon.style.cursor = 'pointer';
 
-    commentIcon.style.width = '20px';
-    commentIcon.style.height = '20px';
-    commentIcon.style.cursor = 'pointer';
+    likeIcon.className = 'icon like-icon';
 
-    commentIcon.cssText = 'cursor: pointer;';
+    commentIcon.className = 'icon comment-icon';
 
-    commentIcon.style.marginLeft = '25px';
+    DeleteIcon.className = 'icon delete-icon';
 
-    DeleteIcon.style.width = '20px';
-    DeleteIcon.style.height = '20px';
-    DeleteIcon.style.cursor = 'pointer';
+    div.className = 'try';
 
-    DeleteIcon.style.marginLeft = '325px';
-
-    div.style.marginTop = '30px';
-    div.style.marginLeft = '20px';
-
-    img.style.height = '100%';
-    img.style.width = '100%';
-    img.style.margin = '0';
-
-    div.style.width = '500px';
-    div.style.height = '500px';
-
+    img.className = 'img';
+    
     div.id = index++;
 
     img.src = path;
@@ -269,9 +252,6 @@
     cardBody.appendChild(DeleteIcon);
     div.appendChild(cardBody);
     src.appendChild(div);
-    div.className = 'card';
-
-    // To edit later with TextCss property
 
   }
 

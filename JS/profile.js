@@ -55,18 +55,13 @@
 
     input.addEventListener('change', function (ev) {
       fileList = this.files;
-      // this.form.image = event.target.files[0];
-      // this.form.name = event.target.files[0].name;
-      console.log(fileList);
       img.src = URL.createObjectURL(ev.target.files[0]);
       ev.preventDefault();
      }, false);
 
      // User infos button event on click
 
-     userinfos.addEventListener('click', function (ev) {
-      console.log("userinfos");
-      console.log(first);
+    userinfos.addEventListener('click', function (ev) {
       
       // Make the class visible to the user
 
@@ -78,7 +73,6 @@
     // Set profile picture button event on click
 
     setpdp.addEventListener('click', function (ev) {
-      console.log("setpdp");
 
       display_hide(second, first, third);
       
@@ -88,7 +82,6 @@
     // Activate or deactivate notifications button event on click
 
     notifications.addEventListener('click', function (ev) {
-      console.log("notifications");
 
       display_hide(third, first, second);
       
@@ -96,9 +89,7 @@
     }, false);
 
 
-      updateinfos.addEventListener('click', function (ev) {
-
-        console.log('Call update infos function');
+    updateinfos.addEventListener('click', function (ev) {
 
         update_infos();
 
@@ -111,7 +102,6 @@
       }, false);
 
       setpicture.addEventListener('click', function (ev) {
-        console.log('Call updateinfos function');
 
         update_img();
         // window.location.href = "../forms/profile.php";
@@ -159,21 +149,13 @@
             if (data == '{"Message":"Post Updated"}') {
               console.log("Credentials of the user were updated");
             } else {
-
               console.log(data);
-              // console.log("Credentials of the user were not updated");
             }
           });
       } catch (error) {
         console.log(error);
       }
 
-    }
-
-    function  set_picture() {
-
-      
-      
     }
 
     function clear_values() {
