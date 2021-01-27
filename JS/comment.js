@@ -5,6 +5,7 @@
     var path = null;
 
     var div = null;
+    var topLayer = null;
     var img = null;
     var input = null;
     var comment = null;
@@ -15,6 +16,8 @@
     var userCreds = null;
     var likeIcon = null;
     var lowerDiv = null;
+    var likesNumber = null;
+    var likes = null;
     var x = null;
 
     function startup() {
@@ -24,7 +27,8 @@
         comment = document.getElementById('comment');
         comments = document.getElementById('comments');
         likeIcon = document.querySelector('.upper-div span');
-        lowerDiv = document.getElementById('smaller')
+        lowerDiv = document.getElementById('smaller');
+        topLayer = document.getElementById('top-layer');
         x = localStorage.getItem("username");
 
         Username = x.trim();
@@ -52,6 +56,22 @@
             addComment(input.value);
             input.value = '';
             ev.preventDefault();
+        }, false);
+
+        div.addEventListener('mouseover', function(ev) {
+          console.log("You fucking touched it");
+
+          // Add likes on hover
+          hoverLikes();
+        }, false);
+
+        div.addEventListener('mouseleave', function(ev) {
+          console.log("You fucking touched it");
+
+          // Remove the appended style
+          div.className = '';
+          likes.className = '';
+          likes = '';
         }, false);
     }
 
@@ -190,6 +210,8 @@
 
       console.log(obj.likes);
 
+      likesNumber = obj.likes;
+
     }
 
     async function getNumberOfLikes(newpath) {
@@ -211,6 +233,17 @@
         console.log(error);
       }
 
+    }
+
+    function hoverLikes() {
+
+      likes = document.createTextNode(likesNumber);
+      div.className = 'top-layer';
+      likes.className = 'likes-number';
+
+      console.log(likes);
+
+      div.appendChild(likes);
     }
 
     window.addEventListener('load', startup, false);

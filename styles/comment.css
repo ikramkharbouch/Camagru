@@ -57,3 +57,13 @@ span {
     margin-left: 30px;
     color: pink;
 }
+
+.top-layer {
+    filter: blur(8px);
+    text-align: center;
+}
+
+.likes-number {
+    font-size: 10rem;
+    color: #000;
+}
