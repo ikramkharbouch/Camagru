@@ -1,7 +1,8 @@
-* {
+body, html {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
 }
 
 .group {
@@ -14,12 +15,13 @@
     width: 30vw;
 }
 
-.login-form .btn {
+/* .login-form .btn {
     background-color: #F9A826;
     border: 0;
     margin-top: 1vh;
     text-align: center;
-}
+    width: 50% !important;
+} */
 
 .login-form .custom-control {
     margin-top: 2rem;
@@ -31,10 +33,6 @@
     padding: 20px;
     margin-top: 30px;
 }
-
-/* .container {
-    padding: 20px;
-} */
 
 .terms {
     color: #8F8C8C;
@@ -73,6 +71,7 @@ img {
     bottom: 0;
     right: 0;
     height: 100%;
+    width: 50%;
 }
 
 span {
@@ -90,7 +89,7 @@ h1 {
 }
 
 input.form-control {
-    width: 70%;
+    width: 60%;
     margin: 10px;
     padding: 30px;
     border: 1px solid #9364A8;
@@ -105,6 +104,7 @@ input.form-control {
     background-color: #9364A8;
     border: 0;
     padding: 16px 40px 16px 40px;
+    margin-left: 10px;
 }
 
 .col {
@@ -115,11 +115,16 @@ input.form-control {
 }
 
 @media only screen and (max-width: 1024px) {
+
+    body {
+        max-width: 100%;
+    }
+
     img {
         display: none;
     }
     input.form-control {
-        width: 100%;
+        width: 85%;
         margin-left: 0;
     }
     .check {
@@ -136,7 +141,7 @@ input.form-control {
         padding-left: 0;
     }
 
-    button.btn {
-        padding-left: 0;
+    .btn-primary.custom-btn {
+        margin-left: 0;
     }
 }

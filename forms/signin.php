@@ -54,8 +54,8 @@ if (isset($_SESSION['auth']) && $_SESSION['auth'] == true)
     </div>
     </form>
     </div>
-
-    <button class="btn btn-warning mt-4" id="getUsers">Get API Data</button>
+<!-- 
+    <button class="btn btn-warning mt-4" id="getUsers">Get API Data</button> -->
     <p id="message" class="text-danger mt-2"></p>
 
 </body>

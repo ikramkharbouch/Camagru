@@ -50,12 +50,14 @@ if (isset($_SESSION['auth']) && $_SESSION['auth'] == true)
       <div class="row">
         <input type="password" id="pass" class="form-control form-control-lg" placeholder="Password" required>
       </div>
-      <button type="submit" value="Register" class="btn btn-primary btn-lg custom-btn">Register</button>
+      <div class="row">
+        <button type="submit" value="Register" class="btn btn-primary btn-lg custom-btn">Register</button>
+      </div>
     </div>
     </form>
     </div>
 
-    <button class="btn btn-warning mt-4" id="getUsers">Get API Data</button>
+    <!-- <button class="btn btn-warning mt-4" id="getUsers">Get API Data</button> -->
     <p id="message" class="text-danger mt-2"></p>
 </body>
 
