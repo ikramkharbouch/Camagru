@@ -18,9 +18,11 @@
     var lowerDiv = null;
     var likesNumber = null;
     var likes = null;
-    var deleteIcon;
-    var deleteElem;
+    var editElem = null;
+    var deleteElem = null;
+    var editComment = null;
     var x = null;
+    var comment_id = 0;
 
     function startup() {
 
@@ -43,8 +45,6 @@
 
         addPreviousComments(newpath);
         getNumberOfLikes(newpath);
-
-        console.log(userCreds);
 
         img = document.createElement('img');
         img.src = path;
@@ -75,6 +75,65 @@
           likes.className = '';
           likes = '';
         }, false);
+
+        // Making a loop to listen to all children of parentElement
+    }
+
+
+    function  events(comments) {
+
+      var children = comments.children;
+
+      if (comments) {
+          for(let i = 0; i < children.length; i++) {
+
+            console.log(children[i]);
+
+            var edit = children[i].querySelector('#edit' + i);
+            var Delete = children[i].querySelector('#delete' + i);
+            console.log(edit);
+            console.log(Delete);
+
+            edit.addEventListener('click', function(ev) {
+              var newEdit = children[i].querySelector('#edit' + i);
+
+              console.log(newEdit);
+              newEdit.className = 'edit-hide';
+              editCmt(children[i], i);
+            }, false);
+
+            Delete.addEventListener('click', function(ev) {
+              var newDelete = children[i].querySelector('#delete' + i);
+
+              newDelete.className = 'delete-hide';
+              console.log(newDelete);
+            }, false);
+          }
+      }
+    }
+
+    function  editCmt(newElem, id) {
+
+      editComment = document.createElement('input');
+      var button = document.createElement('button');
+      var container = document.createElement('div');
+
+      button.innerHTML = 'Edit';
+
+      editComment.setAttribute('style', 'padding: 10px; margin-top: 10px;');
+
+      container.setAttribute('style', 'display: flex; flex-direction: column;');
+
+      container.appendChild(editComment);
+      container.appendChild(button);
+
+      newElem.appendChild(container);
+
+      button.addEventListener('click', function(ev) {
+        console.log(editComment.value);
+        newElem.removeChild(container);
+        newElem.querySelector('#comment').innerHTML = editComment.value;
+      }, false);
     }
 
     function addComment(comment) {
@@ -110,69 +169,69 @@
           }
 
     }
+    
+    function  createCmtElem(comment) {
+      
+      newElem = document.createElement('div');
+      editElem = document.createElement('span');
+      deleteElem = document.createElement('span');
+      
+      newElem.style.cssText = 'border: 1px solid #ABABAB; margin-top: 10px; border-radius: 3px; padding: 20px; width: 100%;';
+      
+      // and give it some content
+      var newContent = document.createTextNode(comment);
+      var username = document.createTextNode(Username);
+      
+      // is this jquery ?
+      // because if it is then it's already fucked up
+      var first_span = document.createElement('span');
+      first_span.setAttribute('style', 'font-size: 10px; color: #9364A8; margin-top: 2px'); /*just an example, your styles set here*/
+      
+      var second_span = document.createElement('span');
+      second_span.setAttribute('style', 'color: black; margin-left: 20px;'); /*just an example, your styles set here*/
+      
+      editElem.className = 'edit-elem';
+      deleteElem.className = 'delete-elem';
 
-    function createCmtElem(comment) {
+      editElem.setAttribute('id', 'edit' + comment_id);
+      deleteElem.setAttribute('id', 'delete' + comment_id);
+      
+      first_span.appendChild(username);
+      second_span.appendChild(newContent);
 
-      console.log(Username);
+      // Set an id for the comment
 
-        newElem = document.createElement('div');
-        deleteIcon = document.createElement('IMG');
-        editElem = document.createElement('span');
-        deleteElem = document.createElement('span');
+      second_span.setAttribute('id', 'comment');
+      
+      var edit = document.createTextNode('Edit');
+      editElem.appendChild(edit);
+      
+      var Delete = document.createTextNode('Delete');
+      deleteElem.appendChild(Delete);
+      
+      // Appending all elements to the principal container
+      
+      newElem.appendChild(first_span);
+      newElem.appendChild(second_span);
+      // newElem.appendChild(newContent);
+      
+      newElem.appendChild(editElem);
+      newElem.appendChild(deleteElem);
 
-        newElem.style.cssText = 'border: 1px solid #ABABAB; margin-top: 10px; border-radius: 3px; padding: 20px; width: 100%;';
+      // Give the element an id;
 
-        deleteIcon.setAttribute('src', '../assets/delete-32.png')
+      newElem.setAttribute('id', comment_id);
 
-        // and give it some content
-        var newContent = document.createTextNode(comment);
-        var username = document.createTextNode(Username);
-
-        // is this jquery ?
-        // because if it is then it's already fucked up
-        var first_span = document.createElement('span');
-        first_span.setAttribute('style', 'font-size: 10px; color: #9364A8; margin-top: 2px'); /*just an example, your styles set here*/
-
-        var second_span = document.createElement('span');
-        second_span.setAttribute('style', 'color: black; margin-left: 20px;'); /*just an example, your styles set here*/
-
-        editElem.className = 'edit-elem';
-
-        first_span.appendChild(username);
-        second_span.appendChild(newContent);
-
-        var edit = document.createTextNode('Edit')
-        editElem.appendChild(edit);
-
-        var Delete = document.createTextNode('Delete');
-        deleteElem.appendChild(Delete);
-
-        // add the text node to the newly created div
-        // newElem.appendChild(first_span);
-
-        // Appending all elements to the principal container
-
-        newElem.appendChild(first_span);
-        newElem.appendChild(second_span);
-        newElem.appendChild(newContent);
-
-        newElem.appendChild(editElem);
-        newElem.appendChild(deleteElem);
-
-        // comments.appendChild(el_span);
-        comments.appendChild(newElem);
-
+      comment_id += 1;
+      
+      comments.appendChild(newElem);
     }
 
     function addCommentBlocks(data) {
-
-      console.log(Username);
-
+      
       var regex = /(?<={"comment":")(.*)(?="})/g;
 
       data = data.substring(9).slice(0, -2);
-
-      console.log(data);
 
       var array = data.split(',');
 
@@ -183,6 +242,7 @@
         createCmtElem(array[i]);
 
       }
+      events(comments);
 
     }
 
@@ -190,8 +250,6 @@
     // Add previous comments to the commented image
 
     function addPreviousComments(newpath) {
-
-      console.log(newpath);
 
       try {
         fetch("https://camagru-ik.cf/api/post/get_comments.php", {
@@ -222,13 +280,9 @@
       var obj = JSON.parse(response);
       var likes = document.createTextNode(obj.likes);
 
-      console.log(likeIcon);
 
       likeIcon.appendChild(likes);
       // lowerDiv.appendChild(likeIcon);
-
-
-      console.log(obj.likes);
 
       likesNumber = obj.likes;
 
@@ -260,8 +314,6 @@
       likes = document.createTextNode(likesNumber);
       div.className = 'top-layer';
       likes.className = 'likes-number';
-
-      console.log(likes);
 
       div.appendChild(likes);
     }

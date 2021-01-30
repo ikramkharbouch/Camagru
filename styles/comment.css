@@ -75,8 +75,26 @@ span {
     position: relative;
     right: 30px; */
 
-    margin-left: 70%;
-    margin-top: 10%;
+    position: absolute;
+    right: 25%;
+    margin-top: 5px;
+    /* margin-right: 100px;
+    margin-top: 10%; */
+}
+
+.delete-elem {
+
+    position: absolute;
+    right: 20%;
+    margin-top: 5px;
+}
+
+.edit-hide {
+    display: none;
+}
+
+.delete-hide {
+    display: none;
 }
 
 @media only screen and (max-width: 600px) {
