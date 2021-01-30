@@ -136,7 +136,7 @@
       password = password.value;
 
       try {
-        fetch("https://camagru-ik.cf/api/post/update.php", {
+        fetch("https://camagru-ik.cf/api/post/update_users.php", {
           method: "PUT",
           headers: {
             'Content-Type': 'application/json',

@@ -18,16 +18,17 @@ $user = new User($db);
 // Get raw posted data
 $data = json_decode(file_get_contents("php://input"));
 
-// // Update ID
-// $user->id = $data->id;
-
 // Set data
-$user->email = $data->email;
-$user->username = $data->username;
-$user->pass = md5($data->pass);
+$user->filename = $data->filename;
+$user->comment = $data->comment;
+
+$user->get_post_id();
+
+var_dump($user->filename);
+var_dump($user->comment);
 
 // Update User
-if ($user->update()) {
+if ($user->update_comment()) {
     echo json_encode(
         array('Message' => 'Post Updated')
     );
@@ -36,3 +37,5 @@ if ($user->update()) {
         array('Message' => 'Post Not Updated')
     );
 }
+
+?>

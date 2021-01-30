@@ -107,12 +107,13 @@
 
               newDelete.className = 'delete-hide';
               console.log(newDelete);
+              deleteFromDatabase();
             }, false);
           }
       }
     }
 
-    function  editCmt(newElem, id) {
+    function  editCmt(newElem) {
 
       editComment = document.createElement('input');
       var button = document.createElement('button');
@@ -130,10 +131,36 @@
       newElem.appendChild(container);
 
       button.addEventListener('click', function(ev) {
-        console.log(editComment.value);
+        var id = newElem.getAttribute('id');
         newElem.removeChild(container);
         newElem.querySelector('#comment').innerHTML = editComment.value;
+        newElem.querySelector('#edit' + id).className = 'edit-elem';
+        addtoDatabase(editComment.value);
       }, false);
+    }
+
+    function addtoDatabase(comment) {
+
+      try {
+        fetch("https://camagru-ik.cf/api/post/update_comment.php", {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({ filename: newpath, comment: comment }),
+        })
+          .then((res) => res.text())
+          .then((data) => {
+            console.log(data);
+          })
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    function deleteFromDatabase() {
+
     }
 
     function addComment(comment) {

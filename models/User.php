@@ -131,7 +131,7 @@
     }
 
     // Update user
-    public function update() {
+    public function update_users() {
 
         // Update Query
        $query = 'UPDATE users SET email = :email, username = :username, pass = :pass WHERE id = :id';
@@ -625,6 +625,23 @@
         // Set properties
         $this->liked = $row['liked'];
         
+    }
+
+    function update_comment() {
+        
+        $query = 'UPDATE `user_comments` SET `comment`= :comment WHERE post_id = :post_id';
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':post_id', $this->post_id);
+        $stmt->bindParam(':comment', $this->comment);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        return false;
+
     }
     
 }
