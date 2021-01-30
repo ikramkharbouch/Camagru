@@ -67,3 +67,21 @@ span {
     font-size: 10rem;
     color: #000;
 }
+
+.edit-elem {
+    /* margin-left: 70%;
+    margin-top: 10px; */
+/* 
+    position: relative;
+    right: 30px; */
+
+    margin-left: 70%;
+    margin-top: 10%;
+}
+
+@media only screen and (max-width: 600px) {
+    
+    .edit-elem {
+        margin-left: 60px;
+    }
+  }

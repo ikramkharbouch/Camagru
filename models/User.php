@@ -370,12 +370,14 @@
 
     public function gallery() {
 
-        $query = 'SELECT post, likes, comments FROM posts WHERE account_id = :account_id ORDER BY `creation_date` DESC LIMIT :offset, 5';
+        // $query = 'SELECT post, likes, comments FROM posts WHERE account_id = :account_id ORDER BY `creation_date` DESC LIMIT :offset, 5';
+
+        $query = 'SELECT post, likes, comments FROM posts WHERE 1 ORDER BY `creation_date` DESC LIMIT :offset, 5';
 
         $stmt = $this->conn->prepare($query);
 
         // var_dump($_GET['offset']);
-        $stmt->bindParam(':account_id', $_SESSION['id']);
+        // $stmt->bindParam(':account_id', $_SESSION['id']);
         $stmt->bindParam(':offset', $this->offset, PDO::PARAM_INT);
 
         $stmt->execute();

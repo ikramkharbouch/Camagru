@@ -18,6 +18,8 @@
     var lowerDiv = null;
     var likesNumber = null;
     var likes = null;
+    var deleteIcon;
+    var deleteElem;
     var x = null;
 
     function startup() {
@@ -114,8 +116,13 @@
       console.log(Username);
 
         newElem = document.createElement('div');
+        deleteIcon = document.createElement('IMG');
+        editElem = document.createElement('span');
+        deleteElem = document.createElement('span');
 
         newElem.style.cssText = 'border: 1px solid #ABABAB; margin-top: 10px; border-radius: 3px; padding: 20px; width: 100%;';
+
+        deleteIcon.setAttribute('src', '../assets/delete-32.png')
 
         // and give it some content
         var newContent = document.createTextNode(comment);
@@ -129,15 +136,28 @@
         var second_span = document.createElement('span');
         second_span.setAttribute('style', 'color: black; margin-left: 20px;'); /*just an example, your styles set here*/
 
+        editElem.className = 'edit-elem';
+
         first_span.appendChild(username);
         second_span.appendChild(newContent);
+
+        var edit = document.createTextNode('Edit')
+        editElem.appendChild(edit);
+
+        var Delete = document.createTextNode('Delete');
+        deleteElem.appendChild(Delete);
 
         // add the text node to the newly created div
         // newElem.appendChild(first_span);
 
+        // Appending all elements to the principal container
+
         newElem.appendChild(first_span);
         newElem.appendChild(second_span);
         newElem.appendChild(newContent);
+
+        newElem.appendChild(editElem);
+        newElem.appendChild(deleteElem);
 
         // comments.appendChild(el_span);
         comments.appendChild(newElem);
