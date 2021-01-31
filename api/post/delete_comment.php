@@ -22,6 +22,8 @@ $user->filename = $data->filename;
 
 $user->comment = $data->comment;
 
+$user->comment_id = $data->comment_id;
+
 $user->get_post_id();
 
 if ($user->delete_comment()) {

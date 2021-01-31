@@ -27,6 +27,7 @@
         public $notifs;
         public $profile_pic;
         public $liked;
+        public $comment_id;
 
         // Constructor with DB
         public function __construct($db) {
@@ -497,7 +498,7 @@
 
     public function get_comments() {
 
-        $query = 'SELECT `comment` FROM `user_comments` WHERE post_id = :post_id';
+        $query = 'SELECT `comment`, `comment_id` FROM `user_comments` WHERE post_id = :post_id';
 
         $stmt = $this->conn->prepare($query);
 
@@ -636,12 +637,12 @@
 
     public function delete_comment() {
 
-        $query = 'DELETE FROM `user_comments` WHERE post_id = :post_id AND comment = :comment';
+        $query = 'DELETE FROM `user_comments` WHERE post_id = :post_id AND comment_id = :comment_id';
 
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindParam(':post_id', $this->post_id);
-        $stmt->bindParam(':comment', $this->comment);
+        $stmt->bindParam(':comment_id', $this->comment_id);
 
         if ($stmt->execute()) {
             return true;

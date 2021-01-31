@@ -24,6 +24,8 @@
     var x = null;
     var comment_id = 0;
 
+    var comment_ids = new Array();
+
     function startup() {
 
         div = document.getElementById('cmt-img');
@@ -159,13 +161,14 @@
       }
     }
 
-    // TODO: delete comments by comment id rather than comment text or user, you should extract the comment id later
-
     function deleteFromDatabase(newElem, comment) {
+
+      var i = newElem.getAttribute('id');
 
       newElem.remove();
 
       console.log(comment);
+      console.log(comment_ids);
 
       try {
         fetch("https://camagru-ik.cf/api/post/delete_comment.php", {
@@ -174,7 +177,7 @@
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
-          body: JSON.stringify({ filename: newpath, comment: comment }),
+          body: JSON.stringify({ filename: newpath, comment: comment, comment_id: parseInt(comment_ids[i])}),
         })
           .then((res) => res.text())
           .then((data) => {
@@ -184,6 +187,11 @@
         console.log(error);
       }
 
+    }
+
+    function update_comment_ids(id) {
+      
+      // TODO: remove the comment id after removing an element and re arrange the array again
     }
 
     function addComment(comment) {
@@ -277,21 +285,27 @@
       comments.appendChild(newElem);
     }
 
+    
     function addCommentBlocks(data) {
       
-      var regex = /(?<={"comment":")(.*)(?="})/g;
+      var regex = /(?<="comment":").*?(?=",)/g;
+      var regex_comment = /(?<=,"comment_id":").*?(?="})/g;
 
       data = data.substring(9).slice(0, -2);
 
-      var array = data.split(',');
+      var array = data.split(',{');
 
       for (i=0; i < array.length; i++) {
 
+        comment_ids[i] = array[i].match(regex_comment);
         array[i] = array[i].match(regex);
 
+        console.log(array[i]);
+        console.log(comment_ids[i]);
         createCmtElem(array[i]);
 
       }
+
       events(comments);
 
     }
