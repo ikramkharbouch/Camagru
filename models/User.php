@@ -349,10 +349,8 @@
 
         $stmt = $this->conn->prepare($query);
 
-        // var_dump($this->path_to_img);
 
         $bool = 0;
-        // $timestamp = date('Y-m-d H:i:s','1299762201428');
         $date = date("Y-m-d");
         $unique_id = uniqid();
 
@@ -370,14 +368,10 @@
 
     public function gallery() {
 
-        // $query = 'SELECT post, likes, comments FROM posts WHERE account_id = :account_id ORDER BY `creation_date` DESC LIMIT :offset, 5';
-
         $query = 'SELECT post, likes, comments FROM posts WHERE 1 ORDER BY `creation_date` DESC LIMIT :offset, 5';
 
         $stmt = $this->conn->prepare($query);
 
-        // var_dump($_GET['offset']);
-        // $stmt->bindParam(':account_id', $_SESSION['id']);
         $stmt->bindParam(':offset', $this->offset, PDO::PARAM_INT);
 
         $stmt->execute();
@@ -385,15 +379,16 @@
         return $stmt;
     }
 
-    // To optimize later if possible
+    // FIXME: To optimize later if possible
 
+    // TODO: To optimize later if possible
+    
     public function upload() {
         
         $query = 'INSERT INTO posts SET account_id = :account_id, post_id = :post_id, post = :post, likes = :likes, comments = :comments, creation_date = :creation_date';
 
         $stmt = $this->conn->prepare($query);
 
-        // var_dump($this->path_to_img);
 
         $bool = 0;
         $date = date("Y-m-d");
@@ -419,7 +414,6 @@
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindParam(':post', $this->filename);
-        // $stmt->bindParam(':account_id', $_SESSION['id']);
 
         $stmt->execute();
 
@@ -434,8 +428,6 @@
     }
 
     public function like() {
-
-        // $query = 'INSERT INTO user_likes SET account_id = :account_id, post_id = :post_id, liked = :liked';
 
         $query = 'BEGIN;
                     UPDATE posts SET likes = :likes WHERE post_id = :post_id AND account_id = :account_id;
@@ -485,8 +477,6 @@
     }
 
     public function dislike() {
-
-        // $query = 'DELETE FROM user_likes WHERE account_id = :account_id AND post_id = :post_id';
 
         $query = 'BEGIN;
                     DELETE FROM user_likes WHERE account_id = :account_id AND post_id = :post_id;
@@ -608,8 +598,6 @@
 
     public function check_like() {
 
-        // SELECT `account_id`, `post_id`, `liked` FROM `user_likes` WHERE 1
-
         $query = 'SELECT `liked` FROM `user_likes` WHERE post_id = :post_id AND account_id = :account_id';
 
         $stmt = $this->conn->prepare($query);
@@ -627,7 +615,7 @@
         
     }
 
-    function update_comment() {
+    public function update_comment() {
         
         $query = 'UPDATE `user_comments` SET `comment`= :comment WHERE post_id = :post_id';
 
@@ -643,6 +631,25 @@
         return false;
 
     }
+
+    // TODO: Fix the multiple comments with different users problem
+
+    public function delete_comment() {
+
+        $query = 'DELETE FROM `user_comments` WHERE post_id = :post_id AND comment = :comment';
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':post_id', $this->post_id);
+        $stmt->bindParam(':comment', $this->comment);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+        
+        return false;
+    }
+
     
 }
 ?>

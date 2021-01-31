@@ -99,7 +99,7 @@
 
               console.log(newEdit);
               newEdit.className = 'edit-hide';
-              editCmt(children[i], i);
+              editCmt(children[i]);
             }, false);
 
             Delete.addEventListener('click', function(ev) {
@@ -107,7 +107,7 @@
 
               newDelete.className = 'delete-hide';
               console.log(newDelete);
-              deleteFromDatabase();
+              deleteFromDatabase(children[i], children[i].querySelector('#comment').innerHTML);
             }, false);
           }
       }
@@ -159,7 +159,28 @@
       }
     }
 
-    function deleteFromDatabase() {
+    function deleteFromDatabase(newElem, comment) {
+
+      newElem.remove();
+
+      console.log(comment);
+
+      try {
+        fetch("https://camagru-ik.cf/api/post/delete_comment.php", {
+          method: "DELETE",
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({ filename: newpath, comment: comment }),
+        })
+          .then((res) => res.text())
+          .then((data) => {
+            console.log(data);
+          })
+      } catch (error) {
+        console.log(error);
+      }
 
     }
 

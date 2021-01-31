@@ -20,19 +20,18 @@ $data = json_decode(file_get_contents("php://input"));
 
 $user->filename = $data->filename;
 
-var_dump($user->filename);
+$user->comment = $data->comment;
 
 $user->get_post_id();
 
-if ($user->delete_img()) {
+if ($user->delete_comment()) {
     echo json_encode(
-        array('Message' => 'deleted Successfully')
+        array('Message' => 'deleted successfully')
     );
 } else {
     echo json_encode(
         array('Message' => 'an error occured')
     );
 }
-
 
 ?>
