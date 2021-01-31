@@ -159,6 +159,8 @@
       }
     }
 
+    // TODO: delete comments by comment id rather than comment text or user, you should extract the comment id later
+
     function deleteFromDatabase(newElem, comment) {
 
       newElem.remove();
@@ -359,11 +361,11 @@
 
     function hoverLikes() {
 
-      likes = document.createTextNode(likesNumber);
-      div.className = 'top-layer';
-      likes.className = 'likes-number';
+      // likes = document.createTextNode(likesNumber);
+      // div.className = 'top-layer';
+      // likes.className = 'likes-number';
 
-      div.appendChild(likes);
+      // div.appendChild(likes);
     }
 
     window.addEventListener('load', startup, false);
