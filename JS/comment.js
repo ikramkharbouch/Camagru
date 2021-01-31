@@ -5,7 +5,6 @@
     var path = null;
 
     var div = null;
-    var topLayer = null;
     var img = null;
     var input = null;
     var comment = null;
@@ -13,16 +12,14 @@
     var comments = null;
     var newpath = null;
     var Username = null;
-    var userCreds = null;
     var likeIcon = null;
-    var lowerDiv = null;
-    var likesNumber = null;
     var likes = null;
     var editElem = null;
     var deleteElem = null;
     var editComment = null;
     var x = null;
     var comment_id = 0;
+    var Cmt_username;
 
     var comment_ids = new Array();
 
@@ -41,6 +38,8 @@
 
         // console.log(window.location.search.substr(1));
 
+        // input = document.getElementById('input').setAttribute('required', 'true');
+
         path = (window.location.search.substr(1)).substr(5);
 
         newpath = "/var/www/camagru-ik.cf/html".concat(path.substring(2));
@@ -56,10 +55,15 @@
 
         div.appendChild(img);
 
+        console.log(input);
+
+
         comment.addEventListener('click', function (ev) {
+          ev.preventDefault();
+          if ((input.value.trim()).length) {
             addComment(input.value);
             input.value = '';
-            ev.preventDefault();
+          }
         }, false);
 
         div.addEventListener('mouseover', function(ev) {
@@ -81,9 +85,7 @@
         // Making a loop to listen to all children of parentElement
     }
 
-
     function  events(comments) {
-
       var children = comments.children;
 
       if (comments) {
@@ -104,8 +106,11 @@
               editCmt(children[i]);
             }, false);
 
+            // TODO: Fix the pre deletion elements problem
+            
             Delete.addEventListener('click', function(ev) {
               var newDelete = children[i].querySelector('#delete' + i);
+              console.log(newDelete);
 
               newDelete.className = 'delete-hide';
               console.log(newDelete);
@@ -200,7 +205,7 @@
 
         var str = '/var/www/camagru-ik.cf/html';
 
-        createCmtElem(comment);
+        createCmtElem(comment, Username);
 
         newpath = str.concat(path.substring(2));
 
@@ -228,7 +233,7 @@
 
     }
     
-    function  createCmtElem(comment) {
+    function  createCmtElem(comment, parameter) {
       
       newElem = document.createElement('div');
       editElem = document.createElement('span');
@@ -238,7 +243,7 @@
       
       // and give it some content
       var newContent = document.createTextNode(comment);
-      var username = document.createTextNode(Username);
+      var username = document.createTextNode(parameter);
       
       // is this jquery ?
       // because if it is then it's already fucked up
@@ -290,6 +295,7 @@
       
       var regex = /(?<="comment":").*?(?=",)/g;
       var regex_comment = /(?<=,"comment_id":").*?(?="})/g;
+      var regex_username = /(?<=,"username":").*?(?="})/g;
 
       data = data.substring(9).slice(0, -2);
 
@@ -298,11 +304,9 @@
       for (i=0; i < array.length; i++) {
 
         comment_ids[i] = array[i].match(regex_comment);
+        Cmt_username = array[i].match(regex_username);
         array[i] = array[i].match(regex);
-
-        console.log(array[i]);
-        console.log(comment_ids[i]);
-        createCmtElem(array[i]);
+        createCmtElem(array[i], Cmt_username);
 
       }
 
@@ -331,6 +335,7 @@
 
             } else {
               addCommentBlocks(data);
+              console.log(data);
             }
           });
       } catch (error) {
@@ -381,6 +386,8 @@
 
       // div.appendChild(likes);
     }
+
+    // TODO: make the comment deletable and editable immediately after creating it
 
     window.addEventListener('load', startup, false);
 })();

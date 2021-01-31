@@ -498,7 +498,13 @@
 
     public function get_comments() {
 
-        $query = 'SELECT `comment`, `comment_id` FROM `user_comments` WHERE post_id = :post_id';
+        // Using the inner join to get the username
+
+        $query = 'SELECT users.username, user_comments.comment, user_comments.comment_id
+                    FROM user_comments
+                    INNER JOIN users
+                    ON users.id = user_comments.account_id
+                    WHERE post_id = :post_id;';
 
         $stmt = $this->conn->prepare($query);
 

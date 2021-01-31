@@ -40,7 +40,8 @@ if ($num > 0) {
 
         $user_item = array(
             'comment' => $comment,
-            'comment_id' => $comment_id
+            'comment_id' => $comment_id,
+            'username' => $username,
         );
 
         // Push to "data"
