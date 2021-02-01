@@ -30,34 +30,42 @@ if (!isset($_SESSION['auth']) && $_SESSION['auth'] == false)
 
 <!-- <form method="POST" action="../api/post/upload.php" id="profileData" enctype="multipart/form-data"> -->
 
-<p id="error-message"></p>
+<div class="main">
 
-<form method="post" enctype="multipart/form-data">
-  <input type="file" name="files[]" accept="image/jpeg, image/png, image/jpg" id="uploaded" multiple>
-  <!-- <input type="submit" name="submit" value="Upload" id="uploaded"> -->
-  <div class="dropdown text-left ml-3 mt-3">
-        <p>Choose a filter</p>
-        <!-- <button class="btn btn-secondary">Filters</button> -->
-        <!-- <div class="dropdown-content"> -->
-          <label>Love</label><br /><input type="radio" name="filter" value="Love" id="filter1"><br />
-          <label>Happy</label><br /><input type="radio" name="filter" value="Happy" id="filter2"> <br />
-          <label>Sad</label><br /><input type="radio" name="filter" value="Sad" id="filter3"> <br />
-          <!-- <p id="filter1" value="love">Love</p>
-          <p id="filter2" value="happy">Happy</p>
-          <p id="filter3" value="sad">Sad</p> -->
-        <!-- </div> -->
+  <p id="error-message"></p>
+  
+  <div class="upload-img">
+    <img id="output" />
+  </div>
+  <div class="d-flex flex-row elements">
+    
+    <form method="post" enctype="multipart/form-data">
+      <div class="mb-3">
+        <input type="file" name="files[]" accept="image/jpeg, image/png, image/jpg" id="uploaded" class="form-control" multiple>
       </div>
-  <button id="upload" type="submit" value="Upload File" class="btn btn-save ml-3 mt-4" disabled>Upload</button>
-</form>
+      <!-- <input type="submit" name="submit" value="Upload" id="uploaded"> -->
+      <div class="d-flex flex-column">
+  
+        <div class="dropdown text-left ml-3 mt-3">
+              <p>Choose a filter</p>
+              <!-- <button class="btn btn-secondary">Filters</button> -->
+              <!-- <div class="dropdown-content"> -->
+                <label>Love</label><br /><input type="radio" name="filter" value="Love" id="filter1"><br />
+                <label>Happy</label><br /><input type="radio" name="filter" value="Happy" id="filter2"> <br />
+                <label>Sad</label><br /><input type="radio" name="filter" value="Sad" id="filter3"> <br />
+                <!-- <p id="filter1" value="love">Love</p>
+                <p id="filter2" value="happy">Happy</p>
+                <p id="filter3" value="sad">Sad</p> -->
+              <!-- </div> -->
+        </div>
+        <button id="upload" type="submit" value="Upload File" class="btn btn-save ml-3 mt-4" disabled>Upload</button>
+  
+      </div>
+    </form>
+</div>
 
-<!-- </form> -->
 
-
-  <!-- <input type="file" name="files[]" multiple />
-  <input type="submit" value="Upload File" name="submit" /> -->
-
-
-<img id="output" width="200" />	
+</div>
 
 </body>
 

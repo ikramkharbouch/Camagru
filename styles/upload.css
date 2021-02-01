@@ -1,4 +1,36 @@
+.main {
+    margin-top: 5%;
+}
+
+
 #error-message {
     color: #ff0000;
     margin-left: 20px;
+    text-align: center;
+}
+
+
+.upload-img {
+    text-align: center;
+    display: block;
+}
+
+img {
+    width: 500px;
+    height: 500px;
+}
+
+.elements {
+    text-align: center;
+}
+
+form {
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 800px) { 
+    img {
+        width: 300px;
+        height: 300px;
+    }
 }
