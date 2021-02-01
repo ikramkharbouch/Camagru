@@ -30,6 +30,8 @@
 
   <?php include '../components/menu.html';?>
     <div class="container">
+    <p id="success-message"></p>
+      <p id="error-message"></p>
       <h1>User settings</h1>
       <div class="second-container d-flex flex-column">
       
@@ -52,21 +54,21 @@
           <div class="inputs">
             <div class="credentials">
   
-              <div class="mb-3">
+              <div class="mb-3 mt-2">
                 <label for="exampleFormControlInput1" class="form-label">Username</label>
                 <input type="text" class="form-control" id="user-name" placeholder="Username" value="">
               </div>
-              <div class="mb-3 email">
+              <button type="submit" value="Login" class="btn btn-primary custom-btn" id="update-username">Update Username</button>
+              <div class="mb-3 email mt-4">
                   <label for="exampleFormControlInput1" class="form-label">Email</label>
                   <input type="email" class="form-control" id="email" placeholder="name@example.com" value="">
               </div>
-              <div class="mb-3 password">
+              <button type="submit" value="Login" class="btn btn-primary custom-btn" id="update-email">Update Email</button>
+              <div class="mb-3 password mt-4">
                   <label for="exampleFormControlInput1" class="form-label">Password</label>
                   <input type="password" class="form-control" id="password" placeholder="hdjueuweE5dk@s/" value="">
               </div>
-  
-              <button type="submit" value="Login" class="btn btn-primary custom-btn" id="updateinfos">Update</button>
-  
+              <button type="submit" value="Login" class="btn btn-primary custom-btn" id="update-password">Update Password</button>
             </div>
 
           </div>

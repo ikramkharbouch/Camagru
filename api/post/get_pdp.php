@@ -31,7 +31,6 @@
         );
     } else {
         echo $user->profile_pic;
-        var_dump($user->profile_pic);
     }
 
 ?>

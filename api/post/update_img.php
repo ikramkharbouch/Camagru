@@ -43,12 +43,29 @@
 
     $user->uploaded_file = '/var/www/camagru-ik.cf/html/profile_pics/' . $filename . $type;
 
-    if ($user->update_img()) {
-        echo $user->uploaded_file;
+    function is_image($path)
+    {
+        $a = getimagesize($path);
+        $image_type = $a[2];
+	
+        if(in_array($image_type , array(IMAGETYPE_GIF , IMAGETYPE_JPEG ,IMAGETYPE_PNG , IMAGETYPE_BMP)))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    if (is_image($user->uploaded_file)) {
+
+        if ($user->update_img()) {
+            echo $user->uploaded_file;
+        } else {
+            echo json_encode(
+                array('Message' => 'Image Not Uploaded')
+            );
+        }
     } else {
-        echo json_encode(
-            array('Message' => 'Image Not Uploaded')
-        );
+        echo 'The uploaded image is not valid';
     }
 
 ?>

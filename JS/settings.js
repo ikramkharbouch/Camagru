@@ -3,11 +3,17 @@
     var userinfos = null;
     var setpdp = null;
     var notifications = null;
-    var updateinfos = null;
+    // var updateinfos = null;
     var setpicture = null;
     var img = null;
     var input = null;
     var fileList = null;
+
+    // The buttons of update infos of the user
+
+    var updateUsername = null;
+    var updateEmail = null;
+    var updatePassword = null;
 
     var username = null;
     var email = null;
@@ -21,14 +27,15 @@
     var first = null;
     var second = null;
     var third = null;
-    
+
+    var profile_pic = null;
+    var errorMsg = null;
+    var successMsg = null;
+
     function startup() {
-      
-    //   profile = document.querySelector(".user-details p");
 
     img = document.getElementById("pdp");
     input = document.getElementById("uploaded");
-    updateinfos = document.getElementById("updateinfos");
     setpicture = document.getElementById("setpicture");
 
     userinfos = document.getElementById("userinfos");
@@ -45,13 +52,19 @@
     second = document.getElementById("profile-picture");
     third = document.getElementById("notifications");
 
+    profile_pic = document.getElementById("avatar");
+    errorMsg = document.getElementById("error-message");
+    successMsg = document.getElementById("success-message");
+
+    // The buttons of user updating infos
+    
+    updateUsername = document.getElementById("update-username");
+    updateEmail = document.getElementById("update-email");
+    updatePassword = document.getElementById("update-password");
 
     // Activate/Deactivate buttons
     activate = document.getElementById('activate');
     deactivate = document.getElementById('deactivate');
-
-
-    console.log(img);
 
     input.addEventListener('change', function (ev) {
       fileList = this.files;
@@ -89,22 +102,27 @@
     }, false);
 
 
-    updateinfos.addEventListener('click', function (ev) {
+    updateUsername.addEventListener('click', function (ev) {
 
-        update_infos();
+        update_username();
+        ev.preventDefault();
+      }, false);
 
-        // Clear the values of inputs 
+      updateEmail.addEventListener('click', function (ev) {
 
-        // clear_values();
+        update_email();
+        ev.preventDefault();
+      }, false);
 
-        // window.location.href = "../forms/profile.php";
+      updatePassword.addEventListener('click', function (ev) {
+
+        update_password();
         ev.preventDefault();
       }, false);
 
       setpicture.addEventListener('click', function (ev) {
 
         update_img();
-        // window.location.href = "../forms/profile.php";
         ev.preventDefault();
       }, false);
 
@@ -129,6 +147,87 @@
       s_hide.className = 'none-display';
     }
 
+    function update_username() {
+      username = username.value;
+
+      try {
+        fetch("https://camagru-ik.cf/api/post/update_username.php", {
+          method: "PUT",
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({username: username}),
+        })
+          .then((res) => res.text())
+          .then((data) => {
+            if (data == '{"Message":"Post Updated"}') {
+              console.log("Credentials of the user were updated");
+              successMsg.innerHTML = "Credentials of the user were updated";
+            } else {
+              errorMsg.innerHTML = data;
+            }
+          });
+      } catch (error) {
+        console.log(error);
+      }
+
+    }
+
+    function update_email() {
+      email = email.value;
+
+      try {
+        fetch("https://camagru-ik.cf/api/post/update_email.php", {
+          method: "PUT",
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({email: email}),
+        })
+          .then((res) => res.text())
+          .then((data) => {
+            if (data == '{"Message":"Post Updated"}') {
+              console.log("Credentials of the user were updated");
+              successMsg.innerHTML = "Credentials of the user were updated";
+            } else {
+              errorMsg.innerHTML = data;
+            }
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    function update_password() {
+      password = password.value;
+
+      try {
+        fetch("https://camagru-ik.cf/api/post/update_password.php", {
+          method: "PUT",
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({pass: password}),
+        })
+          .then((res) => res.text())
+          .then((data) => {
+            if (data == '{"Message":"Post Updated"}') {
+              console.log("Credentials of the user were updated");
+              successMsg.innerHTML = "Credentials of the user were updated";
+            } else {
+              errorMsg.innerHTML = data;
+            }
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    // The function of updating all infos at a time
+
     function  update_infos() {
 
       username = username.value;
@@ -149,20 +248,13 @@
             if (data == '{"Message":"Post Updated"}') {
               console.log("Credentials of the user were updated");
             } else {
-              console.log(data);
+              errorMsg.innerHTML = data;
             }
           });
       } catch (error) {
         console.log(error);
       }
 
-    }
-
-    function clear_values() {
-
-      username.value = '';
-      email.value = '';
-      password.value = '';
     }
 
     function update_img() {
@@ -192,9 +284,11 @@
                 .then((res) => res.text())
                 .then((data) => {
                     if (data == '{"Message":"Image Not Uploaded"}') {
-                        console.log("Error");
+                      errorMsg.innerHTML = "An error occured while uploading";
+                    } else if (data == 'The uploaded image is not valid') {
+                      errorMsg.innerHTML = data;
                     } else {
-                        console.log("Success");
+                      console.log("Success");
                         console.log(data);
                         profile_pic.src = "../".concat(data.substring(28));
                     }
@@ -209,13 +303,9 @@
 
     function notifs_preferences(parameter) {
 
-      console.log(parameter);
-
       var status = document.querySelector('.check p span');
 
       status.innerText = parameter.slice(0, -3) + 'e';
-
-      console.log(status);
 
       try {
         fetch("https://camagru-ik.cf/api/post/notifications.php", {
@@ -231,7 +321,7 @@
             if (data == '{"Message":"Status Updated"}') {
               console.log(data);
             } else {
-              console.log(data);
+              errorMsg.innerHTML = data;
             }
           });
       } catch (error) {

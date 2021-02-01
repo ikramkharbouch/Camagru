@@ -161,6 +161,81 @@
         return false;
     }
 
+    public function update_email() {
+
+        // Update Query
+       $query = 'UPDATE users SET email = :emailWHERE id = :id';
+
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+        
+        // Clean data
+        $this->email = htmlspecialchars(strip_tags($this->email));
+        $this->id = htmlspecialchars(strip_tags($this->id));
+
+        $stmt->bindParam(':email', $this->email);
+        $stmt->bindParam(':id', $_SESSION['id']);
+        
+        // Execute query       
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        // Print error message if something goes wrong
+        printf("Error : %s. \n", $stmt->error);
+        return false;
+    }
+
+    public function update_username() {
+
+        // Update Query
+       $query = 'UPDATE users SET username = :username WHERE id = :id';
+
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+        
+        // Clean data
+        $this->username = htmlspecialchars(strip_tags($this->username));
+        $this->id = htmlspecialchars(strip_tags($this->id));
+
+        $stmt->bindParam(':username', $this->username);
+        $stmt->bindParam(':id', $_SESSION['id']);
+        
+        // Execute query       
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        // Print error message if something goes wrong
+        printf("Error : %s. \n", $stmt->error);
+        return false;
+    }
+
+    public function update_password() {
+
+        // Update Query
+       $query = 'UPDATE users SET pass = :pass WHERE id = :id';
+
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+        
+        // Clean data
+        $this->pass = htmlspecialchars(strip_tags($this->pass));
+        $this->id = htmlspecialchars(strip_tags($this->id));
+
+        $stmt->bindParam(':pass', $this->pass); 
+        $stmt->bindParam(':id', $_SESSION['id']);
+        
+        // Execute query       
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        // Print error message if something goes wrong
+        printf("Error : %s. \n", $stmt->error);
+        return false;
+    }
+
     // Delete User
     public function delete() {
         // Create query
