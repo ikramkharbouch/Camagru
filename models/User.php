@@ -92,7 +92,7 @@
         $this->verified = 0;
         $this->token = htmlspecialchars($this->token);
         $this->notifs = 1;
-        $profile_pic = "test";
+        $profile_pic = "";
 
         //Check if data is empty
         if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {

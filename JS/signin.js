@@ -2,12 +2,10 @@
 
 (function () {
 
-    var getUser = null;
     var checkCurrentUser = null;
 
     function startup() {
 
-        getUser = document.getElementById("getUsers");
         checkCurrentUser = document.getElementById("checkUser");
 
         checkCurrentUser.addEventListener('submit', function (ev) {
@@ -15,19 +13,7 @@
             ev.preventDefault();
         }, false);
 
-        getUser.addEventListener('click', function (ev) {
-            getUsers();
-            ev.preventDefault();
-        }, false);
-
     }
-
-    function getUsers() {
-        fetch("https://camagru-ik.cf/api/post/read.php")
-          .then((res) => res.json())
-          .then((data) => console.log(data))
-          .catch((err) => console.log(err));
-      }
       
       function checkUser(e) {
         e.preventDefault();

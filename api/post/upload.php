@@ -93,14 +93,35 @@
     
     $user->uploaded_file = '/var/www/camagru-ik.cf/html/upload/' . $filename . ".png";
 
-    if ($user->upload()) {
-        echo json_encode(
-            array('Message' => 'Image Uploaded')
-        );
-    } else {
-        echo json_encode(
-            array('Message' => 'Image Not Uploaded')
-        );
+    // Check the image before uploading it
+
+    function is_image($path)
+    {
+        $a = getimagesize($path);
+        $image_type = $a[2];
+	
+        if(in_array($image_type , array(IMAGETYPE_GIF , IMAGETYPE_JPEG ,IMAGETYPE_PNG , IMAGETYPE_BMP)))
+        {
+            return true;
+        }
+        return false;
     }
+
+    if (is_image($user->uploaded_file)) {
+        
+        if ($user->upload()) {
+            echo json_encode(
+                array('Message' => 'Image Uploaded')
+            );
+        } else {
+            echo json_encode(
+                array('Message' => 'Image Not Uploaded')
+            );
+        }
+    } else 
+    {
+        echo 'The file uploaded is not an image';
+    }
+
 
 ?>

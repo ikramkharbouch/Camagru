@@ -17,6 +17,7 @@ if (!isset($_SESSION['auth']) && $_SESSION['auth'] == false)
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Camagru</title>
   <link rel="stylesheet" href="../styles/welcome.css">
+  <link rel="stylesheet" href="../styles/upload.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   <script src="../JS/upload.js"></script>
@@ -28,6 +29,8 @@ if (!isset($_SESSION['auth']) && $_SESSION['auth'] == false)
 <?php include '../components/menu.html';?>
 
 <!-- <form method="POST" action="../api/post/upload.php" id="profileData" enctype="multipart/form-data"> -->
+
+<p id="error-message"></p>
 
 <form method="post" enctype="multipart/form-data">
   <input type="file" name="files[]" accept="image/jpeg, image/png, image/jpg" id="uploaded" multiple>

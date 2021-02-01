@@ -9,6 +9,8 @@
     var filter2 = null;
     var filter3 = null;
 
+    var errorMsg = null;
+
     const url = '../api/post/upload.php';
     var form = null;
 
@@ -17,6 +19,7 @@
         input = document.getElementById('uploaded');
         uploadbutton = document.getElementById('upload');
         img = document.getElementById('output');
+        errorMsg = document.getElementById('error-message');
 
         // Get filter to merge it with the uploaded image
 
@@ -59,8 +62,6 @@
         const files = document.querySelector('[type=file]').files;
         const formData = new FormData();
 
-        console.log("The last filter was ", lastFilter);
-
         for (let i = 0; i < files.length; i++) {
             let file = files[i];
 
@@ -69,7 +70,7 @@
 
         formData.append("filter", lastFilter);
 
-        console.log(formData.get('files[]'));
+        // console.log(formData.get('files[]'));
 
         if (formData.get('files[]'))
         {
@@ -91,7 +92,7 @@
         }
 
         else {
-            console.log("No image was uploaded");
+            errorMsg.innerHTML = 'No image was uploaded';
         }
 
     }

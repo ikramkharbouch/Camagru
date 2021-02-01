@@ -3,20 +3,13 @@
 (function () {
 
     var addUser = null;
-    var getUser = null;
 
     function startup() {
 
         addUser = document.getElementById("addPost");
-        getUser = document.getElementById("getUsers");
 
         addUser.addEventListener('submit', function (ev) {
             addPost(ev);
-            ev.preventDefault();
-        }, false);
-
-        getUser.addEventListener('click', function (ev) {
-            getUsers();
             ev.preventDefault();
         }, false);
 
@@ -53,13 +46,6 @@
                 }
 
             });
-    }
-
-    function getUsers() {
-        fetch("https://camagru-ik.cf/api/post/read_single.php?id=2")
-            .then((res) => res.json())
-            .then((data) => console.log(data))
-            .catch((err) => console.log(err));
     }
 
     window.addEventListener('load', startup, false);
