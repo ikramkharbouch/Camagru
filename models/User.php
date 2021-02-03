@@ -28,6 +28,7 @@
         public $profile_pic;
         public $liked;
         public $comment_id;
+        public $email_of_owner;
 
         // Constructor with DB
         public function __construct($db) {
@@ -485,7 +486,13 @@
 
     public function get_post_id() {
 
-        $query = 'SELECT post_id,account_id,likes,comments FROM posts WHERE post = :post';
+        // $query = 'SELECT post_id,account_id,likes,comments FROM posts WHERE post = :post';
+
+        $query = 'SELECT posts.post_id, posts.account_id, posts.likes, posts.comments, users.email
+                    FROM posts
+                    INNER JOIN users
+                    ON users.id = posts.account_id 
+                    WHERE post = :post;';
 
         $stmt = $this->conn->prepare($query);
 
@@ -499,6 +506,7 @@
         // Set properties
         $this->post_id = $row['post_id'];
         $this->owner = $row['account_id'];
+        $this->email_of_owner = $row['email'];
         $this->likes = $row['likes'];
         $this->comments = $row['comments'];
     }
@@ -517,7 +525,7 @@
         $likes = $this->likes + 1;
 
         $stmt->bindParam(':likes', $likes, PDO::PARAM_INT);
-        $stmt->bindParam(':account_id', $_SESSION['id']);
+        $stmt->bindParam(':account_id', $this->owner);
         $stmt->bindParam(':post_id', $this->post_id);
         $stmt->bindParam(':liked', $bool);
 
@@ -538,10 +546,11 @@
 
         $bool = 1;
 
+        var_dump($this->comments);
         $comments = $this->comments + 1;
 
         $stmt->bindParam(':comments', $comments, PDO::PARAM_INT);
-        $stmt->bindParam(':account_id', $_SESSION['id']);
+        $stmt->bindParam(':account_id', $this->owner);
         $stmt->bindParam(':post_id', $this->post_id);
         $stmt->bindParam(':commented', $bool);
         $stmt->bindParam(':comment', $this->comment);
@@ -578,7 +587,7 @@
         $query = 'SELECT users.username, user_comments.comment, user_comments.comment_id
                     FROM user_comments
                     INNER JOIN users
-                    ON users.id = user_comments.account_id
+                    ON users.id = user_comments.account_id 
                     WHERE post_id = :post_id;';
 
         $stmt = $this->conn->prepare($query);

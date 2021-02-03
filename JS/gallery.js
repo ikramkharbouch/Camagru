@@ -61,7 +61,6 @@
     var str = '/var/www/camagru-ik.cf/html';
 
     path = str.concat(path.substring(2));
-    console.log(path);
 
     try {
       fetch("https://camagru-ik.cf/api/post/" + parameter + ".php", {
@@ -75,7 +74,6 @@
         .then((res) => res.text())
         .then((data) => {
           if (data == '{"Message":"' + parameter + 'd Successfully"}') {
-            console.log(parameter +'d');
             console.log(data);
           } else {
             console.log(data);
@@ -89,7 +87,6 @@
   async function like(path, div) {
 
     let checkUser = await check_user_likes(path);
-    console.log("return value: ",checkUser);
 
     if (checkUser == true)
       liked = 1;
@@ -112,23 +109,10 @@
 
   function comment(path) {
 
-    // var image;
-    console.log(path);
     window.location.href = "../forms/comment.php" + '?path=' + path;
-    // image = document.createElement('img');
-
-    // image.src = path;
-
-    // cmtImg.appendChild(image);
   }
 
   function delete_img(path, div) {
-
-    // var str = '/var/www/camagru-ik.cf/html';
-
-    // path = str.concat(path.substring(2));
-    console.log(path);
-    console.log(div);
 
     div.remove();
     send_query('delete', path);
@@ -192,8 +176,6 @@
     var checkLike;
 
     checkLike = await liked_or_disliked(path);
-
-    console.log("The return value is " + checkLike + "for this path" + path);
 
     img = document.createElement('img');
     div = document.createElement('div');

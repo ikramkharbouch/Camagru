@@ -24,7 +24,30 @@
 
     $user->get_post_id();
 
+    $rest = '..' . substr('/var/www/camagru-ik.cf/html/img/MWINgm.png', 27);
+
     if ($user->comment()) {
+
+        $to      = $user->email_of_owner;
+        $subject = 'Somebody commented your post';
+        $message = "
+                    <!DOCTYPE html>
+                    <html><body style='text-align:center;'>
+                    <h1>somebody commented your following post</h>
+                    <a href='https://camagru-ik.cf/forms/comment.php?path=$rest'><button style='background-color: #4CAF50; /* Green */
+                    border: none;
+                    color: white;
+                    padding: 15px 32px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 16px;'>See more</button></a>
+                    </body></html>
+                    ";
+
+        $headers = "Content-Type: text/html; charset=ISO-8859-1\r\n";
+        mail($to, $subject, $message, $headers);
+
         echo json_encode(
             array('Message' => 'Commented Successfully')
         );

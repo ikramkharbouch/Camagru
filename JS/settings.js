@@ -162,7 +162,6 @@
           .then((res) => res.text())
           .then((data) => {
             if (data == '{"Message":"Post Updated"}') {
-              console.log("Credentials of the user were updated");
               successMsg.innerHTML = "Credentials of the user were updated";
             } else {
               errorMsg.innerHTML = data;
@@ -189,7 +188,6 @@
           .then((res) => res.text())
           .then((data) => {
             if (data == '{"Message":"Post Updated"}') {
-              console.log("Credentials of the user were updated");
               successMsg.innerHTML = "Credentials of the user were updated";
             } else {
               errorMsg.innerHTML = data;
@@ -215,7 +213,6 @@
           .then((res) => res.text())
           .then((data) => {
             if (data == '{"Message":"Post Updated"}') {
-              console.log("Credentials of the user were updated");
               successMsg.innerHTML = "Credentials of the user were updated";
             } else {
               errorMsg.innerHTML = data;
@@ -259,20 +256,14 @@
 
     function update_img() {
 
-      console.log('update image');
-
       const files = document.querySelector('[type=file]').files;
       const formData = new FormData();
-
-      console.log(files[0].name);
 
         for (let i = 0; i < files.length; i++) {
             let file = files[i];
 
             formData.append('files[]', file);
         };
-
-        console.log(formData.get('files[]'));
 
         if (formData.get('files[]'))
         {
@@ -288,8 +279,6 @@
                     } else if (data == 'The uploaded image is not valid') {
                       errorMsg.innerHTML = data;
                     } else {
-                      console.log("Success");
-                        console.log(data);
                         profile_pic.src = "../".concat(data.substring(28));
                     }
     
