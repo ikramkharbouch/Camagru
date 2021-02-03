@@ -488,7 +488,7 @@
 
         // $query = 'SELECT post_id,account_id,likes,comments FROM posts WHERE post = :post';
 
-        $query = 'SELECT posts.post_id, posts.account_id, posts.likes, posts.comments, users.email
+        $query = 'SELECT posts.post_id, posts.account_id, posts.likes, posts.comments, users.email, users.notifs
                     FROM posts
                     INNER JOIN users
                     ON users.id = posts.account_id 
@@ -509,6 +509,7 @@
         $this->email_of_owner = $row['email'];
         $this->likes = $row['likes'];
         $this->comments = $row['comments'];
+        $this->notifs = $row['notifs'];
     }
 
     public function like() {
@@ -747,6 +748,12 @@
 
         $stmt = $this->conn->prepare($query);
         
+        // Validate the password before inserting
+
+        if (!filter_var($this->pass, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-z-A-Z]+[0-9]+/")))) {
+            return false;
+        }
+
         $stmt->bindParam('pass', $this->pass);
         $stmt->bindParam('email', $this->email);
         

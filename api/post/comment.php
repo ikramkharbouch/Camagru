@@ -27,6 +27,8 @@
     $rest = '..' . substr('/var/www/camagru-ik.cf/html/img/MWINgm.png', 27);
 
     if ($user->comment()) {
+        if ($user->notifs == 1) 
+        {
 
         $to      = $user->email_of_owner;
         $subject = 'Somebody commented your post';
@@ -40,20 +42,22 @@
                     padding: 15px 32px;
                     text-align: center;
                     text-decoration: none;
-                    display: inline-block;
+                     display: inline-block;
                     font-size: 16px;'>See more</button></a>
                     </body></html>
                     ";
-
+        
         $headers = "Content-Type: text/html; charset=ISO-8859-1\r\n";
         mail($to, $subject, $message, $headers);
 
-        echo json_encode(
-            array('Message' => 'Commented Successfully')
-        );
+    }
+    echo json_encode(
+        array('Message' => 'Commented Successfully')
+    );
     } else {
         echo json_encode(
             array('Message' => 'An Error Occured')
         );
     }
+
 ?>
