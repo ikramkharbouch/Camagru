@@ -67,6 +67,8 @@ if (!isset($_SESSION['auth']) && $_SESSION['auth'] == false)
 
 </div>
 
+<footer>Ikrkharb Camagru !SilentCorner 2021-2022</footer>
+
 </body>
 
 </html>

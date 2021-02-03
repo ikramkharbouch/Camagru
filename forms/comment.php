@@ -68,7 +68,7 @@ if (!isset($_SESSION['auth']) && $_SESSION['auth'] == false)
 
 </div>
 
-
+<footer style="position: fixed;">!Silent corner 1337 2021 Covid-19 ikrkharb</footer>
 </body>
 
 </html>

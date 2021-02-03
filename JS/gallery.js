@@ -46,7 +46,7 @@
         .then((res) => res.text())
         .then((data) => {
           if (data == '{"Message":"No Posts Found"}') {
-            console.log("Error");
+            // console.log("Error");
           } else {
             manipulate_data(data);
           }
@@ -74,13 +74,13 @@
         .then((res) => res.text())
         .then((data) => {
           if (data == '{"Message":"' + parameter + 'd Successfully"}') {
-            console.log(data);
+            // console.log(data);
           } else {
-            console.log(data);
+            // console.log(data);
           }
         });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   }
 
@@ -260,7 +260,7 @@
       })
         .then((res) => res.text());
 
-        console.log("received data: ",response)
+        // console.log("received data: ",response)
       if (response == '{"Message":"The user owns the image"}') {
           return true;
         } else {
@@ -308,7 +308,7 @@
       })
         .then((res) => res.text());
 
-        console.log("received data: ",response)
+        // console.log("received data: ",response)
       if (response == '{"message":"No Like Found"}') {
           return false;
         } else {

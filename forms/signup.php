@@ -59,6 +59,7 @@ if (isset($_SESSION['auth']) && $_SESSION['auth'] == true)
 
     <!-- <button class="btn btn-warning mt-4" id="getUsers">Get API Data</button> -->
     <p id="message" class="text-danger mt-2"></p>
+    <?php include '../components/footer.html';?>
 </body>
 
 </html>

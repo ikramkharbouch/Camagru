@@ -29,8 +29,9 @@
   <?php include '../components/menu.html';?>
   <div class="container d-flex flex-wrap" id="container">
 
-<!-- </div> -->
+  </div>
 
+    <footer style="position: fixed; margin-left: 0;">!Silent corner 1337 2021 Covid-19 ikrkharb</footer>
 </body>
 
 </html>
