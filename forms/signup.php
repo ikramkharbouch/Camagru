@@ -2,8 +2,6 @@
 
 @require('../init.php');
 
-var_dump($_SESSION['auth']);
-
 if (isset($_SESSION['auth']) && $_SESSION['auth'] == true) 
 {
   header("Location: ../forms/welcome.php");
@@ -59,7 +57,7 @@ if (isset($_SESSION['auth']) && $_SESSION['auth'] == true)
 
     <!-- <button class="btn btn-warning mt-4" id="getUsers">Get API Data</button> -->
     <p id="message" class="text-danger mt-2"></p>
-    <?php include '../components/footer.html';?>
+    <footer style="position: fixed;">!Silent corner 1337 2021 Covid-19 ikrkharb</footer>
 </body>
 
 </html>

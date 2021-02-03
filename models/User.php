@@ -741,6 +741,22 @@
         return false;
     }
 
+    public function change_password() {
+
+        $query = 'UPDATE users SET pass = :pass WHERE email = :email';
+
+        $stmt = $this->conn->prepare($query);
+        
+        $stmt->bindParam('pass', $this->pass);
+        $stmt->bindParam('email', $this->email);
+        
+        if ($stmt->execute()) {
+            return true;
+        } 
+        
+        return false;
+    }
+
     
 }
 ?>
