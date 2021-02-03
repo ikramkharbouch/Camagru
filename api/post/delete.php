@@ -24,15 +24,21 @@ var_dump($user->filename);
 
 $user->get_post_id();
 
-if ($user->delete_img()) {
-    echo json_encode(
-        array('Message' => 'deleted Successfully')
-    );
+if ($user->owner == $_SESSION['id']) {
+
+    if ($user->delete_img()) {
+        echo json_encode(
+            array('Message' => 'deleted Successfully')
+        );
+    } else {
+        echo json_encode(
+            array('Message' => 'an error occured')
+        );
+    }
 } else {
     echo json_encode(
-        array('Message' => 'an error occured')
+        array('Message' => 'You cannot delete this image')
     );
 }
-
 
 ?>

@@ -114,8 +114,8 @@
 
   function delete_img(path, div) {
 
-    div.remove();
     send_query('delete', path);
+    div.remove();
 
   }
 
@@ -174,8 +174,10 @@
     var img;
     var div;
     var checkLike;
+    var imgOwned;
 
     checkLike = await liked_or_disliked(path);
+    imgOwned = await check_img_owner(path);
 
     img = document.createElement('img');
     div = document.createElement('div');
@@ -231,9 +233,43 @@
     cardBody.appendChild(likeText);
     cardBody.appendChild(commentIcon);
     cardBody.appendChild(commentText);
-    cardBody.appendChild(DeleteIcon);
+
+
+    // Check if the image belongs to the logged in user
+    if (imgOwned)
+      cardBody.appendChild(DeleteIcon);
     div.appendChild(cardBody);
     src.appendChild(div);
+
+  }
+
+  async function check_img_owner(path) {
+
+    var str = '/var/www/camagru-ik.cf/html';
+
+    path = str.concat(path.substring(2));
+
+    try {
+      const response = await fetch("https://camagru-ik.cf/api/post/img_owner.php", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({ filename: path }),
+      })
+        .then((res) => res.text());
+
+        console.log("received data: ",response)
+      if (response == '{"Message":"The user owns the image"}') {
+          return true;
+        } else {
+          return false;
+        }
+
+    } catch (error) {
+      console.log(error);
+    }
 
   }
 
