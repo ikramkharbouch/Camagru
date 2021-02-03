@@ -32,7 +32,10 @@
     var errorMsg = null;
     var successMsg = null;
 
-    function startup() {
+    var notif_status = null;
+    var status = null;
+
+    async function startup() {
 
     img = document.getElementById("pdp");
     input = document.getElementById("uploaded");
@@ -65,6 +68,15 @@
     // Activate/Deactivate buttons
     activate = document.getElementById('activate');
     deactivate = document.getElementById('deactivate');
+
+    status = document.querySelector('.check p span');
+
+    notif_status = await set_notif_status();
+
+    if (notif_status)
+      status.innerHTML = 'Activated';
+    else
+      status.innerHTML = 'Deactivated';
 
     input.addEventListener('change', function (ev) {
       fileList = this.files;
@@ -290,11 +302,18 @@
       
     }
 
+    function capitalizeFirstLetter(str) {
+
+      // converting first letter to uppercase
+      const capitalized = str.replace(/^./, str[0].toUpperCase());
+  
+      return capitalized;
+  }
+
     function notifs_preferences(parameter) {
 
-      var status = document.querySelector('.check p span');
-
-      status.innerText = parameter.slice(0, -3) + 'e';
+      var str = capitalizeFirstLetter(parameter.slice(0, -3) + 'ated');
+      status.innerText = str;
 
       try {
         fetch("https://camagru-ik.cf/api/post/notifications.php", {
@@ -317,6 +336,28 @@
         console.log(error);
       }
 
+
+    }
+
+    async function set_notif_status() {
+
+      try {
+        const response = await fetch("https://camagru-ik.cf/api/post/notif_status.php", {
+          method: "PUT",
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+        })
+          .then((res) => res.text());
+
+          if (response == 1)
+            return true;
+          else
+            return false;
+      } catch (error) {
+        console.log(error);
+      }
 
     }
     

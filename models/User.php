@@ -659,12 +659,14 @@
 
         $stmt = $this->conn->prepare($query);
         
+        var_dump($this->notifs);
+        var_dump($_SESSION['id']);
         $stmt->bindParam('notifs', $this->notifs);
-        $stmt->bindParam('id', $_SESSION['id']);
+        $stmt->bindParam('id', $_SESSION['id'], PDO::PARAM_INT);
         
         if ($stmt->execute()) {
             return true;
-        } 
+        }
         
         return false;
 
@@ -738,7 +740,6 @@
         if ($stmt->execute()) {
             return true;
         }
-        
         return false;
     }
 
@@ -764,6 +765,20 @@
         return false;
     }
 
-    
+    public function notif_status() {
+
+        $query = 'SELECT `notifs` FROM `users` WHERE id = :id';
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam('id', $_SESSION['id']);
+
+        if ($stmt->execute()) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $this->notifs = $row['notifs'];
+            return true;
+        }
+        return false;
+    }
 }
 ?>

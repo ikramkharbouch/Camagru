@@ -98,7 +98,7 @@
 
               <div class="check">
               <p>Activate/Deactivate Email Notifications</p>
-              <p>Current status:  <span>Active</span></p>
+              <p>Current status:  <span></span></p>
                 <div class="btn-group" role="group" aria-label="Basic example">
                   <button type="button" class="btn btn-outline-primary" id="activate">Activate</button>
                   <button type="button" class="btn btn-outline-primary" id="deactivate">Deactivate</button>
