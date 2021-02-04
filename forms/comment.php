@@ -45,7 +45,7 @@ if (!isset($_SESSION['auth']) && $_SESSION['auth'] == false)
 <!-- Div of the upper assets -->
 
 <div class="upper-div d-flex flex-row">
-  <button class="btn btn-primary btn custom-btn" id="sharebutton">Share</button>
+  <button class="btn btn-primary btn" id="sharebutton">Share On Facebook</button>
   <img src="../assets/heart-32.png" alt="" class="heart-icon">
   <span></span>
 </div>

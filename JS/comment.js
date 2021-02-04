@@ -20,6 +20,8 @@
     var comment_id = 0;
     var Cmt_username;
 
+    var sharebutton = null;
+
     var comment_ids = new Array();
 
     function startup() {
@@ -32,12 +34,9 @@
         lowerDiv = document.getElementById('smaller');
         topLayer = document.getElementById('top-layer');
         x = localStorage.getItem("username");
+        sharebutton = document.getElementById("sharebutton");
 
         Username = x.trim();
-
-        // console.log(window.location.search.substr(1));
-
-        // input = document.getElementById('input').setAttribute('required', 'true');
 
         path = (window.location.search.substr(1)).substr(5);
 
@@ -54,8 +53,6 @@
 
         div.appendChild(img);
 
-        console.log(input);
-
 
         comment.addEventListener('click', function (ev) {
           ev.preventDefault();
@@ -65,20 +62,9 @@
           }
         }, false);
 
-        div.addEventListener('mouseover', function(ev) {
-          console.log("You fucking touched it");
-
-          // Add likes on hover
-          hoverLikes();
-        }, false);
-
-        div.addEventListener('mouseleave', function(ev) {
-          console.log("You fucking touched it");
-
-          // Remove the appended style
-          div.className = '';
-          likes.className = '';
-          likes = '';
+        sharebutton.addEventListener('click', function (ev) {
+          ev.preventDefault();
+          shareOnFacebook(img);
         }, false);
     }
 
@@ -88,14 +74,10 @@
       if (comments) {
           for(let i = 0; i < children.length; i++) {
 
-            console.log(children[i]);
-
             var edit = children[i].querySelector('#edit' + i);
 
             edit.addEventListener('click', function(ev) {
               var newEdit = children[i].querySelector('#edit' + i);
-
-              console.log(newEdit);
               newEdit.className = 'edit-hide';
               editCmt(children[i]);
             }, false);
@@ -154,7 +136,6 @@
 
     function addComment(comment) {
 
-      console.log(Username);
 
         var str = '/var/www/camagru-ik.cf/html';
 
@@ -174,7 +155,6 @@
               .then((res) => res.text())
               .then((data) => {
                 if (data == '{"Message":"Commented Successfully"}') {
-                  console.log('Success');
                   console.log(data);
                 } else {
                   console.log(data);
@@ -281,7 +261,6 @@
 
             } else {
               addCommentBlocks(data);
-              console.log(data);
             }
           });
       } catch (error) {
@@ -322,6 +301,13 @@
         console.log(error);
       }
 
+    }
+
+    function shareOnFacebook(TheImg) {
+      var u=TheImg.src;
+     // t=document.title;
+      var t=TheImg.getAttribute('alt');
+      window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;
     }
 
     window.addEventListener('load', startup, false);
