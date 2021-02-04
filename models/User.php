@@ -388,25 +388,17 @@
 
         $query = 'INSERT INTO account_sessions SET sess_id = :sess_id, account_id = :account_id, login_time = NOW()';
 
-        // $query = "INSERT INTO account_sessions SET sess_id = '$session', account_id = $id, login_time = NOW()";
         $stmt = $this->conn->prepare($query);
         
-        // var_dump(session_id());
-        var_dump($_SESSION);
-        
         $timestamp = "NOW()";
-        // var_dump($timestamp);
         
         try {
             $stmt->bindParam(':sess_id', session_id());
             $stmt->bindParam(':account_id', $_SESSION['id']);
-            // $stmt->bindParam(':login_time', "NOW()", PDO::PARAM_STR, 12);
-            // var_dump($query);
             
             
             // Execute query 
             if ($stmt->execute()) {
-                // var_dump($query);
                 return true;
             }
         }
@@ -547,7 +539,6 @@
 
         $bool = 1;
 
-        var_dump($this->comments);
         $comments = $this->comments + 1;
 
         $stmt->bindParam(':comments', $comments, PDO::PARAM_INT);
@@ -659,8 +650,6 @@
 
         $stmt = $this->conn->prepare($query);
         
-        var_dump($this->notifs);
-        var_dump($_SESSION['id']);
         $stmt->bindParam('notifs', $this->notifs);
         $stmt->bindParam('id', $_SESSION['id'], PDO::PARAM_INT);
         

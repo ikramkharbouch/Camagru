@@ -143,7 +143,10 @@
           .then((data) => {
             if (data == '{"Message":"Image Not Saved"}') {
               console.log("Image Not Saved");
-            } else {
+            } else if (data == '{"Message":"Filter Not Valid"}') {
+              console.log('filter not valid');
+            }
+            else {
               var str = '../img/';
               data = data.substring(50);
               data = data.substring(0, data.length - 2);

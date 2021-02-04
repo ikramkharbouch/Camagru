@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1 style="color: #000;">A reset password email have been sent to you!</h1>
+    <h1 style="color: #000;">The image was uploaded successfully!</h1>
     <div style="text-align: center; margin-top: 20px">
         <a href="../forms/signin.php"><button class="btn btn-primary">Go back</button></a>
     </div>

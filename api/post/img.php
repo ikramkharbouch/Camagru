@@ -82,6 +82,12 @@
             $src = imagecreatefrompng('../../assets/happy-128.png');
         else if ($user->filter == 'Sad')
             $src = imagecreatefrompng('../../assets/sad-128.png');
+        else {
+            echo json_encode(
+                array('Message' => 'Filter Not Valid')
+            );
+            exit();
+        }
 
         // imagecopymerge($dest, $src, 10, 10, 0, 0, 100, 47, 75);
 
@@ -90,6 +96,17 @@
         header('Content-Type: image/png');
 
         imagepng($dest, $img_file);
+        $user->path_to_img = $img_file;
+    
+        if ($user->save_img()) {
+            echo json_encode(
+                array('Message' => $user->path_to_img)
+            );
+        } else {
+            echo json_encode(
+                array('Message' => 'Image Not Saved')
+            );
+        }
     } else {
         echo json_encode(
             array('Message' => 'Image Not Saved')
@@ -97,16 +114,5 @@
         exit();
     }
 
-    $user->path_to_img = $img_file;
-
-    if ($user->save_img()) {
-        echo json_encode(
-            array('Message' => $user->path_to_img)
-        );
-    } else {
-        echo json_encode(
-            array('Message' => 'Image Not Saved')
-        );
-    }
 
 ?>

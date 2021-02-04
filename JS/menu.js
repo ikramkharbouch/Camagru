@@ -20,12 +20,6 @@ function openNav() {
       profile_pic = document.querySelector(".user-details img");
 
       setup_profile_pic(profile_pic);
-
-      profile.addEventListener('click', function (ev) {
-        console.log('profile');
-        window.location.href = "../forms/profile.php";
-        ev.preventDefault();
-      }, false);
       
     }
     
