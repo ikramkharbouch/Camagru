@@ -12,7 +12,9 @@ body {
 }
 
 img {
-    width: 100%;
+    max-width:100%;
+    height:auto;
+    background-repeat: no-repeat;
 }
 
 h3 {
@@ -26,8 +28,8 @@ h1 {
 }
 
 .content {
-    margin: 100px;
-    width: 50%;
+    margin: 10%;
+    width: 70%;
     padding: 20px;
 }
 
@@ -43,11 +45,22 @@ p {
     margin-top: 30px;
 }
 
-/* button {
-    height: 50px;
-    padding-top: 5px;
-} */
+.btn-primary.custom-btn {
+    background-color: #9364A8;
+    border: 0;
+    padding: 16px 40px 16px 40px;
+}
 
 .camagru {
     color: #fff;
 }
+
+footer {
+    text-align: center;
+    width: 100%;
+    background-color: #9364A8;
+    color: #fff;
+    position: fixed;
+    bottom: 0;
+    margin-top: 100px;
+  }

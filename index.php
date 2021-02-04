@@ -2,8 +2,6 @@
 
 @require('./init.php');
 
-var_dump($_SESSION['auth']);
-
 if (isset($_SESSION['auth']) && $_SESSION['auth'] == true) 
 {
   header("Location: ./forms/welcome.php");
@@ -45,7 +43,7 @@ if (isset($_SESSION['auth']) && $_SESSION['auth'] == true)
     <div class="content">
      <h1>Welcome to Camagru</h1>
      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi sint iste qui nulla illum molestias, at ratione pariatur nostrum, corrupti, laudantium et cum dolorum. Nesciunt magni perferendis iusto sed libero!</p>
-     <a href="./forms/signup.php" class="btn btn-primary btn-lg" role="button">Sign Up</a>
+     <a href="./forms/signup.php" class="btn btn-primary custom-btn" role="button">Sign Up</a>
     </div>
     
       <!-- <div class="content">
@@ -64,6 +62,6 @@ if (isset($_SESSION['auth']) && $_SESSION['auth'] == true)
 
     </div> -->
 
-    <?php include './components/footer.html';?>
+    <footer style="">!Silent corner 1337 2021 Covid-19 ikrkharb</footer>
   </body>
 </html>
