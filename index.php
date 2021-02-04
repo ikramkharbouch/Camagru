@@ -45,22 +45,6 @@ if (isset($_SESSION['auth']) && $_SESSION['auth'] == true)
      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi sint iste qui nulla illum molestias, at ratione pariatur nostrum, corrupti, laudantium et cum dolorum. Nesciunt magni perferendis iusto sed libero!</p>
      <a href="./forms/signup.php" class="btn btn-primary custom-btn" role="button">Sign Up</a>
     </div>
-    
-      <!-- <div class="content">
-        <div class="title">
-          <h3>Hello.</h3>
-        </div>
-      <div class="text">
-        <h1>Lorem ipsum dolor sit amet consectetur
-       <br>adipisicing elit</h1>
-      </div>
-
-       <div class="start">
-         <a href="./forms/signup.php"><p>Get Started</p></a>
-         <img src="./assets/arrow.svg" width="20">
-       </div>
-
-    </div> -->
 
     <footer style="">!Silent corner 1337 2021 Covid-19 ikrkharb</footer>
   </body>

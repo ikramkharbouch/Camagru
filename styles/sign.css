@@ -114,14 +114,23 @@ input.form-control {
     margin: 10px;
 }
 
+.error-message {
+    margin-left: 18%;
+}
+
+p {
+    margin-top: 100px;
+}
+
 footer {
     text-align: center;
     width: 100%;
-    /* background-color: #9364A8; */
-    color: #9364A8;
+    background-color: #9364A8;
+    color: #fff;
     position: absolute;
     bottom: 0;
-    margin-top: 100px;
+    margin: 0;
+    left: 0;
   }
 
 @media only screen and (max-width: 1024px) {
@@ -152,5 +161,9 @@ footer {
 
     .btn-primary.custom-btn {
         margin-left: 0;
+    }
+
+    .error-message {
+        margin-left: 10%;
     }
 }

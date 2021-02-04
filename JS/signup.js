@@ -3,10 +3,12 @@
 (function () {
 
     var addUser = null;
+    var errorMsg = null;
 
     function startup() {
 
         addUser = document.getElementById("addPost");
+        errorMsg = document.querySelector('p');
 
         addUser.addEventListener('submit', function (ev) {
             addPost(ev);
@@ -34,15 +36,13 @@
             .then((res) => res.text())
             .then((data) => {
                 if (data == '{"Message":"User Exists"}') {
-                    document.getElementById("message").innerHTML = "This email or username already exists";
+                    errorMsg.innerHTML = "This email or username already exists";
                 } else if (data == '{"Message":"Post Not Created"}') {
-                    document.getElementById("message").innerHTML = "Email or password doesn't have the minimum requirements";
+                    errorMsg.innerHTML = "Email or password doesn't have the minimum requirements";
                 } else if (data == '{"Message":"Post Created"}') {
-                    console.log('User Created');
                     window.location.href = "./signin.php";
                 } else {
-                    console.log('a problem occured');
-                    console.log(data);
+                    errorMsg = 'An error occured';
                 }
 
             });

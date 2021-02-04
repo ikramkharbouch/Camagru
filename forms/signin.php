@@ -19,7 +19,6 @@ if (isset($_SESSION['auth']) && $_SESSION['auth'] == true)
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Camagru</title>
-    <link rel="icon" href="/assets/Camagru-favicon.png">
     <link rel="stylesheet" href="../styles/sign.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
@@ -31,6 +30,9 @@ if (isset($_SESSION['auth']) && $_SESSION['auth'] == true)
   <div class="sign-in d-flex flex-column">
     <img src="../assets/Sign-in.png" alt="">
 
+    <div class="error-message">
+      <p id="message" class="text-danger mt-10"></p>
+    </div>
     <div class="container">
       <h1>Sign In to <span>Camagru</span></h1>
       <form id="checkUser">
@@ -56,8 +58,7 @@ if (isset($_SESSION['auth']) && $_SESSION['auth'] == true)
     </div>
 <!-- 
     <button class="btn btn-warning mt-4" id="getUsers">Get API Data</button> -->
-    <p id="message" class="text-danger mt-2"></p>
-    <footer style="">!Silent corner 1337 2021 Covid-19 ikrkharb</footer>
+    <footer style="position: fixed;">!Silent corner 1337 2021 Covid-19 ikrkharb</footer>
 </body>
 
 </html>

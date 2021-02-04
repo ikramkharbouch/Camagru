@@ -3,16 +3,21 @@
 (function () {
 
     var checkCurrentUser = null;
+    var errorMsg = null;
 
     function startup() {
 
         checkCurrentUser = document.getElementById("checkUser");
+        errorMsg = document.querySelector('p');
 
         checkCurrentUser.addEventListener('submit', function (ev) {
             checkUser(ev);
             ev.preventDefault();
         }, false);
+    }
 
+    function setErrorMsg() {
+      errorMsg.innerHTML = 'False credentials or account is not activated yet';
     }
       
       function checkUser(e) {
@@ -67,7 +72,7 @@
               }
             });
             } else {
-              console.log("I will not redirect");
+              setErrorMsg();
             }
           });
       }

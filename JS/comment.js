@@ -15,7 +15,6 @@
     var likeIcon = null;
     var likes = null;
     var editElem = null;
-    var deleteElem = null;
     var editComment = null;
     var x = null;
     var comment_id = 0;
@@ -81,8 +80,6 @@
           likes.className = '';
           likes = '';
         }, false);
-
-        // Making a loop to listen to all children of parentElement
     }
 
     function  events(comments) {
@@ -94,9 +91,6 @@
             console.log(children[i]);
 
             var edit = children[i].querySelector('#edit' + i);
-            var Delete = children[i].querySelector('#delete' + i);
-            console.log(edit);
-            console.log(Delete);
 
             edit.addEventListener('click', function(ev) {
               var newEdit = children[i].querySelector('#edit' + i);
@@ -104,17 +98,6 @@
               console.log(newEdit);
               newEdit.className = 'edit-hide';
               editCmt(children[i]);
-            }, false);
-
-            // TODO: Fix the pre deletion elements problem
-            
-            Delete.addEventListener('click', function(ev) {
-              var newDelete = children[i].querySelector('#delete' + i);
-              console.log(newDelete);
-
-              newDelete.className = 'delete-hide';
-              console.log(newDelete);
-              deleteFromDatabase(children[i], children[i].querySelector('#comment').innerHTML);
             }, false);
           }
       }
@@ -126,14 +109,17 @@
       var button = document.createElement('button');
       var container = document.createElement('div');
 
+      button.setAttribute('style', 'padding: 12px 40px 12px 40px; background-color: #9364A8; color: #fff; border: 0; border-radius: 5px;');
       button.innerHTML = 'Edit';
 
       editComment.setAttribute('style', 'padding: 10px; margin-top: 10px;');
 
       container.setAttribute('style', 'display: flex; flex-direction: column;');
 
+
       container.appendChild(editComment);
       container.appendChild(button);
+
 
       newElem.appendChild(container);
 
@@ -164,39 +150,6 @@
       } catch (error) {
         console.log(error);
       }
-    }
-
-    function deleteFromDatabase(newElem, comment) {
-
-      var i = newElem.getAttribute('id');
-
-      newElem.remove();
-
-      console.log(comment);
-      console.log(comment_ids);
-
-      try {
-        fetch("https://camagru-ik.cf/api/post/delete_comment.php", {
-          method: "DELETE",
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify({ filename: newpath, comment: comment, comment_id: parseInt(comment_ids[i])}),
-        })
-          .then((res) => res.text())
-          .then((data) => {
-            console.log(data);
-          })
-      } catch (error) {
-        console.log(error);
-      }
-
-    }
-
-    function update_comment_ids(id) {
-      
-      // TODO: remove the comment id after removing an element and re arrange the array again
     }
 
     function addComment(comment) {
@@ -237,7 +190,6 @@
       
       newElem = document.createElement('div');
       editElem = document.createElement('span');
-      deleteElem = document.createElement('span');
       
       newElem.style.cssText = 'border: 1px solid #ABABAB; margin-top: 10px; border-radius: 3px; padding: 20px; width: 100%;';
       
@@ -254,10 +206,8 @@
       second_span.setAttribute('style', 'color: black; margin-left: 20px;'); /*just an example, your styles set here*/
       
       editElem.className = 'edit-elem';
-      deleteElem.className = 'delete-elem';
 
       editElem.setAttribute('id', 'edit' + comment_id);
-      deleteElem.setAttribute('id', 'delete' + comment_id);
       
       first_span.appendChild(username);
       second_span.appendChild(newContent);
@@ -269,9 +219,6 @@
       var edit = document.createTextNode('Edit');
       editElem.appendChild(edit);
       
-      var Delete = document.createTextNode('Delete');
-      deleteElem.appendChild(Delete);
-      
       // Appending all elements to the principal container
       
       newElem.appendChild(first_span);
@@ -279,7 +226,6 @@
       // newElem.appendChild(newContent);
       
       newElem.appendChild(editElem);
-      newElem.appendChild(deleteElem);
 
       // Give the element an id;
 
@@ -377,17 +323,6 @@
       }
 
     }
-
-    function hoverLikes() {
-
-      // likes = document.createTextNode(likesNumber);
-      // div.className = 'top-layer';
-      // likes.className = 'likes-number';
-
-      // div.appendChild(likes);
-    }
-
-    // TODO: make the comment deletable and editable immediately after creating it
 
     window.addEventListener('load', startup, false);
 })();

@@ -306,7 +306,7 @@
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // Set properties
-        if ($row['email'] == $this->email && $row['pass'] == $this->pass) {
+        if ($row['email'] == $this->email && $row['pass'] == $this->pass && $row['verified'] == 1) {
             return true;
         }
 
