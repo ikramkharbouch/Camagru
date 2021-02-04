@@ -8,8 +8,10 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>The password was changed successfully</h1>
-    <a href="../forms/signin.php"><button class="btn btn-primary">Go back</button></a>
+    <h1 style="color: #000">The password was changed successfully</h1>
+    <div style="text-align: center; margin-top: 20px">
+        <a href="../forms/signin.php"><button class="btn btn-primary custom-btn">Go back</button></a>
+    </div>
     <footer style="position: fixed; margin-left: 0;">!Silent corner 1337 2021 Covid-19 ikrkharb</footer>
 </body>
 </html>

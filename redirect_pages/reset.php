@@ -9,7 +9,9 @@
 </head>
 <body>
     <h1 style="color: #000;">A reset password email have been sent to you!</h1>
-    <a href="../forms/signin.php"><button class="btn btn-primary">Go back</button></a>
+    <div style="text-align: center; margin-top: 20px">
+        <a href="../forms/signin.php"><button class="btn btn-primary">Go back</button></a>
+    </div>
     <footer style="position: fixed; margin-left: 0;">!Silent corner 1337 2021 Covid-19 ikrkharb</footer>
 </body>
 </html>
