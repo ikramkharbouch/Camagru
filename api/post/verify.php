@@ -24,11 +24,12 @@ if ($user->verified == 1) {
     echo json_encode(
         array('Message' => 'User Already Verified')
     );
+    header("Location: ../../redirect_pages/already_verified.php");
+    exit();
 } else {
     if ($user->verify()) {
-        echo json_encode(
-            array('Message' => 'User Was Verified Successfully')
-        );
+        header("Location: ../../redirect_pages/user_verified.php");
+        exit();
     } else {
         echo json_encode(
             array('Message' => 'User Was Not Verified')

@@ -41,7 +41,7 @@ if (isset($_SESSION['auth']) && $_SESSION['auth'] == true)
         <input type="text" id="email" class="form-control form-control-lg" placeholder="Email" required>
       </div>
       <div class="row">
-        <input type="text" id="fullname" class="form-control form-control-lg" placeholder="Fullname" required>
+        <input type="text" id="fullname" class="form-control form-control-lg" placeholder="Full name" required>
       </div>
       <div class="row">
         <input type="text" id="username" class="form-control form-control-lg" placeholder="Username" required>
