@@ -29,6 +29,8 @@
         public $liked;
         public $comment_id;
         public $email_of_owner;
+        public $creation_date;
+        public $creation_time;
 
         // Constructor with DB
         public function __construct($db) {
@@ -414,7 +416,7 @@
 
     public function save_img() {
            
-        $query = 'INSERT INTO posts SET account_id = :account_id, post_id = :post_id, post = :post, likes = :likes, comments = :comments, creation_date = :creation_date';
+        $query = 'INSERT INTO posts SET account_id = :account_id, post_id = :post_id, post = :post, likes = :likes, comments = :comments, creation_date = :creation_date, creation_time = :creation_time';
 
         $stmt = $this->conn->prepare($query);
 
@@ -423,12 +425,15 @@
         $date = date("Y-m-d");
         $unique_id = uniqid();
 
+        $time = gmdate("H:i:s", time());
+
         $stmt->bindParam(':account_id', $_SESSION['id']);
         $stmt->bindParam(':post_id', $unique_id);
         $stmt->bindParam(':post', $this->path_to_img);
         $stmt->bindParam(':likes', $bool);
         $stmt->bindParam(':comments', $bool);
         $stmt->bindParam(':creation_date', $date);
+        $stmt->bindParam(':creation_time', $time);
 
         if ($stmt->execute()) {
             return true;
@@ -437,7 +442,7 @@
 
     public function gallery() {
 
-        $query = 'SELECT post, likes, comments FROM posts WHERE 1 ORDER BY `creation_date` DESC LIMIT :offset, 5';
+        $query = 'SELECT post, likes, comments FROM posts ORDER BY `creation_date`, `creation_time` DESC LIMIT :offset, 5';
 
         $stmt = $this->conn->prepare($query);
 
@@ -454,7 +459,7 @@
     
     public function upload() {
         
-        $query = 'INSERT INTO posts SET account_id = :account_id, post_id = :post_id, post = :post, likes = :likes, comments = :comments, creation_date = :creation_date';
+        $query = 'INSERT INTO posts SET account_id = :account_id, post_id = :post_id, post = :post, likes = :likes, comments = :comments, creation_date = :creation_date, creation_time = :creation_time';
 
         $stmt = $this->conn->prepare($query);
 
@@ -464,12 +469,15 @@
 
         $unique_id = uniqid();
 
+        $time = gmdate("H:i:s", time());
+
         $stmt->bindParam(':account_id', $_SESSION['id']);
         $stmt->bindParam(':post_id', $unique_id);
         $stmt->bindParam(':post', $this->uploaded_file);
         $stmt->bindParam(':likes', $bool);
         $stmt->bindParam(':comments', $bool);
         $stmt->bindParam(':creation_date', $date);
+        $stmt->bindParam(':creation_time', $time);
 
         if ($stmt->execute()) {
             return true;
@@ -477,8 +485,6 @@
     }
 
     public function get_post_id() {
-
-        // $query = 'SELECT post_id,account_id,likes,comments FROM posts WHERE post = :post';
 
         $query = 'SELECT posts.post_id, posts.account_id, posts.likes, posts.comments, users.email, users.notifs
                     FROM posts
@@ -507,18 +513,19 @@
     public function like() {
 
         $query = 'BEGIN;
-                    UPDATE posts SET likes = :likes WHERE post_id = :post_id AND account_id = :account_id;
-                    INSERT INTO user_likes SET account_id = :account_id, post_id = :post_id, liked = :liked;
+                    INSERT INTO `user_likes` SET account_id = :account_id, post_id = :post_id, liked = :liked;  
+                    UPDATE `posts` SET `likes` = `likes` + 1 WHERE post_id = :post_id;
                 COMMIT;';
 
         $stmt = $this->conn->prepare($query);
 
         $bool = 1;
 
-        $likes = $this->likes + 1;
+        var_dump($this->post_id);
 
-        $stmt->bindParam(':likes', $likes, PDO::PARAM_INT);
-        $stmt->bindParam(':account_id', $this->owner);
+        // $stmt->bindParam(':likes', $likes, PDO::PARAM_INT);
+        $stmt->bindParam(':account_id', $_SESSION['id']);
+        // $stmt->bindParam(':account_id2', $this->owner);
         $stmt->bindParam(':post_id', $this->post_id);
         $stmt->bindParam(':liked', $bool);
 

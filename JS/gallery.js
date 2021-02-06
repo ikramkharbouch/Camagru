@@ -74,19 +74,21 @@
         .then((res) => res.text())
         .then((data) => {
           if (data == '{"Message":"' + parameter + 'd Successfully"}') {
-            // console.log(data);
+            console.log(data);
           } else {
-            // console.log(data);
+            console.log(data);
           }
         });
     } catch (error) {
-      // console.log(error);
+      console.log(error);
     }
   }
 
   async function like(path, div) {
 
     let checkUser = await check_user_likes(path);
+
+    console.log(checkUser);
 
     if (checkUser == true)
       liked = 1;
@@ -96,6 +98,7 @@
     if (liked == 0)
     {
       liked = 1;
+      console.log("liked == ", liked);
       div.getElementsByTagName('img')[1].src = '../assets/like-black-32.png';
       send_query('like', path);
 
@@ -169,13 +172,16 @@
 
   }
 
-  async function create_card(path, likes, comments)
+  async function create_card(paths)
   {
     var img;
     var div;
     var checkLike;
     var imgOwned;
 
+    for (let i = 0; i < paths.length; i++) {
+      path = paths[i];
+    
     checkLike = await liked_or_disliked(path);
     imgOwned = await check_img_owner(path);
 
@@ -183,8 +189,8 @@
     div = document.createElement('div');
     cardBody = document.createElement('div');
     likeIcon = document.createElement('IMG');
-    likeText = document.createTextNode(likes);
-    commentText = document.createTextNode(comments);
+    likeText = document.createTextNode(likes[i]);
+    commentText = document.createTextNode(comments[i]);
     DeleteIcon = document.createElement('IMG');
     likeIcon.setAttribute('src', checkLike);
 
@@ -240,6 +246,7 @@
       cardBody.appendChild(DeleteIcon);
     div.appendChild(cardBody);
     src.appendChild(div);
+  }
 
   }
 
@@ -282,12 +289,16 @@
   
     paths = create_path(data);
 
-    for (i = 0; i < paths.length; i++) {
-      if (paths[i].match(regex))
-        create_card(paths[i], likes[i], comments[i]);
-      else
-        continue;
-    }
+    create_card(paths);
+
+    // for (i = 0; i < paths.length; i++) {
+    //   if (paths[i].match(regex)) {
+    //     create_card(paths[i], likes[i], comments[i]);
+    //     console.log(paths[i]);
+    //   }
+    //   else
+    //     continue;
+    // }
     
   }
 
