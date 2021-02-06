@@ -549,7 +549,7 @@
         $comments = $this->comments + 1;
 
         $stmt->bindParam(':comments', $comments, PDO::PARAM_INT);
-        $stmt->bindParam(':account_id', $_SESSION['id']);
+        $stmt->bindParam(':account_id', $this->owner);
         $stmt->bindParam(':post_id', $this->post_id);
         $stmt->bindParam(':commented', $bool);
         $stmt->bindParam(':comment', $this->comment);

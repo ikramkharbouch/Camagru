@@ -18,6 +18,7 @@
 
   var likeText = null;
   var commentText = null;
+  var path = null;
 
   function startup() {
 
@@ -62,6 +63,8 @@
 
     path = str.concat(path.substring(2));
 
+    console.log(path);
+
     try {
       fetch("https://camagru-ik.cf/api/post/" + parameter + ".php", {
         method: "POST",
@@ -89,6 +92,7 @@
     let checkUser = await check_user_likes(path);
 
     console.log(checkUser);
+    console.log("Entered like function");
 
     if (checkUser == true)
       liked = 1;
@@ -98,6 +102,7 @@
     if (liked == 0)
     {
       liked = 1;
+      console.log("called the like query");
       console.log("liked == ", liked);
       div.getElementsByTagName('img')[1].src = '../assets/like-black-32.png';
       send_query('like', path);
@@ -179,73 +184,76 @@
     var checkLike;
     var imgOwned;
 
+    console.log(paths);
+    console.log(likes);
+    console.log(comments);
     for (let i = 0; i < paths.length; i++) {
       path = paths[i];
-    
-    checkLike = await liked_or_disliked(path);
-    imgOwned = await check_img_owner(path);
+      console.log(likes[i]);
+      checkLike = await liked_or_disliked(path);
+      imgOwned = await check_img_owner(path);
 
-    img = document.createElement('img');
-    div = document.createElement('div');
-    cardBody = document.createElement('div');
-    likeIcon = document.createElement('IMG');
-    likeText = document.createTextNode(likes[i]);
-    commentText = document.createTextNode(comments[i]);
-    DeleteIcon = document.createElement('IMG');
-    likeIcon.setAttribute('src', checkLike);
+      img = document.createElement('img');
+      div = document.createElement('div');
+      cardBody = document.createElement('div');
+      likeIcon = document.createElement('IMG');
+      likeText = document.createTextNode(likes[i]);
+      commentText = document.createTextNode(comments[i]);
+      DeleteIcon = document.createElement('IMG');
+      likeIcon.setAttribute('src', checkLike);
 
-    commentIcon = document.createElement('IMG');
-    commentIcon.setAttribute('src', commented_or_uncommented(comments));
+      commentIcon = document.createElement('IMG');
+      commentIcon.setAttribute('src', commented_or_uncommented(comments));
 
-    DeleteIcon.setAttribute('src', '../assets/delete-32.png');
+      DeleteIcon.setAttribute('src', '../assets/delete-32.png');
 
-    likeIcon.addEventListener('click', function (ev) {
-      like(path, div);
-      ev.preventDefault();
-    }, false);
+      likeIcon.addEventListener('click', function (ev) {
+        like(paths[i], div);
+        ev.preventDefault();
+      }, false);
 
-    commentIcon.addEventListener('click', function (ev) {
-      comment(path);
-      ev.preventDefault();
-    }, false);
+      commentIcon.addEventListener('click', function (ev) {
+        comment(paths[i]);
+        ev.preventDefault();
+      }, false);
 
-    DeleteIcon.addEventListener('click', function (ev) {
+      DeleteIcon.addEventListener('click', function (ev) {
 
-      // Add are you sure you want to delete later!
+        // Add are you sure you want to delete later!
 
-      delete_img(path, div);
-      ev.preventDefault();
-    }, false);
-
-
-    likeIcon.className = 'icon like-icon';
-
-    commentIcon.className = 'icon comment-icon';
-
-    DeleteIcon.className = 'icon delete-icon';
-
-    div.className = 'try';
-
-    img.className = 'img';
-    
-    div.id = index++;
-
-    img.src = path;
-    cardBody.className = 'card-footer';
-    cardBody.style.backgroundColor = '#9364A8';
-    cardBody.style.height = '100px';
-    div.appendChild(img);
-    cardBody.appendChild(likeIcon);
-    cardBody.appendChild(likeText);
-    cardBody.appendChild(commentIcon);
-    cardBody.appendChild(commentText);
+        delete_img(paths[i], div);
+        ev.preventDefault();
+      }, false);
 
 
-    // Check if the image belongs to the logged in user
-    if (imgOwned)
-      cardBody.appendChild(DeleteIcon);
-    div.appendChild(cardBody);
-    src.appendChild(div);
+      likeIcon.className = 'icon like-icon';
+
+      commentIcon.className = 'icon comment-icon';
+
+      DeleteIcon.className = 'icon delete-icon';
+
+      div.className = 'try';
+
+      img.className = 'img';
+      
+      div.id = index++;
+
+      img.src = path;
+      cardBody.className = 'card-footer';
+      cardBody.style.backgroundColor = '#9364A8';
+      cardBody.style.height = '100px';
+      div.appendChild(img);
+      cardBody.appendChild(likeIcon);
+      cardBody.appendChild(likeText);
+      cardBody.appendChild(commentIcon);
+      cardBody.appendChild(commentText);
+
+
+      // Check if the image belongs to the logged in user
+      if (imgOwned)
+        cardBody.appendChild(DeleteIcon);
+      div.appendChild(cardBody);
+      src.appendChild(div);
   }
 
   }
