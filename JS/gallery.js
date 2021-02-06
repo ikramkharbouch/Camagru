@@ -63,8 +63,6 @@
 
     path = str.concat(path.substring(2));
 
-    console.log(path);
-
     try {
       fetch("https://camagru-ik.cf/api/post/" + parameter + ".php", {
         method: "POST",
@@ -91,9 +89,6 @@
 
     let checkUser = await check_user_likes(path);
 
-    console.log(checkUser);
-    console.log("Entered like function");
-
     if (checkUser == true)
       liked = 1;
     else
@@ -102,8 +97,6 @@
     if (liked == 0)
     {
       liked = 1;
-      console.log("called the like query");
-      console.log("liked == ", liked);
       div.getElementsByTagName('img')[1].src = '../assets/like-black-32.png';
       send_query('like', path);
 
@@ -184,12 +177,8 @@
     var checkLike;
     var imgOwned;
 
-    console.log(paths);
-    console.log(likes);
-    console.log(comments);
     for (let i = 0; i < paths.length; i++) {
       path = paths[i];
-      console.log(likes[i]);
       checkLike = await liked_or_disliked(path);
       imgOwned = await check_img_owner(path);
 
@@ -275,7 +264,6 @@
       })
         .then((res) => res.text());
 
-        // console.log("received data: ",response)
       if (response == '{"Message":"The user owns the image"}') {
           return true;
         } else {
@@ -293,20 +281,11 @@
   {
     var paths;
 
-    var regex = /^(..\/img\/|..\/upload\/)\/*.+/g;
+    // var regex = /^(..\/img\/|..\/upload\/)\/*.+/g;
   
     paths = create_path(data);
 
     create_card(paths);
-
-    // for (i = 0; i < paths.length; i++) {
-    //   if (paths[i].match(regex)) {
-    //     create_card(paths[i], likes[i], comments[i]);
-    //     console.log(paths[i]);
-    //   }
-    //   else
-    //     continue;
-    // }
     
   }
 
@@ -326,8 +305,7 @@
         body: JSON.stringify({ filename: path }),
       })
         .then((res) => res.text());
-
-        // console.log("received data: ",response)
+        
       if (response == '{"message":"No Like Found"}') {
           return false;
         } else {

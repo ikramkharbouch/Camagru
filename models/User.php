@@ -538,7 +538,7 @@
     public function comment() {
 
         $query = 'BEGIN;
-                    UPDATE posts SET comments = :comments WHERE post_id = :post_id AND account_id = :account_id;
+                    UPDATE posts SET comments = :comments WHERE post_id = :post_id;
                     INSERT INTO user_comments SET account_id = :account_id, post_id = :post_id, commented = :commented, comment = :comment;
         COMMIT;';
 
@@ -549,7 +549,7 @@
         $comments = $this->comments + 1;
 
         $stmt->bindParam(':comments', $comments, PDO::PARAM_INT);
-        $stmt->bindParam(':account_id', $this->owner);
+        $stmt->bindParam(':account_id', $_SESSION['id']);
         $stmt->bindParam(':post_id', $this->post_id);
         $stmt->bindParam(':commented', $bool);
         $stmt->bindParam(':comment', $this->comment);

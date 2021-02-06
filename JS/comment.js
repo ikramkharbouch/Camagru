@@ -13,7 +13,7 @@
     var newpath = null;
     var Username = null;
     var likeIcon = null;
-    var likes = null;
+
     var editElem = null;
     var editComment = null;
     var x = null;
@@ -68,74 +68,7 @@
         }, false);
     }
 
-    function  events(comments) {
-      var children = comments.children;
-
-      if (comments) {
-          for(let i = 0; i < children.length; i++) {
-
-            var edit = children[i].querySelector('#edit' + i);
-
-            edit.addEventListener('click', function(ev) {
-              var newEdit = children[i].querySelector('#edit' + i);
-              newEdit.className = 'edit-hide';
-              editCmt(children[i]);
-            }, false);
-          }
-      }
-    }
-
-    function  editCmt(newElem) {
-
-      editComment = document.createElement('input');
-      var button = document.createElement('button');
-      var container = document.createElement('div');
-
-      button.setAttribute('style', 'padding: 12px 40px 12px 40px; background-color: #9364A8; color: #fff; border: 0; border-radius: 5px;');
-      button.innerHTML = 'Edit';
-
-      editComment.setAttribute('style', 'padding: 10px; margin-top: 10px;');
-
-      container.setAttribute('style', 'display: flex; flex-direction: column;');
-
-
-      container.appendChild(editComment);
-      container.appendChild(button);
-
-
-      newElem.appendChild(container);
-
-      button.addEventListener('click', function(ev) {
-        var id = newElem.getAttribute('id');
-        newElem.removeChild(container);
-        newElem.querySelector('#comment').innerHTML = editComment.value;
-        newElem.querySelector('#edit' + id).className = 'edit-elem';
-        addtoDatabase(editComment.value);
-      }, false);
-    }
-
-    function addtoDatabase(comment) {
-
-      try {
-        fetch("https://camagru-ik.cf/api/post/update_comment.php", {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify({ filename: newpath, comment: comment }),
-        })
-          .then((res) => res.text())
-          .then((data) => {
-            console.log(data);
-          })
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
     function addComment(comment) {
-
 
         var str = '/var/www/camagru-ik.cf/html';
 
@@ -169,7 +102,6 @@
     function  createCmtElem(comment, parameter) {
       
       newElem = document.createElement('div');
-      editElem = document.createElement('span');
       
       newElem.style.cssText = 'border: 1px solid #ABABAB; margin-top: 10px; border-radius: 3px; padding: 20px; width: 100%;';
       
@@ -185,10 +117,6 @@
       var second_span = document.createElement('span');
       second_span.setAttribute('style', 'color: black; margin-left: 20px;'); /*just an example, your styles set here*/
       
-      editElem.className = 'edit-elem';
-
-      editElem.setAttribute('id', 'edit' + comment_id);
-      
       first_span.appendChild(username);
       second_span.appendChild(newContent);
 
@@ -196,23 +124,19 @@
 
       second_span.setAttribute('id', 'comment');
       
-      var edit = document.createTextNode('Edit');
-      editElem.appendChild(edit);
       
       // Appending all elements to the principal container
       
       newElem.appendChild(first_span);
       newElem.appendChild(second_span);
-      // newElem.appendChild(newContent);
-      
-      newElem.appendChild(editElem);
+    
 
       // Give the element an id;
 
       newElem.setAttribute('id', comment_id);
 
       comment_id += 1;
-      
+
       comments.appendChild(newElem);
     }
 
@@ -236,10 +160,7 @@
 
       }
 
-      events(comments);
-
     }
-
 
     // Add previous comments to the commented image
 
