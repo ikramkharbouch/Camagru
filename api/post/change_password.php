@@ -20,7 +20,11 @@
     $data = json_decode(file_get_contents("php://input"));
 
     $user->pass = md5($data->pass);
-    $user->email = $data->email;
+    $user->reset_token = $data->token;
+
+    // Search for token if not found return error
+
+    $user->get_user_id();
 
     if ($user->change_password()) {
         echo json_encode(

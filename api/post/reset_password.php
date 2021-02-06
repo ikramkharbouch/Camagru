@@ -21,13 +21,18 @@
 
     $user->email = $data->email;
 
+    // Generate a new token and insert it to get the user's data
+    $user->reset_token = uniqid();
+
+    $user->insert_reset_token();
+
     $to      = $user->email;
     $subject = 'Reset your password';
     $message = "
                 <!DOCTYPE html>
                 <html><body style='text-align:center;'>
                 <h1>Confirm Your Email</h1><br />
-                Reset your password here " . "<a href='https://camagru-ik.cf/forms/change_password.php?email=$user->email'><button style='background-color: #4CAF50; /* Green */
+                Reset your password here " . "<a href='https://camagru-ik.cf/forms/change_password.php?token=$user->reset_token'><button style='background-color: #4CAF50; /* Green */
                 border: none;
                 color: white;
                 padding: 15px 32px;

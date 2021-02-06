@@ -6,7 +6,7 @@
     var password = null;
     var passwordConfirmation = null;
     var errorMsg = null;
-    var email = null;
+    var token = null;
 
     function startup() {
 
@@ -15,18 +15,19 @@
 
         // Get email
 
-        email = (window.location.search.substr(1)).substr(6);
+        token = (window.location.search.substr(1)).substr(6);
 
-        console.log(email);
+        console.log(token);
 
         form.addEventListener('submit', function (ev) {
-            changePassword(ev);
+            changePassword(ev, token);
             ev.preventDefault();
         }, false);
     }
       
-      function changePassword(e, param1, param2) {
+      function changePassword(e, token) {
         e.preventDefault();
+        console.log("token inside the function is", token);
 
         password = document.getElementById("password").value;
         passwordConfirmation = document.getElementById("passwordConfirmation").value;
@@ -42,7 +43,7 @@
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                   },
-                  body: JSON.stringify({ email: email, pass: password }),
+                  body: JSON.stringify({ token: token, pass: password }),
                 })
                   .then((res) => res.text())
                   .then((data) => {

@@ -31,6 +31,7 @@
         public $email_of_owner;
         public $creation_date;
         public $creation_time;
+        public $reset_token;
 
         // Constructor with DB
         public function __construct($db) {
@@ -82,7 +83,7 @@
     // Create new user
     public function create() {
         // Create Query
-       $query = 'INSERT INTO users SET fullname = :fullname, email = :email, username = :username, pass = :pass, token = :token, verified = :verified, notifs = :notifs, profile_pic = :profile_pic;';
+       $query = 'INSERT INTO users SET fullname = :fullname, email = :email, username = :username, pass = :pass, token = :token, verified = :verified, notifs = :notifs, profile_pic = :profile_pic, private_token = :private_token';
 
         // Prepare statement
         $stmt = $this->conn->prepare($query);
@@ -96,6 +97,7 @@
         $this->token = htmlspecialchars($this->token);
         $this->notifs = 1;
         $profile_pic = "";
+        $private_token = "";
 
         //Check if data is empty
         if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
@@ -124,6 +126,7 @@
         $stmt->bindParam(':notifs', $this->notifs, PDO::PARAM_INT);
         $stmt->bindParam(':token', $this->token);
         $stmt->bindParam(':profile_pic', $profile_pic, PDO::PARAM_STR);
+        $stmt->bindParam(':private_token', $private_token, PDO::PARAM_STR);
 
         if ($stmt->execute()) {
             return true;
@@ -741,7 +744,12 @@
 
     public function change_password() {
 
-        $query = 'UPDATE users SET pass = :pass WHERE email = :email';
+        // $query = 'BEGIN;
+        //             UPDATE users SET pass = :pass WHERE private_token = :private_token;
+        //             UPDATE users SET private_token = "" WHERE private_token = :private_token;
+        //         COMMIT;';
+
+        $query = 'UPDATE users SET pass = :pass, private_token = :private_token WHERE id = :id';
 
         $stmt = $this->conn->prepare($query);
         
@@ -751,8 +759,11 @@
             return false;
         }
 
+        $empty = "";
+
         $stmt->bindParam('pass', $this->pass);
-        $stmt->bindParam('email', $this->email);
+        $stmt->bindParam('private_token', $empty);
+        $stmt->bindParam('id', $this->id);
         
         if ($stmt->execute()) {
             return true;
@@ -775,6 +786,36 @@
             return true;
         }
         return false;
+    }
+
+    public function insert_reset_token() {
+
+        $query = 'UPDATE users SET private_token = :private_token WHERE email = :email';
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam('private_token', $this->reset_token);
+        $stmt->bindParam('email', $this->email);
+        
+        $stmt->execute();
+    }
+
+    public function get_user_id() {
+
+        $query = 'SELECT `id` FROM `users` WHERE private_token = :private_token';
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':private_token', $this->reset_token);
+
+        $stmt->execute();
+
+        // Fetch data
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Set properties
+        $this->id = $row['id'];
+        
     }
 }
 ?>
