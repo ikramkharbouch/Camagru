@@ -27,7 +27,7 @@
     $rest = '..' . substr('/var/www/camagru-ik.cf/html/img/MWINgm.png', 27);
 
     if ($user->comment()) {
-        if ($user->notifs == 1) 
+        if ($user->notifs == 1)
         {
 
         $to      = $user->email_of_owner;

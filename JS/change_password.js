@@ -19,10 +19,38 @@
 
         console.log(token);
 
+        search_for_token(token);
+
         form.addEventListener('submit', function (ev) {
             changePassword(ev, token);
             ev.preventDefault();
         }, false);
+    }
+
+
+    function search_for_token(token) {
+      
+      try {
+        fetch("https://camagru-ik.cf/api/post/search_token.php", {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({ reset_token: token }),
+        })
+          .then((res) => res.text())
+          .then((data) => {
+            if (data == '{"Message":"Token Does Not Exist"}') {
+                window.location.href = '../404.php';
+            } else {
+              console.log(data);
+            }
+          });
+      } catch (error) {
+        console.log(error);
+      }
+
     }
       
       function changePassword(e, token) {

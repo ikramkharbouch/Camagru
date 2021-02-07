@@ -815,7 +815,6 @@
 
         // Set properties
         $this->id = $row['id'];
-        
     }
 }
 ?>
