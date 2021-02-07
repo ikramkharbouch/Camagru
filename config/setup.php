@@ -1,6 +1,7 @@
 <?php
     
-    include_once './Database.php';
+include_once './database.php';
+
 
     // Instantiate DB & connect
     $database = new Database();
@@ -162,6 +163,5 @@
       
     // Execute query
     $stmt->execute();
-
 
 ?>
