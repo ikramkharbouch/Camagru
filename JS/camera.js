@@ -168,6 +168,30 @@
   }
 
 
+  function add_previous_shots(data) {
+    var str = '..';
+    var regex = /((\/img\/)|(\/upload\/)).*?((.png)|(.jpeg)|(.jpg)).*?/g;
+
+    data = (data.substring(9)).slice(0, -2);
+    var array = data.split('},');
+
+    for (i = 0; i < array.length; i++) {
+
+      array[i] = array[i].replace(/\\\//g, "/");
+      found = array[i].match(regex);
+      array[i] = str.concat(found);
+
+      // Creating the element
+
+        var img = document.createElement('img');
+        img.setAttribute('style', 'height: 200px; width: 200px');
+        img.src = array[i];
+        src.appendChild(img);
+    }
+
+  }
+
+
   function get_previous_shots() {
 
     try {
@@ -183,19 +207,12 @@
           if (data == '{"message":"No Shots Found"}') {
             console.log("No Shots Found");
           } else {
-            console.log(data);
+            add_previous_shots(data);
           }
         });
     } catch (error) {
         console.log(error);
     }
-
-
-
-    // var img = document.createElement('img');
-    // img.setAttribute('style', 'height: 200px; width: 200px');
-    // img.src = data;
-    // src.appendChild(img);
   }
 
   window.addEventListener('load', startup, false);
