@@ -65,7 +65,7 @@ include_once './database.php';
     // Create table users
 
     $query = "CREATE TABLE ikrkharb.users (
-    `id` int(8) NOT NULL,
+    `id` int(8) NOT NULL AUTO_INCREMENT,
     `fullname` varchar(50) NOT NULL,
     `email` varchar(50) NOT NULL,
     `username` varchar(50) NOT NULL,
@@ -74,7 +74,8 @@ include_once './database.php';
     `verified` tinyint(1) NOT NULL,
     `notifs` tinyint(1) NOT NULL,
     `profile_pic` varchar(255) NOT NULL,
-    `private_token` varchar(50) NOT NULL
+    `private_token` varchar(50) NOT NULL,
+    PRIMARY KEY (ID)
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 
     // Prepare statement
@@ -142,16 +143,16 @@ include_once './database.php';
           // Execute query
           $stmt->execute();
  
-    // Alter table
+    // // Alter table
 
-    $query = "ALTER TABLE ikrkharb.users
-    ADD PRIMARY KEY (`id`);";
+    // $query = "ALTER TABLE ikrkharb.users
+    // ADD PRIMARY KEY (`id`);";
       
-    // Prepare statement
-    $stmt = $db->prepare($query);
+    // // Prepare statement
+    // $stmt = $db->prepare($query);
       
-    // Execute query
-    $stmt->execute();
+    // // Execute query
+    // $stmt->execute();
 
     // Alter table
 

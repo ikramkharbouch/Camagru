@@ -124,8 +124,8 @@
   {
     var str = '..';
     var regex = /((\/img\/)|(\/upload\/)).*?((.png)|(.jpeg)|(.jpg)).*?/g;
-    var regex_likes = /(?<=,"likes":")(.*)(?=",)/g;
-    var regex_comments = /(?<=,"comments":")(.*)(?=")/g;
+    var regex_likes = /(?<=,"likes":)(.*)(?=,)/g;
+    var regex_comments = /(?<=,"comments":)(.*)(?=)/g;
     var found;
 
     data = (data.substring(9)).slice(0, -2);
@@ -141,7 +141,7 @@
       found = array[i].match(regex);
       array[i] = str.concat(found);
     }
-    
+
     return array;
   }
 
