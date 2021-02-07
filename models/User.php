@@ -524,11 +524,7 @@
 
         $bool = 1;
 
-        var_dump($this->post_id);
-
-        // $stmt->bindParam(':likes', $likes, PDO::PARAM_INT);
         $stmt->bindParam(':account_id', $_SESSION['id']);
-        // $stmt->bindParam(':account_id2', $this->owner);
         $stmt->bindParam(':post_id', $this->post_id);
         $stmt->bindParam(':liked', $bool);
 

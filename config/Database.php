@@ -2,7 +2,7 @@
     class Database {
         // DB Params
         private $host = 'localhost';
-        private $db_name = 'camagru';
+        private $db_name = 'ikrkharb';
         private $username = 'root';
         private $password = 'JJ2AhRBcqFjtxJ';
         private $conn;
@@ -16,6 +16,7 @@
                 // $this->conn = new PDO('mysql:host=' . $this->host . ';dbname=' . $this->db_name,
                 $this->username, $this->password);
                 $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $this->conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, 0);
                 session_start();
             } catch(PDOException $e) {
                 echo 'Connection Error: ' . $e->getMessage();
