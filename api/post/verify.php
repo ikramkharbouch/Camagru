@@ -28,7 +28,7 @@ if ($user->verified == 1) {
     exit();
 } else {
     if ($user->verify()) {
-        header("Location: ../../redirect_pages/user_verified.php");
+        header("Location: ../../redirect_pages/verified_user.php");
         exit();
     } else {
         echo json_encode(

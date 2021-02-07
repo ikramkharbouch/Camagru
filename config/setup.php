@@ -88,11 +88,12 @@ include_once './database.php';
     // Create table user_comments
 
     $query = "CREATE TABLE ikrkharb.user_comments (
-        `comment_id` int(11) NOT NULL,
+        `comment_id` int(8) NOT NULL AUTO_INCREMENT,
         `account_id` int(8) NOT NULL,
         `post_id` varchar(50) NOT NULL,
         `commented` tinyint(1) NOT NULL,
-        `comment` varchar(255) NOT NULL
+        `comment` varchar(255) NOT NULL,
+        PRIMARY KEY (comment_id)
       ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
       
           // Prepare statement
@@ -156,13 +157,13 @@ include_once './database.php';
 
     // Alter table
 
-    $query = "ALTER TABLE ikrkharb.user_comments
-    ADD PRIMARY KEY (`comment_id`);";
+    // $query = "ALTER TABLE ikrkharb.user_comments
+    // ADD PRIMARY KEY (`comment_id`);";
       
-    // Prepare statement
-    $stmt = $db->prepare($query);
+    // // Prepare statement
+    // $stmt = $db->prepare($query);
       
-    // Execute query
-    $stmt->execute();
+    // // Execute query
+    // $stmt->execute();
 
 ?>

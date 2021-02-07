@@ -24,7 +24,7 @@
 
     $user->get_post_id();
 
-    $rest = '..' . substr('/var/www/camagru-ik.cf/html/img/MWINgm.png', 27);
+    $rest = '..' . substr($user->filename, 27);
 
     if ($user->comment()) {
         if ($user->notifs == 1)
