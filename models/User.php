@@ -812,5 +812,19 @@
         // Set properties
         $this->id = $row['id'];
     }
+
+    public function previous_shots() {
+
+        $query = 'SELECT `post` FROM `posts` WHERE account_id = :account_id AND post LIKE "%img%"';
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':account_id', $_SESSION['id']);
+
+        $stmt->execute();
+
+        return $stmt;
+
+    }
 }
 ?>

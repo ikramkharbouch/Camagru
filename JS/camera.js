@@ -40,6 +40,8 @@
 
     src = document.getElementById('x');
 
+    get_previous_shots();
+
     video.onloadedmetadata = function (e) {
       video.play();
     };
@@ -163,6 +165,37 @@
     } else {
       clearphoto();
     }
+  }
+
+
+  function get_previous_shots() {
+
+    try {
+      fetch("https://camagru-ik.cf/api/post/previous_shots.php", {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      })
+        .then((res) => res.text())
+        .then((data) => {
+          if (data == '{"message":"No Shots Found"}') {
+            console.log("No Shots Found");
+          } else {
+            console.log(data);
+          }
+        });
+    } catch (error) {
+        console.log(error);
+    }
+
+
+
+    // var img = document.createElement('img');
+    // img.setAttribute('style', 'height: 200px; width: 200px');
+    // img.src = data;
+    // src.appendChild(img);
   }
 
   window.addEventListener('load', startup, false);
