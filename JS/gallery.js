@@ -50,6 +50,7 @@
             // console.log("Error");
           } else {
             manipulate_data(data);
+            console.log(data);
           }
         });
     } catch (error) {
@@ -170,6 +171,7 @@
 
   }
 
+
   async function create_card(paths)
   {
     var img;
@@ -196,25 +198,6 @@
 
       DeleteIcon.setAttribute('src', '../assets/delete-32.png');
 
-      likeIcon.addEventListener('click', function (ev) {
-        like(paths[i], div);
-        ev.preventDefault();
-      }, false);
-
-      commentIcon.addEventListener('click', function (ev) {
-        comment(paths[i]);
-        ev.preventDefault();
-      }, false);
-
-      DeleteIcon.addEventListener('click', function (ev) {
-
-        // Add are you sure you want to delete later!
-
-        delete_img(paths[i], div);
-        ev.preventDefault();
-      }, false);
-
-
       likeIcon.className = 'icon like-icon';
 
       commentIcon.className = 'icon comment-icon';
@@ -227,7 +210,28 @@
       
       div.id = index++;
 
-      img.src = path;
+      likeIcon.addEventListener('click', function (ev) {
+        let res = document.querySelectorAll('div.try');
+        console.log(paths[i]);
+        like(paths[i], res[i]);
+        ev.preventDefault();
+      }, false);
+
+      commentIcon.addEventListener('click', function (ev) {
+        comment(paths[i]);
+        ev.preventDefault();
+      }, false);
+
+      DeleteIcon.addEventListener('click', function (ev) {
+
+        let res = document.querySelectorAll('div.try');
+        // Add are you sure you want to delete later!
+
+        delete_img(paths[i], res[i]);
+        ev.preventDefault();
+      }, false);
+
+      img.src = paths[i];
       cardBody.className = 'card-footer';
       cardBody.style.backgroundColor = '#9364A8';
       cardBody.style.height = '100px';
@@ -281,8 +285,6 @@
   {
     var paths;
 
-    // var regex = /^(..\/img\/|..\/upload\/)\/*.+/g;
-  
     paths = create_path(data);
 
     create_card(paths);

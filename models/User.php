@@ -445,7 +445,7 @@
 
     public function gallery() {
 
-        $query = 'SELECT post, likes, comments FROM posts ORDER BY `creation_date`, `creation_time` DESC LIMIT :offset, 5';
+        $query = 'SELECT post, likes, comments FROM posts ORDER BY `datetime` DESC LIMIT :offset, 5';
 
         $stmt = $this->conn->prepare($query);
 
