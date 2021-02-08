@@ -19,13 +19,13 @@
 
     // Get the type of the sent image (png, jpeg, jpg)
 
-    $type = substr(implode("", $_FILES[files]["type"]), 6);
+    $type = substr(implode("", $_FILES['files']["type"]), 6);
 
     $type = '.' . $type;
 
     // Get the path of the uploaded image
 
-    $user->uploaded_file = implode("", $_FILES[files]["tmp_name"]);
+    $user->uploaded_file = implode("", $_FILES['files']["tmp_name"]);
 
     // Set random name for the new saved image 
 

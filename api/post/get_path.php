@@ -1,9 +1,11 @@
 <?php
+    
     // Headers
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
-    header('Access-Control-Allow-Methods: DELETE');
+    header('Access-Control-Allow-Methods: POST');
     header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
+
 
     include_once '../../config/database.php';
     include_once '../../models/User.php';
@@ -17,17 +19,17 @@
 
     $data = json_decode(file_get_contents("php://input"));
 
-    $user->email = $data->email;
-    $user->pass = $data->pass;
+    $user->post_id = $data->post_id;
 
-    if ($user->logout()) {
-        echo json_encode(
-            array('Message' => 'User Logged Out')
-        );
-    } else {
-        echo json_encode(
-            array('Message' => 'User Not Logged Out')
-        );
+    // Get user
+    $user->get_path();
+
+    // echo $user->profile_pic;
+
+    if ($user->filename)
+        echo $user->filename;
+    else {
+        echo 'Image does not exist';
     }
 
 ?>

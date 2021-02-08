@@ -74,10 +74,14 @@
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // Set properties
-        $this->email = $row['email'];
-        $this->username = $row['username'];
-        $this->pass = $row['pass'];
-        $this->verified = $row['verified'];
+        if ($row) {
+            $this->email = $row['email'];
+            $this->username = $row['username'];
+            $this->pass = $row['pass'];
+            $this->verified = $row['verified'];
+            return true;
+        }
+        return false;
     }
 
     // Create new user
@@ -280,21 +284,18 @@
         // Fetch data
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Set properties
-        // if (($row['email'] == $this->email) || ($row['username'] == $this->username)) {
-        //     return true;
-        // }
-
-        if (is_array($row) && (($row['email'] == $this->email) || ($row['username'] == $this->username))) {
-            return true;
+        if ($row) {
+            
+            if (is_array($row) && (($row['email'] == $this->email) || ($row['username'] == $this->username))) {
+                return true;
+            }
         }
-
         return false;
     }
 
     public function check_creds() {
         // Create query
-        $query = 'SELECT id, email, username, pass, verified 
+        $query = 'SELECT id, email, pass, verified 
                 FROM users WHERE email = :email';
 
         $stmt = $this->conn->prepare($query);
@@ -311,8 +312,11 @@
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // Set properties
-        if ($row['email'] == $this->email && $row['pass'] == $this->pass && $row['verified'] == 1) {
-            return true;
+
+        if ($row) {
+            if ($row['email'] == $this->email && $row['pass'] == $this->pass && $row['verified'] == 1) {
+                return true;
+            }
         }
 
         return false;
@@ -331,7 +335,11 @@
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $this->id = $row['id'];
+        if ($row) {
+            $this->id = $row['id'];
+            return true;
+        }
+        return false;
     }
 
     public function verify() {
@@ -375,13 +383,15 @@
         $stmt->execute();
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        $this->id = $row['id'];
 
-        $_SESSION["id"] = $this->id;
-        $_SESSION["email"] = $this->email;
-        $_SESSION["auth"] = true;
-
-        return true;
+        if ($row) {
+            $this->id = $row['id'];
+            $_SESSION["id"] = $this->id;
+            $_SESSION["email"] = $this->email;
+            $_SESSION["auth"] = true;
+            return true;
+        }
+        return false;
     }
 
     public function authenticate() {
@@ -396,9 +406,11 @@
         $stmt = $this->conn->prepare($query);
         
         $timestamp = "NOW()";
+
+        $session_id = session_id();
         
         try {
-            $stmt->bindParam(':sess_id', session_id());
+            $stmt->bindParam(':sess_id', $session_id);
             $stmt->bindParam(':account_id', $_SESSION['id']);
             
             
@@ -504,13 +516,18 @@
         // Fetch data
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Set properties
-        $this->post_id = $row['post_id'];
-        $this->owner = $row['account_id'];
-        $this->email_of_owner = $row['email'];
-        $this->likes = $row['likes'];
-        $this->comments = $row['comments'];
-        $this->notifs = $row['notifs'];
+        if ($row) {
+            // Set properties
+            $this->post_id = $row['post_id'];
+            $this->owner = $row['account_id'];
+            $this->email_of_owner = $row['email'];
+            $this->likes = $row['likes'];
+            $this->comments = $row['comments'];
+            $this->notifs = $row['notifs'];
+            return true;
+        }
+
+        return false;
     }
 
     public function like() {
@@ -612,8 +629,11 @@
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // Set properties
-        $this->username = $row['username'];
-
+        if ($row) {
+            $this->username = $row['username'];
+            return true;
+        }
+        return false;
     }
 
     public function delete_img() {
@@ -681,7 +701,13 @@
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // Set properties
-        $this->profile_pic = $row['profile_pic'];
+
+        if ($row) {
+            $this->profile_pic = $row['profile_pic'];
+            return true;
+        }
+
+        return false;
 
     }
 
@@ -700,8 +726,11 @@
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // Set properties
-        $this->liked = $row['liked'];
-        
+        if ($row) {
+            $this->liked = $row['liked'];
+            return true;
+        }
+        return false;
     }
 
     public function update_comment() {
@@ -778,8 +807,11 @@
 
         if ($stmt->execute()) {
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            $this->notifs = $row['notifs'];
-            return true;
+            if ($row) {
+                $this->notifs = $row['notifs'];
+                return true;
+            }
+            return false;
         }
         return false;
     }
@@ -810,7 +842,11 @@
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // Set properties
-        $this->id = $row['id'];
+        if ($row) {
+            $this->id = $row['id'];
+            return true;
+        }
+        return false;
     }
 
     public function previous_shots() {
@@ -841,7 +877,32 @@
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // Set properties
-        $this->id = $row['id'];
+        if ($row) {
+            $this->id = $row['id'];
+            return true;
+        }
+        return false;
+    }
+
+    public function get_path() {
+
+        $query = 'SELECT `post` FROM `posts` WHERE post_id = :post_id';
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':post_id', $this->post_id);
+
+        $stmt->execute();
+
+        // Fetch data
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($row) {
+            // Set properties
+            $this->filename = $row['post'];
+        }
+
+        return null;
     }
 }
 ?>

@@ -8,7 +8,6 @@
     include_once '../../config/database.php';
     include_once '../../models/User.php';
 
-    @require('../../init.php');
 
     // Instantiate DB & connect
     $database = new Database();
@@ -23,13 +22,14 @@
 
     // Get the type of the uploaded file
 
-    $type = substr(implode("", $_FILES[files]["type"]), 6);
+
+    $type = substr(implode("", $_FILES['files']["type"]), 6);
 
     $type = '.' . $type;
 
      // Get the path of the uploaded file
 
-    $user->uploaded_file = implode("", $_FILES[files]["tmp_name"]);
+    $user->uploaded_file = implode("", $_FILES['files']["tmp_name"]);
 
     $random_string = md5(uniqid(rand(), true));
 

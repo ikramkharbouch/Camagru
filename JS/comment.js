@@ -14,8 +14,6 @@
     var Username = null;
     var likeIcon = null;
 
-    var editElem = null;
-    var editComment = null;
     var x = null;
     var comment_id = 0;
     var Cmt_username;
@@ -24,7 +22,7 @@
 
     var comment_ids = new Array();
 
-    function startup() {
+    async function startup() {
 
         div = document.getElementById('cmt-img');
         input = document.getElementById('input');
@@ -38,12 +36,19 @@
 
         Username = x.trim();
 
-        path = (window.location.search.substr(1)).substr(5);
+        post_id = (window.location.search.substr(1)).substr(3);
 
-        newpath = "/var/www/camagru-ik.cf/html".concat(path.substring(2));
+        newpath = await get_path(post_id);
+
+        if (newpath == 'Image does not exist')
+            window.location.href = '../404.php';
 
         addPreviousComments(newpath);
         getNumberOfLikes(newpath);
+
+        var regex = /(?<=\/var\/www\/camagru-ik.cf\/html)(.*)(?=)/g;
+        
+        path = newpath.match(regex);
 
         img = document.createElement('img');
         img.src = path;
@@ -68,13 +73,34 @@
         }, false);
     }
 
+    async function get_path(post_id) {
+
+      try {
+        let response = await fetch("https://camagru-ik.cf/api/post/get_path.php", {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({ post_id: post_id }),
+        })
+          .then((res) => res.text())
+          return (response);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
     function addComment(comment) {
 
         var str = '/var/www/camagru-ik.cf/html';
 
         createCmtElem(comment, Username);
 
-        newpath = str.concat(path.substring(2));
+        console.log(path);
+        newpath = str.concat(path);
+        console.log(newpath);
+
 
         try {
             fetch("https://camagru-ik.cf/api/post/comment.php", {

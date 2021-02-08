@@ -20,7 +20,6 @@
     $data = json_decode(file_get_contents("php://input"));
 
     $user->email = $data->email;
-    $user->username = $data->username;
     $user->pass = $data->pass;
 
     if ($user->check_creds()) {

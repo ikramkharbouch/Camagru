@@ -10,7 +10,7 @@
 <body>
     <h1 style="color: #000;">The image was uploaded successfully!</h1>
     <div style="text-align: center; margin-top: 20px">
-        <a href="../forms/signin.php"><button class="btn btn-primary">Go back</button></a>
+        <a href="../forms/gallery.php"><button class="btn btn-primary">Go back</button></a>
     </div>
     <footer style="position: fixed; margin-left: 0;">!Silent corner 1337 2021 Covid-19 ikrkharb</footer>
 </body>

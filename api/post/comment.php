@@ -29,7 +29,6 @@
     if ($user->comment()) {
         if ($user->notifs == 1)
         {
-
         $to      = $user->email_of_owner;
         $subject = 'Somebody commented your post';
         $message = "

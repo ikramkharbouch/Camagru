@@ -108,9 +108,38 @@
     
   }
 
-  function comment(path) {
+  async function get_post_id(path) {
 
-    window.location.href = "../forms/comment.php" + '?path=' + path;
+    var str = '/var/www/camagru-ik.cf/html';
+
+    path = str.concat(path.substring(2));
+
+    try {
+      let response = await fetch("https://camagru-ik.cf/api/post/get_post_credentials.php", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({ filename: path }),
+      })
+        .then((res) => res.text())
+
+        return response;
+
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+
+  async function comment(path) {
+
+    id = await get_post_id(path);
+
+    var regex = /(?<="post_id":")(.*)(?=","owner)/g;
+    id = id.match(regex);
+    window.location.href = "../forms/comment.php" + '?id=' + id;
   }
 
   function delete_img(path, div) {

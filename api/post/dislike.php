@@ -8,7 +8,6 @@
     include_once '../../config/database.php';
     include_once '../../models/User.php';
 
-
     // Instantiate DB & connect
     $database = new Database();
     $db = $database->connect();

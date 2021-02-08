@@ -1,7 +1,6 @@
 <?php
-@require('../init.php');
 
-echo $_GET['link'];
+require('../init.php');
 
 if (!isset($_SESSION['auth']) && $_SESSION['auth'] == false) 
 {

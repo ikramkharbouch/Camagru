@@ -1,5 +1,5 @@
 <?php
-  @require('../init.php');
+  require('../init.php');
 
   if (!isset($_SESSION['auth']) && $_SESSION['auth'] == false) 
   {
@@ -30,7 +30,6 @@
     <h1>Camagru</h1>
     <a href="../index.php">Home</a>
     <a href="./gallery.php">Gallery</a>
-    <a href="./profile.php">Profile</a>
     <a href="./settings.php">Settings</a>
     <a href="../logout.php">Logout</a>
   </div>

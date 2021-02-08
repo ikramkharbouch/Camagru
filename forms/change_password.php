@@ -1,8 +1,6 @@
 <?php
 
-@require('../init.php');
-
-// echo $_GET['email'];
+require('../init.php');
 
 if (isset($_SESSION['auth']) && $_SESSION['auth'] == true)
 {
