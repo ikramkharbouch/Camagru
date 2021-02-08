@@ -50,7 +50,6 @@
             // console.log("Error");
           } else {
             manipulate_data(data);
-            console.log(data);
           }
         });
     } catch (error) {

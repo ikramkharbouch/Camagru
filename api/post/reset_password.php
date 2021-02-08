@@ -24,28 +24,35 @@
     // Generate a new token and insert it to get the user's data
     $user->reset_token = uniqid();
 
-    $user->insert_reset_token();
+    $user->email_found();
 
-    $to      = $user->email;
-    $subject = 'Reset your password';
-    $message = "
-                <!DOCTYPE html>
-                <html><body style='text-align:center;'>
-                <h1>Confirm Your Email</h1><br />
-                Reset your password here " . "<a href='https://camagru-ik.cf/forms/change_password.php?token=$user->reset_token'><button style='background-color: #4CAF50; /* Green */
-                border: none;
-                color: white;
-                padding: 15px 32px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 16px;'>Reset Password</button></a>
-                </body></html>
-                ";
+    if ($user->id != NULL) {
 
-    $headers = "Content-Type: text/html; charset=ISO-8859-1\r\n";
-    mail($to, $subject, $message, $headers);
-
-    echo 'Email sent successfully';
+        $user->insert_reset_token();
+    
+        $to      = $user->email;
+        $subject = 'Reset your password';
+        $message = "
+                    <!DOCTYPE html>
+                    <html><body style='text-align:center;'>
+                    <h1>Confirm Your Email</h1><br />
+                    Reset your password here " . "<a href='https://camagru-ik.cf/forms/change_password.php?token=$user->reset_token'><button style='background-color: #4CAF50; /* Green */
+                    border: none;
+                    color: white;
+                    padding: 15px 32px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 16px;'>Reset Password</button></a>
+                    </body></html>
+                    ";
+    
+        $headers = "Content-Type: text/html; charset=ISO-8859-1\r\n";
+        mail($to, $subject, $message, $headers);
+    
+        echo 'Email sent successfully';
+    } else {
+        echo 'Email was not found in database';
+    }
 
 ?>

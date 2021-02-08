@@ -34,7 +34,7 @@
                 if (data == 'Email sent successfully') {
                     window.location.href = '../redirect_pages/reset.php';
                 } else {
-                  // console.log(data);
+                  window.location.href = '../redirect_pages/email_not_found.php';
                 }
               });
           } catch (error) {

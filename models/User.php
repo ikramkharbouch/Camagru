@@ -826,5 +826,22 @@
         return $stmt;
 
     }
+
+    public function email_found() {
+
+        $query = 'SELECT `id` FROM `users` WHERE email = :email';
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':email', $this->email);
+
+        $stmt->execute();
+
+        // Fetch data
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Set properties
+        $this->id = $row['id'];
+    }
 }
 ?>
