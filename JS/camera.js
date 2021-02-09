@@ -52,7 +52,7 @@
         video.play();
       })
       .catch(function (err) {
-        console.log("An error occurred: " + err);
+        //console.log("An error occurred: " + err);
       });
 
     video.addEventListener('canplay', function (ev) {
@@ -144,9 +144,9 @@
           .then((res) => res.text())
           .then((data) => {
             if (data == '{"Message":"Image Not Saved"}') {
-              console.log("Image Not Saved");
+              //console.log("Image Not Saved");
             } else if (data == '{"Message":"Filter Not Valid"}') {
-              console.log('filter not valid');
+              //console.log('filter not valid');
             }
             else {
               var str = '../img/';
@@ -160,7 +160,7 @@
             }
           });
       } catch (error) {
-          console.log(error);
+          //console.log(error);
       }
     } else {
       clearphoto();
@@ -205,13 +205,13 @@
         .then((res) => res.text())
         .then((data) => {
           if (data == '{"message":"No Shots Found"}') {
-            console.log("No Shots Found");
+            //console.log("No Shots Found");
           } else {
             add_previous_shots(data);
           }
         });
     } catch (error) {
-        console.log(error);
+        //console.log(error);
     }
   }
 

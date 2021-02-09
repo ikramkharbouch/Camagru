@@ -20,8 +20,6 @@ $data = json_decode(file_get_contents("php://input"));
 
 $user->filename = $data->filename;
 
-var_dump($user->filename);
-
 $user->get_post_id();
 
 if ($user->owner == $_SESSION['id']) {

@@ -24,8 +24,6 @@
 
     $user->get_post_id();
 
-    $rest = '..' . substr($user->filename, 27);
-
     if ($user->comment()) {
         if ($user->notifs == 1)
         {
@@ -35,7 +33,7 @@
                     <!DOCTYPE html>
                     <html><body style='text-align:center;'>
                     <h1>somebody commented your following post</h>
-                    <a href='https://camagru-ik.cf/forms/comment.php?path=$rest'><button style='background-color: #4CAF50; /* Green */
+                    <a href='https://camagru-ik.cf/forms/comment.php?id=$user->post_id'><button style='background-color: #4CAF50; /* Green */
                     border: none;
                     color: white;
                     padding: 15px 32px;

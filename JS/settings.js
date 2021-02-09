@@ -180,7 +180,7 @@
             }
           });
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
 
     }
@@ -206,7 +206,7 @@
             }
           });
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     }
 
@@ -231,7 +231,7 @@
             }
           });
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     }
 
@@ -255,13 +255,13 @@
           .then((res) => res.text())
           .then((data) => {
             if (data == '{"Message":"Post Updated"}') {
-              console.log("Credentials of the user were updated");
+              //console.log("Credentials of the user were updated");
             } else {
               errorMsg.innerHTML = data;
             }
           });
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
 
     }
@@ -297,7 +297,7 @@
                 });
         }
         else {
-            console.log("No image was uploaded");
+            //console.log("No image was uploaded");
         }
       
     }
@@ -327,13 +327,13 @@
           .then((res) => res.text())
           .then((data) => {
             if (data == '{"Message":"Status Updated"}') {
-              console.log(data);
+              //console.log(data);
             } else {
               errorMsg.innerHTML = data;
             }
           });
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
 
 
@@ -356,7 +356,7 @@
           else
             return false;
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
 
     }

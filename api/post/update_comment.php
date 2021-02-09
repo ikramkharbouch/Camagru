@@ -24,9 +24,6 @@ $user->comment = $data->comment;
 
 $user->get_post_id();
 
-var_dump($user->filename);
-var_dump($user->comment);
-
 // Update User
 if ($user->update_comment()) {
     echo json_encode(

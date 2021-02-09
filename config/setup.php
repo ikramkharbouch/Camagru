@@ -143,27 +143,5 @@ include_once './database.php';
       
           // Execute query
           $stmt->execute();
- 
-    // // Alter table
-
-    // $query = "ALTER TABLE ikrkharb.users
-    // ADD PRIMARY KEY (`id`);";
-      
-    // // Prepare statement
-    // $stmt = $db->prepare($query);
-      
-    // // Execute query
-    // $stmt->execute();
-
-    // Alter table
-
-    // $query = "ALTER TABLE ikrkharb.user_comments
-    // ADD PRIMARY KEY (`comment_id`);";
-      
-    // // Prepare statement
-    // $stmt = $db->prepare($query);
-      
-    // // Execute query
-    // $stmt->execute();
 
 ?>

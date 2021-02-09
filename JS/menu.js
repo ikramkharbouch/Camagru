@@ -38,7 +38,7 @@ function openNav() {
           .then((res) => res.text())
           .then((data) => {
             if (data == '{"Message":"No Username Found"}') {
-              console.log('User Not Found');
+              //console.log('User Not Found');
             } else {
               x.innerText = data;
               // Set the variable in the browser so comment.js can access to it
@@ -46,7 +46,7 @@ function openNav() {
             }
           });
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
 
     }
@@ -71,7 +71,7 @@ function openNav() {
             }
           });
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     }
     

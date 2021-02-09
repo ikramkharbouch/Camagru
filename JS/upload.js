@@ -82,7 +82,7 @@
                 .then((res) => res.text())
                 .then((data) => {
                     if (data == '{"Message":"Image Uploaded"}') {
-                        console.log('Image uploaded successfully');
+                        //console.log('Image uploaded successfully');
                         window.location.href = '../redirect_pages/upload.php';
                     } else {
                         errorMsg.innerHTML = data;

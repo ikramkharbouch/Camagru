@@ -87,7 +87,7 @@
           .then((res) => res.text())
           return (response);
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     }
 
@@ -97,9 +97,9 @@
 
         createCmtElem(comment, Username);
 
-        console.log(path);
+        //console.log(path);
         newpath = str.concat(path);
-        console.log(newpath);
+        //console.log(newpath);
 
 
         try {
@@ -114,13 +114,13 @@
               .then((res) => res.text())
               .then((data) => {
                 if (data == '{"Message":"Commented Successfully"}') {
-                  console.log(data);
+                  //console.log(data);
                 } else {
-                  console.log(data);
+                  //console.log(data);
                 }
               });
           } catch (error) {
-            console.log(error);
+            //console.log(error);
           }
 
     }
@@ -204,14 +204,14 @@
           .then((res) => res.text())
           .then((data) => {
             if (data == '{"message":"No Comments Found"}') {
-              console.log('Comments Not Found');
+              //console.log('Comments Not Found');
 
             } else {
               addCommentBlocks(data);
             }
           });
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
 
     }
@@ -245,7 +245,7 @@
           addLikesNumber(response);
           
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
 
     }

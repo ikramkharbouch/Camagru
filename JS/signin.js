@@ -48,8 +48,8 @@
             .then((res) => res.text())
             .then((data) => {
             if (data == '{"Message":"Session Created"}') {
-                console.log("Session Created");
-                console.log("I will redirect");
+                //console.log("Session Created");
+                //console.log("I will redirect");
                 fetch("https://camagru-ik.cf/api/post/auth.php", {
                 method: "POST",
                 headers: {
@@ -61,14 +61,14 @@
             .then((res) => res.text())
             .then((data) => {
               if (data == '{"Message":"User Authenticated"}') {
-                  console.log("User Authenticated");
+                  //console.log("User Authenticated");
               } else {
-                  console.log("User Authenticated");
+                  //console.log("User Authenticated");
               }
             });
                   window.location.href = "./welcome.php";
               } else {
-                  console.log("Session Not Created");
+                  //console.log("Session Not Created");
               }
             });
             } else {

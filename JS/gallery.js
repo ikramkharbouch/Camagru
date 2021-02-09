@@ -47,13 +47,13 @@
         .then((res) => res.text())
         .then((data) => {
           if (data == '{"Message":"No Posts Found"}') {
-            // console.log("Error");
+          //console.log("Error");
           } else {
             manipulate_data(data);
           }
         });
     } catch (error) {
-      console.log(error);
+      //console.lo(error);
     }
   }
 
@@ -75,13 +75,13 @@
         .then((res) => res.text())
         .then((data) => {
           if (data == '{"Message":"' + parameter + 'd Successfully"}') {
-            console.log(data);
+            //console.lo(data);
           } else {
-            console.log(data);
+            //console.lo(data);
           }
         });
     } catch (error) {
-      console.log(error);
+      //console.lo(error);
     }
   }
 
@@ -128,7 +128,7 @@
         return response;
 
     } catch (error) {
-      console.log(error);
+      //console.lo(error);
     }
 
   }
@@ -240,7 +240,7 @@
 
       likeIcon.addEventListener('click', function (ev) {
         let res = document.querySelectorAll('div.try');
-        console.log(paths[i]);
+        ////console.lo(paths[i]);
         like(paths[i], res[i]);
         ev.preventDefault();
       }, false);
@@ -303,7 +303,7 @@
         }
 
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
 
   }
@@ -343,7 +343,7 @@
         }
 
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
 
   }

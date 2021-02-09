@@ -17,7 +17,7 @@
 
         token = (window.location.search.substr(1)).substr(6);
 
-        console.log(token);
+        //console.log(token);
 
         search_for_token(token);
 
@@ -44,24 +44,24 @@
             if (data == '{"Message":"Token Does Not Exist"}') {
                 window.location.href = '../404.php';
             } else {
-              console.log(data);
+              //console.log(data);
             }
           });
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
 
     }
       
       function changePassword(e, token) {
         e.preventDefault();
-        console.log("token inside the function is", token);
+        //console.log("token inside the function is", token);
 
         password = document.getElementById("password").value;
         passwordConfirmation = document.getElementById("passwordConfirmation").value;
 
-        console.log(password);
-        console.log(passwordConfirmation);
+        //console.log(password);
+        //console.log(passwordConfirmation);
 
         if (password == passwordConfirmation) {
             try {
@@ -78,18 +78,18 @@
                     if (data == '{"Message":"The password was changed successfully"}') {
                         window.location.href = '../redirect_pages/changed_password.php';
                     } else {
-                      console.log(data);
+                      //console.log(data);
                     }
                   });
               } catch (error) {
-                console.log(error);
+                //console.log(error);
               }
         } else {
             errorMsg.innerHTML = "The values of the passwords don't match";
             errorMsg.style.color = '#ff0000';
         }
 
-        console.log("end of execution");
+        //console.log("end of execution");
       }
 
     window.addEventListener('load', startup, false);

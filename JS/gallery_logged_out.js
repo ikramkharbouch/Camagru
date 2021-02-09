@@ -38,13 +38,13 @@
           .then((res) => res.text())
           .then((data) => {
             if (data == '{"Message":"No Posts Found"}') {
-              console.log("Error");
+              //console.log("Error");
             } else {
               manipulate_data(data);
             }
           });
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     }
   
