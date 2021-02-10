@@ -22,7 +22,6 @@
 
     async function get_email(username, pass) {
 
-      console.log("entered the function");
       try {
         const response = await fetch("https://camagru-ik.cf/api/post/get_email.php", {
           method: "POST",

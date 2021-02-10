@@ -1,3 +1,7 @@
 node_modules
 *.json
 tasks.todo
+Mysql-Credentials
+README.md
+node_modules
+phpmyadmin

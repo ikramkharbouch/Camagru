@@ -192,7 +192,6 @@
 
     function update_username(username) {
 
-      console.log(username);
       if (username) {
        
         try {
@@ -226,7 +225,6 @@
 
     function update_email(email) {
 
-      console.log(email);
       if (email) {
         
         try {
@@ -259,8 +257,6 @@
     }
 
     function update_password(password) {
-      
-      console.log(password);
 
       if (password) {
         try {

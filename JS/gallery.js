@@ -90,8 +90,6 @@
 
     let checkUser = await check_user_likes(path);
 
-    console.log(div);
-
     if (checkUser == true)
       liked = 1;
     else
