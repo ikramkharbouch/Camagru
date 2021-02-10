@@ -17,9 +17,6 @@
     // Instantiate user object
     $user = new User($db);
 
-    // // Get User ID
-    // $user->id = isset($_GET['id']) ? $_GET['id'] : die();
-
     // Get user
     $user->get_pdp();
 

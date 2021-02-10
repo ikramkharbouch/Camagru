@@ -20,16 +20,18 @@ $data = json_decode(file_get_contents("php://input"));
 
 // Set data
 
-$user->username = $data->username;
+if (isset($data->username)) {
 
-// Update User
-if ($user->update_username()) {
-    echo json_encode(
-        array('Message' => 'Post Updated')
-    );
+    $user->username = $data->username;
+
+    if ($user->update_username()) {
+        echo 'Username Updated Successfully';
+    } else {
+        echo 'Username should contain at least 3 letters';
+    }
 } else {
     echo json_encode(
-        array('Message' => 'Post Not Updated')
+        array('Message' => 'No value was inserted')
     );
 }
 

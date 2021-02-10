@@ -29,8 +29,6 @@
     var third = null;
 
     var profile_pic = null;
-    var errorMsg = null;
-    var successMsg = null;
 
     var notif_status = null;
     var status = null;
@@ -56,8 +54,8 @@
     third = document.getElementById("notifications");
 
     profile_pic = document.getElementById("avatar");
-    errorMsg = document.getElementById("error-message");
-    successMsg = document.getElementById("success-message");
+    feedbackMsg = document.getElementById("error-message");
+    // successMsg = document.getElementById("success-message");
 
     // The buttons of user updating infos
     
@@ -70,6 +68,8 @@
     deactivate = document.getElementById('deactivate');
 
     status = document.querySelector('.check p span');
+
+    set_current_values(username, email, password);
 
     notif_status = await set_notif_status();
 
@@ -116,19 +116,19 @@
 
     updateUsername.addEventListener('click', function (ev) {
 
-        update_username();
+        update_username(username.value);
         ev.preventDefault();
       }, false);
 
       updateEmail.addEventListener('click', function (ev) {
 
-        update_email();
+        update_email(email.value);
         ev.preventDefault();
       }, false);
 
       updatePassword.addEventListener('click', function (ev) {
 
-        update_password();
+        update_password(password.value);
         ev.preventDefault();
       }, false);
 
@@ -152,6 +152,37 @@
       
     }
 
+    async function get_current_values() {
+
+      try {
+        const response = await fetch("https://camagru-ik.cf/api/post/get_values.php", {
+          method: "GET",
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+        })
+          .then((res) => res.text());
+
+          return response;
+  
+      } catch (error) {
+        //console.log(error);
+      }
+
+    }
+
+    async function set_current_values(email, username, password) {
+
+      result = await get_current_values();
+
+      regex_email = /(?<={"email":")(.*)(?=",)/g;
+      regex_username = /(?<="username":")(.*)(?="})/g;
+
+      email.value = result.match(regex_email);
+      username.value = result.match(regex_username);
+    }
+
     function display_hide(display, f_hide, s_hide) {
 
       display.className = 'display';
@@ -159,112 +190,107 @@
       s_hide.className = 'none-display';
     }
 
-    function update_username() {
-      username = username.value;
+    function update_username(username) {
 
-      try {
-        fetch("https://camagru-ik.cf/api/post/update_username.php", {
-          method: "PUT",
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify({username: username}),
-        })
-          .then((res) => res.text())
-          .then((data) => {
-            if (data == '{"Message":"Post Updated"}') {
-              successMsg.innerHTML = "Credentials of the user were updated";
-            } else {
-              errorMsg.innerHTML = data;
-            }
-          });
-      } catch (error) {
-        //console.log(error);
+      console.log(username);
+      if (username) {
+       
+        try {
+          fetch("https://camagru-ik.cf/api/post/update_username.php", {
+            method: "PUT",
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({username: username}),
+          })
+            .then((res) => res.text())
+            .then((data) => {
+              if (data == 'Username Updated Successfully') {
+                feedbackMsg.innerHTML = data;
+                feedbackMsg.style.color = '#00ff00';
+              } else {
+                feedbackMsg.innerHTML = data;
+                feedbackMsg.style.color = '#ff0000';
+              }
+            });
+        } catch (error) {
+          //console.log(error);
+        }
+      } else {
+        feedbackMsg.innerHTML = 'No username was inserted';
+        feedbackMsg.style.color = '#ff0000';
       }
 
     }
 
-    function update_email() {
-      email = email.value;
+    function update_email(email) {
 
-      try {
-        fetch("https://camagru-ik.cf/api/post/update_email.php", {
-          method: "PUT",
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify({email: email}),
-        })
-          .then((res) => res.text())
-          .then((data) => {
-            if (data == '{"Message":"Post Updated"}') {
-              successMsg.innerHTML = "Credentials of the user were updated";
-            } else {
-              errorMsg.innerHTML = data;
-            }
-          });
-      } catch (error) {
-        //console.log(error);
-      }
-    }
-
-    function update_password() {
-      password = password.value;
-
-      try {
-        fetch("https://camagru-ik.cf/api/post/update_password.php", {
-          method: "PUT",
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify({pass: password}),
-        })
-          .then((res) => res.text())
-          .then((data) => {
-            if (data == '{"Message":"Post Updated"}') {
-              successMsg.innerHTML = "Credentials of the user were updated";
-            } else {
-              errorMsg.innerHTML = data;
-            }
-          });
-      } catch (error) {
-        //console.log(error);
-      }
-    }
-
-    // The function of updating all infos at a time
-
-    function  update_infos() {
-
-      username = username.value;
-      email = email.value;
-      password = password.value;
-
-      try {
-        fetch("https://camagru-ik.cf/api/post/update_users.php", {
-          method: "PUT",
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify({email: email, username: username, pass: password}),
-        })
-          .then((res) => res.text())
-          .then((data) => {
-            if (data == '{"Message":"Post Updated"}') {
-              //console.log("Credentials of the user were updated");
-            } else {
-              errorMsg.innerHTML = data;
-            }
-          });
-      } catch (error) {
-        //console.log(error);
+      console.log(email);
+      if (email) {
+        
+        try {
+          fetch("https://camagru-ik.cf/api/post/update_email.php", {
+            method: "PUT",
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({email: email}),
+          })
+            .then((res) => res.text())
+            .then((data) => {
+              if (data == 'Email Updated Successfully') {
+                feedbackMsg.innerHTML = data;
+                feedbackMsg.style.color = '#00ff00';
+              } else {
+                feedbackMsg.innerHTML = data;
+                feedbackMsg.style.color = '#ff0000';
+              }
+            });
+        } catch (error) {
+          //console.log(error);
+        }
+      } else {
+        feedbackMsg.innerHTML = data;
+        feedbackMsg.style.color = '#ff0000';
       }
 
     }
+
+    function update_password(password) {
+      
+      console.log(password);
+
+      if (password) {
+        try {
+          fetch("https://camagru-ik.cf/api/post/update_password.php", {
+            method: "PUT",
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({pass: password}),
+          })
+            .then((res) => res.text())
+            .then((data) => {
+              if (data == 'Password Updated Successfully') {
+                feedbackMsg.innerHTML = data;
+                feedbackMsg.style.color = '#00ff00';
+              } else {
+                feedbackMsg.innerHTML = data;
+                feedbackMsg.style.color = '#ff0000';
+              }
+            });
+          } catch (error) {
+            //console.log(error);
+          }
+        } else {
+          feedbackMsg.innerHTML = data;
+          feedbackMsg.style.color = '#ff0000';
+      }
+    }
+
 
     function update_img() {
 
@@ -287,9 +313,11 @@
                 .then((res) => res.text())
                 .then((data) => {
                     if (data == '{"Message":"Image Not Uploaded"}') {
-                      errorMsg.innerHTML = "An error occured while uploading";
+                      feedbackMsg.innerHTML = "An error occured while uploading";
+                      feedbackMsg.style.color = '#ff0000';
                     } else if (data == 'The uploaded image is not valid') {
-                      errorMsg.innerHTML = data;
+                      feedbackMsg.innerHTML = data;
+                      feedbackMsg.style.color = '#ff0000';
                     } else {
                         profile_pic.src = "../".concat(data.substring(28));
                     }
@@ -327,9 +355,11 @@
           .then((res) => res.text())
           .then((data) => {
             if (data == '{"Message":"Status Updated"}') {
-              //console.log(data);
+              feedbackMsg.innerHTML = 'Status Updated';
+              feedbackMsg.style.color = '#00ff00';
             } else {
-              errorMsg.innerHTML = data;
+              feedbackMsg.innerHTML = data;
+              feedbackMsg.style.color = '#ff0000';
             }
           });
       } catch (error) {

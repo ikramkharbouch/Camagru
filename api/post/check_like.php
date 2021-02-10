@@ -19,17 +19,24 @@
     // Get raw posted data
     $data = json_decode(file_get_contents("php://input"));
 
-    $user->filename = $data->filename;
+    if (isset($data->filename)) {
 
-    $user->get_post_id();
-
-    $user->check_like();
-
-    if ($user->liked)
-        echo $user->liked;
-    else {
+        $user->filename = $data->filename;
+        $user->get_post_id();
+    
+        $user->check_like();
+    
+        if ($user->liked)
+            echo $user->liked;
+        else {
+            echo json_encode(
+                array('message' => 'No Like Found')
+            );
+        }
+    } else {
         echo json_encode(
             array('message' => 'No Like Found')
         );
     }
+
 ?>

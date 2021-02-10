@@ -17,20 +17,27 @@ $user = new User($db);
 
 $data = json_decode(file_get_contents("php://input"));
 
-if ($data->status  == 'activate') {
-    $user->notifs = 1;
-} else {
-    $user->notifs = 0;
-}
-
-if ($user->notifs_update()) {
-    echo json_encode(
-        array('Message' => 'Status Updated')
-    );
+if (isset($data->status)) {
+    if ($data->status  == 'activate') {
+        $user->notifs = 1;
+    } else {
+        $user->notifs = 0;
+    }
+    
+    if ($user->notifs_update()) {
+        echo json_encode(
+            array('Message' => 'Status Updated')
+        );
+    } else {
+        echo json_encode(
+            array('Message' => 'Status Not Updated')
+        );
+    }
 } else {
     echo json_encode(
         array('Message' => 'Status Not Updated')
     );
 }
+
 
 ?>

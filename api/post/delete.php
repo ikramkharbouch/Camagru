@@ -18,19 +18,26 @@ $user = new User($db);
 // Get raw posted data
 $data = json_decode(file_get_contents("php://input"));
 
-$user->filename = $data->filename;
+if (isset($data->filename)) {
 
-$user->get_post_id();
-
-if ($user->owner == $_SESSION['id']) {
-
-    if ($user->delete_img()) {
-        echo json_encode(
-            array('Message' => 'deleted Successfully')
-        );
+    $user->filename = $data->filename;
+    
+    $user->get_post_id();
+    
+    if ($user->owner == $_SESSION['id']) {
+    
+        if ($user->delete_img()) {
+            echo json_encode(
+                array('Message' => 'deleted Successfully')
+            );
+        } else {
+            echo json_encode(
+                array('Message' => 'an error occured')
+            );
+        }
     } else {
         echo json_encode(
-            array('Message' => 'an error occured')
+            array('Message' => 'You cannot delete this image')
         );
     }
 } else {

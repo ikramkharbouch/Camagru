@@ -2,7 +2,7 @@
 
 require('../init.php');
 
-if (isset($_SESSION['auth']) && $_SESSION['auth'] == true) 
+if (isset($_SESSION['auth'])) 
 {
   header("Location: ../forms/welcome.php");
   exit();

@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-if (isset($_SESSION['auth']) && $_SESSION['auth'] == true) 
+if (isset($_SESSION['auth'])) 
 {
   header("Location: ../forms/welcome.php");
   exit();
@@ -37,7 +37,7 @@ if (isset($_SESSION['auth']) && $_SESSION['auth'] == true)
       <form id="checkUser">
       <div class="col">
       <div class="row">
-        <input type="text" id="email" class="form-control form-control-lg form-control-sm" placeholder="Email" required>
+        <input type="text" id="username" class="form-control form-control-lg form-control-sm" placeholder="Username" required>
       </div>
       <div class="row">
         <input type="password" id="pass" class="form-control form-control-lg" placeholder="Password" required>

@@ -19,16 +19,26 @@ $user = new User($db);
 $data = json_decode(file_get_contents("php://input"));
 
 // Set data
-$user->email = $data->email;
 
-// Update User
-if ($user->update_email()) {
-    echo json_encode(
-        array('Message' => 'Post Updated')
-    );
+if (isset($data->email)) {
+    
+    $user->email = $data->email;
+    
+    // Update User
+    if (isset($user->email)) {
+        if ($user->update_email()) {
+            echo 'Email Updated Successfully';
+        } else {
+            echo 'Email should contain 8 letters';
+        }
+    } else {
+        echo json_encode(
+            array('Message' => 'No value was inserted')
+        );
+    }
 } else {
     echo json_encode(
-        array('Message' => 'Post Not Updated')
+        array('Message' => 'No value was inserted')
     );
 }
 

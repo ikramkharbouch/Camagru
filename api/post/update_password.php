@@ -20,16 +20,18 @@ $data = json_decode(file_get_contents("php://input"));
 
 // Set data
 
-$user->pass = md5($data->pass);
+if (isset($data->pass)) {
 
-// Update User
-if ($user->update_password()) {
-    echo json_encode(
-        array('Message' => 'Post Updated')
-    );
+    $user->email = md5($data->pass);
+
+    if ($user->update_password()) {
+        echo 'Password Updated Successfully';
+    } else {
+        echo 'Password should contain minimum 8 characters, at least one letter and one number';
+    }
 } else {
     echo json_encode(
-        array('Message' => 'Post Not Updated')
+        array('Message' => 'No value was inserted')
     );
 }
 

@@ -17,13 +17,20 @@
 
     $data = json_decode(file_get_contents("php://input"));
 
-    $user->email = $data->email;
-    $user->pass = $data->pass;
+    if (isset($data->email) && isset($user->pass)) {
 
-    if ($user->logout()) {
-        echo json_encode(
-            array('Message' => 'User Logged Out')
-        );
+        $user->email = $data->email;
+        $user->pass = $data->pass;
+    
+        if ($user->logout()) {
+            echo json_encode(
+                array('Message' => 'User Logged Out')
+            );
+        } else {
+            echo json_encode(
+                array('Message' => 'User Not Logged Out')
+            );
+        }
     } else {
         echo json_encode(
             array('Message' => 'User Not Logged Out')

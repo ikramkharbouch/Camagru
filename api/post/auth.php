@@ -16,14 +16,21 @@
     $user = new User($db);
 
     $data = json_decode(file_get_contents("php://input"));
+ 
+    if (isset($data->email) && isset($data->pass)) {
 
-    $user->email = $data->email;
-    $user->pass = $data->pass;
-
-    if ($user->authenticate()) {
-        echo json_encode(
-            array('Message' => 'User Authenticated')
-        );
+        $user->email = $data->email;
+        $user->pass = $data->pass;
+    
+        if ($user->authenticate()) {
+            echo json_encode(
+                array('Message' => 'User Authenticated')
+            );
+        } else {
+            echo json_encode(
+                array('Message' => 'User Not Authenticated')
+            );
+        }
     } else {
         echo json_encode(
             array('Message' => 'User Not Authenticated')

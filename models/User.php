@@ -110,10 +110,10 @@
         if (!filter_var($this->fullname, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-z-A-Z]+/")))) {
             return false;
         }
-        if (!filter_var($this->username, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/[\w\s]+/")))) {
+        if (!filter_var($this->username, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-zA-Z]{3,12}$/")))) {
             return false;
         }
-        if (!filter_var($this->pass, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-z-A-Z]+[0-9]+/")))) {
+        if (!filter_var($this->pass, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/")))) {
             return false;
         }
 
@@ -174,7 +174,7 @@
     public function update_email() {
 
         // Update Query
-       $query = 'UPDATE users SET email = :emailWHERE id = :id';
+       $query = 'UPDATE users SET email = :email WHERE id = :id';
 
         // Prepare statement
         $stmt = $this->conn->prepare($query);
@@ -182,6 +182,10 @@
         // Clean data
         $this->email = htmlspecialchars(strip_tags($this->email));
         $this->id = htmlspecialchars(strip_tags($this->id));
+
+        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            return false;
+        }
 
         $stmt->bindParam(':email', $this->email);
         $stmt->bindParam(':id', $_SESSION['id']);
@@ -208,6 +212,10 @@
         $this->username = htmlspecialchars(strip_tags($this->username));
         $this->id = htmlspecialchars(strip_tags($this->id));
 
+        if (!filter_var($this->username, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-zA-Z]{3,12}$/")))) {
+            return false;
+        }
+
         $stmt->bindParam(':username', $this->username);
         $stmt->bindParam(':id', $_SESSION['id']);
         
@@ -215,9 +223,6 @@
         if ($stmt->execute()) {
             return true;
         }
-
-        // Print error message if something goes wrong
-        printf("Error : %s. \n", $stmt->error);
         return false;
     }
 
@@ -232,6 +237,10 @@
         // Clean data
         $this->pass = htmlspecialchars(strip_tags($this->pass));
         $this->id = htmlspecialchars(strip_tags($this->id));
+
+        if (!filter_var($this->pass, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/")))) {
+            return false;
+        }
 
         $stmt->bindParam(':pass', $this->pass); 
         $stmt->bindParam(':id', $_SESSION['id']);
@@ -295,15 +304,15 @@
 
     public function check_creds() {
         // Create query
-        $query = 'SELECT id, email, pass, verified 
-                FROM users WHERE email = :email';
+        $query = 'SELECT id, username, pass, verified 
+                FROM users WHERE username = :username';
 
         $stmt = $this->conn->prepare($query);
 
         // Hash password
         $this->pass = md5($this->pass);
 
-        $stmt->bindParam(':email', $this->email);
+        $stmt->bindParam(':username', $this->username);
 
         // Execute query
         $stmt->execute();
@@ -314,7 +323,7 @@
         // Set properties
 
         if ($row) {
-            if ($row['email'] == $this->email && $row['pass'] == $this->pass && $row['verified'] == 1) {
+            if ($row['username'] == $this->username && $row['pass'] == $this->pass && $row['verified'] == 1) {
                 return true;
             }
         }
@@ -711,6 +720,33 @@
 
     }
 
+    public function get_email() {
+
+        $query = 'SELECT `email` FROM `users` WHERE username = :username AND pass = :pass';
+
+        $stmt = $this->conn->prepare($query);
+
+        $password = md5($this->pass);
+
+        $stmt->bindParam(':username', $this->username);
+        $stmt->bindParam(':pass', $password);
+
+        $stmt->execute();
+
+        // Fetch data
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Set properties
+
+        if ($row) {
+            $this->email = $row['email'];
+            return true;
+        }
+
+        return false;
+
+    }
+
     public function check_like() {
 
         $query = 'SELECT `liked` FROM `user_likes` WHERE post_id = :post_id AND account_id = :account_id';
@@ -904,5 +940,19 @@
 
         return null;
     }
+
+    public function get_values() {
+
+        $query = 'SELECT `email`, `username` FROM `users` WHERE id = :id';
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':id', $_SESSION['id']);
+
+        $stmt->execute();
+
+        return $stmt;
+    }
+
 }
 ?>

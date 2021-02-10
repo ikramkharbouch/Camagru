@@ -19,13 +19,20 @@
     // Get raw posted data
     $data = json_decode(file_get_contents("php://input"));
 
-    $user->email = $data->email;
-    $user->pass = $data->pass;
+    if (isset($data->username) && isset($data->pass)) {
 
-    if ($user->check_creds()) {
-        echo json_encode(
-            array('Message' => 'User Exists')
-        );
+        $user->username = $data->username;
+        $user->pass = $data->pass;
+    
+        if ($user->check_creds()) {
+            echo json_encode(
+                array('Message' => 'User Exists')
+            );
+        } else {
+            echo json_encode(
+                array('Message' => 'User Does Not Exist')
+            );
+        }
     } else {
         echo json_encode(
             array('Message' => 'User Does Not Exist')

@@ -19,16 +19,24 @@ $user = new User($db);
 $data = json_decode(file_get_contents("php://input"));
 
 // Set data
-$user->filename = $data->filename;
-$user->comment = $data->comment;
 
-$user->get_post_id();
+if (isset($data->filename) && isset($data->comment)) {
 
-// Update User
-if ($user->update_comment()) {
-    echo json_encode(
-        array('Message' => 'Post Updated')
-    );
+    $user->filename = $data->filename;
+    $user->comment = $data->comment;
+    
+    $user->get_post_id();
+    
+    // Update User
+    if ($user->update_comment()) {
+        echo json_encode(
+            array('Message' => 'Post Updated')
+        );
+    } else {
+        echo json_encode(
+            array('Message' => 'Post Not Updated')
+        );
+    }
 } else {
     echo json_encode(
         array('Message' => 'Post Not Updated')

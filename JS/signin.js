@@ -19,12 +19,35 @@
     function setErrorMsg() {
       errorMsg.innerHTML = 'False credentials or account is not activated yet';
     }
+
+    async function get_email(username, pass) {
+
+      console.log("entered the function");
+      try {
+        const response = await fetch("https://camagru-ik.cf/api/post/get_email.php", {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({username: username, pass: pass}),
+        })
+          .then((res) => res.text());
+
+          return response;
+  
+      } catch (error) {
+        //console.log(error);
+      }
+    }
       
-      function checkUser(e) {
+      async function checkUser(e) {
         e.preventDefault();
       
-        let email = document.getElementById("email").value;
+        let username = document.getElementById("username").value;
         let pass = document.getElementById("pass").value;
+
+        let email = await(get_email(username, pass));
       
         fetch("https://camagru-ik.cf/api/post/check_creds.php", {
           method: "POST",
@@ -32,7 +55,7 @@
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
-          body: JSON.stringify({email: email, pass: pass}),
+          body: JSON.stringify({username: username, pass: pass}),
         })
           .then((res) => res.text())
           .then((data) => {

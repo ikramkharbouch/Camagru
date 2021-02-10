@@ -22,7 +22,7 @@
 
     // Get the type of the uploaded file
 
-
+    if (isset($_FILES['files']) && isset($_POST['filter'])) {
     $type = substr(implode("", $_FILES['files']["type"]), 6);
 
     $type = '.' . $type;
@@ -37,10 +37,16 @@
 
     $img_file = "../../upload/" .$filename .".png";
 
-    if ($type == ".jpeg")
-        $png = imagepng(imagecreatefromjpeg($user->uploaded_file), $img_file);
-    else
-        $png = imagepng(imagecreatefrompng($user->uploaded_file), $img_file);
+    if (@exif_imagetype($user->uploaded_file)) {
+
+        if ($type == ".jpeg")
+            $png = imagepng(imagecreatefromjpeg($user->uploaded_file), $img_file);
+        else
+            $png = imagepng(imagecreatefrompng($user->uploaded_file), $img_file);
+    } else {
+        echo 'The file uploaded is not an image';
+        exit();
+    }
 
     // The function to place the filter on the image using alpha method
 
@@ -85,22 +91,21 @@
         exit();
     }
 
-    // if (move_uploaded_file($img_file, $img_file)) {
-    //     copy($img_file, '../../upload/2.jpg');
-    // }
-
     // A variable to save in the database
     
     $user->uploaded_file = '/var/www/camagru-ik.cf/html/upload/' . $filename . ".png";
 
     // Check the image before uploading it
 
+
     function is_image($path)
     {
+        $output = exif_imagetype($path);
+        var_dump($output);
         $a = getimagesize($path);
         $image_type = $a[2];
 	
-        if(in_array($image_type , array(IMAGETYPE_GIF , IMAGETYPE_JPEG ,IMAGETYPE_PNG , IMAGETYPE_BMP)))
+        if(in_array($image_type , array(IMAGETYPE_JPEG ,IMAGETYPE_PNG)))
         {
             return true;
         }
@@ -122,6 +127,9 @@
     {
         echo 'The file uploaded is not an image';
     }
+} else {
+    echo 'The file uploaded is not an image';
+}
 
 
 ?>

@@ -19,14 +19,21 @@
     // Get raw posted data
     $data = json_decode(file_get_contents("php://input"));
 
-    $user->filename = $data->filename;
+    if (isset($data->filename)) {
 
-    $user->get_post_id();
-
-    if ($user->like()) {
-        echo json_encode(
-            array('Message' => 'liked Successfully')
-        );
+        $user->filename = $data->filename;
+    
+        $user->get_post_id();
+    
+        if ($user->like()) {
+            echo json_encode(
+                array('Message' => 'liked Successfully')
+            );
+        } else {
+            echo json_encode(
+                array('Message' => 'An Error Occured')
+            );
+        }
     } else {
         echo json_encode(
             array('Message' => 'An Error Occured')

@@ -11,6 +11,7 @@
   var cmtImg = null;
   var liked = 0;
   var index = 0;
+  var like_index = 0;
 
   var likes = null;
   var comments = null;
@@ -89,6 +90,8 @@
 
     let checkUser = await check_user_likes(path);
 
+    console.log(div);
+
     if (checkUser == true)
       liked = 1;
     else
@@ -128,7 +131,7 @@
         return response;
 
     } catch (error) {
-      //console.lo(error);
+      //console.log(error);
     }
 
   }
@@ -174,6 +177,38 @@
     return array;
   }
 
+  function create_likes(data)
+  {
+    var regex_likes = /(?<=,"likes":")(.*)(?=",)/g;
+
+    data = (data.substring(9)).slice(0, -2);
+    var array = data.split('},');
+
+    likes = new Array(array.length);
+
+    for (i = 0; i < array.length; i++) {
+      likes[i] = array[i].match(regex_likes);
+    }
+
+    return likes;
+  }
+
+  function create_comments(data)
+  {
+    var regex_comments = /(?<=,"comments":")(.*)(?=")/g;
+
+    data = (data.substring(9)).slice(0, -2);
+    var array = data.split('},');
+
+    comments = new Array(array.length);
+
+    for (i = 0; i < array.length; i++) {
+      comments[i] = array[i].match(regex_comments);
+    }
+
+    return comments;
+  }
+
   async function liked_or_disliked(path) {
 
     let checkUser = await check_user_likes(path);
@@ -200,7 +235,7 @@
   }
 
 
-  async function create_card(paths)
+  async function create_card(paths, likes, comments)
   {
     var img;
     var div;
@@ -217,7 +252,9 @@
       cardBody = document.createElement('div');
       likeIcon = document.createElement('IMG');
       likeText = document.createTextNode(likes[i]);
+  
       commentText = document.createTextNode(comments[i]);
+  
       DeleteIcon = document.createElement('IMG');
       likeIcon.setAttribute('src', checkLike);
 
@@ -240,8 +277,8 @@
 
       likeIcon.addEventListener('click', function (ev) {
         let res = document.querySelectorAll('div.try');
-        ////console.lo(paths[i]);
-        like(paths[i], res[i]);
+        let id = ev.target.parentElement.parentElement.id;
+        like(paths[i], res[id]);
         ev.preventDefault();
       }, false);
 
@@ -314,8 +351,10 @@
     var paths;
 
     paths = create_path(data);
+    likes = create_likes(data);
+    comments = create_comments(data);
 
-    create_card(paths);
+    create_card(paths, likes, comments);
     
   }
 

@@ -13,6 +13,7 @@
 </head>
 
 <body>
+  <?php include '../components/header.html';?>
   <div class="container d-flex flex-wrap" id="container">
 
   </div>

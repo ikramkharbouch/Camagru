@@ -18,17 +18,22 @@
 
     // Insert filename from data
 
-    $user->filename = $data->filename;
+    if (isset($data->filename)) {
 
-    $user->get_post_id();
-
-    $user_credentials = array(
-        'post_id' => $user->post_id,
-        'owner' => $user->owner,
-        'likes' => $user->likes,
-        'comments' => $user->comments,
-    );
-
+        $user->filename = $data->filename;
     
-    echo json_encode($user_credentials);
+        $user->get_post_id();
+    
+        $user_credentials = array(
+            'post_id' => $user->post_id,
+            'owner' => $user->owner,
+            'likes' => $user->likes,
+            'comments' => $user->comments,
+        );
+    
+        
+        echo json_encode($user_credentials);
+    } else {
+        echo 'An error occured';
+    }
 ?>

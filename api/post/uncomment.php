@@ -19,12 +19,18 @@
     // Get raw posted data
     $data = json_decode(file_get_contents("php://input"));
 
-    $user->email = $data->email;
-
-    if ($user->like()) {
-        echo json_encode(
-            array('Message' => 'Comment Removed Successfully')
-        );
+    if (isset($data->email)) {
+        $user->email = $data->email;
+    
+        if ($user->like()) {
+            echo json_encode(
+                array('Message' => 'Comment Removed Successfully')
+            );
+        } else {
+            echo json_encode(
+                array('Message' => 'An Error Occured')
+            );
+        }
     } else {
         echo json_encode(
             array('Message' => 'An Error Occured')

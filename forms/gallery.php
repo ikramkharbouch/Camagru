@@ -2,7 +2,7 @@
 
 require('../init.php');
 
-if (!isset($_SESSION['auth']) && $_SESSION['auth'] == false) {
+if (!isset($_SESSION['auth'])) {
   header("Location: ./gallery_logged_out.php");
   exit();
 }

@@ -17,18 +17,15 @@
     // Instantiate user object
     $user = new User($db);
 
-    // // Get User ID
-    // $user->id = isset($_GET['id']) ? $_GET['id'] : die();
-
     // Get user
     $user->get_user();
-
-    echo $user->username;
 
     if (!isset($user->username)) {
         echo json_encode(
             array('message' => 'No Username Found')
         );
+    } else {
+        echo $user->username;
     }
 
 ?>

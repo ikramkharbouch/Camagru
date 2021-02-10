@@ -19,18 +19,24 @@
     // Get raw posted data
     $data = json_decode(file_get_contents("php://input"));
 
-    $user->filename = $data->filename;
+    if (isset($data->filename)) {
 
-    $user->get_post_id();
-
-    if ($user->owner == $_SESSION['id']) {
-        echo json_encode(
-            array('Message' => 'The user owns the image')
-        );
+        $user->filename = $data->filename;
+    
+        $user->get_post_id();
+    
+        if ($user->owner == $_SESSION['id']) {
+            echo json_encode(
+                array('Message' => 'The user owns the image')
+            );
+        } else {
+            echo json_encode(
+                array('Message' => 'The user does not own the image')
+            );
+        }
     } else {
-        echo json_encode(
-            array('Message' => 'The user does not own the image')
-        );
+        
     }
+
     
 ?>

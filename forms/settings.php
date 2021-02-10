@@ -1,7 +1,7 @@
 <?php
   require('../init.php');
 
-  if (!isset($_SESSION['auth']) && $_SESSION['auth'] == false) 
+  if (!isset($_SESSION['auth'])) 
   {
     header("Location: ../404.php");
     exit();
@@ -56,17 +56,17 @@
   
               <div class="mb-3 mt-2">
                 <label for="exampleFormControlInput1" class="form-label">Username</label>
-                <input type="text" class="form-control" id="user-name" placeholder="Username" value="">
+                <input type="text" class="form-control" id="user-name" placeholder="Username" value="" required>
               </div>
               <button type="submit" value="Login" class="btn btn-primary custom-btn" id="update-username">Update Username</button>
               <div class="mb-3 email mt-4">
                   <label for="exampleFormControlInput1" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="email" placeholder="name@example.com" value="">
+                  <input type="email" class="form-control" id="email" placeholder="name@example.com" value="" required>
               </div>
               <button type="submit" value="Login" class="btn btn-primary custom-btn" id="update-email">Update Email</button>
               <div class="mb-3 password mt-4">
                   <label for="exampleFormControlInput1" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="password" placeholder="hdjueuweE5dk@s/" value="">
+                  <input type="password" class="form-control" id="password" placeholder="hdjueuweE5dk@s/" value="" required>
               </div>
               <button type="submit" value="Login" class="btn btn-primary custom-btn" id="update-password">Update Password</button>
             </div>

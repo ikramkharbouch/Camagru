@@ -19,18 +19,26 @@
     // Get raw posted data
     $data = json_decode(file_get_contents("php://input"));
 
-    $user->reset_token = $data->reset_token;
+    if (isset($data->reset_token)) {
 
-    $user->get_user_id();
-
-    if ($user->id != NULL) {
-        echo json_encode(
-            array('Message' => 'Token Exists')
-        );
+        $user->reset_token = $data->reset_token;
+    
+        $user->get_user_id();
+    
+        if ($user->id != NULL) {
+            echo json_encode(
+                array('Message' => 'Token Exists')
+            );
+        } else {
+            echo json_encode(
+                array('Message' => 'Token Does Not Exist')
+            );
+        }
     } else {
         echo json_encode(
             array('Message' => 'Token Does Not Exist')
         );
     }
+
     
 ?>

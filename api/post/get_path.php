@@ -19,16 +19,21 @@
 
     $data = json_decode(file_get_contents("php://input"));
 
-    $user->post_id = $data->post_id;
+    if (isset($data->post_id)) {
 
-    // Get user
-    $user->get_path();
-
-    // echo $user->profile_pic;
-
-    if ($user->filename)
-        echo $user->filename;
-    else {
+        $user->post_id = $data->post_id;
+    
+        // Get user
+        $user->get_path();
+    
+        // echo $user->profile_pic;
+    
+        if ($user->filename)
+            echo $user->filename;
+        else {
+            echo 'Image does not exist';
+        }
+    } else {
         echo 'Image does not exist';
     }
 

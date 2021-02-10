@@ -22,15 +22,23 @@ $data = json_decode(file_get_contents("php://input"));
 // $user->id = $data->id;
 
 // Set data
-$user->email = $data->email;
-$user->username = $data->username;
-$user->pass = md5($data->pass);
 
-// Update User
-if ($user->update_comment()) {
-    echo json_encode(
-        array('Message' => 'Post Updated')
-    );
+if (isset($data->email) && isset($data->username) && isset($data->pass)) {
+
+    $user->email = $data->email;
+    $user->username = $data->username;
+    $user->pass = md5($data->pass);
+    
+    // Update User
+    if ($user->update_comment()) {
+        echo json_encode(
+            array('Message' => 'Post Updated')
+        );
+    } else {
+        echo json_encode(
+            array('Message' => 'Post Not Updated')
+        );
+    }
 } else {
     echo json_encode(
         array('Message' => 'Post Not Updated')
