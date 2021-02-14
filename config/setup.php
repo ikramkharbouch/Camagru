@@ -2,7 +2,6 @@
     
 include_once './database.php';
 
-
     // Instantiate DB & connect
     $database = new Database();
     $db = $database->connect();
@@ -51,8 +50,7 @@ include_once './database.php';
         `likes` int(255) NOT NULL,
         `comments` int(11) NOT NULL,
         `post` varchar(50) NOT NULL,
-        `creation_date` date DEFAULT NULL,
-        `creation_time` time NOT NULL
+        `datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
       ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 
     // Prepare statement

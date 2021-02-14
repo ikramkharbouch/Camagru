@@ -18,31 +18,14 @@
   <title>Camagru</title>
   <link rel="stylesheet" href="../styles/welcome.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   <script src="../JS/camera.js"></script>
   <script src="../JS/menu.js"></script>
 </head>
 
 <body>
 
-  <div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <h1>Camagru</h1>
-    <a href="../index.php">Home</a>
-    <a href="./gallery.php">Gallery</a>
-    <a href="./settings.php">Settings</a>
-    <a href="../logout.php">Logout</a>
-  </div>
-
-  <!-- Use any element to open the sidenav -->
-  <span onclick="openNav()"><i class="fas fa-bars"></i>
-  </span>
-
-  <div class="user-details d-flex flex-row">
-    <img src="../assets/avatar.png" alt="Avatar" class="avatar">
-    <p class="font-weight-bold ml-1">Ikram Kharbouch</p>
-  </div>
-
+  
+  <?php include '../components/menu.html';?>
 
   <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
   <div class="main">

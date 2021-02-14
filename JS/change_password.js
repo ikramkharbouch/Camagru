@@ -78,7 +78,8 @@
                     if (data == '{"Message":"The password was changed successfully"}') {
                         window.location.href = '../redirect_pages/changed_password.php';
                     } else {
-                      //console.log(data);
+                      errorMsg.innerHTML = "The password isn't valid";
+                      errorMsg.style.color = '#ff0000';
                     }
                   });
               } catch (error) {

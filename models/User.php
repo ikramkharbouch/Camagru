@@ -29,7 +29,6 @@
         public $liked;
         public $comment_id;
         public $email_of_owner;
-        public $creation_date;
         public $creation_time;
         public $reset_token;
 
@@ -113,13 +112,9 @@
         if (!filter_var($this->username, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-zA-Z]{3,12}$/")))) {
             return false;
         }
-        if (!filter_var($this->pass, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/")))) {
+        if (!filter_var($this->pass, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-z-A-Z]+[0-9]+/")))) {
             return false;
         }
-
-        // if(!($stmt->bind_param(':email', $this->email))){
-        //     die( "Error in bind_param: (" .$this->conn->errno . ") " . $this->conn->error);
-        // }
 
 
         $stmt->bindParam(':fullname', $this->fullname, PDO::PARAM_STR);
@@ -238,7 +233,7 @@
         $this->pass = htmlspecialchars(strip_tags($this->pass));
         $this->id = htmlspecialchars(strip_tags($this->id));
 
-        if (!filter_var($this->pass, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/")))) {
+        if (!filter_var($this->pass, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-z-A-Z]+[0-9]+/")))) {
             return false;
         }
 
@@ -440,24 +435,19 @@
 
     public function save_img() {
            
-        $query = 'INSERT INTO posts SET account_id = :account_id, post_id = :post_id, post = :post, likes = :likes, comments = :comments, creation_date = :creation_date, creation_time = :creation_time';
+        $query = 'INSERT INTO posts SET account_id = :account_id, post_id = :post_id, post = :post, likes = :likes, comments = :comments';
 
         $stmt = $this->conn->prepare($query);
 
 
         $bool = 0;
-        $date = date("Y-m-d");
         $unique_id = uniqid();
-
-        $time = gmdate("H:i:s", time());
 
         $stmt->bindParam(':account_id', $_SESSION['id']);
         $stmt->bindParam(':post_id', $unique_id);
         $stmt->bindParam(':post', $this->path_to_img);
         $stmt->bindParam(':likes', $bool);
         $stmt->bindParam(':comments', $bool);
-        $stmt->bindParam(':creation_date', $date);
-        $stmt->bindParam(':creation_time', $time);
 
         if ($stmt->execute()) {
             return true;
@@ -483,25 +473,19 @@
     
     public function upload() {
         
-        $query = 'INSERT INTO posts SET account_id = :account_id, post_id = :post_id, post = :post, likes = :likes, comments = :comments, creation_date = :creation_date, creation_time = :creation_time';
+        $query = 'INSERT INTO posts SET account_id = :account_id, post_id = :post_id, post = :post, likes = :likes, comments = :comments';
 
         $stmt = $this->conn->prepare($query);
 
 
         $bool = 0;
-        $date = date("Y-m-d");
-
         $unique_id = uniqid();
-
-        $time = gmdate("H:i:s", time());
 
         $stmt->bindParam(':account_id', $_SESSION['id']);
         $stmt->bindParam(':post_id', $unique_id);
         $stmt->bindParam(':post', $this->uploaded_file);
         $stmt->bindParam(':likes', $bool);
         $stmt->bindParam(':comments', $bool);
-        $stmt->bindParam(':creation_date', $date);
-        $stmt->bindParam(':creation_time', $time);
 
         if ($stmt->execute()) {
             return true;
@@ -804,11 +788,6 @@
     }
 
     public function change_password() {
-
-        // $query = 'BEGIN;
-        //             UPDATE users SET pass = :pass WHERE private_token = :private_token;
-        //             UPDATE users SET private_token = "" WHERE private_token = :private_token;
-        //         COMMIT;';
 
         $query = 'UPDATE users SET pass = :pass, private_token = :private_token WHERE id = :id';
 
