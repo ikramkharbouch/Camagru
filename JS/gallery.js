@@ -352,8 +352,10 @@
     likes = create_likes(data);
     comments = create_comments(data);
 
-    create_card(paths, likes, comments);
-    
+    if (paths.length != 0)
+      create_card(paths, likes, comments);
+    else
+      return ;
   }
 
   async function check_user_likes(path) {
