@@ -383,7 +383,7 @@
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($row) {
+        if (isset($row['id'])) {
             $this->id = $row['id'];
             return true;
         }
@@ -556,7 +556,7 @@
         // Fetch data
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($row) {
+        if (isset($row['post_id']) && isset($row['account_id']) && isset($row['email']) && isset($row['likes']) && isset($row['comments']) && isset($row['notifs'])) {
             // Set properties
             $this->post_id = $row['post_id'];
             $this->owner = $row['account_id'];
@@ -669,7 +669,7 @@
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // Set properties
-        if ($row) {
+        if (isset($row['username'])) {
             $this->username = $row['username'];
             return true;
         }
@@ -742,7 +742,7 @@
 
         // Set properties
 
-        if ($row) {
+        if (isset($row['profile_pic'])) {
             $this->profile_pic = $row['profile_pic'];
             return true;
         }
@@ -769,7 +769,7 @@
 
         // Set properties
 
-        if ($row) {
+        if (isset($row['email'])) {
             $this->email = $row['email'];
             return true;
         }
@@ -793,7 +793,7 @@
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // Set properties
-        if ($row) {
+        if (isset($row['liked'])) {
             $this->liked = $row['liked'];
             return true;
         }
@@ -869,7 +869,7 @@
 
         if ($stmt->execute()) {
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            if ($row) {
+            if (isset($row['notifs'])) {
                 $this->notifs = $row['notifs'];
                 return true;
             }
@@ -904,7 +904,7 @@
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // Set properties
-        if ($row) {
+        if (isset($row['id'])) {
             $this->id = $row['id'];
             return true;
         }
@@ -939,7 +939,7 @@
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // Set properties
-        if ($row) {
+        if (isset($row['id'])) {
             $this->id = $row['id'];
             return true;
         }
@@ -959,7 +959,7 @@
         // Fetch data
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($row) {
+        if (isset($row['post'])) {
             // Set properties
             $this->filename = $row['post'];
         }
