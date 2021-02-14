@@ -54,7 +54,7 @@
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
-          body: JSON.stringify({username: username, pass: pass}),
+          body: JSON.stringify({email: email, pass: pass}),
         })
           .then((res) => res.text())
           .then((data) => {

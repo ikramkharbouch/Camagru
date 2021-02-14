@@ -21,15 +21,25 @@ $data = json_decode(file_get_contents("php://input"));
 // Set data
 
 if (isset($data->email)) {
+
+    if ($data->email == $_SESSION["email"]) {
+        echo 'Email is the same as the old one';
+        exit();
+    }    
     
     $user->email = $data->email;
+
+    if ($user->check_email()) {
+        echo 'Another user already uses this email';
+        exit();
+    }
     
     // Update User
     if (isset($user->email)) {
         if ($user->update_email()) {
             echo 'Email Updated Successfully';
         } else {
-            echo 'Email should contain 8 letters';
+            echo 'Email should be valid';
         }
     } else {
         echo json_encode(

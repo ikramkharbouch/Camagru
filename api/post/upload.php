@@ -101,7 +101,6 @@
     function is_image($path)
     {
         $output = exif_imagetype($path);
-        var_dump($output);
         $a = getimagesize($path);
         $image_type = $a[2];
 	

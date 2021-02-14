@@ -19,9 +19,9 @@
     // Get raw posted data
     $data = json_decode(file_get_contents("php://input"));
 
-    if (isset($data->username) && isset($data->pass)) {
+    if (isset($data->email) && isset($data->pass)) {
 
-        $user->username = $data->username;
+        $user->email = $data->email;
         $user->pass = $data->pass;
     
         if ($user->check_creds()) {

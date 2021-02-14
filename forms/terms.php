@@ -1,3 +1,16 @@
+<?php
+
+require('../init.php');
+
+if (isset($_SESSION['auth'])) 
+{
+  header("Location: ../forms/welcome.php");
+  exit();
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 

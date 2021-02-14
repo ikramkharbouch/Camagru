@@ -116,7 +116,6 @@
             return false;
         }
 
-
         $stmt->bindParam(':fullname', $this->fullname, PDO::PARAM_STR);
         $stmt->bindParam(':email', $this->email);
         $stmt->bindParam(':username', $this->username);
@@ -130,9 +129,6 @@
         if ($stmt->execute()) {
             return true;
         }
-
-        // Print error message if something goes wrong
-        printf("Error : %s. \n", $stmt->error);
         return false;
     }
 
@@ -187,6 +183,7 @@
         
         // Execute query       
         if ($stmt->execute()) {
+            $_SESSION["email"] = $this->email;
             return true;
         }
 
@@ -216,6 +213,7 @@
         
         // Execute query       
         if ($stmt->execute()) {
+            $_SESSION["username"] = $this->username;
             return true;
         }
         return false;
@@ -242,6 +240,7 @@
         
         // Execute query       
         if ($stmt->execute()) {
+            $_SESSION["pass"] = $this->pass;
             return true;
         }
 
@@ -288,7 +287,7 @@
         // Fetch data
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($row) {
+        if (isset($row['email']) && isset($row['username'])) {
             
             if (is_array($row) && (($row['email'] == $this->email) || ($row['username'] == $this->username))) {
                 return true;
@@ -297,17 +296,62 @@
         return false;
     }
 
+    public function check_username() {
+        // Create query
+        $query = 'SELECT id, username FROM users WHERE username = :username';
+        
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':username', $this->username);
+
+        $stmt->execute();
+
+        // Fetch data
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (isset($row['username'])) {
+            if (is_array($row) && ($row['username'] == $this->username)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function check_email() {
+         // Create query
+         $query = 'SELECT id, email FROM users WHERE email = :email';
+        
+         // Prepare statement
+         $stmt = $this->conn->prepare($query);
+ 
+         $stmt->bindParam(':email', $this->email);
+ 
+         $stmt->execute();
+ 
+         // Fetch data
+         $row = $stmt->fetch(PDO::FETCH_ASSOC);
+ 
+         if (isset($row['email'])) {
+             if (is_array($row) && ($row['email'] == $this->email)) {
+                 return true;
+             }
+         }
+         return false;
+        
+    }
+
     public function check_creds() {
         // Create query
-        $query = 'SELECT id, username, pass, verified 
-                FROM users WHERE username = :username';
+        $query = 'SELECT id, email, pass, verified
+                FROM users WHERE email = :email';
 
         $stmt = $this->conn->prepare($query);
 
         // Hash password
         $this->pass = md5($this->pass);
 
-        $stmt->bindParam(':username', $this->username);
+        $stmt->bindParam(':email', $this->email);
 
         // Execute query
         $stmt->execute();
@@ -317,8 +361,8 @@
 
         // Set properties
 
-        if ($row) {
-            if ($row['username'] == $this->username && $row['pass'] == $this->pass && $row['verified'] == 1) {
+        if (isset($row['email']) && isset($row['pass']) && isset($row['verified'])) {
+            if ($row['email'] == $this->email && $row['pass'] == $this->pass && $row['verified'] == 1) {
                 return true;
             }
         }
@@ -377,7 +421,7 @@
         // You should compare the hashes
         $this->pass = md5($this->pass);
         
-        $query = 'SELECT id FROM users WHERE email = :email AND pass = :pass';
+        $query = 'SELECT id, username FROM users WHERE email = :email AND pass = :pass';
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindParam(':email', $this->email);
@@ -388,10 +432,13 @@
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($row) {
+        if (isset($row['id']) && isset($row['username'])) {
             $this->id = $row['id'];
+            $this->username = $row['username'];
             $_SESSION["id"] = $this->id;
             $_SESSION["email"] = $this->email;
+            $_SESSION["username"] = $this->username;
+            $_SESSION["pass"] = $this->pass;
             $_SESSION["auth"] = true;
             return true;
         }

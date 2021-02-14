@@ -38,7 +38,7 @@
                 if (data == '{"Message":"User Exists"}') {
                     errorMsg.innerHTML = "This email or username already exists";
                 } else if (data == '{"Message":"Post Not Created"}') {
-                    errorMsg.innerHTML = "Email or password doesn't have the minimum requirements";
+                    errorMsg.innerHTML = 'Email should be valid <br /> Fullname should have at least 3 letters with no numbers or characters <br />Username should have at least 3 letters with no numbers or characters <br />Password should contain at least 8 characters including numbers and a special character and a capital letter';
                 } else if (data == '{"Message":"Post Created"}') {
                     window.location.href = "./signin.php";
                 } else {

@@ -22,7 +22,12 @@ $data = json_decode(file_get_contents("php://input"));
 
 if (isset($data->pass)) {
 
-    $user->email = md5($data->pass);
+    if (md5($data->pass) == $_SESSION["pass"]) {
+        echo 'You cannot use this password another time';
+        exit();
+    }    
+
+    $user->pass = md5($data->pass);
 
     if ($user->update_password()) {
         echo 'Password Updated Successfully';
