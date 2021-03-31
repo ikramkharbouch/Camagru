@@ -1,4 +1,8 @@
-# correction-cmgru
+# Camagru
 
+## How to run the project ?
+Install MAMP or XAMPP and run the server
 
-You should if username already exists before creating it
+## Run the setup file
+```./config/setup.php```
+
